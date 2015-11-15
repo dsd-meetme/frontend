@@ -1,0 +1,25 @@
+AngularJS project structure description:
+
+app
+	\shared   -> This folder will contain reusable elements for the angularJS application.
+			         These elements are usually angularJS directives, but in some cases they can
+			         be services that are used throughout the entire application
+
+	\components -> AngularJS applications are single page applications so we have a master
+				         page in which different pieces of html and all their related stuff are injected
+				         based on the user's behavior. These pieces of html and all their related stuff(controllers
+				         , specific services etc..) are put in subfolders of this components directives
+
+	angular.module.js -> Configures and inits the application
+	angular.routes.js  -> Defines the routes of the application
+
+assets
+	\css   -> Contains the css of the app
+	\sass -> Contains the sass file for the app
+		\components -> sass for app/components elements
+		\shared -> sass for app/shared elements
+		\global -> global styles
+	\js     -> Javascript that is not angular related
+	\libs  -> External libraries (Jquery, bootstrap, …)
+
+index.html -> the app entry point
