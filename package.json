@@ -1,0 +1,32 @@
+{
+  "name": "plunner",
+  "version": "1.0.0",
+  "description": "A meeting planner for companies with efficiency and simplicity in mind",
+  "main": "index.js",
+  "devDependencies": {
+    "browser-sync": "^2.10.0",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.1.0",
+    "jasmine-core": "^2.3.4",
+    "karma-jasmine": "^0.3.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsd-meetme/frontend.git"
+  },
+  "keywords": [
+    "meeting",
+    "meeting",
+    "planner",
+    "business"
+  ],
+  "author": "Giorgio Pea, Jean Barre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dsd-meetme/frontend/issues"
+  },
+  "homepage": "https://github.com/dsd-meetme/frontend#readme"
+}
