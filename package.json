@@ -2,7 +2,7 @@
   "name": "plunner",
   "version": "1.0.0",
   "description": "A meeting planner for companies with efficiency and simplicity in mind",
-  "main": "index.js",
+  "main": "/app/angular.module.js",
   "devDependencies": {
     "browser-sync": "^2.10.0",
     "gulp": "^3.9.0",
