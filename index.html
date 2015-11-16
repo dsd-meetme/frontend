@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="assets/css/login.css">
   </head>
   <body>
-  <button ng-click="$location.path('/login')">Go to sign in</button>
+  <button ng-click="dsda.do()" ng-controller = "da as dsda">Go to sign in</button>
   <div ng-view>
 
   </div>
@@ -15,9 +15,9 @@
   <script type="text/javascript" src="app/app.module.js"></script>
   <script type="text/javascript" src="app/app.routes.js"></script>
   <script type="text/javascript" src="app/shared/plunnerAuth.js"></script>
+  <script type="text/javascript" src="app/components/da.js"></script>
   <script type="text/javascript" src="app/components/domainSignIn/dsiController.js"></script>
-
-  </script>
+  <script type="text/javascript" src="app/components/signIn/sinController.js"></script>
   </body>
 
 </html>
