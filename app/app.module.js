@@ -1,1 +1,3 @@
-angular.module('OurApp',[]);
+(function(){
+  angular.module('Plunner',['ngRoute','ngMessages']);
+}());

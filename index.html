@@ -1,12 +1,23 @@
-<html ng-app="OurApp">
+<html ng-app="Plunner">
   <head>
+    <title>Plunner</title>
+    <link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/login.css">
   </head>
   <body>
-    <h1>Title</h1>
-    <dada></dada>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-  <script src="app/app.module.js"></script>
-  <script src="app/shared/example_directive.js"></script>
+  <button ng-click="$location.path('/login')">Go to sign in</button>
+  <div ng-view>
+
+  </div>
+  <script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
+  <script type="text/javascript" src="assets/libs/angular-route/angular-route.min.js"></script>
+  <script type="text/javascript" src="assets/libs/angular-messages/angular-messages.min.js"></script>
+  <script type="text/javascript" src="app/app.module.js"></script>
+  <script type="text/javascript" src="app/app.routes.js"></script>
+  <script type="text/javascript" src="app/shared/plunnerAuth.js"></script>
+  <script type="text/javascript" src="app/components/domainSignIn/dsiController.js"></script>
+
+  </script>
   </body>
+
 </html>

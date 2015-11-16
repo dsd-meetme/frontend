@@ -1,18 +1,18 @@
-var app = angular.module('OurApp');
+var app = angular.module('Plunner');
 
 
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/phones', {
-        templateUrl: 'partials/phone-list.html',
-        controller: 'PhoneListCtrl'
+      when('/login', {
+        templateUrl: 'app/components/domainSignIn/dsiTemplate.html',
+        controller: 'dsiController'
       }).
-      when('/phones/:phoneId', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl'
+      when('/loginn', {
+        templateUrl: 'app/components/signin/sinTemplate.html',
+        controller: 'sinController'
       }).
       otherwise({
-        redirectTo: '/phones'
+        redirectTo: '/'
       });
   }]);
