@@ -4,10 +4,18 @@
   </head>
   <body>
     <h1 class="helvet">Login Page</h1>
-    <button></button>
+    <div ng-controller="domain">
+      <input type="text" ng-model="domainName"></input>/plunner.fr
+      <br/>
+      <button ng-click="checkDomain()"></button>
+      <br/>
+      {{domainName}}
+    </div>
+    
   <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js"></script>-->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
   <script src="app/app.module.js"></script>
+  <script type="text/javascript" src="app/components/form_domain/controller_domain.js"></script>
   <script src="app/shared/example_directive.js"></script>
   </body>
 </html>
