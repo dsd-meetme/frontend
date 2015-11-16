@@ -1,2 +1,7 @@
 .my-class {
   width: 60px; }
+
+.helvet {
+  font: 100% Helvetica, sans-serif;
+  color: #FF0000;
+  text-align: center; }
