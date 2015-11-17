@@ -10,7 +10,8 @@
         data : 'email='+credentials.email + '&password='+credentials.pwd,
         withCredentials : true,
         headers: {
-          'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+          'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
+          'X-XSFR-TOKEN' : 'blaafaf'
         }
       })
       .then(function(response){
