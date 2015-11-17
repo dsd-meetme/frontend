@@ -8,7 +8,7 @@
          method : 'POST',
          url : '//api.plunner.com/auth/login'
          params : {
-           'username' : credentials.email,
+           'email' : credentials.email,
            'password' : credentials.pwd
          },
          headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
