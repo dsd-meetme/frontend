@@ -12,6 +12,10 @@ app.config(['$routeProvider',
         templateUrl: 'app/components/userSignIn/usiTemplate.html',
         controller: 'usiController'
       }).
+      when('/register', {
+        templateUrl: 'app/components/registration/regTemplate.html',
+        controller: 'regController'
+      }).
       otherwise({
         redirectTo: '/'
       });

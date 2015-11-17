@@ -1,0 +1,27 @@
+<form name="regForm" ng-submit="regC.process()" ng-controller="regController as regC" novalidate>
+  <h2>Registration</h2>
+  <div>
+    <input name="orgName" type="text" required ng-model="regC.orgName">
+    <input name="orgMail" type="text" required ng-model="regC.orgMail">
+    <input name="orgPwd" type="text" required ng-model="regC.orgPwd">
+    <div>
+      .plunner.com
+    </div>
+  </div>
+  <button>Sign in</button>
+  <div ng-if="regForm.validFields.orgNameReq">
+    You did not insert a name
+  </div>
+  <div ng-if="regForm.validFields.orgMailReq">
+    You did not inser an email address
+  </div>
+  <div ng-if="regForm.validFields.orgPwdReq">
+    You did not insert a password
+  </div>
+  <div ng-if="regForm.validFields.orgMailVal">
+    You did not insert a valid email address
+  </div>
+  <div>
+
+  </div>
+</form>

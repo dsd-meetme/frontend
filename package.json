@@ -1,8 +1,17 @@
 {
   "name": "plunner",
   "version": "1.0.0",
-  "description": "A meeting planner for companies with efficiency and simplicity in mind",
-  "main": "/app/angular.module.js",
+  "description": "A meeting planner for companies with simplicity, automation and optimization in mind",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "angular": "^1.4.7",
+    "bootstrap": "^3.3.5",
+    "angular-route": "^1.4.7",
+
+  },
   "devDependencies": {
     "browser-sync": "^2.10.0",
     "gulp": "^3.9.0",
@@ -19,9 +28,7 @@
   },
   "keywords": [
     "meeting",
-    "meeting",
-    "planner",
-    "business"
+    "bussiness"
   ],
   "author": "Giorgio Pea, Jean Barre",
   "license": "ISC",
