@@ -1,3 +1,3 @@
 (function(){
-  angular.module('Plunner',['ngRoute']);
+  angular.module('Plunner',['ngRoute','ngCookies']);
 }());

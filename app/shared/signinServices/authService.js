@@ -1,35 +1,38 @@
 (function(){
-  var service = function($http,sessionService){
+  var service = function($http,$cookies,sessionService){
     var thisService = {};
 
 
     thisService.login = function (credentials) {
-       $http({
-         method : 'POST',
-         url : '//api.plunner.com/auth/login',
-         data : 'email='+credentials.email + '&password='+credentials.pwd,
-         headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-       })
-         .then(function(response){
-           console.log(response);
-         }, function(response){
-           console.log(response);
-         });
-     };
+      $http.get('//api.plunner.com/auth/logout');
+      $http({
+        method : 'POST',
+        url : '//api.plunner.com/auth/login',
+        data : 'email='+credentials.email + '&password='+credentials.pwd,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        }
+      })
+      .then(function(response){
+        console.log(response);
+      }, function(response){
+        console.log(response);
+      });
+    };
 
-     thisService.isAuthenticated = function () {
-       return !!Session.userId;
-     };
+    thisService.isAuthenticated = function () {
+      return !!Session.userId;
+    };
 
-     thisService.isAuthorized = function (authorizedRoles) {
-       if (!angular.isArray(authorizedRoles)) {
-         authorizedRoles = [authorizedRoles];
-       }
-       return (thisService.isAuthenticated() &&
-         authorizedRoles.indexOf(Session.userRole) !== -1);
-     };
+    thisService.isAuthorized = function (authorizedRoles) {
+      if (!angular.isArray(authorizedRoles)) {
+        authorizedRoles = [authorizedRoles];
+      }
+      return (thisService.isAuthenticated() &&
+      authorizedRoles.indexOf(Session.userRole) !== -1);
+    };
 
-     return thisService;
+    return thisService;
   }
 
   var app = angular.module('Plunner');
