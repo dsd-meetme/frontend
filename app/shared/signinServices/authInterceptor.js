@@ -16,5 +16,7 @@
   app.factory('authInterceptor', service);
   app.config(function($httpProvider){
     $httpProvider.interceptors.push('authInterceptor');
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
   });
 })
