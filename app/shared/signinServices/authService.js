@@ -4,6 +4,7 @@
 
 
     thisService.login = function (credentials) {
+      console.log($cookies)
       $http({
         method : 'POST',
         url : '//api.plunner.com/auth/login',
