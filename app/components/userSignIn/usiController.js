@@ -4,7 +4,7 @@
     of a plunner organization
     @author Giorgio Pea
   **/
-  var controller = function($scope,$location){
+  var controller = function($scope,$location,authService){
     //an object that encapsulate the validity status of input fields
     this.validFields = {
       inputReq : false,
@@ -15,7 +15,10 @@
     this.process = function(){
       var form = $scope.usiForm;
       if(!form.$invalid){
-        $location.url('/home');
+        authService.login({
+          username : this.usiEmail,
+          password : this.usiPwd
+        })
       }
       //validity status of input fields checking
       this.validFields.inputReq = form.usiPwd.$error.required;

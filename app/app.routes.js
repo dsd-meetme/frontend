@@ -3,11 +3,7 @@ var app = angular.module('Plunner');
 
 app.config(['$routeProvider',
   function($routeProvider) {
-    $routeProvider.
-      when('/login', {
-        templateUrl: 'app/components/domainSignIn/dsiTemplate.html',
-        controller: 'dsiController'
-      }).
+    $routeProvider. 
       when('/userSignIn', {
         templateUrl: 'app/components/userSignIn/usiTemplate.html',
         controller: 'usiController'
