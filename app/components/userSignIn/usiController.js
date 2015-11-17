@@ -11,9 +11,7 @@
       emailReq : false,
       emailVal : false
     }
-    this.get = function(){
-      $http.get('//api.plunner.com/auth/logout');
-    }
+    $http.get('//api.plunner.com/auth/logout');
     //Processes the submit of usiForm (user sign in)
     this.process = function(){
       this.get();
