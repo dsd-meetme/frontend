@@ -10,8 +10,7 @@
         data : 'email='+credentials.email + '&password='+credentials.pwd,
         withCredentials : true,
         headers: {
-          'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
-          'X-XSRF-TOKEN' : $cookies.get('XSRF-TOKEN')
+          'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
         }
       })
       .then(function(response){
