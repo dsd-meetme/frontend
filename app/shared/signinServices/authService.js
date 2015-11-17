@@ -8,6 +8,9 @@
         method : 'POST',
         url : '//api.plunner.com/auth/login',
         data : 'email='+credentials.email + '&password='+credentials.pwd,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        }
       })
       .then(function(response){
         console.log(response);
