@@ -16,9 +16,9 @@
       var form = $scope.usiForm;
       if(!form.$invalid){
         authService.login({
-          username : this.usiEmail,
-          password : this.usiPwd
-        })
+          email : this.usiEmail,
+          pwd : this.usiPwd
+        });
       }
       //validity status of input fields checking
       this.validFields.inputReq = form.usiPwd.$error.required;

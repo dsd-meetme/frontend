@@ -4,13 +4,16 @@
 
 
     thisService.login = function (credentials) {
-       return $http
-         .post('//api.plunner.com/auth/login', credentials)
-         .then(function (res) {
-           console.log(res)
-           Session.create(res.data.id, res.data.user.id,
-                          res.data.user.role);
-           return res.data.user;
+       $http({
+         method : 'POST',
+         url : '//api.plunner.com/auth/login'
+         params : [{ username : credentials.email, password : credentials.pwd }],
+         headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+       })
+         .then(function(response){
+           console.log(response);
+         }, function(response){
+           console.log(response);
          });
      };
 
