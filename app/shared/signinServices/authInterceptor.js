@@ -16,6 +16,5 @@
   app.factory('authInterceptor', service);
   app.config(function($httpProvider){
     $httpProvider.interceptors.push('authInterceptor');
-    })
-  })
+  });
 })
