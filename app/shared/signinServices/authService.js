@@ -4,7 +4,6 @@
 
 
     thisService.login = function (credentials) {
-      $http.get('//api.plunner.com/auth/logout');
       $http({
         method : 'POST',
         url : '//api.plunner.com/auth/login',

@@ -4,7 +4,8 @@
     of a plunner organization
     @author Giorgio Pea
   **/
-  var controller = function($scope,$location,authService){
+  var controller = function($scope,$location,authService,$http){
+    $http.get('//api.plunner.com/auth/logout');
     //an object that encapsulate the validity status of input fields
     this.validFields = {
       inputReq : false,
