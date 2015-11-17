@@ -2,6 +2,7 @@
   /**
     A controller for managing the login of Users and Administrators in the context
     of a plunner organization
+    @author Giorgio Pea
   **/
   var controller = function($scope,$location){
     //an object that encapsulate the validity status of input fields

@@ -2,9 +2,11 @@
   /**
     A controller for managing the checking of a plunner organization domain, so
     that a User or an Administrator can sign in in the context of that organization
+    @author Giorgio Pea
     @param plunnerAuth A service that exposes among others, a method used to check
     the existence of a given domain as a plunner organization domain. This service
     communicates with the Plunner app server
+
   **/
   var controller = function($scope,$location){
     //an object that encapsulate the validity status of input fields
