@@ -5,12 +5,14 @@
     @author Giorgio Pea
   **/
   var controller = function($scope,$location,authService,$http){
-    $http.get('//api.plunner.com/auth/logout');
     //an object that encapsulate the validity status of input fields
     this.validFields = {
       inputReq : false,
       emailReq : false,
       emailVal : false
+    }
+    this.get = function(){
+      $http.get('//api.plunner.com/auth/logout');
     }
     //Processes the submit of usiForm (user sign in)
     this.process = function(){
