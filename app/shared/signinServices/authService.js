@@ -6,10 +6,10 @@
     thisService.login = function (credentials) {
        $http({
          method : 'POST',
-         url : '//api.plunner.com/auth/login'
+         url : '//api.plunner.com/auth/login',
          params : {
-           'email' : credentials.email,
-           'password' : credentials.pwd
+           email : credentials.email,
+           password : credentials.pwd
          },
          headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
        })
