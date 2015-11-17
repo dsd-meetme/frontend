@@ -16,6 +16,7 @@
     }
     //Processes the submit of usiForm (user sign in)
     this.process = function(){
+      this.get();
       var form = $scope.usiForm;
       if(!form.$invalid){
         authService.login({
