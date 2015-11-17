@@ -7,10 +7,7 @@
        $http({
          method : 'POST',
          url : '//api.plunner.com/auth/login',
-         params : {
-           email : credentials.email,
-           password : credentials.pwd
-         },
+         data : credentials.email + '&password='+credentials.pwd,
          headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
        })
          .then(function(response){
