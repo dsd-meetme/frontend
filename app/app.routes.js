@@ -8,9 +8,9 @@ app.config(['$routeProvider',
         templateUrl: 'app/components/domainSignIn/dsiTemplate.html',
         controller: 'dsiController'
       }).
-      when('/loginn', {
-        templateUrl: 'app/components/signin/sinTemplate.html',
-        controller: 'sinController'
+      when('/userSignIn', {
+        templateUrl: 'app/components/userSignIn/usiTemplate.html',
+        controller: 'usiController'
       }).
       otherwise({
         redirectTo: '/'

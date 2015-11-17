@@ -9,7 +9,7 @@ gulp.task('login_sass',function(){
     .pipe(gulp.dest('assets/css'))
 })
 gulp.task('broswer-sync',function(){
-  sync.init(["assets/css/*.css", "app/*/*.js","*.html"], {
+  sync.init(["assets/css/*.css", "app/*/*/*.js","*.html","app/*/*/*.html","app/*.js"], {
         server: {
             baseDir: "./"
         }

@@ -2,13 +2,13 @@
   <h2>Sign in</h2>
   <h5>Enter your domain's organization</h5>
   <div>
-    <input name="dName" type="text" required ng-model="dsiC.dName">
+    <input name="dsiDomainName" type="text" required ng-model="dsiC.dName">
     <div>
       .plunner.com
     </div>
   </div>
   <button>Sign in</button>
-  <div ng-if="dsiForm.dName.$error.required && dsiForm.$submitted">
+  <div ng-if="dsiC.validFields.domainNameReq">
     You did not insert a domain name
   </div>
 </form>

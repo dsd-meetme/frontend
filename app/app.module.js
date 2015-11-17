@@ -1,3 +1,3 @@
 (function(){
-  angular.module('Plunner',['ngRoute','ngMessages']);
+  angular.module('Plunner',['ngRoute']);
 }());
