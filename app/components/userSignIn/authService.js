@@ -26,7 +26,7 @@
           ,
           function(response){
             if(response.status===442){
-              $rootScope.wrong = 442;
+              alert("SDasd")
             }
           });
         },
