@@ -5,7 +5,7 @@
     @author Giorgio Pea
   **/
   var controller = function($scope,$location,authService,$rootScope){
-    this.wrong = $rootScope.wrong
+    this.wrong = $rootScope.wrong;
     //an object that encapsulate the validity status of input fields
     this.validFields = {
       inputReq : false,
