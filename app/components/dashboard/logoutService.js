@@ -3,6 +3,7 @@
     return {
       logout : function(){
         $cookies.remove('auth_token');
+        $location.path('/userSignIn')
       }
     }
   }
