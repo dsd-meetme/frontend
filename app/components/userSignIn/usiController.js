@@ -11,11 +11,6 @@
       emailReq : false,
       emailVal : false
     }
-    $http.get('//api.plunner.com/auth/logout').then(function(res){
-      console.log(res);
-    },function(res){
-      console.log(res);
-    });
     //Processes the submit of usiForm (user sign in)
     this.process = function(){
       var form = $scope.usiForm;
