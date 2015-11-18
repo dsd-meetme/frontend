@@ -1,6 +1,7 @@
 (function(){
     var service = function($http, $cookies, $location){
       return {
+        errors : [],
         login : function(credentials){
           $http({
             method : 'POST',
@@ -24,9 +25,11 @@
             }
           ,
           function(response){
-            console.log(response);
+            if(response.status===442){
+              errors.push(442)
+            }
           });
-        }
+        },
       }
     }
     var app = angular.module('Plunner');

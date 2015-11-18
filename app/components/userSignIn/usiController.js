@@ -20,6 +20,9 @@
           pwd : this.usiPwd,
           rmbMe : this.rmbMe
         });
+        if(authService.erros.indexOf(442)!=-1){
+          this.wrong = true;
+        }
       }
       //validity status of input fields checking
       this.validFields.inputReq = form.usiPwd.$error.required;
