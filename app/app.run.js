@@ -5,6 +5,9 @@
           if(next.controller==='dashController' && $cookies.get('auth_token') === undefined ){
             $location.path('/userSignIn');
           }
+          else if(next.controller==='usiController' && $cookies.get('auth_token') === undefined){
+            $location.path('/dashboard');
+          }
   });
 });
 }())
