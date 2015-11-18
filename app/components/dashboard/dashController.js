@@ -1,7 +1,7 @@
 (function(){
   var controller = function(logoutService){
     this.process = function(){
-
+        logoutService.logout();
     }
   }
 

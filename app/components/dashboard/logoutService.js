@@ -6,8 +6,6 @@
       }
     }
   }
-
-
   var app = angular.module('Plunner');
   app.factory('logoutService',service);
 }())
