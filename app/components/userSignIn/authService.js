@@ -1,5 +1,5 @@
 (function(){
-    var service = function($http, $cookies, $location){
+    var service = function($http, $cookies, $location,$rootScope){
       return {
         errors : [],
         login : function(credentials){
@@ -26,7 +26,7 @@
           ,
           function(response){
             if(response.status===442){
-              errors.push(442)
+              $rootScope.wrong = 442;
             }
           });
         },

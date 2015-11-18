@@ -4,7 +4,8 @@
     of a plunner organization
     @author Giorgio Pea
   **/
-  var controller = function($scope,$location,authService,$http){
+  var controller = function($scope,$location,authService,$rootScope){
+    this.wrong = $rootScope.wrong
     //an object that encapsulate the validity status of input fields
     this.validFields = {
       inputReq : false,
@@ -20,9 +21,6 @@
           pwd : this.usiPwd,
           rmbMe : this.rmbMe
         });
-        if(authService.erros.indexOf(442)!=-1){
-          this.wrong = true;
-        }
       }
       //validity status of input fields checking
       this.validFields.inputReq = form.usiPwd.$error.required;
