@@ -12,7 +12,7 @@
               var token = response.token;
               if(credentials.rmbMe==='true'){
                 $cookies.put('auth_token',token,{
-                  expires : dataManipulator.addDays(7);
+                  expires : dataManipulator.addDays(7)
                 })
               }
               else{
