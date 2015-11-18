@@ -3,7 +3,7 @@
       return {
         login : function(credentials){
           $http({
-            method : 'post',
+            method : 'POST',
             url : '//api.plunner.com/auth/login',
             data : 'email='+credentials.email + '&password='+credentials.pwd,
             withCredentials : true,
