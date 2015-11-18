@@ -1,5 +1,5 @@
 (function(){
-    var service = function($http, $cookies, $location,dataManipulator){
+    var service = function($http, $cookies, $location){
       return {
         login : function(credentials){
           $http({
@@ -11,9 +11,9 @@
             function(response){
               var token = response.token;
               if(credentials.rmbMe==='true'){
-                $cookies.put('auth_token',token,{
+                /*$cookies.put('auth_token',token,{
                   expires : dataManipulator.addDays(7)
-                })
+                })*/
               }
               else{
                 $cookies.put('auth_token',token);
