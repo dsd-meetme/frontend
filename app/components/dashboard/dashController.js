@@ -2,7 +2,7 @@
   var controller = function(logoutService){
     this.process = function(){
         logoutService.logout();
-        $location('/userSignIn');
+        $location.path('/userSignIn');
     }
   }
 
