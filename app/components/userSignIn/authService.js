@@ -25,7 +25,7 @@
             }
           ,
           function(response){
-            if(response.status===422){
+            if(response.status === '422'){
               alert("sadasd");
             }
           });
