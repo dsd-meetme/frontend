@@ -20,11 +20,10 @@
               }
               $location.path('/dashboard')
             }
-          ),
+          ,
           function(response){
           });
         }
-
-      };
+      }
     }
 }())
