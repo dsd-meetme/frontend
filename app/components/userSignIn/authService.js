@@ -10,11 +10,12 @@
             withCredentials : true
           }).then(
             function(response){
-              var token = response.token;
+              console.log(response);
+              var token = response.data.token;
               if(credentials.rmbMe==='true'){
-                /*$cookies.put('auth_token',token,{
+                $cookies.put('auth_token',token,{
                   expires : dataManipulator.addDays(7)
-                })*/
+                })
               }
               else{
                 $cookies.put('auth_token',token);
@@ -23,6 +24,7 @@
             }
           ,
           function(response){
+            console.log(response);
           });
         }
       }
