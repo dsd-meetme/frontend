@@ -23,9 +23,7 @@
             }
           ,
           function(response){
-            if(response.status === 422){
-              console.log('a')
-            }
+            console.log('a');
           });
         }
       }
