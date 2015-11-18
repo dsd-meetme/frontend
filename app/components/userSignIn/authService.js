@@ -25,8 +25,8 @@
             }
           ,
           function(response){
-            if(response.status === '422'){
-              alert("sadasd");
+            if(response.status==='422'){
+              $rootScope.wrong = 422;
             }
           });
         },
