@@ -8,6 +8,9 @@
           else if(next.controller==='usiController' && $cookies.get('auth_token') !== undefined){
             $location.path('/dashboard');
           }
+          else if (next.controller==='logoutController' && $cookies.get('auth_token') !== undefined) {
+            $location.path('/userSignIn');
+          }
   });
 });
 }())
