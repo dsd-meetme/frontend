@@ -1,9 +1,10 @@
-<form name="regForm" ng-submit="regC.process()" ng-controller="regController as regC" novalidate>
+<form name="regForm" ng-submit="regC.process()" novalidate>
   <h2>Registration</h2>
   <div>
-    <input name="orgName" type="text" required ng-model="regC.orgName">
-    <input name="orgMail" type="text" required ng-model="regC.orgMail">
-    <input name="orgPwd" type="text" required ng-model="regC.orgPwd">
+    <input name="orgName" type="text" placeholder="name" required ng-model="regC.orgName">
+    <input name="orgMail" type="text" placeholder="email" required ng-model="regC.orgMail">
+    <input name="orgPwd" type="text" placeholder="password" required ng-model="regC.orgPwd">
+    <input name="orgPwdC"type="text" placeholder="confirm password" required ng-model="reg.orgPwdC">
     <div>
       .plunner.com
     </div>
@@ -21,7 +22,8 @@
   <div ng-if="regForm.validFields.orgMailVal">
     You did not insert a valid email address
   </div>
-  <div>
 
+  <div ng-if="regForm.validFields.orgPwdCmatch">
+    The two passwords don't match
   </div>
 </form>
