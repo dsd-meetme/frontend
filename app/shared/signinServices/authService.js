@@ -11,7 +11,7 @@
         withCredentials : true,
         headers: {
           'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
-          'X-XSFR-TOKEN' : 'blaafaf'
+          'X-CSRF-TOKEN': $cookies.get('XSRF-TOKEN'),
         }
       })
       .then(function(response){
