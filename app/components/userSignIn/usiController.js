@@ -22,7 +22,8 @@
       if(!form.$invalid){
         authService.login({
           email : this.usiEmail,
-          pwd : this.usiPwd
+          pwd : this.usiPwd,
+          rmbMe : this.rmbMe
         });
       }
       //validity status of input fields checking
