@@ -21,8 +21,8 @@
       var form = $scope.osiForm;
       if(!form.$invalid){
         authService.login({
-          email : this.usiEmail,
-          pwd : this.usiPwd,
+          email : this.osiEmail,
+          pwd : this.osiPwd,
           rmbMe : this.rmbMe
         });
       }
