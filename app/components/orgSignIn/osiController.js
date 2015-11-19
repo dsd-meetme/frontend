@@ -14,9 +14,9 @@
 
     this.process = function(){
       //validity status of input fields checking
-      this.validFields.inputReq = form.usiPwd.$error.required;
-      this.validFields.emailReq = form.usiEmail.$error.required;
-      this.validFields.emailVal = form.usiEmail.$error.email;
+      this.validFields.inputReq = form.osiPwd.$error.required;
+      this.validFields.emailReq = form.osiEmail.$error.required;
+      this.validFields.emailVal = form.osiEmail.$error.email;
       //Processes the submit of usiForm (organization sign in)
       var form = $scope.osiForm;
       if(!form.$invalid){
