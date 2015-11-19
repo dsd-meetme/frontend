@@ -16,13 +16,13 @@
           }
         },
         response : function(response) {
-          var token = response.headers.authorization;
+          /*var token = response.headers.authorization;
           if($cookies.get('auth_token')!==undefined){
             $cookies.remove('auth_token');
           }
           else{
             $cookies.get('auth_token',token);
-          }
+          }*/
         }
       };
     });

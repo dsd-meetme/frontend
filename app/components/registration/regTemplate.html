@@ -2,28 +2,27 @@
   <h2>Registration</h2>
   <div>
     <input name="orgName" type="text" placeholder="name" required ng-model="regC.orgName">
-    <input name="orgMail" type="text" placeholder="email" required ng-model="regC.orgMail">
-    <input name="orgPwd" type="text" placeholder="password" required ng-model="regC.orgPwd">
-    <input name="orgPwdC"type="text" placeholder="confirm password" required ng-model="reg.orgPwdC">
+    <input name="orgEmail" type="email" placeholder="email" required ng-model="regC.orgEmail">
+    <input name="orgPwd" type="password" placeholder="password" required ng-model="regC.orgPwd">
+    <input name="orgPwdC"type="password" placeholder="confirm password" required ng-model="reg.orgPwdC">
     <div>
       .plunner.com
     </div>
   </div>
   <button>Sign in</button>
-  <div ng-if="regForm.validFields.orgNameReq">
+  <div ng-if="regC.validFields.orgNameReq">
     You did not insert a name
   </div>
-  <div ng-if="regForm.validFields.orgMailReq">
+  <div ng-if="regC.validFields.orgMailReq">
     You did not inser an email address
   </div>
-  <div ng-if="regForm.validFields.orgPwdReq">
+  <div ng-if="regC.validFields.orgPwdReq">
     You did not insert a password
   </div>
-  <div ng-if="regForm.validFields.orgMailVal">
+  <div ng-if="regC.validFields.orgMailVal">
     You did not insert a valid email address
   </div>
-
-  <div ng-if="regForm.validFields.orgPwdCmatch">
+  <div ng-if="regC.validFields.orgPwdCmatch">
     The two passwords don't match
   </div>
 </form>

@@ -1,0 +1,22 @@
+<form name="usiForm" ng-submit="osiC.process()" novalidate>
+  <h2>Sign in</h2>
+  <h5>Enter your credentials</h5>
+  <div>
+    <input name="usiEmail" type="email" required ng-model="osiC.usiEmail" placeholder="Email">
+    <input name="usiPwd" type="password" required ng-model="osiC.usiPwd" placeholder="Password">
+    <input type="text" ng-model="osiC.rmbMe">
+  </div>
+  <button>Sign in</button>
+  <div ng-show="osiC.validFields.emailReq">
+    You did not insert an email address
+  </div>
+  <div ng-show="osiC.validFields.inputReq">
+    You did not insert an password
+  </div>
+  <div ng-show="osiC.validFields.emailVal">
+    You did not insert a valid email address
+  </div>
+  <div ng-show="osiC.nonRegUser">
+    The data you inserted don't match any existing user
+  </div>
+</form>
