@@ -28,6 +28,7 @@
       }
     }
     $rootScope.$on('event:NonRegUser',function(){
+      console.log('entro');
       this.nonRegUser = true;
     })
   }
