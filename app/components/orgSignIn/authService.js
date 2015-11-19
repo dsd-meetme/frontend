@@ -16,7 +16,8 @@
           ,
           function(response){
             if(response.status==='422'){
-              $rootScope.$broadcast('event:NotRegUser');
+              console.log('entro');
+              $rootScope.$broadcast('event:NonRegUser');
             }
 
 
