@@ -5,7 +5,7 @@
     function($routeProvider) {
       $routeProvider.
         when('/orgSignIn', {
-          templateUrl: 'app/components/orgSignIn/usiTemplate.html',
+          templateUrl: 'app/components/orgSignIn/osiTemplate.html',
           controller: 'osiController',
           controllerAs: 'osiC'
         }).
