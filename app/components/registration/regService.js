@@ -5,7 +5,7 @@
         $http({
           method : 'POST',
           url : '//api.plunner.com/auth/register',
-          data : 'name='+data.name + '&email='+data.email+'&password='+data.pwd,
+          data : 'name='+data.name + '&email='+data.email+'&password='+data.pwd+'&password_confirmed='+data.pwd,
           headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
           withCredentials : true
         }).then(
