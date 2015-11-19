@@ -1,5 +1,5 @@
 (function(){
-  var service = function($http){
+  var service = function($http,$location){
     return {
       register : function(data){
         $http({
@@ -10,10 +10,9 @@
           withCredentials : true
         }).then(
           function(response){
-            console.log(response);
+            $location.path('/dashboard');
           },
           function(response){
-            console.log(response);
           }
         )
       }

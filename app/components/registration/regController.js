@@ -7,6 +7,7 @@
       orgPwdReq : false,
       orgMailVal : false,
       orgPwdCmatch : false,
+      orgPwdLength : false
     }
     //Processes the submit of dsiForm (domain sign in)
     this.process = function(){
@@ -16,6 +17,7 @@
       this.validFields.orgPwdReq = form.orgPwd.$error.required;
       this.validFields.orgNameReq = form.orgName.$error.required;
       this.validFields.orgMailReq = form.orgEmail.$error.required;
+      this.validFields.orgPwdLength = form.orgPwd.$error.minlength;
       this.validFields.orgMailVal = form.orgEmail.$error.email;
       this.validFields.orgPwdCmatch = (form.orgPwd.$modelValue !== form.orgPwdC.$modelValue);
       console.log(this.validFields);

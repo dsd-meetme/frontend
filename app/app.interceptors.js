@@ -6,7 +6,7 @@
     $httpProvider.interceptors.push(function($q,$cookies) {
       return {
         request : function(config) {
-          if(config.url!=='http://api.plunner.com/auth/login'){
+          if(config.type === 'GET' || config.type === 'HEAD' || ){
             var token = $cookies.get('auth_token');
             if(token !== undefined){
               config.headers.authorization = token;
@@ -16,13 +16,18 @@
           }
         },
         response : function(response) {
-          /*var token = response.headers.authorization;
+          var token = response.headers.authorization;
           if($cookies.get('auth_token')!==undefined){
             $cookies.remove('auth_token');
           }
           else{
             $cookies.get('auth_token',token);
-          }*/
+          }
+        },
+        responseError : function(response){
+          if(response.status !== 422 && response.status !== 401 && response.status !== 403 ){
+            $routeScope.broadcast('event:ComError');
+          }
         }
       };
     });

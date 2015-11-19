@@ -3,7 +3,7 @@
   <div>
     <input name="orgName" type="text" placeholder="name" required ng-model="regC.orgName">
     <input name="orgEmail" type="email" placeholder="email" required ng-model="regC.orgEmail">
-    <input name="orgPwd" type="password" placeholder="password" required ng-model="regC.orgPwd">
+    <input name="orgPwd" ng-minlength="6" type="password" placeholder="password" required ng-model="regC.orgPwd">
     <input name="orgPwdC"type="password" placeholder="confirm password" required ng-model="reg.orgPwdC">
     <div>
       .plunner.com
@@ -24,5 +24,8 @@
   </div>
   <div ng-if="regC.validFields.orgPwdCmatch">
     The two passwords don't match
+  </div>
+  <div ng-if="regC.validFields.orgPwdLength">
+    The password must be of at least 6 characters
   </div>
 </form>
