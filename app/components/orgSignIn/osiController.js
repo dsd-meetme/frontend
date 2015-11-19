@@ -27,7 +27,7 @@
         });
       }
     }
-    $rootScope.on('event:NonRegUser',function(){
+    $rootScope.$on('event:NonRegUser',function(){
       this.nonRegUser = true;
     })
   }
