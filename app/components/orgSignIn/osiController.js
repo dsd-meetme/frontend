@@ -13,12 +13,12 @@
     }
 
     this.process = function(){
+      //Processes the submit of usiForm (organization sign in)
+      var form = $scope.osiForm;
       //validity status of input fields checking
       this.validFields.inputReq = form.osiPwd.$error.required;
       this.validFields.emailReq = form.osiEmail.$error.required;
       this.validFields.emailVal = form.osiEmail.$error.email;
-      //Processes the submit of usiForm (organization sign in)
-      var form = $scope.osiForm;
       if(!form.$invalid){
         authService.login({
           email : this.osiEmail,
