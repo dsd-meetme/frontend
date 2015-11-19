@@ -11,13 +11,14 @@
       emailReq : false,
       emailVal : false
     }
-    //validity status of input fields checking
-    this.validFields.inputReq = form.usiPwd.$error.required;
-    this.validFields.emailReq = form.usiEmail.$error.required;
-    this.validFields.emailVal = form.usiEmail.$error.email;
-    //Processes the submit of usiForm (organization sign in)
+
     this.process = function(){
-      var form = $scope.usiForm;
+      //validity status of input fields checking
+      this.validFields.inputReq = form.usiPwd.$error.required;
+      this.validFields.emailReq = form.usiEmail.$error.required;
+      this.validFields.emailVal = form.usiEmail.$error.email;
+      //Processes the submit of usiForm (organization sign in)
+      var form = $scope.osiForm;
       if(!form.$invalid){
         authService.login({
           email : this.usiEmail,
