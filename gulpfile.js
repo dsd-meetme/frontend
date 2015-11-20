@@ -16,5 +16,5 @@ gulp.task('broswer-sync',function(){
     });
 })
 gulp.task('default',['login_sass'], function(){
-  gulp.watch('assets/sass/*/*',['login_sass'])
+  //gulp.watch('assets/sass/*/*',['login_sass'])
 })
