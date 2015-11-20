@@ -11,9 +11,10 @@
             if(token !== undefined){
               config.headers.authorization = token;
             }
-            return config;
           }
           console.log('here');
+          return config;
+
         },
         response : function(response) {
           if(response.config.url.search('app/')===-1){
@@ -30,7 +31,7 @@
           return response;
         },
         responseError : function(response){
-          if(response.status !== '422' && response.status !== '401' && response.status !== '403' ){
+          if(response.status !== 422 && response.status !== 401 && response.status !== 403 ){
             console.log("sasfalshfhla");
           }
           return response;
