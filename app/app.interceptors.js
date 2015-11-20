@@ -16,6 +16,7 @@
           }
         },
         response : function(response) {
+          console.log("sasfalshfhla111");
           var token = response.headers.authorization;
           if($cookies.get('auth_token')!==undefined){
             $cookies.remove('auth_token');
@@ -25,8 +26,8 @@
           }
         },
         responseError : function(response){
-          if(response.status !== 422 && response.status !== 401 && response.status !== 403 ){
-            $routeScope.broadcast('event:ComError');
+          if(response.status !== '422' && response.status !== '401' && response.status !== '403' ){
+            console.log("sasfalshfhla");
           }
         }
       };

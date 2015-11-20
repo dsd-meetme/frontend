@@ -5,6 +5,7 @@
   @author Giorgio Pea
   **/
   var controller = function($rootScope,$scope,$location,authService){
+    this.nonRegUser = true;
     //an object that encapsulate the validity status of input fields
     this.validFields = {
       inputReq : false,
@@ -24,13 +25,9 @@
           email : this.osiEmail,
           pwd : this.osiPwd,
           rmbMe : this.rmbMe
-        });
+        },this.NonRegUser);
       }
     }
-    $rootScope.$on('event:NonRegUser',function(){
-      console.log('entro');
-      this.nonRegUser = true;
-    })
   }
 
   var app = angular.module('Plunner');
