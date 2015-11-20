@@ -15,14 +15,16 @@
           }
         },
         response : function(response) {
-          console.log(response);
-          var token = response.headers.authorization;
-          if($cookies.get('auth_token')!==undefined){
-            $cookies.remove('auth_token');
+          if(response.config.url.search('app/')!==-1){
+            console.log('non centro');
+            var token = response.headers.authorization;
+            if($cookies.get('auth_token')!==undefined){
+              $cookies.remove('auth_token');
 
-          }
-          else{
-            $cookies.get('auth_token',token);
+            }
+            else{
+              $cookies.get('auth_token',token);
+            }
           }
           return response;
         },
