@@ -11,6 +11,7 @@
             withCredentials : true
           }).then(
             function(response){
+              console.log('sadasd');
               $location.path('/dashboard')
             }
           ,
