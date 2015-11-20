@@ -16,7 +16,7 @@
           ,
           function(response){
             if(response.status===422){
-                $rootScope.emit('mya')
+                $rootScope.$emit('mya')
             }
 
 
