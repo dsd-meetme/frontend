@@ -12,9 +12,7 @@
               config.headers.authorization = token;
             }
           }
-          console.log('here');
           return config;
-
         },
         response : function(response) {
           if(response.config.url.search('app/')===-1){
@@ -34,7 +32,7 @@
           if(response.status !== 422 && response.status !== 401 && response.status !== 403 ){
             console.log("sasfalshfhla");
           }
-          return response;
+          return $q.reject(response);
         }
       };
     });
