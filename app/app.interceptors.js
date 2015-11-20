@@ -15,7 +15,7 @@
           }
         },
         response : function(response) {
-          console.log("sasfalshfhla111");
+          console.log(response);
           var token = response.headers.authorization;
           if($cookies.get('auth_token')!==undefined){
             $cookies.remove('auth_token');
