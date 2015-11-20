@@ -13,6 +13,7 @@
             }
             return config;
           }
+          console.log('here');
         },
         response : function(response) {
           if(response.config.url.search('app/')===-1){
