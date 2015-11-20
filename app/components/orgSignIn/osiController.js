@@ -25,7 +25,7 @@
           email : this.osiEmail,
           pwd : this.osiPwd,
           rmbMe : this.rmbMe
-        },this.NonRegUser);
+        });
       }
     }
   }
