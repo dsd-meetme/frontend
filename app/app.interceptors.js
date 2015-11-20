@@ -15,7 +15,7 @@
           }
         },
         response : function(response) {
-          if(response.config.url.search('app/')!==-1){
+          if(response.config.url.search('app/')===-1){
             console.log('non centro');
             var token = response.headers.authorization;
             if($cookies.get('auth_token')!==undefined){
