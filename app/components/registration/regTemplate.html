@@ -28,4 +28,7 @@
   <div ng-if="regC.validFields.orgPwdLength">
     The password must be of at least 6 characters
   </div>
+  <div ng-show="regC.mailTaken">
+    The inserted mail has already been taken
+  </div>
 </form>

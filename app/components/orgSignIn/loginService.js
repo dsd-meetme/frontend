@@ -7,17 +7,16 @@
             method : 'POST',
             url : '//api.plunner.com/companies/auth/login',
             data : 'email='+credentials.email + '&password='+credentials.pwd,
-            headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
-            withCredentials : true
+            headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
+            //withCredentials : true
           }).then(
             function(response){
-              console.log('sadasd');
-              $location.path('/dashboard')
+              $location.path('/dashboard');
             }
           ,
           function(response){
             if(response.status===422){
-                $rootScope.$emit('mya')
+                $rootScope.$emit('event:badMatch');
             }
 
 
@@ -26,5 +25,5 @@
       }
     }
     var app = angular.module('Plunner');
-    app.factory('authService',service);
+    app.factory('loginService',service);
 }())
