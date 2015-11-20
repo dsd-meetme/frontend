@@ -2,7 +2,7 @@
     var service = function($http, $cookies, $location,$rootScope){
       return {
         errors : [],
-        login : function(credentials){
+        login : function(credentials,scope_prop){
           $http({
             method : 'POST',
             url : '//api.plunner.com/companies/auth/login',
@@ -15,9 +15,9 @@
             }
           ,
           function(response){
+            console.log("entro qui");
+            scope_prop = false;
             if(response.status==='422'){
-              console.log('entro');
-              $rootScope.$emit('event:NonRegUser');
             }
 
 
