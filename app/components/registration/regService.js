@@ -4,7 +4,7 @@
       register : function(data){
         $http({
           method : 'POST',
-          url : '//api.plunner.com/auth/register',
+          url : '//api.plunner.com/companies/auth/register',
           data : 'name='+data.name + '&email='+data.email+'&password='+data.pwd+'&password_confirmation='+data.pwd,
           headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
           withCredentials : true

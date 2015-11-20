@@ -5,7 +5,7 @@
         login : function(credentials){
           $http({
             method : 'POST',
-            url : '//api.plunner.com/auth/login',
+            url : '//api.plunner.com/companies/auth/login',
             data : 'email='+credentials.email + '&password='+credentials.pwd,
             headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
             withCredentials : true
