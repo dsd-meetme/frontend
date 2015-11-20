@@ -6,7 +6,7 @@
     $httpProvider.interceptors.push(function($q,$cookies) {
       return {
         request : function(config) {
-          if(config.type === 'GET' || config.type === 'HEAD' || ){
+          if(config.url !== 'http://api.plunner.com/companies/auth/login' && config.url !== 'http://api.plunner.com/companies/auth/register' ){
             var token = $cookies.get('auth_token');
             if(token !== undefined){
               config.headers.authorization = token;
