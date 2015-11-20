@@ -15,9 +15,10 @@
             }
           ,
           function(response){
-            console.log("entro qui");
+
             scope_prop = false;
             if(response.status==='422'){
+                          console.log("entro qui");
             }
 
 
