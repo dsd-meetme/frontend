@@ -6,7 +6,7 @@
   **/
   var controller = function($rootScope,$scope,$location,authService){
     $rootScope.$on('mya',function(){
-      console.log('mya');
+      this.nonRegUser = true;
     });
     //an object that encapsulate the validity status of input fields
     this.validFields = {
