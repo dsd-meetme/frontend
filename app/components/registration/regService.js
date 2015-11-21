@@ -2,7 +2,7 @@
   /**
   A service used to register a plunner's organization
   **/
-  var service = function($http,$location,$rootScope){
+  var service = function($http,$location,errorsLocation){
     return {
       register : function(data){
         $http({
@@ -17,8 +17,7 @@
           },
           function(response){
             if(response.status===422){
-              //Alredy registered organization
-              $rootScope.$emit('event:mailTaken');
+              errorsLocation = response.data;
             }
           }
         )

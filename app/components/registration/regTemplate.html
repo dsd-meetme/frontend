@@ -2,9 +2,13 @@
   <h2>Registration</h2>
   <div>
     <input name="orgName" type="text" placeholder="name" required ng-model="regC.orgName">
+    <p>{{ regC.errors.name }}</p>
     <input name="orgEmail" type="email" placeholder="email" required ng-model="regC.orgEmail">
+    <p>{{ regC.errors.email }}</p>
     <input name="orgPwd" ng-minlength="6" type="password" placeholder="password" required ng-model="regC.orgPwd">
+    <p>{{ regC.errors.password }}</p>
     <input name="orgPwdC"type="password" placeholder="confirm password" required ng-model="reg.orgPwdC">
+    <p>{{ regC.errors.confirm_password }}</p>
     <div>
       .plunner.com
     </div>

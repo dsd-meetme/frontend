@@ -6,10 +6,8 @@
   var controller = function($scope,$location,regService,$rootScope){
     var self = this;
     //In case of account already registered, sets a property to true so that
-    //an error can be displayed on the view 
-    $rootScope.$on('event:mailTaken',function(){
-      self.mailTaken = true;
-    })
+    //an error can be displayed on the view
+    self.errors = {};
     //an object that encapsulate the validity status of input fields
     self.validFields = {
       orgNameReq : false,
