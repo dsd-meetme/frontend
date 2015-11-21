@@ -20,7 +20,7 @@
     "karma-chrome-launcher": "^0.2.1",
     "karma": "^0.13.15",
     "karma-jasmine": "^0.3.6",
-    "angular-mocks": "^1.4.8",
+    "angular-mocks": "^1.4.8"
   },
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run"
