@@ -10,11 +10,11 @@
     "angular-cookies": "^1.4.8",
     "angular": "^1.4.8",
     "angular-route": "^1.4.8",
-    "bootstrap": "^3.3.5",
-    "browser-sync": "^2.10.0",
-    "gulp": "^3.9.0",
+    "bootstrap": "^3.3.5"
   },
   "devDependencies": {
+    "gulp": "^3.9.0",
+    "browser-sync": "^2.10.0",
     "gulp-sass": "^2.1.0",
     "jasmine-core": "^2.3.4",
     "karma-chrome-launcher": "^0.2.1",
