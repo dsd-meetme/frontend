@@ -7,9 +7,8 @@
   **/
   var controller = function($rootScope,$scope,$location,loginService){
     var self = this;
-    $rootScope.$on('event:badMatch',function(){
-      self.nonRegUser = true;
-    });
+
+    self.errors = {};
     //an object that encapsulate the validity status of input fields
     self.validFields = {
       inputReq : false,
@@ -17,7 +16,7 @@
       emailVal : false
     }
 
-    this.login = function(){
+    self.login = function(){
       //Processes the submit of usiForm (organization sign in)
       var form = $scope.osiForm;
       //Validity status of input fields checking
@@ -25,11 +24,11 @@
       self.validFields.emailReq = form.osiEmail.$error.required;
       self.validFields.emailVal = form.osiEmail.$error.email;
       if(!form.$invalid){
-        loginService.login({
+        loginService.login('http://api.plunner.com/companies/auth/login',{
           email : self.osiEmail,
           pwd : self.osiPwd,
           rmbMe : self.rmbMe
-        });
+        },self.errors,'/dashboard');
       }
     }
   }

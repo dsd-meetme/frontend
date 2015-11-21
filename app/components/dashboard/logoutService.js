@@ -2,7 +2,7 @@
   /**
   A service that manages the logout of a plunner's organization
   **/
-  var service = function($http,$location,$cookies){
+  var service = function($location,$cookies){
     return {
       logout : function(){
         $cookies.remove('auth_token');

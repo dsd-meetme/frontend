@@ -4,9 +4,17 @@
   @author Giorgio Pea
   @param logoutService A service used to manage the logout of a plunner's organization
   **/
-  var controller = function(logoutService){
+  var controller = function(logoutService,dataProvider){
+    this.errors = {
+      unauthorized : false,
+      forbidden : false
+    }
+    this.data = {};
     this.logout = function(){
         logoutService.logout();
+    }
+    this.getInfo = function(){
+      dataProvider.provide('http://api.plunner.com/companies/example',this,this.data);
     }
   }
 

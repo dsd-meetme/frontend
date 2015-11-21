@@ -15,7 +15,7 @@
             if(config.url !== 'http://api.plunner.com/companies/auth/login' && config.url !== 'http://api.plunner.com/companies/auth/register' ){
               var token = $cookies.get('auth_token');
               if(token !== undefined){
-                config.headers.authorization = token;
+                config.headers.Authorization = token;
               }
             }
 
@@ -23,11 +23,12 @@
           return config;
         },
         response : function(response) {
+          console.log(response);
           //If not template retrieving request
-          if(response.config.url.search('app/')===-1){
+          if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS' ){
             //Gets the refreshed token
-            var token = response.data.token;
-            //Stores token
+            var token = response.headers('Authorization');
+            
             if($cookies.get('auth_token')!==undefined){
               $cookies.remove('auth_token');
             }

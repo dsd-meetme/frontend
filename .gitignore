@@ -116,7 +116,7 @@ coverage.xml
 node_modules/
 npm-debug.log
 public/css
- 
+
 ### laravel ide helper ###
 .phpstorm.meta.php
 _ide_helper.php
@@ -125,4 +125,5 @@ _ide_helper.php
 ### DEPLOYING ###
 .git_utility
 
-
+#karma config
+karma.conf.js
