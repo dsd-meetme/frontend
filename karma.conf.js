@@ -25,8 +25,8 @@ module.exports = function(config) {
     ],
 
     plugins: [
-      'karma-jasmine'/*,
-      'karma-chrome-launcher'*/
+      'karma-jasmine',
+      'karma-phantomjs-launcher'
     ],
 
     // list of files to exclude
