@@ -6,11 +6,12 @@
   @param loginService A service that is used to manage the login of a plunner's organization
   **/
   var controller = function($rootScope,$scope,$location,loginService){
-    $rootScope.$on('badMatch',function(){
-      $scope.osiC.nonRegUser = true;
+    var self = this;
+    $rootScope.$on('event:badMatch',function(){
+      self.nonRegUser = true;
     });
     //an object that encapsulate the validity status of input fields
-    this.validFields = {
+    self.validFields = {
       inputReq : false,
       emailReq : false,
       emailVal : false
@@ -20,14 +21,14 @@
       //Processes the submit of usiForm (organization sign in)
       var form = $scope.osiForm;
       //Validity status of input fields checking
-      this.validFields.inputReq = form.osiPwd.$error.required;
-      this.validFields.emailReq = form.osiEmail.$error.required;
-      this.validFields.emailVal = form.osiEmail.$error.email;
+      self.validFields.inputReq = form.osiPwd.$error.required;
+      self.validFields.emailReq = form.osiEmail.$error.required;
+      self.validFields.emailVal = form.osiEmail.$error.email;
       if(!form.$invalid){
         loginService.login({
-          email : this.osiEmail,
-          pwd : this.osiPwd,
-          rmbMe : this.rmbMe
+          email : self.osiEmail,
+          pwd : self.osiPwd,
+          rmbMe : self.rmbMe
         });
       }
     }

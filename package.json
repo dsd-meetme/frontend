@@ -1,35 +1,34 @@
 {
   "name": "plunner",
   "version": "1.0.0",
-  "description": "A meeting planner for companies with simplicity, automation and optimization in mind",
-  "main": "gulpfile.js",
+  "description": "A meeting planner for business with automation and optimization in mind",
+  "main": "gulp-file.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "angular": "^1.4.7",
+    "angular-cookies": "^1.4.8",
+    "angular": "^1.4.8",
+    "angular-route": "^1.4.8",
     "bootstrap": "^3.3.5",
-    "angular-route": "^1.4.7",
-    "angular-cookies": "^1.4.7"
-  },
-  "devDependencies": {
     "browser-sync": "^2.10.0",
     "gulp": "^3.9.0",
+  },
+  "devDependencies": {
     "gulp-sass": "^2.1.0",
     "jasmine-core": "^2.3.4",
-    "karma-jasmine": "^0.3.6"
+    "karma-chrome-launcher": "^0.2.1",
+    "karma": "^0.13.15",
+    "karma-jasmine": "^0.3.6",
+    "angular-mocks": "^1.4.8",
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/karma start --single-run"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dsd-meetme/frontend.git"
   },
-  "keywords": [
-    "meeting",
-    "bussiness"
-  ],
   "author": "Giorgio Pea, Jean Barre",
   "license": "ISC",
   "bugs": {
