@@ -28,7 +28,7 @@
           email : self.osiEmail,
           pwd : self.osiPwd,
           rmbMe : self.rmbMe
-        },self.errors,'/dashboard');
+        },self.errors,'/organization');
       }
     }
   }

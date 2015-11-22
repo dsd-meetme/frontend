@@ -6,7 +6,8 @@
     <p>{{osiC.errors.email}}</p>
     <input name="osiPwd" type="password" required ng-model="osiC.osiPwd" placeholder="Password"><br>
     <p>{{osiC.errors.password}}</p>
-    <input type="text" ng-model="osiC.rmbMe"><br>
+    <input type="checkbox" ng-model="osiC.rmbMe">Remember Me<br>
+    <a href="/#/osirecovery">forgot your password?</a>
   </div>
   <button>Sign in</button>
   <div ng-show="osiC.validFields.emailReq">

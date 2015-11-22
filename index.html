@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html ng-app="Plunner">
 <head>
   <title>Plunner</title>
@@ -5,7 +6,7 @@
 </head>
 <body ng-controller="rootController as rootC">
   <h1>Plunner</h1>
-  <div ng-show="rootC.comError">A communication error occured</div>
+  <div ng-show="rootC.comError" class="container">A communication error occured</div>
   <button ng-click="rootC.signIn()">org sign in</button>
   <button ng-click="rootC.reg()">registration</button>
   <div ng-view>
@@ -19,12 +20,15 @@
   <script type="text/javascript" src="app/app.interceptors.js"></script>
   <script type="text/javascript" src="app/components/global/rootController.js"></script>
   <script type="text/javascript" src="app/shared/communication/loginService.js"></script>
-  <script type="text/javascript" src="app/components/orgSignIn/osiController.js"></script>
-  <script type="text/javascript" src="app/components/registration/regService.js"></script>
-  <script type="text/javascript" src="app/components/registration/regController.js"></script>
-  <script type="text/javascript" src="app/components/dashboard/dashController.js"></script>
-  <script type="text/javascript" src="app/components/dashboard/logoutService.js"></script>
+  <script type="text/javascript" src="app/components/organization/signIn/osiController.js"></script>
+  <script type="text/javascript" src="app/components/organization/registration/regService.js"></script>
+  <script type="text/javascript" src="app/components/organization/registration/regController.js"></script>
+  <script type="text/javascript" src="app/components/organization/dashboard/dashController.js"></script>
+  <script type="text/javascript" src="app/components/organization/logoutService.js"></script>
   <script type="text/javascript" src="app/shared/communication/dataProvider.js"></script>
+  <script type="text/javascript" src="app/components/organization/profile/opController.js"></script>
+  <script type="text/javascript" src="app/components/organization/recovery/recService.js"></script>
+  <script type="text/javascript" src="app/components/organization/recovery/recController.js"></script>
 </body>
 
 </html>

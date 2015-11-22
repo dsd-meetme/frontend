@@ -2,7 +2,7 @@
   /**
   A service used to register a plunner's organization
   **/
-  var service = function($http,$location,errorsLocation){
+  var service = function($http,$location){
     return {
       register : function(data){
         $http({

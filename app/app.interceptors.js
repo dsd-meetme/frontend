@@ -1,6 +1,11 @@
 (function(){
 
   var app = angular.module('Plunner');
+  var excludedUrlFromToken = [
+    'http://api.plunner.com/companies/auth/login',
+    'http://api.plunner.com/companies/auth/register',
+    'http://api.plunner.com/companies/password/email'
+  ]
   /**
   Http interceptors
   **/
@@ -12,7 +17,7 @@
           //If not template retrieving request
           if(config.url.search('app/')===-1){
             //If not a login/register request (these requests don't need to include the token)
-            if(config.url !== 'http://api.plunner.com/companies/auth/login' && config.url !== 'http://api.plunner.com/companies/auth/register' ){
+            if(excludedUrlFromToken.indexOf(config.url) === -1 ){
               var token = $cookies.get('auth_token');
               if(token !== undefined){
                 config.headers.Authorization = token;
@@ -28,7 +33,7 @@
           if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS' ){
             //Gets the refreshed token
             var token = response.headers('Authorization');
-            
+
             if($cookies.get('auth_token')!==undefined){
               $cookies.remove('auth_token');
             }

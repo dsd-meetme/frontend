@@ -6,7 +6,7 @@
     return {
       logout : function(){
         $cookies.remove('auth_token');
-        $location.path('/orgSignIn');
+        $location.path('/osignin');
       }
     }
   }

@@ -7,7 +7,7 @@
       $scope.rootController.comError = true
     });
     this.signIn = function(){
-      $location.path('/orgSignIn');
+      $location.path('/organization');
     }
     this.reg = function(){
       $location.path('/register');

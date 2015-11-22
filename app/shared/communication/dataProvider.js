@@ -1,24 +1,24 @@
 (function(){
   var service = function($http){
     return {
-      provide : function(url,storageLocation,errorsLocation){
+      provide : function(url,controllerScope){
         return $http({
           method : 'GET',
           url : url,
           //withCredentials : true
         }).then(
           function(response){
-            storageLocation.data = response.data;
-            errorsLocation.forbidden = false;
-            errorsLocation.unauthorized = false;
+            controllerScope.data = response.data;
+            controllerScope.errors.forbidden = false;
+            controllerScope.errors.unauthorized = false;
           }
         ,
         function(response){
           if(response.status === 401){
-            errorsLocation.unauthorized = true;
+            controllerScope.errors.unauthorized = true;
           }
           else if(response.status === 403){
-            errorsLocation.forbidden = true;
+            controllerScope.errors.forbidden = true;
           }
         });
       }

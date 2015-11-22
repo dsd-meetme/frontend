@@ -13,9 +13,6 @@
     this.logout = function(){
         logoutService.logout();
     }
-    this.getInfo = function(){
-      dataProvider.provide('http://api.plunner.com/companies/example',this,this.data);
-    }
   }
 
   var app = angular.module('Plunner');
