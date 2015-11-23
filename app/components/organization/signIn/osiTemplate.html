@@ -1,0 +1,25 @@
+<form name="osiForm" ng-submit="osiC.login()" novalidate>
+  <h2>Sign in</h2>
+  <h5>Enter your credentials</h5>
+  <div>
+    <input name="osiEmail" type="email" required ng-model="osiC.osiEmail" placeholder="Email"><br>
+    <p>{{osiC.errors.email}}</p>
+    <input name="osiPwd" type="password" required ng-model="osiC.osiPwd" placeholder="Password"><br>
+    <p>{{osiC.errors.password}}</p>
+    <input type="checkbox" ng-model="osiC.rmbMe">Remember Me<br>
+    <a href="/#/osirecovery">forgot your password?</a>
+  </div>
+  <button>Sign in</button>
+  <div ng-show="osiC.validFields.emailReq">
+    You did not insert an email address
+  </div>
+  <div ng-show="osiC.validFields.inputReq">
+    You did not insert an password
+  </div>
+  <div ng-show="osiC.validFields.emailVal">
+    You did not insert a valid email address
+  </div>
+  <div ng-show="osiC.nonRegUser">
+    The data you inserted don't match any existing user
+  </div>
+</form>

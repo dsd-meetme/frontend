@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html ng-app="OurApp">
   <head>
     <link rel="stylesheet" href="./assets/css/index_sass.css"></link>
@@ -18,4 +19,39 @@
   <script type="text/javascript" src="app/components/form_domain/controller_domain.js"></script>
   <script src="app/shared/example_directive.js"></script>
   </body>
+=======
+<!DOCTYPE html>
+<html ng-app="Plunner">
+<head>
+  <title>Plunner</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body ng-controller="rootController as rootC">
+  <h1>Plunner</h1>
+  <div ng-show="rootC.comError" class="container">A communication error occured</div>
+  <button ng-click="rootC.signIn()">org sign in</button>
+  <button ng-click="rootC.reg()">registration</button>
+  <div ng-view>
+  </div>
+  <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+  <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+  <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="app/app.module.js"></script>
+  <script type="text/javascript" src="app/app.routes.js"></script>
+  <script type="text/javascript" src="app/app.run.js"></script>
+  <script type="text/javascript" src="app/app.interceptors.js"></script>
+  <script type="text/javascript" src="app/components/global/rootController.js"></script>
+  <script type="text/javascript" src="app/shared/communication/loginService.js"></script>
+  <script type="text/javascript" src="app/components/organization/signIn/osiController.js"></script>
+  <script type="text/javascript" src="app/components/organization/registration/regService.js"></script>
+  <script type="text/javascript" src="app/components/organization/registration/regController.js"></script>
+  <script type="text/javascript" src="app/components/organization/dashboard/dashController.js"></script>
+  <script type="text/javascript" src="app/components/organization/logoutService.js"></script>
+  <script type="text/javascript" src="app/shared/communication/dataProvider.js"></script>
+  <script type="text/javascript" src="app/components/organization/profile/opController.js"></script>
+  <script type="text/javascript" src="app/components/organization/recovery/recService.js"></script>
+  <script type="text/javascript" src="app/components/organization/recovery/recController.js"></script>
+</body>
+
+>>>>>>> master
 </html>

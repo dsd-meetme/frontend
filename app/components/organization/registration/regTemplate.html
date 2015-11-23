@@ -1,0 +1,38 @@
+<form name="regForm" ng-submit="regC.process()" novalidate>
+  <h2>Registration</h2>
+  <div>
+    <input name="orgName" type="text" placeholder="name" required ng-model="regC.orgName">
+    <p>{{ regC.errors.name }}</p>
+    <input name="orgEmail" type="email" placeholder="email" required ng-model="regC.orgEmail">
+    <p>{{ regC.errors.email }}</p>
+    <input name="orgPwd" ng-minlength="6" type="password" placeholder="password" required ng-model="regC.orgPwd">
+    <p>{{ regC.errors.password }}</p>
+    <input name="orgPwdC"type="password" placeholder="confirm password" required ng-model="reg.orgPwdC">
+    <p>{{ regC.errors.confirm_password }}</p>
+    <div>
+      .plunner.com
+    </div>
+  </div>
+  <button>Sign in</button>
+  <div ng-if="regC.validFields.orgNameReq">
+    You did not insert a name
+  </div>
+  <div ng-if="regC.validFields.orgMailReq">
+    You did not inser an email address
+  </div>
+  <div ng-if="regC.validFields.orgPwdReq">
+    You did not insert a password
+  </div>
+  <div ng-if="regC.validFields.orgMailVal">
+    You did not insert a valid email address
+  </div>
+  <div ng-if="regC.validFields.orgPwdCmatch">
+    The two passwords don't match
+  </div>
+  <div ng-if="regC.validFields.orgPwdLength">
+    The password must be of at least 6 characters
+  </div>
+  <div ng-show="regC.mailTaken">
+    The inserted mail has already been taken
+  </div>
+</form>

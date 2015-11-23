@@ -1,0 +1,6 @@
+<form name="recoveryForm" ng-submit="recC.recover()" novalidate>
+  <input type="email" name="emailField" ng-model="recC.email" placeholder="Insert your mail" required>
+  <button>Recover password</button>
+  <div ng-show="recC.validfields.required">Required</div>
+  <div ng-show="recC.errors">{{recC.errors}}</div>
+</form>
