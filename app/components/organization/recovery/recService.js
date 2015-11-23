@@ -1,7 +1,7 @@
 (function(){
   var service = function($http){
     return {
-      recover : function(email,errorsLocation){
+      recover : function(email,controllerScope){
         console.log("centro");
         $http({
           method : 'POST',
@@ -10,10 +10,12 @@
           headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
         }).then(
           function(response){
+            controllerScope.success = true;
+            controllerScope.errors = {};
           },
           function(response){
             if(response.status === 422){
-              errorsLocation = response.data;
+              controllerScope.errors = response.data;
             }
           }
         )

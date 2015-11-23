@@ -28,12 +28,11 @@
           return config;
         },
         response : function(response) {
-          console.log(response);
           //If not template retrieving request
           if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS' ){
             //Gets the refreshed token
             var token = response.headers('Authorization');
-
+            console.log(token);
             if($cookies.get('auth_token')!==undefined){
               $cookies.remove('auth_token');
             }
