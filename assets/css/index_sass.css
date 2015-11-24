@@ -1,7 +1,18 @@
-.my-class {
-  width: 60px; }
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+body {
+  font-family: "Open Sans", Helvetica, Arial sans-serif; }
 
-.helvet {
-  font: 100% Helvetica, sans-serif;
-  color: #FF0000;
-  text-align: center; }
+div.header-left {
+  margin-left: 30px; }
+
+div.header-right {
+  display: inline;
+  float: right;
+  margin-right: 30px; }
+
+div.form-register {
+  width: 400px;
+  margin: 0 auto;
+  padding: 0 50 0 50;
+    padding-border-style: solid;
+    padding-border-radius: 25; }

@@ -1,38 +1,31 @@
-<<<<<<< HEAD
-<html ng-app="OurApp">
-  <head>
-    <link rel="stylesheet" href="./assets/css/index_sass.css"></link>
-  </head>
-  <body>
-    <h1 class="helvet">Login Page</h1>
-    <div ng-controller="domain">
-      <input type="text" ng-model="domainName"></input>/plunner.fr
-      <br/>
-      <button ng-click="checkDomain()"></button>
-      <br/>
-      {{domainName}}
-    </div>
-    
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js"></script>-->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-  <script src="app/app.module.js"></script>
-  <script type="text/javascript" src="app/components/form_domain/controller_domain.js"></script>
-  <script src="app/shared/example_directive.js"></script>
-  </body>
-=======
 <!DOCTYPE html>
 <html ng-app="Plunner">
 <head>
   <title>Plunner</title>
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/index_sass.css">
 </head>
 <body ng-controller="rootController as rootC">
-  <h1>Plunner</h1>
-  <div ng-show="rootC.comError" class="container">A communication error occured</div>
-  <button ng-click="rootC.signIn()">org sign in</button>
-  <button ng-click="rootC.reg()">registration</button>
-  <div ng-view>
+
+  <div class="navbar navbar-default">
+  <!-- HEADER -->
+    <div class="nav navbar-left">
+      <h1 class="navbar-brand">Plunner</h1>
+    </div>
+    
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">How To</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><button type="button" class="btn btn-default navbar-btn" ng-click="rootC.presentation()">Presentation</button></li>
+    </ul>
   </div>
+
+  <div ng-show="rootC.comError" class="container">A communication error occured</div>
+  <div ng-view>
+  <!-- TEMPLATE INJECTED -->
+  </div>
+  <!-- FOOTER -->
+
   <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
   <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
   <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
@@ -51,7 +44,8 @@
   <script type="text/javascript" src="app/components/organization/profile/opController.js"></script>
   <script type="text/javascript" src="app/components/organization/recovery/recService.js"></script>
   <script type="text/javascript" src="app/components/organization/recovery/recController.js"></script>
+  <script type="text/javascript" src="app/components/employee/signIn/usiController.js"></script>
+  <script type="text/javascript" src="app/components/employee/dashboard/dashController.js"></script>
+  <script type="text/javascript" src="app/components/presentation/presController.js"></script>
 </body>
-
->>>>>>> master
 </html>
