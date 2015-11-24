@@ -32,10 +32,10 @@
         self.data.groups = response.data;
       }, function(response){
         if(response.status === 401){
-          self.errors.unauthorized = true;
+          self.code = 401;
         }
         else if(response.status === 403){
-          self.errors.forbidden = true;
+          self.code = 403;
         }
       })
     }
