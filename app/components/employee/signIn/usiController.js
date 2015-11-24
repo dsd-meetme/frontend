@@ -28,11 +28,17 @@
           email : self.usiEmail,
           pwd : self.usiPwd,
           rmbMe : self.rmbMe
-        },self.errors,'/employee');
+        }).then(function(){
+          $location.path('/employee')
+        },function(response){
+          if(response.status === 422){
+            self.errors = response.data;
+          }
+        });
       }
     }
   }
-  
+
   var app = angular.module('Plunner');
   app.controller('usiController',controller);
 }())

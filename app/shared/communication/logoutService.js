@@ -4,9 +4,9 @@
   **/
   var service = function($location,$cookies){
     return {
-      logout : function(){
+      logout : function(url){
         $cookies.remove('auth_token');
-        $location.path('/usignin');
+        $location.path(url);
       }
     }
   }

@@ -12,7 +12,7 @@
     }
     this.data = {};
     this.logout = function(){
-        logoutService.logout();
+        logoutService.logout('/osignin');
     };
     this.getEmployees = function(){
       dataProvider.provide('http://api.plunner.com/companies/employees').then(function(response){

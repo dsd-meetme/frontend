@@ -8,15 +8,15 @@
   var controller = function($rootScope,$scope,$location,loginService){
     var self = this;
 
-    self.errors = {};
+    this.errors = {};
     //an object that encapsulate the validity status of input fields
-    self.validFields = {
+    this.validFields = {
       inputReq : false,
       emailReq : false,
       emailVal : false
     }
 
-    self.login = function(){
+    this.login = function(){
       //Processes the submit of usiForm (organization sign in)
       var form = $scope.osiForm;
       //Validity status of input fields checking
@@ -28,7 +28,13 @@
           email : self.osiEmail,
           pwd : self.osiPwd,
           rmbMe : self.rmbMe
-        },self.errors,'/organization');
+        }).then(function(){
+            $location.path('/organization');
+        },function(response){
+          if(response.status === 422){
+            self.errors = response.data;
+          }
+        });
       }
     }
   }
