@@ -6,18 +6,18 @@
   **/
   var controller = function(logoutService,dataProvider){
     var self = this;
-    this.errors = {
+    self.errors = {
       unauthorized : false,
       forbidden : false
     }
-    this.data = {};
-    this.logout = function(){
+    self.data = {};
+    self.logout = function(){
         logoutService.logout('/osignin');
     };
-    this.getEmployees = function(){
+    self.getEmployees = function(){
       dataProvider.provide('http://api.plunner.com/companies/employees').then(function(response){
         self.data.employees = response.data;
-        self.getGroups();
+        //self.getGroups();
       },function(response){
         if(response.status === 401){
           self.errors.unauthorized = true;
@@ -27,7 +27,7 @@
         }
       });
     }
-    this.getGroups = function(){
+    self.getGroups = function(){
       dataProvider.provide('http://api.plunner.com/companies/groups').then(function(response){
         self.data.groups = response.data;
       }, function(response){
@@ -39,7 +39,7 @@
         }
       })
     }
-    this.getEmployees();
+    self.getEmployees();
   }
 
   var app = angular.module('Plunner');

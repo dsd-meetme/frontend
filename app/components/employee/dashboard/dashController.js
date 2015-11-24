@@ -11,7 +11,7 @@
     }
     this.data = {};
     this.logout = function(){
-        logoutService.logout();
+        logoutService.logout('/usignin');
     }
   }
 

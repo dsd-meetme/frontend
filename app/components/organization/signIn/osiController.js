@@ -17,6 +17,7 @@
     }
 
     this.login = function(){
+      console.log('enter')
       //Processes the submit of usiForm (organization sign in)
       var form = $scope.osiForm;
       //Validity status of input fields checking

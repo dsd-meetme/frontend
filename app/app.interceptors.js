@@ -19,6 +19,8 @@
             //If not a login/register request (these requests don't need to include the token)
             if(excludedUrlFromToken.indexOf(config.url) === -1 ){
               var token = $cookies.get('auth_token');
+              console.log("Url "+config.url);
+              console.log('Appending token to request '+token);
               if(token !== undefined){
                 config.headers.Authorization = token;
               }
@@ -32,7 +34,7 @@
           if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS' ){
             //Gets the refreshed token
             var token = response.headers('Authorization');
-            console.log(token);
+            console.log("Received token "+token);
             if($cookies.get('auth_token')!==undefined){
               $cookies.remove('auth_token');
             }
