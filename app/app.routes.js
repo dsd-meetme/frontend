@@ -9,6 +9,11 @@
           controller: 'osiController',
           controllerAs: 'osiC'
         }).
+        when('/usignin', {
+          templateUrl: 'app/components/employee/signIn/usiTemplate.html',
+          controller: 'usiController',
+          controllerAs: 'usiC'
+        }).
         when('/register', {
           templateUrl: 'app/components/organization/registration/regTemplate.html',
           controller: 'regController',
@@ -17,7 +22,12 @@
         when('/organization', {
           templateUrl: 'app/components/organization/dashboard/dashTemplate.html',
           controller: 'dashController',
-          controllerAs: 'dashC'
+          controllerAs: 'dashOrgC'
+        }).
+        when('/employee', {
+          templateUrl: 'app/components/employee/dashboard/dashTemplate.html',
+          controller: 'dashController',
+          controllerAs: 'dashEmpC'
         }).
         when('/organization/profile',{
           templateUrl: 'app/components/organization/profile/opTemplate.html',
@@ -28,6 +38,11 @@
           templateUrl: 'app/components/organization/recovery/recTemplate.html',
           controller: 'recController',
           controllerAs: 'recC'
+        }).
+        when('/presentation',{
+          templateUrl: 'app/components/presentation/presTemplate.html',
+          controller: 'presController',
+          controllerAs: 'presC'
         }).
         otherwise({
           redirectTo: '/'

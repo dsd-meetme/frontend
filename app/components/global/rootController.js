@@ -6,11 +6,8 @@
     $rootScope.$on('event:comError',function(){
       $scope.rootController.comError = true
     });
-    this.signIn = function(){
-      $location.path('/organization');
-    }
-    this.reg = function(){
-      $location.path('/register');
+    this.presentation = function(){
+      $location.path('/presentation');
     }
   }
 

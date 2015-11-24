@@ -1,7 +1,7 @@
 <div>
   <h1>Success! Your are logged</h1>
-  <a href="/#/organization/profile">Profile</a>
-  <button ng-click="dashOrgC.logout()">Logout</button>
+  <a href="/#/employee/profile">Profile</a>
+  <button ng-click="dashEmpC.logout()">Logout</button>
   <div>
     <h2>Employees</h2>
     <input type="search" placeholder="search">
@@ -15,10 +15,11 @@
         <th></th>
       </thead>
       <tbody>
-        <tr ng-repeat="employee in dashC.data.employees">
-          <td>{{employee.name}}</td>
-          <td>{{employee.email}}</td>
+        <tr>
           <td>Bla</td>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>GO</td>
         </tr>
       </tbody>
     </table>
@@ -35,14 +36,13 @@
         <th></th>
       </thead>
       <tbody>
-        <!--<tr ng-repeat="group in dashC.data.groups">
-          <td>{{group.name}}</td>
-          <td>{{group.}}</td>
+        <tr>
+          <td>Bla</td>
+          <td>Bla</td>
           <td>GO</td>
-        </tr>-->
+        </tr>
       </tbody>
     </table>
-    {{dashC.data}}
   </div>
 
 
