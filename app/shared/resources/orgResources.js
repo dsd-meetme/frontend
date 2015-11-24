@@ -19,7 +19,7 @@
       'update' : {
         method : 'PUT'
       }
-    }
+    });
     return {
         employee : function(){
           return employeeResource;

@@ -21,12 +21,12 @@
         }).
         when('/organization', {
           templateUrl: 'app/components/organization/dashboard/dashTemplate.html',
-          controller: 'dashController',
+          controller: 'dashOrgController',
           controllerAs: 'dashOrgC'
         }).
         when('/employee', {
           templateUrl: 'app/components/employee/dashboard/dashTemplate.html',
-          controller: 'dashController',
+          controller: 'dashEmpController',
           controllerAs: 'dashEmpC'
         }).
         when('/organization/profile',{
@@ -43,6 +43,16 @@
           templateUrl: 'app/components/presentation/presTemplate.html',
           controller: 'presController',
           controllerAs: 'presC'
+        }).
+        when('/organization/employees/:id',{
+          templateUrl: 'app/components/organization/employee/empOrgTemplate.html',
+          controller: 'empOrgController',
+          controllerAs: 'empOrgC'
+        }).
+        when('/organization/groups/:id', {
+          templateUrl: 'app/components/organization/group/groupOrgTemplate.html',
+          controller : 'groupOrgController',
+          controllerAs : 'groupOrgC'
         }).
         otherwise({
           redirectTo: '/'

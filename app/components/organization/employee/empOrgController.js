@@ -1,14 +1,17 @@
 (function(){
-  var controller = function(dataProvider,$routeParams,deleter){
+  var controller = function($routeParams,orgResources){
     var self = this;
     self.data = {};
     self.errors = {
       unauth : false,
       forb : false
     }
+    //employee id
+    var id = $routeParams.id;
+    //Get employee info in the context of an org
     self.getInfo = function(){
-      var employeeId = $routeParams.id;
-      dataProvider.provide('http://api.plunner.com/companies/employees/'+employeeId)
+      //restful show
+      orgResources.employee.$get({employeeId:id}).$promise
       .then(function(response){
         self.data = response.data;
       },function(response){
@@ -22,8 +25,10 @@
         }
       })
     };
+    //Delete an employee in the context of an org
     self.delete = function(){
-      deleter.delete('http://api.plunner.com/companies/employees/'+employeeId)
+      //restful delete
+      orgResources.employee.$remove({employeeId:id}).$promise
       .then(function(response){
         //Show success popup wait for some time
         //redirect
@@ -38,8 +43,15 @@
         }
       })
     }
-    self.update = function(){
-
+    //Update employee info
+    self.update = function(data){
+        //validation
+        orgResources.employees.update({employeeId:id}).$promise
+        .then(function(){
+          //
+        },function(){
+          //
+        })
     }
   }
 
