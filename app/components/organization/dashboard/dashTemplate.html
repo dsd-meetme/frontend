@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="employee in dashOrgC.data.employees">
-          <td>{{employee.name}}</td>
+          <td><a href="/#/organization/employees/{{employee.id}}">{{employee.name}}</a></td>
           <td>{{employee.email}}</td>
           <td>Bla</td>
         </tr>

@@ -1,6 +1,6 @@
 (function(){
   var service = function($resource){
-    var employeeResource = $resource('http://api.plunner.com/companies/employee/:employeeId',null,{
+    var employeeResource = $resource('http://api.plunner.com/companies/employees/:employeeId',null,{
       'update' : {
         method : 'PUT'
       }

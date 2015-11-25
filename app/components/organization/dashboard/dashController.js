@@ -4,7 +4,7 @@
   @author Giorgio Pea
   @param logoutService A service used to manage the logout of a plunner's organization
   **/
-  var controller = function(logoutService,orgResources){
+  var controller = function(logoutService,orgResources,$cookies){
     var self = this;
     self.errors = {
       unauthorized : false,
@@ -18,9 +18,10 @@
     //Get employees
     self.getEmployees = function(){
       //employees restful index
-      orgResources.employee.$get({employeeId : ''}).$promise
+      orgResources.employee().query({employeeId : ''}).$promise
       .then(function(response){
-        self.data.employees = response.data;
+        self.data.employees = response;
+        console.log($cookies.get('auth_token'));
         //self.getGroups();
       },function(response){
         if(response.status === 401){
@@ -34,9 +35,11 @@
     //Get groups
     self.getGroups = function(){
       //employees restful groups index
-      orgResources.group.$get({groupId : ''}).$promise
+      orgResources.group().query({groupId : ''}).$promise
       .then(function(response){
-        self.data.groups = response.data;
+        self.data.groups = response;
+        console.log($cookies.get('auth_token'));
+
       }, function(response){
         if(response.status === 401){
           self.code = 401;
@@ -46,7 +49,7 @@
         }
       })
     }
-    //self.getEmployees();
+    self.getEmployees();
   }
 
   var app = angular.module('Plunner');
