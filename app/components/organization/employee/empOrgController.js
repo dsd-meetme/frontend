@@ -1,40 +1,86 @@
 (function(){
   var controller = function($scope,$routeParams,orgResources){
-    var self = this;
-    self.data = {};
-    self.errors = {
+    var c = this;
+    //employee id
+    var id = $routeParams.id;
+
+    c.errors = {
       unauth : false,
       forb : false
     }
-    self.invalidFields = {
-      emailVal : false,
-      passwordLen : false,
-      passwordMatch : false
-    }
-    self.shallowData = {
 
+    c.profileData = {};
+
+    c.nameMailForm = {
+      formVisible : false,
+      form : $scope.nmeForm,
+      invalidFields : {
+        emailVal : false
+      },
+      data : {
+        name : null,
+        email : null
+      },
+      abort : function(){
+          this.formVisible = false;
+      },
+      submit : function(){
+        console.log(this);
+        console.log($scope.nmeForm);
+        this.invalidFields.emailVal = this.form.email.$error.email;
+        if(!this.form.$invalid){
+          c.updateProfile(this.data);
+        }
+      },
+      show : function(){
+        this.formVisible = true
+      }
+
+    };
+    c.passwordForm = {
+      formVisible : false,
+      form : $scope.peForm,
+      invalidFields : {
+        passwordLen : false,
+        passwordMatch : false
+      },
+      data : {
+        password : null,
+        cpassword : null
+      },
+      abort : function(){
+        this.formVisible = false;
+      },
+      submit : function(){
+        this.invalidFields.passwordLen = this.form.password.$error.minlength;
+        this.invalidFields.passwordMatch = (this.data.password !== this.data.cpassword);
+        if(!this.form.$invalid){
+          c.updateProfile(this.data);
+        }
+      },
+      show : function(){
+        this.formVisible = true;
+      }
     }
-    //employee id
-    var id = $routeParams.id;
     //Get employee info in the context of an org
-    self.getInfo = function(){
+    c.getInfo = function(){
       //restful show
       orgResources.employee().get({employeeId:id}).$promise
       .then(function(response){
-        self.data = response;
+        c.profileData = response;
       },function(response){
         if(response.status === 401){
-          self.errors.unauth = true;
-          self.errors.forb = false;
+          c.errors.unauth = true;
+          c.errors.forb = false;
         }
         else if(response.status === 403){
-          self.errors.unauth = false;
-          self.errors.forb = true;
+          c.errors.unauth = false;
+          c.errors.forb = true;
         }
       })
     };
     //Delete an employee in the context of an org
-    self.delete = function(){
+    c.delete = function(){
       //restful delete
       orgResources.employee().remove({employeeId:id}).$promise
       .then(function(response){
@@ -43,17 +89,17 @@
         //redirect
       },function(response){
         if(response.status === 401){
-          self.errors.unauth = true;
-          self.errors.forb = false;
+          c.errors.unauth = true;
+          c.errors.forb = false;
         }
         else if(response.status === 403){
-          self.errors.unauth = false;
-          self.errors.forb = true;
+          c.errors.unauth = false;
+          c.errors.forb = true;
         }
       })
     }
     //Update employee info
-    self.update = function(data){
+    c.update = function(data){
         //validation
         orgResources.employees.update({employeeId:id}).$promise
         .then(function(){
@@ -62,50 +108,10 @@
           //
         })
     }
-    self.editOpen = function(){
-      self.nameMailEdit = true;
-    }
-    self.editClosed = function(){
-      self.passwordEdit = true;
-    }
-    self.getGroups = function(){
+    c.getGroups = function(){
 
     }
-    self.nmeConfirm = function(){
-      var form = $scope.nmeForm;
-      self.invalidFields.emailVal = form.email.$error.email || false;
-      console.log(self.invalidFields);
-      if(!form.$invalid && self.shallowData !== undefined){
-        orgResources.employee().update({employeeId:id},{
-          name : self.shallowData.name || undefined,
-          email : self.shallowData.email || undefined,
-        }).$promise.
-        then(function(){
-          alert('success');
-        },function(){
-          alert('failure');
-        })
-      }
-    };
-    self.peConfirm = function(){
-      var form = $scope.peForm;
-      self.invalidFields.passwordLen = form.password.$error.minlength || false;
-      self.invalidFields.passwordMatch = (self.shallowData.password !== self.shallowData.cpassword);
-      console.log(self.invalidFields);
-      if(!form.$invalid && !self.invalidFields.passwordMatch){
-        self.update({
-          password : self.shallowData.password,
-          password_confirmed : self.cpassword
-        })
-      }
-    }
-    self.nmeAbort = function(){
-      self.nameMailEdit = false;
-    }
-    self.peAbort = function(){
-      self.passwordEdit = false;
-    }
-    self.getInfo();
+    c.getInfo();
   }
 
 

@@ -16,5 +16,5 @@
   }
 
   var app = angular.module('Plunner');
-  app.controller('dashController',controller);
+  app.controller('dashEmpController',controller);
 }())

@@ -10,7 +10,7 @@
             data = 'email='+credentials.email + '&password='+credentials.pwd;
           }
           else{
-            data = 'name='+credentials.name+'&email='+credentials.email+'&password='+credentials.pwd;
+            data = 'company='+credentials.name+'&email='+credentials.email+'&password='+credentials.pwd;
           }
           return $http({
             method : 'POST',

@@ -13,7 +13,8 @@
     self.validFields = {
       inputReq : false,
       emailReq : false,
-      emailVal : false
+      emailVal : false,
+      org : false
     }
 
     self.login = function(){
@@ -23,10 +24,12 @@
       self.validFields.inputReq = form.usiPwd.$error.required;
       self.validFields.emailReq = form.usiEmail.$error.required;
       self.validFields.emailVal = form.usiEmail.$error.email;
+      self.validFields.org = form.company.$error.required;
       if(!form.$invalid){
-        loginService.login('http://api.plunner.com/employee/auth/login',{
-          email : self.usiEmail,
-          pwd : self.usiPwd,
+        loginService.login('http://api.plunner.com/employees/auth/login',{
+          name : self.org,
+          email : self.email,
+          pwd : self.password,
           rmbMe : self.rmbMe
         }).then(function(){
           $location.path('/employee')
