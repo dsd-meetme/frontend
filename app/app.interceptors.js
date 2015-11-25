@@ -33,7 +33,13 @@
           //If not template retrieving request
           if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS' ){
             //Gets the refreshed token
-            var token = response.headers('Authorization');
+            var token;
+            if(response.config.url==='http://api.plunner.com/companies/auth/login'){
+              token = 'Bearer '+response.data.token;
+            }
+            else{
+              token = response.headers('Authorization');
+            }
             console.log("Received token "+token);
             if($cookies.get('auth_token')!==undefined){
               $cookies.remove('auth_token');

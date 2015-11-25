@@ -4,19 +4,26 @@
   app.run(function($rootScope, $location,$cookies) {
     //Route filtering
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
-      //Redirect to orgSignIn if you're not authenticated
-      var cookie = $cookies.get('auth_token');
-      var controller = next.controller;
-      if(controller==='dashController' && cookie  === undefined ){
-        $location.path('/osignin');
+      //Gets the decoded jwt
+      var mode = undefined;
+      var token = $cookies.get('auth_token');
+      if(token !== undefined){
+        mode = jwt_decode($cookies.get('auth_token')).mode;
       }
-      /*else if(controller==='organizationProfileController' && cookie === undefined){
-        $location.path('/orgSignIn');
-      }*/
-      //Redirect to dashboard if you're authenticated and if you try to access the
-      //orgSignIn area
-      else if(next.controller==='osiController' && $cookies.get('auth_token') !== undefined){
-        $location.path('/organization');
+      //Gets the url the user want to reach
+      var path = next.originalPath;
+      //Mode checking(organizations)
+      if(path.search('organization')!== -1 && path.search('auth') === -1 ){
+        console.log("mode"+mode);
+        if(mode === undefined || mode !== 'cn'){
+          $location.path('/osignin');
+        }
+      }
+      //Mode checking(employees)
+      else if(path.search('employees')!== -1 && path.search('auth') === -1){
+        if(mode === undefined || mode !== 'en'){
+          $location.path('/usignin');
+        }
       }
     });
   });

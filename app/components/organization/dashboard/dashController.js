@@ -4,7 +4,7 @@
   @author Giorgio Pea
   @param logoutService A service used to manage the logout of a plunner's organization
   **/
-  var controller = function(logoutService,orgResources,$cookies){
+  var controller = function(logoutService,orgResources,$cookies,$http){
     var self = this;
     self.errors = {
       unauthorized : false,
@@ -19,10 +19,21 @@
     self.getEmployees = function(){
       //employees restful index
       orgResources.employee().query({employeeId : ''}).$promise
+      //console.log('token to deliver '+$cookies.get('auth_token'))
+      /*$http({
+        method : 'GET',
+        url : 'http://api.plunner.com/companies/employees',
+        headers : {
+          Authorization : $cookies.get('auth_token')
+        }
+      })*/
       .then(function(response){
+        console.log(response.headers);
+        /*$cookies.remove('auth_token');
+        $cookies.put('auth_token',response.headers('Authorization'));*/
+        console.log('token ricevuto '+$cookies.get('auth_token'));
         self.data.employees = response;
-        console.log($cookies.get('auth_token'));
-        //self.getGroups();
+        self.getGroups();
       },function(response){
         if(response.status === 401){
           self.errors.unauthorized = true;

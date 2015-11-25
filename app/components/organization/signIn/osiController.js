@@ -5,7 +5,7 @@
   @author Giorgio Pea
   @param loginService A service that is used to manage the login of a plunner's organization
   **/
-  var controller = function($rootScope,$scope,$location,loginService){
+  var controller = function($rootScope,$scope,$location,loginService,$cookies){
     var self = this;
 
     this.errors = {};
@@ -29,7 +29,10 @@
           email : self.osiEmail,
           pwd : self.osiPwd,
           rmbMe : self.rmbMe
-        }).then(function(){
+        }).then(function(response){
+            console.log(response);
+            /*$cookies.put('auth_token','Bearer '+response.data.token);
+            console.log('Putted token '+$cookies.get('auth_token'))*/
             $location.path('/organization');
         },function(response){
           if(response.status === 422){

@@ -4,28 +4,28 @@
 
   <div>
     <input name="company" type="text" required ng-model="usiC.org" placeholder="company"><br>
-    <p>{{usiC.errors.company}}</p>
+    <p class="text-danger">{{usiC.errors.company}}</p>
     <input name="usiEmail" type="email" required ng-model="usiC.email" placeholder="Email"><br>
-    <p>{{usiC.errors.email}}</p>
+    <p class="text-danger">{{usiC.errors.email}}</p>
     <input name="usiPwd" type="password" required ng-model="usiC.password" placeholder="Password"><br>
-    <p>{{usiC.errors.password}}</p>
+    <p class="text-danger">{{usiC.errors.password}}</p>
     <input type="checkbox" ng-model="usiC.rmbMe">Remember Me<br>
   </div>
   <button type="submit" class="btn btn-default">Sign in</button>
-</br>
-  <a href="/#/usirecovery">forgot your password?</a>
-  <i>If you are an organization it is <a href="/#/osignin">here</a></i>
-  <div ng-show="usiC.validFields.emailReq">
+  <div class="text-danger" ng-show="usiC.validFields.emailReq">
     You did not insert an email address
   </div>
-  <div ng-show="usiC.validFields.inputReq">
+  <div class="text-danger" ng-show="usiC.validFields.inputReq">
     You did not insert an password
   </div>
-  <div ng-show="usiC.validFields.emailVal">
+  <div class="text-danger" ng-show="usiC.validFields.emailVal">
     You did not insert a valid email address
   </div>
-  <div ng-show="usiC.nonRegUser">
+  <div class="text-danger" ng-show="usiC.nonRegUser">
     The data you inserted don't match any existing user
   </div>
-  <div ng-show="usiC.validFields.org">You did not insert an organization</div>
+  <div class="text-danger" ng-show="usiC.validFields.org">You did not insert an organization</div>
+</br>
+  <a href="/#/usirecovery">forgot your password?</a><br>
+  <i>If you are an organization it is <a href="/#/osignin">here</a></i>
 </form>

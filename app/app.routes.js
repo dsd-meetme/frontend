@@ -25,7 +25,7 @@
           controllerAs: 'dashOrgC'
         }).
         when('/employee', {
-          templateUrl: 'app/components/employee/dashboard/dashTemplate.html',
+          templateUrl: 'app/components/employee/dashboard/edTemplate.html',
           controller: 'dashEmpController',
           controllerAs: 'dashEmpC'
         }).

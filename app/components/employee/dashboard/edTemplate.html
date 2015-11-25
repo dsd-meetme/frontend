@@ -1,0 +1,47 @@
+<div>
+  <h1>Success! Your are logged (employee)</h1>
+  <a href="/#/employee/profile">Profile</a>
+  <button ng-click="dashEmpC.logout()">Logout</button>
+
+  <h2>Meetings</h2>
+  <button>Make a meeting</button>
+  <div style="width: 100%">
+    <div>
+      <div ng-click="dashEmpC.meetingList.showItenere" class="text-center" style="float:left; width:50%">TO BE PLANNED</div>
+      <div ng-click="dashEmpC.meetingList.showComplete" class="text-center" style="float:left; width:50%">PLANNED</div>
+    </div>
+    <table ng-show="dashEmpC.meetingsList.visibleItinere" class="table">
+      <thead>
+        <th>Name</th>
+        <th>Group</th>
+        <th>Time window</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>Go</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table" ng-show="dashEmpC.meetingsList.visibleComplete">
+      <thead>
+        <th>Name</th>
+        <th>Group</th>
+        <th>Planned for</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>Go</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

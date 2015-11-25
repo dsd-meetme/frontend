@@ -31,7 +31,8 @@
           email : self.email,
           pwd : self.password,
           rmbMe : self.rmbMe
-        }).then(function(){
+        }).then(function(response){
+          
           $location.path('/employee')
         },function(response){
           if(response.status === 422){
