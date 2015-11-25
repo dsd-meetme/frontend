@@ -7,10 +7,10 @@
   <button>Make a meeting</button>
   <div style="width: 100%">
     <div>
-      <div ng-click="dashEmpC.meetingList.showItenere" class="text-center" style="float:left; width:50%">TO BE PLANNED</div>
-      <div ng-click="dashEmpC.meetingList.showComplete" class="text-center" style="float:left; width:50%">PLANNED</div>
+      <div ng-click="dashEmpC.meetingsList.groupA.show()" class="text-center" style="float:left; width:50%">TO BE PLANNED</div>
+      <div ng-click="dashEmpC.meetingsList.groupB.show()" class="text-center" style="float:left; width:50%">PLANNED</div>
     </div>
-    <table ng-show="dashEmpC.meetingsList.visibleItinere" class="table">
+    <table ng-show="dashEmpC.meetingsList.groupA.isVisible" class="table">
       <thead>
         <th>Name</th>
         <th>Group</th>
@@ -26,7 +26,7 @@
         </tr>
       </tbody>
     </table>
-    <table class="table" ng-show="dashEmpC.meetingsList.visibleComplete">
+    <table class="table" ng-show="dashEmpC.meetingsList.groupB.isVisible">
       <thead>
         <th>Name</th>
         <th>Group</th>
