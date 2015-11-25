@@ -54,6 +54,11 @@
           controller : 'groupOrgController',
           controllerAs : 'groupOrgC'
         }).
+        when('/employee/newmeeting', {
+          templateUrl: 'app/components/employee/newMeeting/nmTemplate.html',
+          controller : 'nmController',
+          controllerAs : 'nmC'
+        }).
         otherwise({
           redirectTo: '/'
         });

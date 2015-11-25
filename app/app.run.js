@@ -20,7 +20,7 @@
         }
       }
       //Mode checking(employees)
-      else if(path.search('employees')!== -1 && path.search('auth') === -1){
+      else if(path.search('employee')!== -1 && path.search('auth') === -1){
         if(mode === undefined || mode !== 'en'){
           $location.path('/usignin');
         }
