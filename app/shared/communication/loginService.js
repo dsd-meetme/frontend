@@ -1,10 +1,10 @@
 (function(){
-    var service = function($http,$location){
+    var service = function($http){
       return {
         /**
         Makes a POST request considering the given url, the given credentials, using
         **/
-        login : function(url,credentials,redirectTo){
+        login : function(url,credentials){
           var data;
           if(credentials.name === undefined){
             data = 'email='+credentials.email + '&password='+credentials.pwd;
