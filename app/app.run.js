@@ -5,17 +5,19 @@
     //Route filtering
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
       //Gets the decoded jwt
-      var mode = undefined;
+      var mode;
       var token = $cookies.get('auth_token');
-      if(token !== undefined){
+      console.log(token);
+      if(token != null || !angular.isUndefined(token)){
         mode = jwt_decode($cookies.get('auth_token')).mode;
       }
       //Gets the url the user want to reach
       var path = next.originalPath;
+      console.log(next.originalPath)
       //Mode checking(organizations)
       if(path.search('organization')!== -1 && path.search('auth') === -1 ){
         console.log("mode"+mode);
-        if(mode === undefined || mode !== 'cn'){
+        if(angular.isUndefined(mode) || mode !== 'cn'){
           $location.path('/osignin');
         }
       }

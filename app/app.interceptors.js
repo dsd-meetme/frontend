@@ -4,7 +4,8 @@
   var excludedUrlFromToken = [
     'http://api.plunner.com/companies/auth/login',
     'http://api.plunner.com/companies/auth/register',
-    'http://api.plunner.com/companies/password/email'
+    'http://api.plunner.com/companies/password/email',
+    'http://api.plunner.com/employees/auth/login'
   ]
   /**
   Http interceptors
@@ -15,7 +16,7 @@
       return {
         request : function(config) {
           //If not template retrieving request
-          if(config.url.search('app/')===-1){
+          if(config.url.search('app/')===-1 && config.url.search('template/') === -1){
             //If not a login/register request (these requests don't need to include the token)
             if(excludedUrlFromToken.indexOf(config.url) === -1 ){
               var token = $cookies.get('auth_token');
@@ -31,10 +32,10 @@
         },
         response : function(response) {
           //If not template retrieving request
-          if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS' ){
+          if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS'  && response.config.url.search('template/') === -1){
             //Gets the refreshed token
             var token;
-            if(response.config.url==='http://api.plunner.com/companies/auth/login'){
+            if(response.config.url==='http://api.plunner.com/companies/auth/login' || response.config.url==='http://api.plunner.com/employees/auth/login' ){
               token = 'Bearer '+response.data.token;
             }
             else{

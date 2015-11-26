@@ -4,8 +4,16 @@
   <title>Plunner</title>
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/index_sass.css">
+  <link rel="stylesheet" href="assets/jquery-ui.min.css">
 </head>
 <body ng-controller="rootController as rootC">
+  <style>
+  .date-range-selected > .ui-state-active,
+  .date-range-selected > .ui-state-default {
+   background: none;
+   background-color: lightsteelblue;
+  }
+  </style>
   <div class="navbar navbar-default" role="navigation">
   <!-- HEADER -->
     <div class="nav navbar-left">
@@ -33,7 +41,6 @@
   <script type="text/javascript" src="app/app.module.js"></script>
   <script type="text/javascript" src="app/app.routes.js"></script>
   <script type="text/javascript" src="app/app.run.js"></script>
-
   <script type="text/javascript" src="app/app.interceptors.js"></script>
   <script type="text/javascript" src="app/components/global/rootController.js"></script>
   <script type="text/javascript" src="app/shared/communication/loginService.js"></script>
@@ -53,5 +60,8 @@
   <script type="text/javascript" src="app/components/organization/group/groupOrgController.js"></script>
   <script type="text/javascript" src="app/components/employee/dashboard/edController.js"></script>
   <script type="text/javascript" src="app/components/employee/newMeeting/nmController.js"></script>
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+  <!--<script type="text/javascript" src="assets/js/rangedata.js"></script>-->
 </body>
 </html>
