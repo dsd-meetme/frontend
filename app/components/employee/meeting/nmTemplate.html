@@ -27,6 +27,7 @@
           <div></div>
         </div>
         <input id="meetingDatepickerInput" ng-model="nmC.formGroupB.data.meetingRange" type="hidden">
+        <p ng-show="nmC.formGroupB.data.invalidFields.range" class="text-danger">Please specify a date range(at least 2 days)</p>
         <p>Meeting repetion</p>
         <select name="meetingRepeat" ng-model="nmC.formGroupB.data.meetingRepeat">
           <option value="1W">every week</option>
@@ -37,7 +38,7 @@
         <button ng-click="nmC.formGroupB.showDlDatepicker()">Add deadline</button>
         <div id="deadlineDatepicker" ng-show="nmC.formGroupB.dlDatepickerVisibility">
         </div>
-        <input type="hidden" ng-model="nmC.formGroupB.data.deadline">
+        <input type="hidden"  ng-model="nmC.formGroupB.data.deadline">
       </form>
     </div>
   </div>
@@ -46,21 +47,19 @@
     <div class="col-md-12">
       <form name="formGroupC">
         <h2>Partecipants</h2>
-        <button class="btn btn-primary">Add partecipants</button>
         <table class="table">
           <thead>
             <th>Name</th>
             <th>Email</th>
             <th>Required</th>
-            <th></th>
+            <th>Exluded</th>
           </thead>
           <tbody>
             <tr>
               <td></td>
               <td>Bla</td>
-              <td><input type="checkbox" ng-model="formGroupC.data.schedules[0].required">
-              <input type="hidden" ng-model="formGroupC.data.schedules[0].schedule"></td>
-              <td><Button class="btn btn-danger">Remove</Button></td>
+              <td><input type="checkbox" ng-model="nmC.formGroupC.data.partecipants[0].required"></td>
+              <td><input type="checkbox" ng-model="nmC.formGroupC.data.schedules[0].excluded"></td>
             </tr>
           </tbody>
         </table>
@@ -70,11 +69,13 @@
   <hr>
   <div class="row">
     <div class="col-md-12">
-      <form action="" name="formGroupD">
+      <form name="formGroupD">
         <h2>Schedules for the meeting</h2>
+        <p ng-show="nmC.formGroupD.invalidFields.notimeslots" class="text-danger">If u not chose to use one of
+        your schedule allow the use of timeslots or import you schedule in you dashboard</p>
         <ul class="list-unstyled">
           <li>sadasdsad
-            <input type="hidden" ng-model="formGroupD.data.schedules[0]">
+            <input type="hidden" ng-model="nmC.formGroupD.data.schedules[0]">
           </li>
           <li></li>
         </ul>
@@ -85,7 +86,7 @@
     <div class="col-md-12">
       <form name="formGroupE">
         <h2>Do you want to use your free time slots</h2>
-        <select name="timeSlots" ng-model="formGroupD.data.timeSlots">
+        <select name="timeSlots" ng-model="nmC.formGroupD.data.timeSlots">
           <option value="YES">YES</option>
           <option value="NO">NO</option>
         </select>

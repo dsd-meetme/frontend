@@ -1,5 +1,5 @@
 (function(){
-  var controller = function($routeParams){
+  var controller = function($routeParams, orgResources){
     var self = this;
     self.data = {};
     self.errors = {
@@ -11,9 +11,11 @@
     //Get employee info in the context of an org
     self.getInfo = function(){
       //restful show
-      orgResources.group.$get({groupId:id}).$promise
+      orgResources.group().get({groupId:id}).$promise
       .then(function(response){
-        self.data = response.data;
+        console.log(response);
+        self.data.group = response;
+        self.getEmployees();
       },function(response){
         if(response.status === 401){
           self.errors.unauth = true;
@@ -28,7 +30,7 @@
     //Delete an employee in the context of an org
     self.delete = function(){
       //restful delete
-      orgResources.group.$remove({groupId:id}).$promise
+      orgResources.group().remove({groupId:id}).$promise
       .then(function(response){
         //Show success popup wait for some time
         //redirect
@@ -46,25 +48,26 @@
     //Update employee info
     self.update = function(data){
         //validation
-        orgResources.group.$get({groupId:id}).$promise
+        orgResources.group().get({groupId:id}).$promise
         .then(function(){
-          //
+
         },function(){
           //
         })
     }
     self.getEmployees = function(){
-      orgResources.employeeInGroup.$get({groupId:id, employeeId: ''}).$promise
+      orgResources.employeeInGroup().get({groupId:id, employeeId: ''}).$promise
       .then(
-        function(){
-
-        }, function(){
+        function(response){
+          console.log(response);
+          self.data.members = response;
+        }, function(response){
 
         }
       )
     }
     self.removeEmployee = function(eid){
-      orgResources.employeeInGroup.$remove({groupId:id, employeeId: eid}).$promise
+      orgResources.employeeInGroup().remove({groupId:id, employeeId: eid}).$promise
       .then(
         function(){
 
@@ -73,6 +76,7 @@
         }
       )
     }
+    self.getInfo();
   }
   var app = angular.module('Plunner');
   app.controller('groupOrgController',controller);

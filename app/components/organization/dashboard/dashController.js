@@ -48,7 +48,9 @@
       //employees restful groups index
       orgResources.group().query({groupId : ''}).$promise
       .then(function(response){
+        console.log(response)
         self.data.groups = response;
+        console.log(self.data.groups);
         console.log($cookies.get('auth_token'));
 
       }, function(response){
