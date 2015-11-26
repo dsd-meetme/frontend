@@ -6,6 +6,8 @@
   **/
   var controller = function(logoutService,orgResources,$cookies,$http){
     var self = this;
+    var a = [1,2]
+    console.log($.param(angular.toJson(a)));
     self.errors = {
       unauthorized : false,
       forbidden : false
@@ -63,6 +65,33 @@
       })
     }
     self.getEmployees();
+  }
+  self.addGroup = {
+    planners : '',
+    members: [],
+    selectPlanner : function(id){
+      this.selectedPlanner = id;
+    },
+    name : '',
+    invalidField : {
+      nameReq : false,
+      plannerReq : false
+    },
+    submit : function(){
+      if(this.name !== '' && this.selectPlanner !== ''){
+        orgResources.group().save({groupId: ''}).$promise
+        .then(function(){
+          alert('success');
+          self.getEmployees();
+        },function(){
+
+        })
+      }
+      else{
+        this.invalidFields.nameReq = (this.name === '');
+        this.invalidFields.plannerReq = (this.plannerReq === '');
+      }
+    }
   }
 
   var app = angular.module('Plunner');
