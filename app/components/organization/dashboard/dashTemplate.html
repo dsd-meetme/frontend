@@ -53,29 +53,31 @@
         </div>
         <div class="modal-body">
             <p>Name</p>
-            <input type="search" name="groupName" >
-            <p></p>
-            <p>Planner</p>
-            <input type="search" name="planner" ng-model="searchedPlanner">
+            <input type="search" ng-model="dashOrgC.addGroup.name" >
+            <p ng-show="dashOrgC.addGroup.invalidFields.nameReq">Insert a name</p>
+            <p>Description</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.descReq">Insert a desc</p>
+            <input type="text" ng-model="dashOrgC.addGroup.desc">
             <table class="table">
               <thead>
                 <th></th>
                 <th>Member</th>
-                <th>Planner</th>
               </thead>
               <tbody>
                 <tr ng-repeat="emp in dashOrgC.data.employees | filter: searchedPlanner" id="{{emp.id}}">
                   <td>{{emp.name}}</td>
                   <td ng-click="dashOrgC.addGroup.selectPlanner(emp.id)"><input type="checkbox" ng-model="dashOrgC.addGroup.members[emp.id]"></td>
-                  <td ng-click=""><input type="radio" name="plannerasd"></td>
+                  <td ng-click=""><input type="radio" name="plannerasd" ng-model="dashOrgC.addGroup.planner" ng-value="emp.id"></td>
                 </tr>
               </tbody>
             </table>
-            {{dashOrgC.addGroup.members}}
+            <p ng-show="dashOrgC.addGroup.invalidFields.membersReq">Insert at least one member</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.plannerReq">Insert one planner</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.nonMatchingPlanner">Non matching planner</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" ng-click="dashOrgC.addGroup.submit()">Create</button>
         </div>
       </div>
     </div>
