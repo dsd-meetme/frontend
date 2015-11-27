@@ -59,6 +59,11 @@
           controller : 'nmController',
           controllerAs : 'nmC'
         }).
+        when('/organization/resetpwd/:token', {
+          templateUrl: 'app/components/organization/recovery/resetTemplate.html',
+          controller : 'resetController',
+          controllerAs : 'resetC'
+        }).
         otherwise({
           redirectTo: '/'
         });
