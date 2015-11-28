@@ -31,13 +31,14 @@
       console.log(this.validFields);
       if(!form.$invalid && !c.validFields.orgPwdCmatch){
         dataPublisher.publish('http://api.plunner.com/companies/auth/register',{
-          email : this.orgEmail,
-          pwd : this.orgPwd,
-          name : this.orgName
+          email : c.orgEmail,
+          password : c.orgPwd,
+          password_confirmation : c.orgPwdC,
+          name : c.orgName
         })
         .then(
           function(response){
-            $location.path('/dashboard');
+            $location.path('/organization');
           },
           function(response){
             if(response.status===422){

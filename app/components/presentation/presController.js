@@ -8,7 +8,7 @@
       $location.path('/orgsignin');
     }
     this.reg = function(){
-      $location.path('/register');
+      $location.path('/signup');
     }
     this.usignIn = function(){
       $location.path('/usersignin');

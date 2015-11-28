@@ -27,7 +27,7 @@
       if(!form.$invalid){
         dataPublisher.publish('http://api.plunner.com/companies/auth/login',{
           email : self.osiEmail,
-          pwd : self.osiPwd,
+          password : self.osiPwd,
           rmbMe : self.rmbMe
         }).then(function(response){
             console.log(response);

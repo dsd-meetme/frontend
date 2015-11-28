@@ -29,7 +29,7 @@
         dataPublisher.publish('http://api.plunner.com/employees/auth/login',{
           name : c.org,
           email : c.email,
-          pwd : c.password,
+          password : c.password,
           rmbMe : c.rmbMe
         }).then(function(response){
           $location.path('/employee')

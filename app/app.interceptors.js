@@ -18,11 +18,10 @@
           //If not template retrieving request
           if(config.url.search('app/')===-1 && config.url.search('template/') === -1){
             //If not a login/register request (these requests don't need to include the token)
+            if(config.method === 'POST'){
+              config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+            }
             if(excludedUrlFromToken.indexOf(config.url) === -1 ){
-              if(config.method === 'POST'){
-                console.log(config.headers['Content-Type']);
-                config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-              }
               var token = $cookies.get('auth_token');
               console.log("Url "+config.url);
               console.log('Appending token to request '+token);
