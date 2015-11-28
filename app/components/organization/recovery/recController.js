@@ -14,7 +14,12 @@
       c.invalidFields.emailReq = form.email.$error.required;
       c.invalidFields.emailVal = form.email.$error.email;
       if(!form.$invalid){
-        recService.recover('http://api.plunner.com/companies/password/mail',{email : c.email},);
+        recService.recover('http://api.plunner.com/companies/password/mail',{email : c.email})
+        .then(function(){
+          c.success = true;
+        },function(){
+
+        })
       }
 
     }
