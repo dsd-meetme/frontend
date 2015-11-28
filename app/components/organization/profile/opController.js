@@ -1,12 +1,12 @@
 (function(){
-  var controller = function(dataProvider){
+  var controller = function(orgResources){
     var self = this;
     self.data = {};
     self.errors = {
       unauthorized : false,
       forbidden : false
     }
-    dataProvider.provide('http://api.plunner.com/companies/example').then(
+    orgResources.company().query().then(
       function(response){
           self.data = response.data;
       }, function(response){

@@ -1,5 +1,5 @@
 (function(){
-  var controller = function($scope, recService, $routeParams,$cookies){
+  var controller = function($scope, dataPublisher, $routeParams,$cookies){
     c = this;
     c.invalidFields = {
       emailReq : false,
@@ -14,7 +14,7 @@
       c.invalidFields.emailVal = form.email.$error.email;
       c.invalidFields.pwdLength = form.password.$error.minlength;
       if(!form.$invalid){
-        resetService.recover('http://api.plunner.com/companies/password/reset',{
+        dataPublisher.publish('http://api.plunner.com/companies/password/reset',{
           email : c.email,
           password : c.password,
           password_confirmation : c.password,

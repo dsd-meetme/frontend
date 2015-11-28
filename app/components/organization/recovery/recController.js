@@ -1,6 +1,6 @@
 (function(){
 
-  var controller = function(recService,$scope){
+  var controller = function(dataPublisher,$scope){
 
     var c = this;
     c.errors = {};
@@ -14,7 +14,7 @@
       c.invalidFields.emailReq = form.email.$error.required;
       c.invalidFields.emailVal = form.email.$error.email;
       if(!form.$invalid){
-        recService.recover('http://api.plunner.com/companies/password/mail',{email : c.email})
+        dataPublisher.publish('http://api.plunner.com/companies/password/email',{email : c.email})
         .then(function(){
           c.success = true;
         },function(){

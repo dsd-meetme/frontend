@@ -40,6 +40,15 @@
         isArray : true
       }
     });
+    var company = $resource('http://api.plunner.com/companies/example', null, {
+      'update' : {
+        method : 'PUT'
+      },
+      'remove' : {
+        method : 'DELETE',
+        isArray : true
+      }
+    })
     return {
         employee : function(){
           return employeeResource;
