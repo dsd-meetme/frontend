@@ -1,28 +1,48 @@
-<form name="usiForm" ng-submit="usiC.login()" novalidate>
-  <h2>Sign in as an Employee</h2>
-  <h5>Enter your credentials</h5>
-  
-  <div>
-    <input name="usiEmail" type="email" required ng-model="usiE.usiEmail" placeholder="Email"><br>
-    <p>{{usiC.errors.email}}</p>
-    <input name="usiPwd" type="password" required ng-model="usiE.usiPwd" placeholder="Password"><br>
-    <p>{{usiC.errors.password}}</p>
-    <input type="checkbox" ng-model="usiC.rmbMe">Remember Me<br>
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- HEADER -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Plunner</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">How To</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><button type="button" class="btn btn-primary navbar-btn" ng-click="usiC.register()">Register my Organization</button></li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-default">Sign in</button>
-</br>
-  <a href="/#/usirecovery">forgot your password?</a>
-  <i>If you are an organization it is <a href="/#/osignin">here</a></i>
-  <div ng-show="usiC.validFields.emailReq">
-    You did not insert an email address
+</div>
+
+<div class="page-content">
+  <div class="form-signin">
+    <form name="usiForm" ng-submit="usiC.login()" novalidate>
+      <h2>Sign in as an Employee</h2>
+      <h5>Enter your credentials</h5>
+      
+      <div>
+        <input class="form-control" name="usiEmail" type="email" required ng-model="usiE.usiEmail" placeholder="Email">
+        <p>{{usiC.errors.email}}</p>
+        <input class="form-control" name="usiPwd" type="password" required ng-model="usiE.usiPwd" placeholder="Password"><br>
+        <p>{{usiC.errors.password}}</p>
+        <input type="checkbox" ng-model="usiC.rmbMe">Remember Me<br><br>
+      </div>
+      <button type="submit" class="btn btn-default">Sign in</button>
+      <a style="float:right;" href="/#/usirecovery">Password forgotten?</a><br><br>
+      <i>If you are an organization it is <a href="/#/osignin">here</a></i>
+      <div ng-show="usiC.validFields.emailReq">
+        You did not insert an email address
+      </div>
+      <div ng-show="usiC.validFields.inputReq">
+        You did not insert an password
+      </div>
+      <div ng-show="usiC.validFields.emailVal">
+        You did not insert a valid email address
+      </div>
+      <div ng-show="usiC.nonRegUser">
+        The data you inserted don't match any existing user
+      </div>
+    </form>
   </div>
-  <div ng-show="usiC.validFields.inputReq">
-    You did not insert an password
-  </div>
-  <div ng-show="usiC.validFields.emailVal">
-    You did not insert a valid email address
-  </div>
-  <div ng-show="usiC.nonRegUser">
-    The data you inserted don't match any existing user
-  </div>
-</form>
+</div>

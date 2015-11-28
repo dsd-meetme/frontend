@@ -1,18 +1,17 @@
   
     <form name="regForm" ng-submit="regC.process()" novalidate>
       <div class="form-register">
-      <h2>Registration</h2>
+      <h2>Organization Registration</h2><br>
       <input name="orgName" class="form-control" type="text" placeholder="Organization Name" required ng-model="regC.orgName">
       <p>{{ regC.errors.name }}</p>
       <input name="orgEmail" class="form-control" type="email" placeholder="Contact Email" required ng-model="regC.orgEmail">
       <p>{{ regC.errors.email }}</p>
-      <input name="orgPwd" class="form-control" ng-minlength="6" type="Password" placeholder="password" required ng-model="regC.orgPwd">
+      <input name="orgPwd" class="form-control" ng-minlength="6" type="password" placeholder="Password" required ng-model="regC.orgPwd">
       <p>{{ regC.errors.password }}</p>
       <input name="orgPwdC" class="form-control" type="password" placeholder="Confirm Password" required ng-model="reg.orgPwdC">
-      <p>{{ regC.errors.confirm_password }}</p>
-      <button type="submit" class="btn btn-default">Register!</button>
-      </br>
-      <i>Already registered? <a href="/#/osignin">Sign in here!</a></i>
+      <p>{{ regC.errors.confirm_password }}</p><br>
+      <button type="submit" class="btn btn-primary btn-lg">Register!</button>
+      <i style="margin-left:50px">Already registered? <a href="/#/osignin">Sign in here!</a></i>
       </div>
     </form>
     

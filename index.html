@@ -4,21 +4,9 @@
   <title>Plunner</title>
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/index_sass.css">
+  <link rel="stylesheet" href="assets/css/presentation.css">
 </head>
 <body ng-controller="rootController as rootC">
-
-  <div class="navbar navbar-default">
-  <!-- HEADER -->
-    <div class="nav navbar-left">
-      <h1 class="navbar-brand">Plunner</h1>
-    </div>
-    
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">How To</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><button type="button" class="btn btn-default navbar-btn" ng-click="rootC.presentation()">Presentation</button></li>
-    </ul>
-  </div>
 
   <div ng-show="rootC.comError" class="container">A communication error occured</div>
   <div ng-view>

@@ -45,7 +45,7 @@
           controllerAs: 'presC'
         }).
         otherwise({
-          redirectTo: '/'
+          redirectTo: '/presentation'
         });
     }]);
 }());

@@ -5,15 +5,28 @@
 body
 	font-family: $font-stack
 
-div.header-left
-	margin-left: $header-margin
+div.page-content
+	margin: $small-margin $large-margin $small-margin $large-margin
 
-div.header-right
-	display: inline
+div.content-left
+	float: left
+	margin-left: $small-margin
+
+div.content-left.organization
+	background-color: light-blue
+
+div.content-right
 	float: right
-	margin-right: $header-margin
+	margin-right: $small-margin
 
 div.form-register
+	width: 400px
+	margin: 0 auto
+	padding: 0 50 0 50
+    border-style: solid
+    border-radius: 25
+
+div.form-signin
 	width: 400px
 	margin: 0 auto
 	padding: 0 50 0 50

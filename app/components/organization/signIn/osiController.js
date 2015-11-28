@@ -31,6 +31,9 @@
         },self.errors,'/organization');
       }
     }
+    this.register = function(){
+        $location.path('/register');
+    }
   }
   var app = angular.module('Plunner');
   app.controller('osiController',controller);

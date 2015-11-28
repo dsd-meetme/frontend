@@ -31,6 +31,10 @@
         },self.errors,'/employee');
       }
     }
+    
+    this.register = function(){
+        $location.path('/register');
+    }
   }
   
   var app = angular.module('Plunner');
