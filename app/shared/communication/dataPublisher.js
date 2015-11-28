@@ -1,15 +1,16 @@
 (function(){
   var service = function($http){
     return {
-      provide : function(url){
+      publish : function(url,data){
         return $http({
-          method : 'GET',
+          method : 'POST',
           url : url,
-          //withCredentials : true
-        });
+          data : jQuery.param(data),
+        })
       }
     }
+
   }
   var app = angular.module('Plunner');
-  app.factory('dataProvider',service);
-}());
+  app.factory('dataPublisher',service);
+}())

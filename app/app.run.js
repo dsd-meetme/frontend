@@ -7,24 +7,26 @@
       //Gets the decoded jwt
       var mode;
       var token = $cookies.get('auth_token');
-      console.log(token);
+
       if(token != null || !angular.isUndefined(token)){
         mode = jwt_decode($cookies.get('auth_token')).mode;
       }
       //Gets the url the user want to reach
       var path = next.originalPath;
-      console.log(next.originalPath)
+
       //Mode checking(organizations)
-      if(path.search('organization')!== -1 && path.search('auth') === -1 ){
-        console.log("mode"+mode);
-        if(angular.isUndefined(mode) || mode !== 'cn'){
-          $location.path('/osignin');
+      if(!angular.isUndefined(path)){
+        if(path.search('organization')!== -1 && path.search('auth') === -1 ){
+          console.log("mode"+mode);
+          if(angular.isUndefined(mode) || mode !== 'cn'){
+            $location.path('/osignin');
+          }
         }
-      }
-      //Mode checking(employees)
-      else if(path.search('employee')!== -1 && path.search('auth') === -1){
-        if(mode === undefined || mode !== 'en'){
-          $location.path('/usignin');
+        //Mode checking(employees)
+        else if(path.search('employee')!== -1 && path.search('auth') === -1){
+          if(mode === undefined || mode !== 'en'){
+            $location.path('/usignin');
+          }
         }
       }
     });

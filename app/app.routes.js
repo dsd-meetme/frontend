@@ -4,17 +4,17 @@
   app.config(['$routeProvider',
     function($routeProvider) {
       $routeProvider.
-        when('/osignin', {
+        when('/orgsignin', {
           templateUrl: 'app/components/organization/signIn/osiTemplate.html',
           controller: 'osiController',
           controllerAs: 'osiC'
         }).
-        when('/usignin', {
+        when('/usersignin', {
           templateUrl: 'app/components/employee/signIn/usiTemplate.html',
           controller: 'usiController',
           controllerAs: 'usiC'
         }).
-        when('/register', {
+        when('/signup', {
           templateUrl: 'app/components/organization/registration/regTemplate.html',
           controller: 'regController',
           controllerAs: 'regC'
@@ -24,7 +24,7 @@
           controller: 'dashOrgController',
           controllerAs: 'dashOrgC'
         }).
-        when('/employee', {
+        when('/user', {
           templateUrl: 'app/components/employee/dashboard/edTemplate.html',
           controller: 'dashEmpController',
           controllerAs: 'dashEmpC'
@@ -34,7 +34,7 @@
           controller: 'opController',
           controllerAs: 'opC'
         }).
-        when('/osirecovery',{
+        when('/orgpwdrecovery',{
           templateUrl: 'app/components/organization/recovery/recTemplate.html',
           controller: 'recController',
           controllerAs: 'recC'
@@ -44,7 +44,7 @@
           controller: 'presController',
           controllerAs: 'presC'
         }).
-        when('/organization/employees/:id',{
+        when('/organization/users/:id',{
           templateUrl: 'app/components/organization/employee/empOrgTemplate.html',
           controller: 'empOrgController',
           controllerAs: 'empOrgC'
@@ -54,12 +54,22 @@
           controller : 'groupOrgController',
           controllerAs : 'groupOrgC'
         }).
-        when('/employee/newmeeting', {
+        when('/user/newmeeting', {
           templateUrl: 'app/components/employee/newMeeting/nmTemplate.html',
           controller : 'nmController',
           controllerAs : 'nmC'
         }).
-        when('/organization/resetpwd/:token', {
+        when('/userpwdrecovery', {
+          templateUrl: 'app/components/employee/recovery/recTemplate.html',
+          controller : 'emprecController',
+          controllerAs : 'emprecC'
+        }).
+        when('/userpwdreset/:token', {
+          templateUrl: 'app/components/employee/recovery/empResetTemplate.html',
+          controller : 'empResetController',
+          controllerAs : 'empresC'
+        }).
+        when('/orgpwdreset/:token', {
           templateUrl: 'app/components/organization/recovery/resetTemplate.html',
           controller : 'resetController',
           controllerAs : 'resetC'

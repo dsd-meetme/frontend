@@ -5,7 +5,7 @@
   @author Giorgio Pea
   @param loginService A service that is used to manage the login of a plunner's organization
   **/
-  var controller = function($rootScope,$scope,$location,loginService,$cookies){
+  var controller = function($rootScope,$scope,$location,dataPublisher,$cookies){
     var self = this;
 
     this.errors = {};
@@ -25,7 +25,7 @@
       self.validFields.emailReq = form.osiEmail.$error.required;
       self.validFields.emailVal = form.osiEmail.$error.email;
       if(!form.$invalid){
-        loginService.login('http://api.plunner.com/companies/auth/login',{
+        dataPublisher.publish('http://api.plunner.com/companies/auth/login',{
           email : self.osiEmail,
           pwd : self.osiPwd,
           rmbMe : self.rmbMe
