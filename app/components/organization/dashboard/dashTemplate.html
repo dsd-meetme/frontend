@@ -9,7 +9,7 @@
           <li><a href="#">How To</a></li>
           <li><a href="#">Contact</a></li>
           <li><a href="/#/organization/profile">
-            <span class="glyphicon glyphicon-user"></span> Profile</a></li>
+            <span class="glyphicon glyphicon-user"></span> Company Name</a></li>
           <li><button type="button" class="btn btn-danger navbar-btn" ng-click="dashOrgC.logout()">Sign Out</button></li>
         </ul>
       </div>
@@ -18,13 +18,16 @@
 </div>
 
 <div class="page-content">
-  <h1>Home</h1>
+  <interrors code="{{dashOrgC.code}}"></interrors>
   <div>
     <h2>Employees</h2>
-    <input type="search" placeholder="search">
-    <button>See all</button>
-    <button>Add employee</button>
-    <table class="table">
+      <ul>
+        <li style="list-style-type: none;float:left;margin-left:30px"><input type="text" class="form-control" placeholder="Search for..." ng-model="searchEmployee"></input></li>
+        <li style="list-style-type: none;float:left;margin-left:30px"><button class="btn btn-default" ng-click="dashOrgC.seeAllEmp()">See all</button></li>
+        <li style="list-style-type: none;float:left;margin-left:30px"><a href="#"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
+      </ul>
+
+    <table ng-show="empTableVisible" class="ng-hide" class="table">
       <thead>
         <th>Name</th>
         <th>Email</th>
@@ -32,35 +35,83 @@
         <th></th>
       </thead>
       <tbody>
-        <tr>
+        <tr ng-repeat="employee in dashOrgC.data.employees | filter:searchEmployee">
+          <td><a href="/#/organization/employees/{{employee.id}}">{{employee.name}}</a></td>
+          <td>{{employee.email}}</td>
           <td>Bla</td>
-          <td>Bla</td>
-          <td>Bla</td>
-          <td>GO</td>
         </tr>
       </tbody>
     </table>
   </div>
+  <br>
+  <br>
+  <hr>
   <div>
     <h2>Groups</h2>
-    <input type="search" placeholder="search">
-    <button>See all</button>
-    <button>Add group</button>
-    <table class="table">
+    <ul>
+        <li style="list-style-type: none;float:left;margin-left:30px"><input type="text" class="form-control" placeholder="Search for..." ng-model="searchEmployee"></li>
+        <li style="list-style-type: none;float:left;margin-left:30px"><button class="btn btn-default">See all</button></li>
+        <li style="list-style-type: none;float:left;margin-left:30px"><a href="#"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
+      </ul>
+
+    <table ng-show="empTableVisible" class="ng-hide" class="table">
       <thead>
         <th>Name</th>
         <th>Planner</th>
         <th></th>
       </thead>
       <tbody>
-        <tr>
-          <td>Bla</td>
-          <td>Bla</td>
-          <td>GO</td>
+        <tr ng-repeat="group in dashOrgC.data.groups | filter:searchGroup">
+          <td>{{group.name}}</td>
+          <td><a href="/#/organization/employees/{{group.planner_name}}"></a>{{group.planner_name}}</td>
+          <td><a href="/#/organization/groups/{{group.id}}">GO</a></td>
         </tr>
       </tbody>
     </table>
   </div>
+  <div id="addGroup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          Add group
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <p>Name</p>
+            <input type="search" ng-model="dashOrgC.addGroup.name" >
+            <p ng-show="dashOrgC.addGroup.invalidFields.nameReq">Insert a name</p>
+            <p>Description</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.descReq">Insert a desc</p>
+            <input type="text" ng-model="dashOrgC.addGroup.desc">
+            <table class="table">
+              <thead>
+                <th></th>
+                <th>Member</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="emp in dashOrgC.data.employees | filter: searchedPlanner" id="{{emp.id}}">
+                  <td>{{emp.name}}</td>
+                  <td ng-click="dashOrgC.addGroup.selectPlanner(emp.id)"><input type="checkbox" ng-model="dashOrgC.addGroup.members[emp.id]"></td>
+                  <td ng-click=""><input type="radio" name="plannerasd" ng-model="dashOrgC.addGroup.planner" ng-value="emp.id"></td>
+                </tr>
+              </tbody>
+            </table>
+            <p ng-show="dashOrgC.addGroup.invalidFields.membersReq">Insert at least one member</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.plannerReq">Insert one planner</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.nonMatchingPlanner">Non matching planner</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ng-click="dashOrgC.addGroup.submit()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
 
 
 </div>

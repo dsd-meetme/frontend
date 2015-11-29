@@ -2,6 +2,7 @@
   var controller = function(dataProvider){
     var self = this;
     self.data = {};
+
     self.errors = {
       unauthorized : false,
       forbidden : false

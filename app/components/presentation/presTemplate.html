@@ -8,7 +8,9 @@
 		    <ul class="nav navbar-nav navbar-right">
 		      <li><a href="#">How To</a></li>
 		      <li><a href="#">Contact</a></li>
-		      <li style="margin-left:30px"><button type="button" class="btn btn-primary navbar-btn" ng-click="rootC.presentation()">Register my Organization</button></li>
+		      <li style="margin-left:30px">
+		      	<button type="button" class="btn btn-primary navbar-btn" ng-click="rootC.signup()">Register my Organization</button>
+		      </li>
 		    </ul>
 	    </div>
 	  </div>
@@ -16,9 +18,9 @@
 </div>
 <div class="presentation">
 	<div class="content-left organization">
-	  <button class="btn btn-default btn-lg" ng-click="presC.osignIn()">Organization Sign In</button>
+	  <button class="btn btn-default btn-lg" ng-click="rootC.orgsignin()">Organization Sign In</button>
 	</div>
 	<div class="content-right organization">
-	  <button class="btn btn-default btn-lg" ng-click="presC.usignIn()">Employee Sign In</button>
+	  <button class="btn btn-default btn-lg" ng-click="rootC.usersignin()">Employee Sign In</button>
 	</div>
 </div>

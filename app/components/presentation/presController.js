@@ -5,13 +5,15 @@
   var controller = function($scope,$location,$rootScope){
     
     this.osignIn = function(){
-      $location.path('/organization');
+      $location.path('/orgsignin');
     }
+
     this.reg = function(){
-      $location.path('/register');
+      $location.path('/signup');
     }
+
     this.usignIn = function(){
-      $location.path('/employee');
+      $location.path('/usersignin');
     }
 
   }

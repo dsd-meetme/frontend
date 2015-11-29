@@ -1,13 +1,49 @@
-<div class="row">
-  <h2>Your profile</h2>
-  <div class="col-md-12">
-    <ul class="list-unstyled">
-      <li>Name: {{opC.data.name}}</li>
-      <li>Registration email: {{opC.data.email}} </li>
-      <li>Password:</li>
-      <button>Change email</button>
-      <button>Change password</button>
-      <a href="#">Delete this account</a>
-    </ul>
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- HEADER -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Plunner</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">How To</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="/#/organization/profile">
+            <span class="glyphicon glyphicon-user"></span> Company Name</a></li>
+          <li><button type="button" class="btn btn-danger navbar-btn" ng-click="dashOrgC.logout()">Sign Out</button></li>
+        </ul>
+      </div>
+    </div>
   </div>
+</div>
+
+<div class="page-content">
+  <h2>Your profile</h2>
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6"><h1><b>Company Name</b></h1></div>
+    <div class="col-md-3"></div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3">Registration email: </div>
+    <div class="col-md-6">registrationmail@company.com</div>
+    <div class="col-md-3"><button class="btn btn-primary">Change email</button></div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6"></div>
+    <div class="col-md-3"><button class="btn btn-primary">Change Password</button></div>
+  </div>
+
+        <button class="btn btn-danger">Delete this account</button>
+      </ul>
+    </div>
+
+    
+    
+  </div>
+
 </div>
