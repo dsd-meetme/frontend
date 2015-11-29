@@ -1,6 +1,6 @@
 <form name="recoveryForm" ng-submit="emprecC.recover()" novalidate>
   <input type="text" name="name" ng-model="emprecC.name" placeholder="Insert the name of you company" required>
-  <input type="email" name="emailField" ng-model="emprecC.email" placeholder="Insert your mail" required>
+  <input type="email" name="email" ng-model="emprecC.email" placeholder="Insert your mail" required>
   <button>Recover password</button>
   <div ng-show="emprecC.invalidFields.emailReq">Insert an email address</div>
   <div ng-show="emprecC.invalidFields.emailVal">You have not inserted a valid mail</div>

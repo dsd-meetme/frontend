@@ -6,8 +6,7 @@
   <div>
     <h2>Employees</h2>
     <input type="search" placeholder="search" ng-model="searchEmployee">
-    <button>See all</button>
-    <button>Add employee</button>
+    <button class="btn btn-primary">Add employee</button>
     <table class="table">
       <thead>
         <th>Name</th>
@@ -16,18 +15,19 @@
         <th></th>
       </thead>
       <tbody>
-        <tr ng-repeat="employee in dashOrgC.data.employees | filter:searchEmployee">
-          <td><a href="/#/organization/employees/{{employee.id}}">{{employee.name}}</a></td>
+        <tr ng-repeat="employee in dashOrgC.data.employees | filter:searchEmployee | limitTo:10">
+          <td>{{employee.name}}</td>
           <td>{{employee.email}}</td>
           <td>Bla</td>
+          <td><a href="/#/organization/employees/{{employee.id}}">GO</a></td>
         </tr>
       </tbody>
     </table>
+    <p ng-show="dashOrgC.data.employees.length > 10">....</p>
   </div>
   <div>
     <h2>Groups</h2>
     <input type="search" placeholder="search" ng-model="searchGroup">
-    <button>See all</button>
     <button class="btn btn-primary" data-toggle="modal" data-target="#addGroup">Add group</button>
     <table class="table">
       <thead>
@@ -36,13 +36,14 @@
         <th></th>
       </thead>
       <tbody>
-        <tr ng-repeat="group in dashOrgC.data.groups | filter:searchGroup">
+        <tr ng-repeat="group in dashOrgC.data.groups | filter:searchGroup | limitTo:10">
           <td>{{group.name}}</td>
           <td><a href="/#/organization/employees/{{group.planner_name}}"></a>{{group.planner_name}}</td>
           <td><a href="/#/organization/groups/{{group.id}}">GO</a></td>
         </tr>
       </tbody>
     </table>
+    <p ng-show="dashOrgC.data.groups.length > 10">....</p>
   </div>
   <div id="addGroup" class="modal" role="dialog" tabindex="-1">
     <div class="modal-dialog">
@@ -82,7 +83,4 @@
       </div>
     </div>
   </div>
-
-
-
 </div>

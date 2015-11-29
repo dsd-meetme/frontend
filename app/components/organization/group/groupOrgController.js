@@ -1,39 +1,34 @@
 (function(){
   var controller = function($routeParams, orgResources,$location,$timeout){
-    var self = this;
-    self.data = {};
-    self.errors = {
-      unauth : false,
-      forb : false
+
+    var c = this;
+    //group id
+    var id = $routeParams.id;
+    c.data = {};
+    c.errors = {
+      unauthorized : false,
+      forbidden : false
     },
-    self.invalidFields = {
+    c.invalidFields = {
       nameReq : false
     }
-    self.inchange = false;
-    //employee id
-    var id = $routeParams.id;
+    c.inchange = false;
+
     //Get employee info in the context of an org
-    self.getInfo = function(){
+    c.getInfo = function(){
       //restful show
       orgResources.group().get({groupId:id}).$promise
       .then(function(response){
-        console.log(response);
-        self.data.group = response;
-        self.data.groupC = response;
-        self.getEmployees();
+        c.data.group = response;
+        c.data.groupC = response;
+        c.getEmployees();
       },function(response){
-        if(response.status === 401){
-          self.errors.unauth = true;
-          self.errors.forb = false;
-        }
-        else if(response.status === 403){
-          self.errors.unauth = false;
-          self.errors.forb = true;
-        }
+        c.errors.unauthorized = (response.status === 401);
+        c.errors.forbidden = (response.status === 403);
       })
     }
     //Delete an employee in the context of an org
-    self.deleteGroup = function(){
+    c.delete = function(){
       //restful delete
       orgResources.group().remove({groupId:id}).$promise
       .then(function(response){
@@ -45,73 +40,68 @@
         //Show success popup wait for some time
         //redirect
       },function(response){
-        if(response.status === 401){
-          self.errors.unauth = true;
-          self.errors.forb = false;
-        }
-        else if(response.status === 403){
-          self.errors.unauth = false;
-          self.errors.forb = true;
-        }
+        c.errors.unauthorized = (response.status === 401);
+        c.errors.forbidden = (response.status === 403);
       })
     }
-    self.updatePlanner = function(ida){
-      console.log(id);
-      if(ida !== self.data.group.planner_id){
-        console.log('entro qui')
+    c.updatePlanner = function(plannerId){
+      if(plannerId !== c.data.group.planner_id){
         orgResources.group().update({groupId:id},{
-          name : self.data.group.name,
-          description : self.data.group.desc,
-          planner_id : ida
+          name : c.data.group.name,
+          description : c.data.group.desc,
+          planner_id : plannerId
         }).$promise
       .then(function(){
         alert('sucess');
-        self.getInfo();
+        c.getInfo();
       },function(){
-        //
+        c.errors.unauthorized = (response.status === 401);
+        c.errors.forbidden = (response.status === 403);
       })
       }
     }
     //Update employee info
-    self.updateInfo = function(){
-        self.invalidFields.nameReq = (self.data.groupC.name === '');
-        if(self.invalidFields.nameReq === false){
+    c.updateInfo = function(){
+        c.invalidFields.nameReq = (c.data.groupC.name === '');
+        if(c.invalidFields.nameReq === false){
           orgResources.group().update({groupId:id},{
-            name : self.data.groupC.name,
-            description : self.data.groupC.desc,
-            planner_id : self.data.group.planner_id
+            name : c.data.groupC.name,
+            description : c.data.groupC.desc,
+            planner_id : c.data.group.planner_id
           }).$promise
-        .then(function(){
+        .then(function(response){
           alert('sucess');
-          self.inchange = false;
-          self.getInfo();
-        },function(){
-          //
+          c.inchange = false;
+          c.getInfo();
+        },function(response){
+          c.errors.unauthorized = (response.status === 401);
+          c.errors.forbidden = (response.status === 403);
         })
       }
     }
-    self.getEmployees = function(){
+    c.getEmployees = function(){
       orgResources.employeeInGroup().query({groupId:id, employeeId: ''}).$promise
       .then(
         function(response){
-          console.log(response);
-          self.data.members = response;
+          c.data.members = response;
         }, function(response){
-
+          c.errors.unauthorized = (response.status === 401);
+          c.errors.forbidden = (response.status === 403);
         }
       )
     }
-    self.deleteFromGroup = function(eid){
+    c.deleteFromGroup = function(eid){
       orgResources.employeeInGroup().remove({groupId:id, employeeId: eid}).$promise
       .then(
-        function(){
-          self.getEmployees();
-        }, function(){
-
+        function(response){
+          c.getEmployees();
+        }, function(response){
+          c.errors.unauthorized = (response.status === 401);
+          c.errors.forbidden = (response.status === 403);
         }
       )
     }
-    self.getInfo();
+    c.getInfo();
   }
   var app = angular.module('Plunner');
   app.controller('groupOrgController',controller);

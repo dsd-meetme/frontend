@@ -61,7 +61,7 @@
         }).
         when('/userpwdrecovery', {
           templateUrl: 'app/components/employee/recovery/recTemplate.html',
-          controller : 'emprecController',
+          controller : 'empRecController',
           controllerAs : 'emprecC'
         }).
         when('/userpwdreset/:token', {
