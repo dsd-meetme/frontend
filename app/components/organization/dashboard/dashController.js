@@ -7,6 +7,8 @@
     var controller = function(logoutService,orgResources,arrayToUrlParams,$cookies){
       var self = this;
       var a = [1,2]
+      this.displayAllEmployee = "See All";
+      this.displayAllGroup = "See All";
       console.log($.param(angular.toJson(a)));
       self.errors = {
         unauthorized : false,
@@ -45,8 +47,25 @@
           }
         });
       }
+
   self.seeAllEmp = function(){
-    $scope.empTableVisible = true;
+    if (self.empTableVisible) {
+      self.empTableVisible = false;
+    this.displayAllEmployee = "See All";
+    } else {
+      self.empTableVisible = true;
+      this.displayAllEmployee = "Hide All";
+    }
+  }
+
+  self.seeAllGp = function(){
+    if (self.gpTableVisible) {
+      self.gpTableVisible = false;
+    this.displayAllGroup = "See All";
+    } else {
+      self.gpTableVisible = true;
+      this.displayAllGroup = "Hide All";
+    }
   }
 
   //Get groups
@@ -115,6 +134,34 @@
 
           });
         }
+      }
+    }
+
+    self.addEmployee = {
+      name : '',
+      email : '',
+      invalidFields : {
+        nameReq : false,
+        emailReq : false,
+      },
+      submit : function(){
+        this.invalidFields.nameReq = (this.name === '');
+        this.invalidFields.emailReq = (this.email === '');
+
+        // TO CHECK
+        console.log(this.invalidFields);
+        if(this.invalidFields.nameReq === false 
+          && this.invalidFields.emailReq === false){
+            //orgResources.employee().save({employeeId: ''},jQuery.param({name : this.name, email : this.email})).$promise
+            //.then(function(response){
+            //  var b = response.id;
+            //  console.log(b);
+              self.getEmployees();
+              jQuery('#addEmployee').modal('hide');
+            //},function(){
+
+            //});
+          }
       }
     }
   }

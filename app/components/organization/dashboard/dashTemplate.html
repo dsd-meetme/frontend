@@ -23,25 +23,35 @@
     <h2>Employees</h2>
       <ul>
         <li style="list-style-type: none;float:left;margin-left:30px"><input type="text" class="form-control" placeholder="Search for..." ng-model="searchEmployee"></input></li>
-        <li style="list-style-type: none;float:left;margin-left:30px"><button class="btn btn-default" ng-click="dashOrgC.seeAllEmp()">See all</button></li>
-        <li style="list-style-type: none;float:left;margin-left:30px"><a href="#"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
+        <li style="list-style-type: none;float:left;margin-left:30px">
+          <button style="width:80px" class="btn btn-default" ng-click="dashOrgC.seeAllEmp()">
+            {{dashOrgC.displayAllEmployee}}</button>
+        </li>
+        <li style="list-style-type: none;float:left;margin-left:30px">
+          <button style="border:none;background-color:white" data-toggle="modal" data-target="#addEmployee"><a href>
+            <span style="font-size:30px" class="glyphicon glyphicon-plus-sign"></span>
+          </a></button>
+        </li>
       </ul>
 
-    <table ng-show="empTableVisible" class="ng-hide" class="table">
-      <thead>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Group</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr ng-repeat="employee in dashOrgC.data.employees | filter:searchEmployee">
-          <td><a href="/#/organization/employees/{{employee.id}}">{{employee.name}}</a></td>
-          <td>{{employee.email}}</td>
-          <td>Bla</td>
-        </tr>
-      </tbody>
-    </table>
+      <br><br>
+      <div ng-show="dashOrgC.empTableVisible" class="ng-hide">
+        <table class="table">
+          <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Group</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="employee in dashOrgC.data.employees | filter:searchEmployee">
+              <td><a href="/#/organization/employees/{{employee.id}}">{{employee.name}}</a></td>
+              <td>{{employee.email}}</td>
+              <td>Bla</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
   </div>
   <br>
   <br>
@@ -49,44 +59,53 @@
   <div>
     <h2>Groups</h2>
     <ul>
-        <li style="list-style-type: none;float:left;margin-left:30px"><input type="text" class="form-control" placeholder="Search for..." ng-model="searchEmployee"></li>
-        <li style="list-style-type: none;float:left;margin-left:30px"><button class="btn btn-default">See all</button></li>
-        <li style="list-style-type: none;float:left;margin-left:30px"><a href="#"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
+        <li style="list-style-type: none;float:left;margin-left:30px"><input type="text" class="form-control" placeholder="Search for..." ng-model="searchGroup"></li>
+        <li style="list-style-type: none;float:left;margin-left:30px">
+          <button style="width:80px" class="btn btn-default" ng-click="dashOrgC.seeAllGp()">
+            {{dashOrgC.displayAllGroup}}</button></li>
+        <li style="list-style-type: none;float:left;margin-left:30px">
+          <button style="border:none;background-color:white" data-toggle="modal" data-target="#addGroup"><a href>
+            <span style="font-size:30px" class="glyphicon glyphicon-plus-sign"></span>
+          </a></button>
+        </li>
       </ul>
 
-    <table ng-show="empTableVisible" class="ng-hide" class="table">
-      <thead>
-        <th>Name</th>
-        <th>Planner</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr ng-repeat="group in dashOrgC.data.groups | filter:searchGroup">
-          <td>{{group.name}}</td>
-          <td><a href="/#/organization/employees/{{group.planner_name}}"></a>{{group.planner_name}}</td>
-          <td><a href="/#/organization/groups/{{group.id}}">GO</a></td>
-        </tr>
-      </tbody>
-    </table>
+      <br><br>
+      <div ng-show="dashOrgC.gpTableVisible" class="ng-hide">
+        <table class="table">
+          <thead>
+            <th>Name</th>
+            <th>Planner</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="group in dashOrgC.data.groups | filter:searchGroup">
+              <td>{{group.name}}</td>
+              <td><a href="/#/organization/employees/{{group.planner_name}}"></a>{{group.planner_name}}</td>
+              <td><a href="/#/organization/groups/{{group.id}}">GO</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
   </div>
   <div id="addGroup" class="modal" role="dialog" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          Add group
+          Add a Group
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
             <p>Name</p>
-            <input type="search" ng-model="dashOrgC.addGroup.name" >
-            <p ng-show="dashOrgC.addGroup.invalidFields.nameReq">Insert a name</p>
+            <input type="search" class="form-control" ng-model="dashOrgC.addGroup.name" >
+            <p ng-show="dashOrgC.addGroup.invalidFields.nameReq">Insert a group name</p>
             <p>Description</p>
-            <p ng-show="dashOrgC.addGroup.invalidFields.descReq">Insert a desc</p>
-            <input type="text" ng-model="dashOrgC.addGroup.desc">
+            <p ng-show="dashOrgC.addGroup.invalidFields.descReq">Insert a group description</p>
+            <input type="text" class="form-control" ng-model="dashOrgC.addGroup.desc">
             <table class="table">
               <thead>
                 <th></th>
-                <th>Member</th>
+                <th>Members</th>
               </thead>
               <tbody>
                 <tr ng-repeat="emp in dashOrgC.data.employees | filter: searchedPlanner" id="{{emp.id}}">
@@ -103,6 +122,29 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" ng-click="dashOrgC.addGroup.submit()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="addEmployee" class="modal" role="dialog" tabindex="-2">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          Add an Employee
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <p>Name</p>
+            <input type="text" class="form-control" ng-model="dashOrgC.addEmployee.name">
+            <p ng-show="dashOrgC.addEmployee.invalidFields.nameReq">Insert a name</p>
+            <p>Email</p>
+            <input type="text" class="form-control" ng-model="dashOrgC.addEmployee.email">
+            <p ng-show="dashOrgC.addEmployee.invalidFields.emailReq">Insert the employee email address</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ng-click="dashOrgC.addEmployee.submit()">Create</button>
         </div>
       </div>
     </div>

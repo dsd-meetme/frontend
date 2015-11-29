@@ -1,49 +1,47 @@
 <div>
-  <h1>Success! Your are logged</h1>
+  <h1>Success! Your are logged (employee)</h1>
   <a href="/#/employee/profile">Profile</a>
   <button ng-click="dashEmpC.logout()">Logout</button>
-  <div>
-    <h2>Employees</h2>
-    <input type="search" placeholder="search">
-    <button>See all</button>
-    <button>Add employee</button>
-    <table class="table">
-      <thead>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Group</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Bla</td>
-          <td>Bla</td>
-          <td>Bla</td>
-          <td>GO</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div>
-    <h2>Groups</h2>
-    <input type="search" placeholder="search">
-    <button>See all</button>
-    <button>Add group</button>
-    <table class="table">
-      <thead>
-        <th>Name</th>
-        <th>Planner</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Bla</td>
-          <td>Bla</td>
-          <td>GO</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
+  <h2>Meetings</h2>
+  <a href="/#/employee/newmeeting">Make a meeting</a>
+  <div style="width: 100%">
+    <div>
+      <div ng-click="dashEmpC.meetingsList.groupA.show()" class="text-center" style="float:left; width:50%">TO BE PLANNED</div>
+      <div ng-click="dashEmpC.meetingsList.groupB.show()" class="text-center" style="float:left; width:50%">PLANNED</div>
+    </div>
+    <table ng-show="dashEmpC.meetingsList.groupA.isVisible" class="table">
+      <thead>
+        <th>Name</th>
+        <th>Group</th>
+        <th>Time window</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>Go</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table" ng-show="dashEmpC.meetingsList.groupB.isVisible">
+      <thead>
+        <th>Name</th>
+        <th>Group</th>
+        <th>Planned for</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>Go</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>

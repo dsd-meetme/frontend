@@ -7,7 +7,14 @@
   <link rel="stylesheet" href="assets/css/presentation.css">
 </head>
 <body ng-controller="rootController as rootC">
-
+  <style>
+  .date-range-selected > .ui-state-active,
+  .date-range-selected > .ui-state-default {
+   background: none;
+   background-color: lightsteelblue;
+  }
+  </style>
+  
   <div ng-show="rootC.comError" class="container">A communication error occured</div>
   <div ng-view>
   <!-- TEMPLATE INJECTED -->
@@ -17,23 +24,32 @@
   <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
   <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
   <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
+  <script type="text/javascript" src="node_modules/jwt-decode/build/jwt-decode.min.js"></script>
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="app/app.module.js"></script>
   <script type="text/javascript" src="app/app.routes.js"></script>
   <script type="text/javascript" src="app/app.run.js"></script>
   <script type="text/javascript" src="app/app.interceptors.js"></script>
   <script type="text/javascript" src="app/components/global/rootController.js"></script>
-  <script type="text/javascript" src="app/shared/communication/loginService.js"></script>
   <script type="text/javascript" src="app/components/organization/signIn/osiController.js"></script>
-  <script type="text/javascript" src="app/components/organization/registration/regService.js"></script>
   <script type="text/javascript" src="app/components/organization/registration/regController.js"></script>
-  <script type="text/javascript" src="app/components/organization/dashboard/dashOrgController.js"></script>
-  <script type="text/javascript" src="app/components/organization/logoutService.js"></script>
-  <script type="text/javascript" src="app/shared/communication/dataProvider.js"></script>
+  <script type="text/javascript" src="app/components/organization/dashboard/dashController.js"></script>
+  <script type="text/javascript" src="app/shared/communication/logoutService.js"></script>
   <script type="text/javascript" src="app/components/organization/profile/opController.js"></script>
-  <script type="text/javascript" src="app/components/organization/recovery/recService.js"></script>
   <script type="text/javascript" src="app/components/organization/recovery/recController.js"></script>
   <script type="text/javascript" src="app/components/employee/signIn/usiController.js"></script>
-  <script type="text/javascript" src="app/components/employee/dashboard/dashEmpController.js"></script>
+  <script type="text/javascript" src="app/shared/resources/orgResources.js"></script>
   <script type="text/javascript" src="app/components/presentation/presController.js"></script>
+  <script type="text/javascript" src="app/components/organization/employee/empOrgController.js"></script>
+  <script type="text/javascript" src="app/components/organization/group/groupOrgController.js"></script>
+  <script type="text/javascript" src="app/components/employee/dashboard/edController.js"></script>
+  <script type="text/javascript" src="app/components/employee/meeting/nmController.js"></script>
+  <script type="text/javascript" src="app/shared/utils/arrayToUrlParams.js"></script>
+  <script type="text/javascript" src="app/components/organization/recovery/resetController.js"></script>
+  <script type="text/javascript" src="app/components/employee/recovery/empResetController.js"></script>
+  <script type="text/javascript" src="app/shared/communication/dataPublisher.js"></script>
 </body>
 </html>

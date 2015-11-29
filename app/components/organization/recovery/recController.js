@@ -1,19 +1,25 @@
 (function(){
 
-  var controller = function(recService,$scope){
-    this.successFlag = false;
-    this.errors = {};
-    this.validFields = {
-      required : false,
-      valid : false
+  var controller = function(dataPublisher,$scope){
+
+    var c = this;
+    c.errors = {};
+    c.success = false;
+    c.invalidFields = {
+      emailReq : false,
+      emailVal : false
     }
-    this.recover = function(){
-      console.log("sadasdasd");
+    c.recover = function(){
       var form = $scope.recoveryForm;
-      this.validFields.required = form.emailField.$error.required;
-      this.validFields.valid = form.emailField.$error.email;
+      c.invalidFields.emailReq = form.email.$error.required;
+      c.invalidFields.emailVal = form.email.$error.email;
       if(!form.$invalid){
-        recService.recover(this.email,this.successFlag,this.errors);
+        dataPublisher.publish('http://api.plunner.com/companies/password/email',{email : c.email})
+        .then(function(){
+          c.success = true;
+        },function(){
+
+        })
       }
 
     }

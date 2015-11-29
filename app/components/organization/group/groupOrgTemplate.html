@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <h2>Group detail</h2>
+    <div class="col-md-6">
+      <ul class="list-unstyled">
+        <li class="text-bold">
+          Name : <input ng-model="groupOrgC.data.groupC.name" ng-readonly="!groupOrgC.inchange"></li>
+        <li>Description : <textarea ng-model="groupOrgC.data.groupC.description" ng-readonly="!groupOrgC.inchange"></textarea></li>
+      </ul>
+      <button ng-hide="groupOrgC.inchange" ng-disabled="groupOrgC.inchange" ng-click="groupOrgC.inchange = true">Edit name and description</button>
+      <button ng-show="groupOrgC.inchange" ng-disabled="!groupOrgC.inchange" ng-click="groupOrgC.updateInfo()">Change</button>
+      <button ng-click="groupOrgC.deleteGroup()">Delete group</button>
+    </div>
+    <div class="col-md-6">
+      <h3>Members</h3>
+      <ul class="list-unstyled">
+        <li ng-repeat="member in groupOrgC.data.members">
+          <p>{{member.name}}</p>
+          <p ng-show="member.id === groupOrgC.data.group.planner_id">is planner<p>
+          <button ng-if="member.id !== groupOrgC.data.group.planner_id" ng-click="groupOrgC.updatePlanner(member.id)">Make planner</button>
+          <button class="btn btn-defualt btn-small" ng-click="groupOrgC.deleteFromGroup(member.id)">remove from this group</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          This group has been successfully removed
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
