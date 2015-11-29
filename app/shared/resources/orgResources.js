@@ -61,6 +61,9 @@
         },
         planner : function(){
           return planner;
+        },
+        company : function() {
+          return company;
         }
     }
   }

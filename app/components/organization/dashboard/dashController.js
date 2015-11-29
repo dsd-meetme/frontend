@@ -148,7 +148,7 @@
         this.invalidFields.nameReq = (this.name === '');
         this.invalidFields.emailReq = (this.email === '');
 
-        // TO CHECK
+        // TO LINK WITH API
         console.log(this.invalidFields);
         if(this.invalidFields.nameReq === false 
           && this.invalidFields.emailReq === false){
