@@ -1,24 +1,38 @@
 <div class="container">
+  <style>
+    .disabled {
+      border : none;
+      cursor : text;
+    }
+    textarea {
+      resize : none;
+      outline : none;
+    }
+  </style>
   <div class="row">
     <h2>Group detail</h2>
     <div class="col-md-6">
       <ul class="list-unstyled">
         <li class="text-bold">
-          Name : <input ng-model="groupOrgC.data.groupC.name" ng-readonly="!groupOrgC.inchange"></li>
-        <li>Description : <textarea ng-model="groupOrgC.data.groupC.description" ng-readonly="!groupOrgC.inchange"></textarea></li>
+          Name :
+          <input ng-model="groupOrgC.data.groupC.name" ng-readonly="!groupOrgC.inchange" ng-class="{disabled : !groupOrgC.inchange}">
+        </li>
+        <li>Description :
+          <textarea ng-model="groupOrgC.data.groupC.description" ng-readonly="!groupOrgC.inchange" ng-class="{disabled : !groupOrgC.inchange}"></textarea>
+        </li>
       </ul>
-      <button ng-hide="groupOrgC.inchange" ng-disabled="groupOrgC.inchange" ng-click="groupOrgC.inchange = true">Edit name and description</button>
-      <button ng-show="groupOrgC.inchange" ng-disabled="!groupOrgC.inchange" ng-click="groupOrgC.updateInfo()">Change</button>
-      <button ng-click="groupOrgC.deleteGroup()">Delete group</button>
+      <button class="btn btn-default" ng-hide="groupOrgC.inchange" ng-disabled="groupOrgC.inchange" ng-click="groupOrgC.inchange = true">Edit name and description</button>
+      <button class="btn btn-default" ng-show="groupOrgC.inchange" ng-disabled="!groupOrgC.inchange" ng-click="groupOrgC.updateInfo()">Change</button>
+      <button class="btn btn-danger" ng-click="groupOrgC.delete()">Delete group</button>
     </div>
     <div class="col-md-6">
       <h3>Members</h3>
       <ul class="list-unstyled">
         <li ng-repeat="member in groupOrgC.data.members">
           <p>{{member.name}}</p>
-          <p ng-show="member.id === groupOrgC.data.group.planner_id">is planner<p>
-          <button ng-if="member.id !== groupOrgC.data.group.planner_id" ng-click="groupOrgC.updatePlanner(member.id)">Make planner</button>
-          <button class="btn btn-defualt btn-small" ng-click="groupOrgC.deleteFromGroup(member.id)">remove from this group</button>
+          <p ng-show="member.id === groupOrgC.data.group.planner_id" class="text-primary">is planner<p>
+          <button class="btn btn-default btn-sm" ng-if="member.id !== groupOrgC.data.group.planner_id" ng-click="groupOrgC.updatePlanner(member.id)">Make planner</button>
+          <button class="btn btn-danger btn-sm" ng-click="groupOrgC.deleteFromGroup(member.id)">remove from this group</button>
         </li>
       </ul>
     </div>
