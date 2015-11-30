@@ -6,10 +6,10 @@
       </div>
       <div class="navbar-collapse collapse navbar-right">
         <ul class="nav navbar-nav navbar-right">
+          <li><a href="/#/organization/profile">
+            <span class="glyphicon glyphicon-user"></span> Organisation Name</a></li>
           <li><a href="#">How To</a></li>
           <li><a href="#">Contact</a></li>
-          <li><a href="/#/organization/profile">
-            <span class="glyphicon glyphicon-user"></span> Company Name</a></li>
           <li><button type="button" class="btn btn-danger navbar-btn" ng-click="dashOrgC.logout()">Sign Out</button></li>
         </ul>
       </div>
@@ -35,7 +35,6 @@
       </ul>
 
       <br><br>
-      <div ng-show="dashOrgC.empTableVisible" class="ng-hide">
         <table class="table">
           <thead>
             <th>Name</th>
@@ -51,7 +50,6 @@
             </tr>
           </tbody>
         </table>
-      </div>
   </div>
   <br>
   <br>
@@ -71,7 +69,6 @@
       </ul>
 
       <br><br>
-      <div ng-show="dashOrgC.gpTableVisible" class="ng-hide">
         <table class="table">
           <thead>
             <th>Name</th>
@@ -86,7 +83,6 @@
             </tr>
           </tbody>
         </table>
-      </div>
   </div>
   <div id="addGroup" class="modal" role="dialog" tabindex="-1">
     <div class="modal-dialog">
@@ -97,11 +93,11 @@
         </div>
         <div class="modal-body">
             <p>Name</p>
-            <p ng-show="dashOrgC.addGroup.invalidFields.nameReq">Insert a group name</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.nameReq" class="text-danger">Insert a group name</p>
             <input type="search" class="form-control" ng-model="dashOrgC.addGroup.name" >
             
             <p>Description</p>
-            <p ng-show="dashOrgC.addGroup.invalidFields.descReq">Insert a group description</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.descReq" class="text-danger">Insert a group description</p>
             <input type="text" class="form-control" ng-model="dashOrgC.addGroup.desc">
             <table class="table">
               <thead>
@@ -116,9 +112,9 @@
                 </tr>
               </tbody>
             </table>
-            <p ng-show="dashOrgC.addGroup.invalidFields.membersReq">Insert at least one member</p>
-            <p ng-show="dashOrgC.addGroup.invalidFields.plannerReq">Insert one planner</p>
-            <p ng-show="dashOrgC.addGroup.invalidFields.nonMatchingPlanner">Non matching planner</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one member</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.plannerReq" class="text-danger">Insert one planner</p>
+            <p ng-show="dashOrgC.addGroup.invalidFields.nonMatchingPlanner" class="text-danger">Non matching planner</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -139,18 +135,18 @@
           <div class="modal-body">
               <p>Name</p>
               <input name="name" type="text" class="form-control" required ng-model="dashOrgC.name">
-              <p ng-show="dashOrgC.addEmployee.invalidFields.nameReq">Insert a name</p>
+              <p ng-show="dashOrgC.addEmployee.invalidFields.nameReq" class="text-danger">Insert a name</p>
               <p>Email</p>
               <input name="email" type="text" class="form-control" required ng-model="dashOrgC.addEmployee.email">
-              <p ng-show="dashOrgC.addEmployee.invalidFields.emailReq">Insert the employee email address</p>
-              <p ng-show="dashOrgC.addEmployee.invalidFields.emailVal">Email address is not valid</p>
+              <p ng-show="dashOrgC.addEmployee.invalidFields.emailReq" class="text-danger">Insert the employee email address</p>
+              <p ng-show="dashOrgC.addEmployee.invalidFields.emailVal" class="text-danger">Email address is not valid</p>
               <p>Password</p>
               <input name="password" type="password" class="form-control" required ng-model="dashOrgC.addEmployee.password">
-              <p ng-show="dashOrgC.addEmployee.invalidFields.passwordReq">Insert the employee password</p>
-              <p ng-show="dashOrgC.addEmployee.invalidFields.passwordLenght">The two passwords are differents</p>
+              <p ng-show="dashOrgC.addEmployee.invalidFields.passwordReq" class="text-danger">Insert the employee password</p>
+              <p ng-show="dashOrgC.addEmployee.invalidFields.passwordLenght" class="text-danger">The passwords must contains at least 6 characters</p>
               <p>Confirm Password</p>
               <input name="confirmation_password" type="password" class="form-control" ng-model="dashOrgC.addEmployee.confirmation_password">
-              <p ng-show="dashOrgC.addEmployee.invalidFields.passwordMatch">The two passwords are differents</p>
+              <p ng-show="dashOrgC.addEmployee.invalidFields.passwordMatch" class="text-danger">The two passwords are differents</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

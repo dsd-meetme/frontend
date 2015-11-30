@@ -1,10 +1,33 @@
-<form name="recoveryForm" ng-submit="emprecC.recover()" novalidate>
-  <input type="text" name="name" ng-model="emprecC.name" placeholder="Insert the name of you company" required>
-  <input type="email" name="email" ng-model="emprecC.email" placeholder="Insert your mail" required>
-  <button>Recover password</button>
-  <div ng-show="emprecC.invalidFields.emailReq">Insert an email address</div>
-  <div ng-show="emprecC.invalidFields.emailVal">You have not inserted a valid mail</div>
-  <div ng-show="emprecC.invalidFields.nameReq">Insert the name of your company</div>
-  <div ng-show="emprecC.errors.error">{{recC.errors.error}}</div>
-  <div ng-show="emprecC.success">Success! We have sent you a link that you can use to reset your password</div>
-</form>
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- HEADER -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Plunner</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">How To</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><button type="button" class="btn btn-default navbar-btn" ng-click="rootC.presentation()">Home</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-content">
+	<form name="recoveryForm" ng-submit="emprecC.recover()" novalidate>
+	  <input class="form-control" type="text" name="name" ng-model="emprecC.name" placeholder="Insert the name of you company" required>
+	  <div ng-show="emprecC.invalidFields.nameReq" class="text-danger">Insert the name of your company</div>
+	  <br>
+	  <input class="form-control" type="email" name="email" ng-model="emprecC.email" placeholder="Insert your mail" required>
+	  <div ng-show="emprecC.invalidFields.emailReq" class="text-danger">Insert an email address</div>
+	  <div ng-show="emprecC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</div>
+	  <br>
+	  <p ng-repeat="error in emprecC.errors" class="text-danger">{{emprecC.errors}}</p>
+	  <br>
+	  <button class="btn btn-default">Recover Password</button>
+	  <br><br>
+	  <div ng-show="emprecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</div>
+	</form>
+</div>

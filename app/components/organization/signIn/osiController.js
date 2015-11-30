@@ -21,7 +21,7 @@
       //Processes the submit of usiForm (organization sign in)
       var form = $scope.signinForm;
       //Validity status of input fields checking
-      c.validFields.inputReq = form.password.$error.required;
+      c.validFields.passwordReq = form.password.$error.required;
       c.validFields.emailReq = form.email.$error.required;
       c.validFields.emailVal = form.email.$error.email;
       if(!form.$invalid){

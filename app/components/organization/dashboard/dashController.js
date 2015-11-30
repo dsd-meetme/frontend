@@ -51,11 +51,12 @@
           //Validation
           this.invalidFields.nameReq = form.name.$error.required;
           this.invalidFields.emailReq = form.email.$error.required;
-          this.invalidFields.passwordReq = form.password.$error.required;
-          this.invalidFields.passwordLength = form.password.$error.minLenght;
           this.invalidFields.emailVal = form.email.$error.email;
-          this.invalidFields.passwordMatch = (form.password !== form.confirmation_password);
+          this.invalidFields.passwordReq = form.password.$error.required;
+          this.invalidFields.passwordLength = (form.password.length < 6);
+          this.invalidFields.passwordMatch = !(form.password === form.confirmation_password);
 
+          console.log(this.invalidFields);
 
           //Submits everything to the server if data is valid
           if(!form.$invalid && !this.invalidFields.passwordMatch){
@@ -151,21 +152,19 @@
       // TABLES VIEW SECTION
       //Show or Hide Employee table
       c.seeAllEmp = function(){
-        if (c.empTableVisible) {
-          c.empTableVisible = false;
+        if (this.displayAllEmployee === "Hide All") {
         this.displayAllEmployee = "See All";
         } else {
-          c.empTableVisible = true;
+          // TODO : Expend employee table
           this.displayAllEmployee = "Hide All";
         }
       }
       //Show or Hide Group table
       c.seeAllGp = function(){
-        if (c.gpTableVisible) {
-          c.gpTableVisible = false;
-        this.displayAllGroup = "See All";
+        if (this.displayAllGroup === "Hide All") {
+          this.displayAllGroup = "See All";
         } else {
-          c.gpTableVisible = true;
+          // TODO : Expend group table
           this.displayAllGroup = "Hide All";
         }
       }

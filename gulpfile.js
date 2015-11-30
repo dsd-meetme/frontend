@@ -21,6 +21,12 @@ gulp.task('presentation_sass',function(){
     .pipe(gulp.dest('assets/css'))
 })
 
+gulp.task('form_sass',function(){
+  return gulp.src('assets/sass/components/form.sass')
+    .pipe(sass([{ includePaths: ['sass'], outputStyle: 'expanded'}]))
+    .pipe(gulp.dest('assets/css'))
+})
+
 gulp.task('broswer-sync',function(){
   sync.init(["assets/css/*.css","app/*/*/*/*.js","app/*/*/*/*.html", "app/*/*/*.js","*.html","app/*/*/*.html","app/*.js"], {
         server: {
@@ -29,6 +35,6 @@ gulp.task('broswer-sync',function(){
     });
 })
 
-gulp.task('default',['index_sass','login_sass','presentation_sass','broswer-sync'], function(){
+gulp.task('default',['index_sass','login_sass','presentation_sass','form_sass','broswer-sync'], function(){
   gulp.watch('assets/sass/*/*',['login_sass'])
 })

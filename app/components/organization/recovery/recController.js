@@ -15,10 +15,12 @@
       c.invalidFields.emailVal = form.email.$error.email;
       if(!form.$invalid){
         dataPublisher.publish('http://api.plunner.com/companies/password/email',{email : c.email})
-        .then(function(){
+        .then(function(response){
           c.success = true;
-        },function(){
-
+        },function(response){
+          if(response.status === 422){
+            c.errors = response.data;
+          }
         })
       }
 

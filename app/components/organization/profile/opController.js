@@ -1,5 +1,5 @@
 (function(){
-  var controller = function(orgResources,$window){
+  var controller = function(orgResources,$scope){
     var self = this;
     self.data = {};
     self.errors = {
@@ -8,8 +8,9 @@
     }
 
     // STATIC DATAS FOR GRAPHIC TESTS
-    self.data.name = "Organization A";
-    self.data.email = "contact@organizationa.com";
+    self.data.name = "Organization Name";
+    self.data.email = "testInit@test.com";
+    self.data.organizationPwd = "test"
     /* DYNAMIC DATAS QUERY TO SERVER
     orgResources.company().query().then(
       function(response){
@@ -23,7 +24,8 @@
         }
       }
     );
-    */
+*/
+    console.log(self.data);
     self.editProfile = {
       name : '',
       email : '',
@@ -33,29 +35,37 @@
       changedFields : {
         name : false,
         email : false,
-        pwd : false,
+        pwd : false
       },
       invalidFields : {
-        emailReq : false,
+        emailVal : false,
         newPwdReq : false,
         newPwdCheckReq : false,
         pwdReq : false,
+        oneChangeReq : false
       },
       submit : function(){
-        this.changedFields.name = !(this.name === '');
-        this.changedFields.email = !(this.email === '');
-        this.changedFields.pwd = !(this.newPwd === '');
 
+        var form = $scope.editProfileForm;
+        this.changedFields.name = (form.name === '');
+        this.changedFields.email = (form.email === '');
+        this.changedFields.pwd = (form.newPwd === '');
         // CHECK EMAIL SYNTAX + PWD LENGHT
         //this.invalidFields.emailReq = (this.email === '');
-        this.invalidFields.newPwdReq = (this.newPwd.LENGHT < 6);
-        this.invalidFields.newPwdCheckReq = !(this.newPwd === this.newPwdCheck);
-        this.invalidFields.pwdReq = !(this.pwd === self.organizationPwd);
+        this.invalidFields.emailVal = form.email.$error.email;
+        this.invalidFields.newPwdReq = (form.newPwd.LENGHT < 6);
+        if (this.changedFields.pwd) {
+          this.invalidFields.newPwdCheckReq = !(form.newPwd === form.newPwdCheck);
+        }
+        this.invalidFields.pwdReq = !(form.currentPwd === "tes");
+        this.invalidFields.oneChangeReq = (!(form.name === '') || !(form.email === '') || !(form.newPwd === ''));
 
         // TO LINK WITH API
+        console.log(this.changedFields);
         console.log(this.invalidFields);
         if(this.invalidFields.nameReq === false 
-          && this.invalidFields.emailReq === false){
+          && this.invalidFields.emailReq === false
+          && this.invalidFields.oneChangeReq === false){
             //orgResources.employee().save({employeeId: ''},jQuery.param({name : this.name, email : this.email})).$promise
             //.then(function(response){
             //  var b = response.id;
@@ -69,6 +79,9 @@
       }
     }
 
+    self.deleteOrg = function() {
+      console.log("Delete Organisation");
+    }
     
 
   }
