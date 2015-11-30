@@ -18,7 +18,7 @@
           //If not template retrieving request
           if(config.url.search('app/')===-1 && config.url.search('template/') === -1){
             //If not a login/register request (these requests don't need to include the token)
-            if(config.method === 'POST'){
+            if(config.method === 'POST' || config.method === 'PUT'){
               config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
             }
             if(excludedUrlFromToken.indexOf(config.url) === -1 ){

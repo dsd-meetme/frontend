@@ -1,5 +1,5 @@
 (function(){
-  var controller = function($scope,$routeParams,orgResources){
+  var controller = function($scope,$routeParams,orgResources,$location){
     var c = this;
     //employee id
     var id = $routeParams.id;
@@ -9,65 +9,84 @@
       forb : false
     }
 
-    c.profileData = {};
+    c.data = {};
+    c.dataC = {};
 
-    c.nameMailForm = {
-      formVisible : false,
+    c.changeNameMail = {
+      inChange : false,
       form : $scope.nmeForm,
       invalidFields : {
+        nameReq : false,
+        emailReq : false,
         emailVal : false
       },
-      data : {
-        name : null,
-        email : null
-      },
       abort : function(){
-          this.formVisible = false;
+          this.inChange = false;
       },
       submit : function(){
-        console.log(this);
-        console.log($scope.nmeForm);
-        this.invalidFields.emailVal = this.form.email.$error.email;
-        if(!this.form.$invalid){
-          c.updateProfile(this.data);
+        var form = $scope.changeForm;
+        console.log(form);
+        this.invalidFields.emailVal = form.email.$error.email || false;
+        this.invalidFields.emailReq = form.email.$error.required || false;
+        this.invalidFields.nameReq = form.name.$error.required || false;
+        console.log(this.invalidFields);
+        if(this.invalidFields.emailVal === false &&
+        this.invalidFields.emailReq === false && this.invalidFields.nameReq === false){
+          console.log(c.dataC);
+          orgResources.employee().update({employeeId: id},jQuery.param(c.dataC)).$promise
+          .then(function(){
+            alert('success');
+            c.changeNameMail.abort();
+            c.getInfo();
+          },function(){
+
+          })
         }
       },
       show : function(){
-        this.formVisible = true
+        this.inChange = true
       }
 
     };
-    c.passwordForm = {
-      formVisible : false,
-      form : $scope.peForm,
+    c.changePassword = {
+      inChange : false,
+      form : $scope.nmeForm,
       invalidFields : {
         passwordLen : false,
         passwordMatch : false
       },
-      data : {
-        password : null,
-        cpassword : null
-      },
       abort : function(){
-        this.formVisible = false;
+          this.inChange = false;
       },
       submit : function(){
-        this.invalidFields.passwordLen = this.form.password.$error.minlength;
-        this.invalidFields.passwordMatch = (this.data.password !== this.data.cpassword);
-        if(!this.form.$invalid){
-          c.updateProfile(this.data);
+        var form = $scope.changeForm;
+        this.invalidFields.passwordLen = form.password.$error.minlength || false;
+        this.invalidFields.passwordMatch = (c.dataC.password !== c.dataC.password_confirmation);
+        console.log(this.invalidFields);
+        if(!form.$invalid && !this.invalidFields.passwordMatch ){
+          orgResources.employee().update({employeeId: id},jQuery.param(c.dataC)).$promise
+          .then(function(){
+            alert('success');
+            c.changePassword.abort();
+            c.getInfo();
+          },function(){
+
+          })
         }
       },
       show : function(){
-        this.formVisible = true;
+        this.inChange = true
       }
-    }
+
+    };
     //Get employee info in the context of an org
     c.getInfo = function(){
       //restful show
       orgResources.employee().get({employeeId:id}).$promise
       .then(function(response){
-        c.profileData = response;
+        c.data = response;
+        c.dataC.name = c.data.name;
+        c.dataC.email = c.data.email;
       },function(response){
         if(response.status === 401){
           c.errors.unauth = true;
@@ -85,8 +104,7 @@
       orgResources.employee().remove({employeeId:id}).$promise
       .then(function(response){
         alert('Evviva');
-        //Show success popup wait for some time
-        //redirect
+        $location.path('/organization');
       },function(response){
         if(response.status === 401){
           c.errors.unauth = true;
@@ -97,19 +115,6 @@
           c.errors.forb = true;
         }
       })
-    }
-    //Update employee info
-    c.update = function(data){
-        //validation
-        orgResources.employees.update({employeeId:id}).$promise
-        .then(function(){
-          //
-        },function(){
-          //
-        })
-    }
-    c.getGroups = function(){
-
     }
     c.getInfo();
   }

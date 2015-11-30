@@ -21,7 +21,7 @@
           <td>
             <a href="/#/organization/groups/{{group.id}}" ng-repeat="group in employee.groups">{{group.name}}</p>
           </td>
-          <td><a href="/#/organization/employees/{{employee.id}}">GO</a></td>
+          <td><a href="/#/organization/users/{{employee.id}}">GO</a></td>
         </tr>
       </tbody>
     </table>
@@ -97,7 +97,7 @@
             <p>Name</p>
             <input type="text" ng-model="dashOrgC.addEmployee.name" required name="name">
             <p>Email</p>
-            <input type="text" ng-model="dashOrgC.addEmployee.email" required name="email">
+            <input type="email" ng-model="dashOrgC.addEmployee.email" required name="email">
             <p>Password</p>
             <input ng-minlength="6" type="password" ng-model="dashOrgC.addEmployee.password" required name="password">
             <p>Password confirmation</p>

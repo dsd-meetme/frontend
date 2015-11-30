@@ -3,10 +3,6 @@
     var employeeResource = $resource('http://api.plunner.com/companies/employees/:employeeId',null,{
       'update' : {
         method : 'PUT'
-      },
-      'remove' : {
-        method : 'DELETE',
-        isArray : true
       }
     });
     var groupResource = $resource('http://api.plunner.com/companies/groups/:groupId',null, {
