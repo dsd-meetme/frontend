@@ -4,7 +4,7 @@
     c.errors = {};
     c.success = false;
     c.invalidFields = {
-      nameReq : false
+      nameReq : false,
       emailReq : false,
       emailVal : false
     }
@@ -15,7 +15,7 @@
       c.invalidFields.emailVal = form.email.$error.email;
       if(!form.$invalid){
         dataPublisher.publish('http://api.plunner.com/employees/password/email', {
-          name : c.name,
+          company : c.name,
           email : c.email,
         })
         .then(function(response){

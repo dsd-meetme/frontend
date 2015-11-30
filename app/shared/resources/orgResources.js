@@ -12,10 +12,6 @@
     var groupResource = $resource('http://api.plunner.com/companies/groups/:groupId',null, {
       'update' : {
         method : 'PUT'
-      },
-      'remove' : {
-        method : 'DELETE',
-        isArray : true
       }
     });
     var employeesWithinGroup = $resource('http://api.plunner.com/companies/groups/:groupId/employees/:employeeId',null, {
@@ -61,9 +57,6 @@
         },
         planner : function(){
           return planner;
-        },
-        company : function() {
-          return company;
         }
     }
   }

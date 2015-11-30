@@ -21,13 +21,13 @@
 
   <div class="row">
     <div class="col-md-3"></div>
-    <div class="col-md-6"><h1><b>{{opC.organizationName}}</b></h1></div>
+    <div class="col-md-6"><h1><b>{{opC.data.name}}</b></h1></div>
     <div class="col-md-3"></div>
   </div>
   <br>
   <div class="row">
     <div class="col-md-3">Registration Email: </div>
-    <div class="col-md-6">{{opC.organizationEmail}}</div>
+    <div class="col-md-6">{{opC.data.email}}</div>
     <div class="col-md-3"></div>
   </div>
   <br>
@@ -44,7 +44,7 @@
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6"></div>
-    <div class="col-md-3"><button class="btn btn-danger" ng-click="opC.deleteAccount()">Delete this account</button></div>
+    <div class="col-md-3"><button class="btn btn-danger">Delete this account</button></div>
   </div>
   
   <div id="editProfile" class="modal" role="dialog" tabindex="-1">
@@ -56,10 +56,10 @@
         </div>
         <div class="modal-body">
             <p>Type here to change your Organization name</p>
-            <input type="text" class="form-control" ng-model="opC.editProfile.name" placeholder="{{opC.organizationName}}">
+            <input type="text" class="form-control" ng-model="opC.editProfile.name" placeholder="{{opC.data.name}}">
             <hr>
             <p>Type here to change Email address</p>
-            <input type="text" class="form-control" ng-model="opC.editProfile.email" placeholder="{{opC.organizationEmail}}">
+            <input type="text" class="form-control" ng-model="opC.editProfile.email" placeholder="{{opC.data.email}}">
             <p ng-show="opC.editProfile.invalidFields.emailReq">The new email address is not valid</p>
             <hr>
             <p>Type here to change Password</p>

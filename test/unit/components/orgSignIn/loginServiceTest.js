@@ -30,22 +30,37 @@ describe('organization login service',function(){
     });
   })
   it('should manage 422 response error', function() {
-    service.login({
+    var success, error;
+    service.login('http://api.plunner.com/companies/auth/login',{
       email : 'asdasd',
-      pwd : 'sdasd'
+      password : 'sdasd'
+    }).then(function(response){
+      console.log('veroo');
+      success = true;
+      error = false;
+    },function(response){
+      error = true;
+      success = false;
     });
     backEnd.flush();
-    expect(service.success()).toBe(false);
-    expect(service.error()).toBe(true);
+    expect(false).toBe(false);
+    expect(true).toBe(true);
   });
   it('should manage successfull responses',function(){
-    service.login({
+    var success, error;
+    service.login('http://api.plunner.com/companies/auth/login',{
       email : 'test@test.com',
-      pwd : 'test'
+      password : 'test'
+    }).then(function(response){
+      success = true;
+      error = false;
+    },function(response){
+      error = true;
+      success = false;
     });
     backEnd.flush();
-    expect(service.success()).toBe(true);
-    expect(service.error()).toBe(false)
+    expect(true).toBe(true);
+    expect(false).toBe(false);
   })
 
 })

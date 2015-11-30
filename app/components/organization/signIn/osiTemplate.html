@@ -23,9 +23,9 @@
       <h5>Enter your credentials</h5>
       
       <div>
-        <input class="form-control" name="osiEmail" type="email" required ng-model="osiC.osiEmail" placeholder="Email">
+        <input class="form-control" name="email" type="email" required ng-model="osiC.email" placeholder="Email">
         <p>{{osiC.errors.email}}</p>
-        <input class="form-control" name="osiPwd" type="password" required ng-model="osiC.osiPwd" placeholder="Password"><br>
+        <input class="form-control" name="password" type="password" required ng-model="osiC.password" placeholder="Password"><br>
         <p>{{osiC.errors.password}}</p>
         <input type="checkbox" ng-model="osiC.rmbMe">Remember Me<br><br>
       </div>
@@ -35,17 +35,24 @@
       <i>If you are an employee it is <a href="/#/usersignin">here</a></i>
     </form>
 
-    <div ng-show="osiC.validFields.emailReq">
+    <div ng-show="osiC.validFields.emailReq" class="text-danger">
       You did not insert an email address
     </div>
-    <div ng-show="osiC.validFields.inputReq">
+    <div ng-show="osiC.validFields.passwordReq" class="text-danger">
       You did not insert an password
     </div>
-    <div ng-show="osiC.validFields.emailVal">
+    <div ng-show="osiC.validFields.emailVal" class="text-danger">
       You did not insert a valid email address
     </div>
+    <p ng-repeat="error in osiC.errors" class="text-danger">{{error}}</p>
+    
     <div ng-show="osiC.nonRegUser">
       The data you inserted don't match any existing user
     </div>
+
+    <div ng-show="osiC.loaderVisibility">
+      <img src="assets/img/loader.gif" width="40px" alt="">
+    </div>
+
   </div>
 </div>

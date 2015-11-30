@@ -5,165 +5,175 @@
     @param logoutService A service used to manage the logout of a plunner's organization
     **/
     var controller = function(logoutService,orgResources,arrayToUrlParams,$cookies){
-      var self = this;
-      var a = [1,2]
-      this.displayAllEmployee = "See All";
-      this.displayAllGroup = "See All";
-      console.log($.param(angular.toJson(a)));
-      self.errors = {
+      var c = this;
+      c.errors = {
         unauthorized : false,
         forbidden : false
       }
-      self.data = {};
+      c.data = {};
       //Logout
-      self.logout = function(){
+      c.logout = function(){
         logoutService.logout('/orgsignin');
       };
+      
+      // EMPLOYEES SECTION
       //Get employees
-      self.getEmployees = function(){
+      c.getEmployees = function(){
         //employees restful index
         orgResources.employee().query({employeeId : ''}).$promise
-        //console.log('token to deliver '+$cookies.get('auth_token'))
-        /*$http({
-        method : 'GET',
-        url : 'http://api.plunner.com/companies/employees',
-        headers : {
-        Authorization : $cookies.get('auth_token')
-        }
-        })*/
         .then(function(response){
-          console.log(response.headers);
-          /*$cookies.remove('auth_token');
-          $cookies.put('auth_token',response.headers('Authorization'));*/
-          console.log('token ricevuto '+$cookies.get('auth_token'));
-          self.data.employees = response;
-          self.getGroups();
-        },function(response){
-          if(response.status === 401){
-            self.errors.unauthorized = true;
-          }
-          else if(response.status === 403){
-            self.errors.forbidden = true;
-          }
+          c.data.employees = response;
+          c.getGroups();
+        },
+        function(response){
+          c.errors.unauthorized = (response.status === 401);
+          c.errors.forbidden = (response.status === 403);
         });
       }
+      //Add employee
+      c.addEmployee = {
+        name : '',
+        email : '',
+        password : '',
+        confirmation_password : '',
+        invalidFields : {
+          nameReq : false,
+          emailReq : false,
+          passwordReq : false,
+          passwordMatch : false,
+          passwordLength : false
+        },
+        submit : function(){
+          console.log(this.invalidFields)
+          var form = $scope.addEmployeeForm;
+          console.log(form);
+          //Validation
+          this.invalidFields.nameReq = form.name.$error.required;
+          this.invalidFields.emailReq = form.email.$error.required;
+          this.invalidFields.passwordReq = form.password.$error.required;
+          this.invalidFields.passwordLength = form.password.$error.minlength;
+          this.invalidFields.emailVal = form.email.$error.email;
+          this.invalidFields.passwordMatch = (this.password !== this.confirmation_password);
 
-  self.seeAllEmp = function(){
-    if (self.empTableVisible) {
-      self.empTableVisible = false;
-    this.displayAllEmployee = "See All";
-    } else {
-      self.empTableVisible = true;
-      this.displayAllEmployee = "Hide All";
-    }
-  }
 
-  self.seeAllGp = function(){
-    if (self.gpTableVisible) {
-      self.gpTableVisible = false;
-    this.displayAllGroup = "See All";
-    } else {
-      self.gpTableVisible = true;
-      this.displayAllGroup = "Hide All";
-    }
-  }
+          //Submits everything to the server if data is valid
+          if(!form.$invalid && !this.invalidFields.passwordMatch){
+              //Updates the group name and planner
+              orgResources.employee().save({employeeId: ''},jQuery.param({
+                name : this.name,
+                email : this.email,
+                password : this.password,
+                password_confirmation : this.confirmation_password
+              })).$promise
+              .then(function(response){
+                //Updates the group members
+                //orgResources.employeeInGroup().save({groupId: response.id, employeeId: ''}).$promise
+                //.then(function(response){
+                  c.getEmployees();
+                  jQuery('#addEmployees').modal('hide');
+                },
+                function(){
 
-  //Get groups
-  self.getGroups = function(){
-    //employees restful groups index
-    orgResources.group().query({groupId : ''}).$promise
-    .then(function(response){
-      console.log(response)
-      self.data.groups = response;
-      console.log(self.data.groups);
-      console.log($cookies.get('auth_token'));
-
-    }, function(response){
-      if(response.status === 401){
-        self.code = 401;
-      }
-      else if(response.status === 403){
-        self.code = 403;
-      }
-    })
-  }
-  self.getEmployees();
-  self.addGroup = {
-    planner : null,
-    members: [],
-    selectPlanner : function(id){
-      this.selectedPlanner = id;
-    },
-    name : '',
-    desc : '',
-    invalidFields : {
-      nameReq : false,
-      descReq : false,
-      plannerReq : false,
-      membersReq : false,
-      nonMatchingPlanner : false
-    },
-    submit : function(){
-      var validMembers = [];
-      angular.forEach(this.members, function(value, key){
-        if(value===true){
-          validMembers.push(key.toString());
-        }
-      })
-      this.invalidFields.nameReq = (this.name === '');
-      this.invalidFields.descReq = (this.desc === '');
-      this.invalidFields.membersReq = (this.members.length === 0);
-      this.invalidFields.plannerReq = (this.planner == null || angular.isUndefined(this.planner));
-      this.invalidFields.nonMatchingPlanner = (validMembers.indexOf(this.planner) === -1);
-
-      console.log(this.invalidFields);
-      if(this.invalidFields.nameReq === false && this.invalidFields.plannerReq === false
-        && this.invalidFields.membersReq === false
-        && this.invalidFields.nonMatchingPlanner === false
-        && this.invalidFields.descReq === false){
-          orgResources.group().save({groupId: ''},jQuery.param({name : this.name, planner_id : this.planner})).$promise
-          .then(function(response){
-            var b = response.id;
-            console.log(b);
-            orgResources.employeeInGroup().save({groupId: b, employeeId: ''},arrayToUrlParams.process('id',validMembers)).$promise
-            .then(function(response){
-              self.getGroups();
-              jQuery('#addGroup').modal('hide');
-            },function(){})
-          },function(){
-
-          });
-        }
-      }
-    }
-
-    self.addEmployee = {
-      name : '',
-      email : '',
-      invalidFields : {
-        nameReq : false,
-        emailReq : false,
-      },
-      submit : function(){
-        this.invalidFields.nameReq = (this.name === '');
-        this.invalidFields.emailReq = (this.email === '');
-
-        // TO LINK WITH API
-        console.log(this.invalidFields);
-        if(this.invalidFields.nameReq === false 
-          && this.invalidFields.emailReq === false){
-            //orgResources.employee().save({employeeId: ''},jQuery.param({name : this.name, email : this.email})).$promise
-            //.then(function(response){
-            //  var b = response.id;
-            //  console.log(b);
-              self.getEmployees();
-              jQuery('#addEmployee').modal('hide');
-            //},function(){
-
-            //});
+              });
           }
+        }
       }
-    }
+
+      // GROUP SECTION
+      //Get groups
+      c.getGroups = function(){
+        //employees restful groups index
+        orgResources.group().query({groupId : ''}).$promise
+        .then(function(response){
+          c.data.groups = response;
+        },
+        function(response){
+          c.errors.unauthorized = (response.status === 401);
+          c.errors.forbidden = (response.status === 403);
+        })
+      }
+      //Add group
+      c.addGroup = {
+        planner : null,
+        members: [],
+        name : '',
+        desc : '',
+        invalidFields : {
+          nameReq : false,
+          descReq : false,
+          plannerReq : false,
+          membersReq : false,
+          nonMatchingPlanner : false
+        },
+        selectPlanner : function(id){
+          this.selectedPlanner = id;
+        },
+        submit : function(){
+          var validMembers = [];
+          angular.forEach(this.members, function(value, key){
+            if(value===true){
+              validMembers.push(key.toString());
+            }
+          })
+          //Validation
+          this.invalidFields.nameReq = (this.name === '');
+          this.invalidFields.descReq = (this.desc === '');
+          this.invalidFields.membersReq = (this.members.length === 0);
+          this.invalidFields.plannerReq = (this.planner == null || angular.isUndefined(this.planner));
+          this.invalidFields.nonMatchingPlanner = (validMembers.indexOf(this.planner) === -1);
+
+          //Submits everything to the server if data is valid
+          if(this.invalidFields.nameReq === false
+            && this.invalidFields.plannerReq === false
+            && this.invalidFields.membersReq === false
+            && this.invalidFields.nonMatchingPlanner === false
+            && this.invalidFields.descReq === false){
+              //Updates the group name and planner
+              orgResources.group().save({groupId: ''},jQuery.param({name : this.name, planner_id : this.planner})).$promise
+              .then(function(response){
+                //Updates the group members
+                orgResources.employeeInGroup().save({groupId: response.id, employeeId: ''},arrayToUrlParams.process('id',validMembers)).$promise
+                .then(function(response){
+                  c.getGroups();
+                  jQuery('#addGroup').modal('hide');
+                },function(){
+
+                })},
+                function(){
+
+              });
+          }
+        }
+      }
+
+      // TABLES VIEW SECTION
+      //Show or Hide Employee table
+      c.seeAllEmp = function(){
+        if (c.empTableVisible) {
+          c.empTableVisible = false;
+        this.displayAllEmployee = "See All";
+        } else {
+          c.empTableVisible = true;
+          this.displayAllEmployee = "Hide All";
+        }
+      }
+      //Show or Hide Group table
+      c.seeAllGp = function(){
+        if (c.gpTableVisible) {
+          c.gpTableVisible = false;
+        this.displayAllGroup = "See All";
+        } else {
+          c.gpTableVisible = true;
+          this.displayAllGroup = "Hide All";
+        }
+      }
+
+      // INIT SECTION
+      c.getEmployees();
+      c.getGroups();
+      //Init buttons
+      this.displayAllEmployee = "See All";
+      this.displayAllGroup = "See All";
   }
 
   var app = angular.module('Plunner');

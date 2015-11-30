@@ -6,10 +6,11 @@
       unauthorized : false,
       forbidden : false
     }
-    self.organizationName = "Organization A";
-    self.organizationEmail = "contact@organizationa.com";
-    self.organizationPwd = "password"
-/*
+
+    // STATIC DATAS FOR GRAPHIC TESTS
+    self.data.name = "Organization A";
+    self.data.email = "contact@organizationa.com";
+    /* DYNAMIC DATAS QUERY TO SERVER
     orgResources.company().query().then(
       function(response){
           self.data = response.data;
@@ -22,7 +23,7 @@
         }
       }
     );
-*/
+    */
     self.editProfile = {
       name : '',
       email : '',
@@ -68,9 +69,7 @@
       }
     }
 
-    self.deleteAccount = function() {
-      $window.alert("ALERT!!");
-    }
+    
 
   }
 
