@@ -4,7 +4,7 @@
   @author Giorgio Pea
   @param logoutService A service used to manage the logout of a plunner's organization
   **/
-  var controller = function(logoutService,orgResources,arrayToUrlParams,$cookies){
+  var controller = function($scope,logoutService,orgResources,arrayToUrlParams,$cookies){
     var c = this;
     c.errors = {
       unauthorized : false,
@@ -86,6 +86,53 @@
               },function(){
 
               })},
+              function(){
+
+            });
+        }
+      }
+    }
+    c.addEmployee = {
+      name : '',
+      email : '',
+      password : '',
+      confirmation_password : '',
+      invalidFields : {
+        nameReq : false,
+        emailReq : false,
+        passwordReq : false,
+        passwordMatch : false,
+        passwordLength : false
+      },
+      submit : function(){
+        console.log(this.invalidFields)
+        var form = $scope.addEmployeeForm;
+        console.log(form);
+        //Validation
+        this.invalidFields.nameReq = form.name.$error.required;
+        this.invalidFields.emailReq = form.email.$error.required;
+        this.invalidFields.passwordReq = form.password.$error.required;
+        this.invalidFields.passwordLength = form.password.$error.minlength;
+        this.invalidFields.emailVal = form.email.$error.email;
+        this.invalidFields.passwordMatch = (this.password !== this.confirmation_password);
+
+
+        //Submits everything to the server if data is valid
+        if(!form.$invalid && !this.invalidFields.passwordMatch){
+            //Updates the group name and planner
+            orgResources.employee().save({employeeId: ''},jQuery.param({
+              name : this.name,
+              email : this.email,
+              password : this.password,
+              password_confirmation : this.confirmation_password
+            })).$promise
+            .then(function(response){
+              //Updates the group members
+              //orgResources.employeeInGroup().save({groupId: response.id, employeeId: ''}).$promise
+              //.then(function(response){
+                c.getEmployees();
+                jQuery('#addEmployees').modal('hide');
+              },
               function(){
 
             });
