@@ -45,9 +45,9 @@
       members: [],
       name : '',
       desc : '',
+      errors : {},
       invalidFields : {
         nameReq : false,
-        descReq : false,
         plannerReq : false,
         membersReq : false,
         nonMatchingPlanner : false
@@ -61,10 +61,9 @@
           if(value===true){
             validMembers.push(key.toString());
           }
-        })
+        });
         //Validation
         this.invalidFields.nameReq = (this.name === '');
-        this.invalidFields.descReq = (this.desc === '');
         this.invalidFields.membersReq = (this.members.length === 0);
         this.invalidFields.plannerReq = (this.planner == null || angular.isUndefined(this.planner));
         this.invalidFields.nonMatchingPlanner = (validMembers.indexOf(this.planner) === -1);
@@ -73,8 +72,7 @@
         if(this.invalidFields.nameReq === false
             && this.invalidFields.plannerReq === false
             && this.invalidFields.membersReq === false
-            && this.invalidFields.nonMatchingPlanner === false
-            && this.invalidFields.descReq === false){
+            && this.invalidFields.nonMatchingPlanner === false){
           //Updates the group name and planner
           orgResources.group().save({groupId: ''},jQuery.param({name : this.name, planner_id : this.planner})).$promise
               .then(function(response){
@@ -92,11 +90,12 @@
               });
         }
       }
-    }
+    };
     c.addEmployee = {
       name : '',
       email : '',
       password : '',
+      errors : {},
       confirmation_password : '',
       invalidFields : {
         nameReq : false,
@@ -136,15 +135,15 @@
                 jQuery('#addEmployee').modal('hide');
                 jQuery('#addEmployee input').val('');
               },
-              function(){
-
+              function(response){
+                  c.addEmployee.errors = response.data;
               });
         }
       }
-    }
+    };
     c.getEmployees();
-  }
+  };
 
   var app = angular.module('Plunner');
   app.controller('dashOrgController',controller);
-}())
+}());

@@ -16,9 +16,9 @@
 
             //Mode checking(organizations)
             if(!angular.isUndefined(path)){
-                if(path.search('organization')!== -1){
+                if(path.search('organization')!== -1 && path.search('auth') === -1){
                     if(angular.isUndefined(mode) || mode !== 'cn'){
-                        $location.path('/osignin');
+                        $location.path('/orgsignin');
                     }
                 }
                 //Mode checking(employees)
@@ -27,12 +27,14 @@
                         $location.path('/usignin');
                     }
                 }
-                if(path.search('/orgsignin')!== -1 || path.search('/usersignin')!== -1){
+                if(path.search('/orgsignin')!== -1 ){
+                    if(mode === 'cn'){
+                        $location.path('/organization');
+                    }
+                }
+                if(path.search('/usersignin') !== -1){
                     if(mode === 'en'){
                         $location.path('/user');
-                    }
-                    else if(mode === 'cn'){
-                        $location.path('/organization');
                     }
                 }
             }

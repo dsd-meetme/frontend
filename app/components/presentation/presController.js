@@ -3,13 +3,13 @@
   A controller that manages global events
   **/
   var controller = function($scope,$location,$rootScope){
-    this.osignIn = function(){
+    this.orgSignIn = function(){
       $location.path('/orgsignin');
     };
     this.reg = function(){
       $location.path('/signup');
     };
-    this.usignIn = function(){
+    this.userSignIn = function(){
       $location.path('/usersignin');
     }
   };

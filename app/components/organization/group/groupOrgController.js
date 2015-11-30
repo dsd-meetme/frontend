@@ -46,11 +46,11 @@
     }
     c.updatePlanner = function(plannerId){
       if(plannerId !== c.data.group.planner_id){
-        orgResources.group().update({groupId:id},{
+        orgResources.group().update({groupId:id},jQuery.param({
           name : c.data.group.name,
           description : c.data.group.desc,
           planner_id : plannerId
-        }).$promise
+        })).$promise
       .then(function(){
         alert('sucess');
         c.getInfo();
