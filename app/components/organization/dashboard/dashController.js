@@ -41,7 +41,8 @@
           emailReq : false,
           passwordReq : false,
           passwordMatch : false,
-          passwordLength : false
+          passwordLength : false,
+          emailVal : false
         },
         submit : function(){
           console.log(this.invalidFields)
@@ -70,7 +71,8 @@
                 //orgResources.employeeInGroup().save({groupId: response.id, employeeId: ''}).$promise
                 //.then(function(response){
                   c.getEmployees();
-                  jQuery('#addEmployees').modal('hide');
+                  jQuery('#addEmployee').modal('hide');
+                  jQuery('#addEmployee input').val('');
                 },
                 function(){
 
