@@ -16,8 +16,8 @@
 
       //Mode checking(organizations)
       if(!angular.isUndefined(path)){
-        if(path.search('organization')!== -1 && path.search('auth') === -1 ){
-          console.log("mode"+mode);
+        console.log('centro');
+        if(path.search('organization')!== -1){
           if(angular.isUndefined(mode) || mode !== 'cn'){
             $location.path('/osignin');
           }
@@ -26,6 +26,14 @@
         else if(path.search('employee')!== -1 && path.search('auth') === -1){
           if(mode === undefined || mode !== 'en'){
             $location.path('/usignin');
+          }
+        }
+        if(path.search('/orgsignin')!== -1 || path.search('/usersignin')!== -1){
+          if(mode === 'en'){
+            $location.path('/user');
+          }
+          else if(mode === 'cn'){
+            $location.path('/organization');
           }
         }
       }
