@@ -5,7 +5,7 @@
   @author Giorgio Pea
   @param loginService A service that is used to manage the login of a plunner's organization
   **/
-  var controller = function($rootScope,$scope,$location,dataPublisher,$cookies){
+  var controller = function($scope,$location,dataPublisher){
     /*This controller instance */
     var c = this;
 
@@ -23,7 +23,6 @@
       //Validity status of input fields checking
       c.validFields.passwordReq = form.password.$error.required;
       c.validFields.emailReq = form.email.$error.required;
-      c.validFields.emailVal = form.email.$error.email;
       if(!form.$invalid){
         //shows loader gif
         c.loaderVisibility = true;
@@ -42,6 +41,7 @@
       }
     }
   }
+
   var app = angular.module('Plunner');
   app.controller('osiController',controller);
-}())
+}());

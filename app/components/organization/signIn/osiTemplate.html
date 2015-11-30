@@ -1,4 +1,5 @@
 
+
 <div class="navbar navbar-default">
   <div class="container-fluid">
     <!-- HEADER -->
@@ -14,8 +15,6 @@
       </div>
     </div>
   </div>
-</div>
-
 <div class="page-content">
   <div class="form-signin">
     <form name="signinForm" ng-submit="osiC.login()" novalidate>
@@ -48,18 +47,11 @@
 
       <a style="float:right" href="/#/orgpwdrecovery">Password forgotten?</a><br><br>
       <i>If you are an employee it is <a href="/#/usersignin">here</a></i>
+      <div ng-show="osiC.loaderVisibility">
+        <img src="assets/img/loader.gif" width="40px" alt="">
+      </div>
     </form>
 
-    
-
-    
-    
-    
-    
-
-    <div ng-show="osiC.loaderVisibility">
-      <img src="assets/img/loader.gif" width="40px" alt="">
-    </div>
 
   </div>
 </div>

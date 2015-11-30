@@ -5,7 +5,19 @@
     self.errors = {
       unauthorized : false,
       forbidden : false
-    }
+    };
+    orgResources.company().query().then(
+      function(response){
+          self.data = response.data;
+      }, function(response){
+        if(response.status === 401){
+          self.errors.unauthorized = true;
+        }
+        else if(response.status === 403){
+          self.errors.forbidden = true;
+        }
+      }
+    );
 
     // STATIC DATAS FOR GRAPHIC TESTS
     self.data.name = "Organization Name";
@@ -77,15 +89,15 @@
             //});
           }
       }
-    }
+    };
 
     self.deleteOrg = function() {
       console.log("Delete Organisation");
     }
     
 
-  }
+  };
 
   var app = angular.module('Plunner');
   app.controller('opController',controller);
-}())
+}());

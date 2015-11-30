@@ -14,7 +14,11 @@
       inputReq : false,
       emailReq : false,
       emailVal : false,
+<<<<<<< HEAD
       orgNameReq : false
+=======
+      org : false
+>>>>>>> master
     }
 
     c.login = function(){
@@ -24,12 +28,21 @@
       c.validFields.inputReq = form.usiPwd.$error.required;
       c.validFields.emailReq = form.usiEmail.$error.required;
       c.validFields.emailVal = form.usiEmail.$error.email;
+<<<<<<< HEAD
       c.validFields.orgNameReq = form.usiOrgName.$error.required;
       if(!form.$invalid){
         dataPublisher.publish('http://api.plunner.com/employees/auth/login',{
           name : c.usiOrgName,
           email : c.usiEmail,
           password : c.usiPassword,
+=======
+      c.validFields.org = form.company.$error.required;
+      if(!form.$invalid){
+        dataPublisher.publish('http://api.plunner.com/employees/auth/login',{
+          name : c.org,
+          email : c.email,
+          password : c.password,
+>>>>>>> master
           rmbMe : c.rmbMe
         }).then(function(response){
           $location.path('/employee')

@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="assets/css/index_sass.css">
   <link rel="stylesheet" href="assets/css/presentation.css">
   <link rel="stylesheet" href="assets/css/form.css">
+  <link rel="stylesheet" href="assets/jquery-ui.min.css">
 </head>
 <body ng-controller="rootController as rootC">
   <style>
@@ -15,7 +16,19 @@
    background-color: lightsteelblue;
   }
   </style>
-  
+  <div class="navbar navbar-default" role="navigation">
+  <!-- HEADER -->
+    <div class="nav navbar-left">
+      <h1 class="navbar-brand">Plunner</h1>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">How To</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><button type="button" class="btn btn-default navbar-btn" ng-click="rootC.presentation()">Presentation</button></li>
+    </ul>
+  </div>
+
   <div ng-show="rootC.comError" class="container">A communication error occured</div>
   <div ng-view>
   <!-- TEMPLATE INJECTED -->
@@ -51,7 +64,7 @@
   <script type="text/javascript" src="app/shared/utils/arrayToUrlParams.js"></script>
   <script type="text/javascript" src="app/components/organization/recovery/resetController.js"></script>
   <script type="text/javascript" src="app/components/employee/recovery/empResetController.js"></script>
-  <script type="text/javascript" src="app/components/employee/recovery/emprecController.js"></script>
   <script type="text/javascript" src="app/shared/communication/dataPublisher.js"></script>
+  <script type="text/javascript" src="app/components/employee/recovery/emprecController.js"></script>
 </body>
 </html>

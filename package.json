@@ -10,7 +10,10 @@
     "angular-cookies": "^1.4.8",
     "angular": "^1.4.8",
     "angular-route": "^1.4.8",
-    "bootstrap": "^3.3.5"
+    "angular-resource" : "^1.4.8",
+    "jwt-decode" : "^1.4.0",
+    "bootstrap": "^3.3.5",
+    "jquery" : "^2.1.4"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
