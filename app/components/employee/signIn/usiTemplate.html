@@ -22,6 +22,8 @@
       <h5>Enter your credentials</h5>
       
       <div>
+        <input class="form-control" name="usiOrgName" type="text" required ng-model="usiC.usiOrgName" placeholder="Email">
+        <p>{{usiC.errors.orgname}}</p>
         <input class="form-control" name="usiEmail" type="email" required ng-model="usiC.usiEmail" placeholder="Email">
         <p>{{usiC.errors.email}}</p>
         <input class="form-control" name="usiPwd" type="password" required ng-model="usiC.usiPwd" placeholder="Password"><br>
@@ -32,6 +34,9 @@
       <a style="float:right;" href="/#/userpwdrecovery">Password forgotten?</a><br><br>
       <i>If you are an organization it is <a href="/#/orgsignin">here</a></i>
 
+      <div ng-show="usiC.validFields.orgNameReq" class="text-danger">
+        You did not insert your organization name
+      </div>
       <div ng-show="usiC.validFields.emailReq" class="text-danger">
         You did not insert an email address
       </div>

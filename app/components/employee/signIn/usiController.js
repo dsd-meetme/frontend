@@ -14,7 +14,7 @@
       inputReq : false,
       emailReq : false,
       emailVal : false,
-      org : false
+      orgNameReq : false
     }
 
     c.login = function(){
@@ -24,12 +24,12 @@
       c.validFields.inputReq = form.usiPwd.$error.required;
       c.validFields.emailReq = form.usiEmail.$error.required;
       c.validFields.emailVal = form.usiEmail.$error.email;
-      c.validFields.org = form.company.$error.required;
+      c.validFields.orgNameReq = form.usiOrgName.$error.required;
       if(!form.$invalid){
         dataPublisher.publish('http://api.plunner.com/employees/auth/login',{
-          name : c.org,
-          email : c.email,
-          password : c.password,
+          name : c.usiOrgName,
+          email : c.usiEmail,
+          password : c.usiPassword,
           rmbMe : c.rmbMe
         }).then(function(response){
           $location.path('/employee')
