@@ -4,7 +4,7 @@
     @author Giorgio Pea
     @param logoutService A service used to manage the logout of a plunner's organization
     **/
-    var controller = function(logoutService,orgResources,arrayToUrlParams,$cookies){
+    var controller = function(logoutService,orgResources,arrayToUrlParams,$scope,$cookies){
       var c = this;
       c.errors = {
         unauthorized : false,
@@ -52,9 +52,9 @@
           this.invalidFields.nameReq = form.name.$error.required;
           this.invalidFields.emailReq = form.email.$error.required;
           this.invalidFields.passwordReq = form.password.$error.required;
-          this.invalidFields.passwordLength = form.password.$error.minlength;
+          this.invalidFields.passwordLength = form.password.$error.minLenght;
           this.invalidFields.emailVal = form.email.$error.email;
-          this.invalidFields.passwordMatch = (this.password !== this.confirmation_password);
+          this.invalidFields.passwordMatch = (form.password !== form.confirmation_password);
 
 
           //Submits everything to the server if data is valid

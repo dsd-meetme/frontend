@@ -97,8 +97,9 @@
         </div>
         <div class="modal-body">
             <p>Name</p>
-            <input type="search" class="form-control" ng-model="dashOrgC.addGroup.name" >
             <p ng-show="dashOrgC.addGroup.invalidFields.nameReq">Insert a group name</p>
+            <input type="search" class="form-control" ng-model="dashOrgC.addGroup.name" >
+            
             <p>Description</p>
             <p ng-show="dashOrgC.addGroup.invalidFields.descReq">Insert a group description</p>
             <input type="text" class="form-control" ng-model="dashOrgC.addGroup.desc">
@@ -134,18 +135,28 @@
           Add an Employee
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
-        <div class="modal-body">
-            <p>Name</p>
-            <input type="text" class="form-control" ng-model="dashOrgC.addEmployee.name">
-            <p ng-show="dashOrgC.addEmployee.invalidFields.nameReq">Insert a name</p>
-            <p>Email</p>
-            <input type="text" class="form-control" ng-model="dashOrgC.addEmployee.email">
-            <p ng-show="dashOrgC.addEmployee.invalidFields.emailReq">Insert the employee email address</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="dashOrgC.addEmployee.submit()">Create</button>
-        </div>
+        <form name="addEmployeeForm" ng-submit="dashOrgC.addEmployee.submit()" novalidate>
+          <div class="modal-body">
+              <p>Name</p>
+              <input name="name" type="text" class="form-control" required ng-model="dashOrgC.name">
+              <p ng-show="dashOrgC.addEmployee.invalidFields.nameReq">Insert a name</p>
+              <p>Email</p>
+              <input name="email" type="text" class="form-control" required ng-model="dashOrgC.addEmployee.email">
+              <p ng-show="dashOrgC.addEmployee.invalidFields.emailReq">Insert the employee email address</p>
+              <p ng-show="dashOrgC.addEmployee.invalidFields.emailVal">Email address is not valid</p>
+              <p>Password</p>
+              <input name="password" type="password" class="form-control" required ng-model="dashOrgC.addEmployee.password">
+              <p ng-show="dashOrgC.addEmployee.invalidFields.passwordReq">Insert the employee password</p>
+              <p ng-show="dashOrgC.addEmployee.invalidFields.passwordLenght">The two passwords are differents</p>
+              <p>Confirm Password</p>
+              <input name="confirmation_password" type="password" class="form-control" ng-model="dashOrgC.addEmployee.confirmation_password">
+              <p ng-show="dashOrgC.addEmployee.invalidFields.passwordMatch">The two passwords are differents</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

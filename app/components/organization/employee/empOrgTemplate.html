@@ -1,42 +1,46 @@
 <div class="container">
+  <style>
+    .disabled {
+      border: none;
+    }
+    input {
+      cursor: text;
+    }
+  </style>
   <div class="row">
     <h2>Employee detail</h2>
     <div class="col-md-6">
+      <form name="changeForm" novalidate>
       <ul class="list-unstyled">
-        <li>Name : {{empOrgC.data.name}}</li>
-        <li>Email : {{empOrgC.data.email}}</li>
-        <li>Password : .....</li>
-      </ul>
-      <form ng-show="empOrgC.nameMailForm.formVisible" name="nmeForm" ng-submit="empOrgC.nameMailForm.submit()" novalidate>
-        Edit your name
-        <input name="name" type="text" ng-model="empOrgC.nameMailForm.name" placeholder="{{empOrgC.profileData.name}}">
-        <br>
-        Edit your email
-        <input name="email" type="email" ng-model="empOrgC.nameMailForm.email" placeholder="{{empOrgC.profileData.email}}">
-        <div ng-show="empOrgC.nameMailForm.sinvalidFields.emailVal">Insert a valid mail</div>
-        <br>
-        <button type="submit" class="btn btn-default">Confirm</button>
-        <button class="btn btn-default" ng-click="empOrgC.nameMailForm.abort()">Abort</button>
+        <li>Name :
+          <input required name="name" type="text" ng-model="empOrgC.dataC.name" ng-readonly="!empOrgC.changeNameMail.inChange" ng-class="{disabled : !empOrgC.changeNameMail.inChange}">
+        </li>
+        <li>Email :
+          <input required name="email" type="email" ng-model="empOrgC.dataC.email" ng-readonly="!empOrgC.changeNameMail.inChange" ng-class="{disabled : !empOrgC.changeNameMail.inChange}">
+        </li>
+        <li>Password :
+          <input name="password" ng-minlength="6" type="password" ng-model="empOrgC.dataC.password" ng-readonly="!empOrgC.changePassword.inChange" ng-class="{disabled : !empOrgC.changePassword.inChange}" >
+        </li>
+        <li ng-show="empOrgC.changePassword.inChange">
+          Confirm password :
+          <input name="password_confirmation" type="password" ng-model="empOrgC.dataC.password_confirmation" >
+        </li>
+        </ul>
+        <p ng-show="empOrgC.changeNameMail.invalidFields.nameReq">Insert a name</p>
+        <p ng-show="empOrgC.changeNameMail.invalidFields.emailReq">Insert a mail</p>
+        <p ng-show="empOrgC.changeNameMail.invalidFields.emailVal">Insert a validmail</p>
+        <p ng-show="empOrgC.changePassword.invalidFields.passwordLen">password too short</p>
+        <p ng-show="empOrgC.changePassword.invalidFields.passwordMatch">password don't match</p>
+        <button class="btn btn-default" ng-show="empOrgC.changeNameMail.inChange" ng-click="empOrgC.changeNameMail.submit()">CHANGE</button>
+        <button class="btn btn-default" ng-show="empOrgC.changePassword.inChange" ng-click="empOrgC.changePassword.submit()">CHANGE</button>
+        <button class="btn btn-default" ng-show="empOrgC.changeNameMail.inChange" ng-click="empOrgC.changeNameMail.abort()">ABORT</button>
+        <button class="btn btn-default" ng-show="empOrgC.changePassword.inChange" ng-click="empOrgC.changePwd.abort()">ABORT</button>
       </form>
-      <form ng-show="empOrgC.passwordForm.formVisible" name="peForm" ng-submit="empOrgC.passwordForm.formVisible" novalidate="">
-        Insert a new password
-        <input name="password" ng-minLength="6" type="password" ng-model="empOrgC.passwordForm.data.password">
-        <br>
-        Confirm your password
-        <input name="cpassword" type="password" ng-model="empOrgC.passwordForm.data.cpassword">
-        <br>
-        <br>
-        <div ng-show="empOrgC.passwordForm.invalidFields.passwordLen">Please insert a password of at least 6 characters</div>
-        <div ng-show="empOrgC.passwordForm.invalidFields.passwordMatch">The two passwords don't match</div>
-        <button type="submit" class="btn btn-default">Confirm</button>
-        <button class="btn btn-default" ng-click="empOrgC.passwordForm.abort()">Abort</button>
-        <br>
-        <br>
-      </form>
-      <button class="btn btn-default" ng-click="empOrgC.nameMailForm.show()">Change name and email</button>
+
+      <button class="btn btn-default" ng-hide="empOrgC.changeNameMail.inChange"  ng-click="empOrgC.changeNameMail.show()">Change name and email</button>
       <br>
       <br>
-      <button class="btn btn-default" ng-click="empOrgC.passwordForm.show()">Change password</button>
+      <button class="btn btn-default" ng-click="empOrgC.changePassword.show()">Change password</button>
       <br>
       <br>
       <button class="btn btn-default" ng-click="empOrgC.delete()">Delete employee</button>
@@ -45,7 +49,9 @@
     <div class="col-md-6">
       <h3>Joined groups</h3>
       <ul class="list-unstyled">
-        <li></li>
+        <li ng-repeat="group in empOrgC.data.groups">
+          <a href="/#/organization/groups/{{group.id}}">{{group.name}}</a>
+        </li>
       </ul>
     </div>
   </div>
