@@ -55,7 +55,7 @@
           controllerAs : 'groupOrgC'
         }).
         when('/user/newmeeting', {
-          templateUrl: 'app/components/employee/newMeeting/nmTemplate.html',
+          templateUrl: 'app/components/employee/meeting/nmTemplate.html',
           controller : 'nmController',
           controllerAs : 'nmC'
         }).
