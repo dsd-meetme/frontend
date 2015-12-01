@@ -1,8 +1,30 @@
-<form name="recoveryForm" ng-submit="recC.recover()" novalidate>
-  <input type="email" name="email" ng-model="recC.email" placeholder="Insert your mail" required>
-  <button>Recover password</button>
-  <div ng-show="recC.invalidFields.emailReq">Insert an email address</div>
-  <div ng-show="recC.invalidFields.emailVal">You have not inserted a valid mail</div>
-  <div ng-show="recC.errors.error">{{recC.errors.error}}</div>
-  <div ng-show="recC.success">Success! We have sent you a link that you can use to reset your password</div>
-</form>
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- HEADER -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Plunner</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">How To</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><button type="button" class="btn btn-default navbar-btn" ng-click="rootC.presentation()">Home</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="page-content">
+	<form name="recoveryForm" ng-submit="recC.recover()" novalidate>
+	  <input class="form-control" type="email" name="email" ng-model="recC.email" placeholder="Recovering Email" required>
+      <br/>
+	  <p ng-show="recC.invalidFields.emailReq" class="text-danger">Insert an email address</p>
+	  <p ng-show="recC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</p>
+	  <p class="text-danger">{{recC.errors["error"]}}</p>
+      <p ng-show="recC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
+	  <button class="btn btn-default">Recover password</button>
+    <br>
+
+	  
+	</form>
+</div>

@@ -4,12 +4,12 @@
   @author Giorgio Pea
   @param logoutService A service used to manage the logout of a plunner's organization
   **/
-  var controller = function(logoutService,dataProvider){
+  var controller = function(logoutService){
     var c = this;
     c.errors = {
       unauthorized : false,
       forbidden : false
-    }
+    };
     c.meetingsList = {
       groupA : {
         isVisible : true,
@@ -31,7 +31,7 @@
     c.logout = function(){
         logoutService.logout('/usignin');
     }
-  }
+  };
 
   var app = angular.module('Plunner');
   app.controller('dashEmpController',controller);

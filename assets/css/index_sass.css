@@ -2,15 +2,28 @@
 body {
   font-family: "Open Sans", Helvetica, Arial sans-serif; }
 
-div.header-left {
+div.page-content {
+  margin: 30px 80px 30px 80px; }
+
+div.content-left {
+  float: left;
   margin-left: 30px; }
 
-div.header-right {
-  display: inline;
+div.content-left.organization {
+  background-color: light-blue; }
+
+div.content-right {
   float: right;
   margin-right: 30px; }
 
 div.form-register {
+  width: 400px;
+  margin: 0 auto;
+  padding: 0 50 0 50;
+    padding-border-style: solid;
+    padding-border-radius: 25; }
+
+div.form-signin {
   width: 400px;
   margin: 0 auto;
   padding: 0 50 0 50;

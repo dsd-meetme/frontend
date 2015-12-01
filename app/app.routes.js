@@ -55,7 +55,7 @@
           controllerAs : 'groupOrgC'
         }).
         when('/user/newmeeting', {
-          templateUrl: 'app/components/employee/newMeeting/nmTemplate.html',
+          templateUrl: 'app/components/employee/meeting/nmTemplate.html',
           controller : 'nmController',
           controllerAs : 'nmC'
         }).
@@ -66,7 +66,7 @@
         }).
         when('/userpwdreset/:token', {
           templateUrl: 'app/components/employee/recovery/empResetTemplate.html',
-          controller : 'empResetController',
+          controller : 'empresetController',
           controllerAs : 'empresC'
         }).
         when('/orgpwdreset/:token', {
@@ -75,7 +75,7 @@
           controllerAs : 'resetC'
         }).
         otherwise({
-          redirectTo: '/'
+          redirectTo: '/presentation'
         });
     }]);
 }());

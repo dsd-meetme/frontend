@@ -5,7 +5,7 @@
         return $http({
           method : 'POST',
           url : url,
-          data : jQuery.param(data),
+          data : jQuery.param(data)
         })
       }
     }

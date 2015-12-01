@@ -1,8 +1,26 @@
-<div>Organisation
-  <button class="btn btn-outline btn-lg" ng-click="presC.osignIn()">org sign in</button>
-  <button class="btn btn-outline btn-lg" ng-click="presC.reg()">registration</button>
+<div class="navbar navbar-default">
+	<div class="container-fluid">
+	  <!-- HEADER -->
+	    <div class="navbar-header">
+  			<a class="navbar-brand" href="#">Plunner</a>
+  		</div>
+	    <div class="navbar-collapse collapse navbar-right">
+		    <ul class="nav navbar-nav navbar-right">
+		      <li><a href="#">How To</a></li>
+		      <li><a href="#">Contact</a></li>
+		      <li style="margin-left:30px">
+		      	<button type="button" class="btn btn-primary navbar-btn" ng-click="presC.signup()">Register my Organization</button>
+		      </li>
+		    </ul>
+	    </div>
+	  </div>
 </div>
-</br>
-<div>Employee
-  <button class="btn btn-outline btn-lg" ng-click="presC.usignIn()">employee sign in</button>
+<div class="presentation">
+	<div class="content-left organization">
+	  <button class="btn btn-default btn-lg" ng-click="presC.orgSignIn()">Organization Sign In</button>
+	</div>
+	<div class="content-right organization">
+	  <button class="btn btn-default btn-lg" ng-click="presC.userSignIn()">Employee Sign In</button>
+	</div>
 </div>
+

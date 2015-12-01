@@ -1,37 +1,54 @@
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Plunner</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="page-content"> 
    <form name="regForm" ng-submit="regC.process()" novalidate>
       <div class="form-register">
-      <h2>Registration</h2>
-      <input name="orgName" class="form-control" type="text" placeholder="Organization Name" required ng-model="regC.orgName">
-      <p>{{ regC.errors.name }}</p>
-      <input name="orgEmail" class="form-control" type="email" placeholder="Contact Email" required ng-model="regC.orgEmail">
-      <p>{{ regC.errors.email }}</p>
-      <input name="orgPwd" class="form-control" ng-minlength="6" type="Password" placeholder="password" required ng-model="regC.orgPwd">
-      <p>{{ regC.errors.password }}</p>
-      <input name="orgPwdC" class="form-control" type="password" placeholder="Confirm Password" required ng-model="regC.orgPwdC">
-      <p>{{ regC.errors.confirm_password }}</p>
-      <button type="submit" class="btn btn-default">Register!</button>
-      </br>
-      <i>Already registered? <a href="/#/osignin">Sign in here!</a></i>
-      <div ng-show="regC.validFields.orgNameReq">
-        You did not insert a name
-      </div>
-      <div ng-show="regC.validFields.orgMailReq">
-        You did not inser an email address
-      </div>
-      <div ng-show="regC.validFields.orgPwdReq">
-        You did not insert a password
-      </div>
-      <div ng-show="regC.validFields.orgMailVal">
-        You did not insert a valid email address
-      </div>
-      <div ng-show="regC.validFields.orgPwdCmatch">
-        The two passwords don't match
-      </div>
-      <div ng-show="regC.validFields.orgPwdLength">
-        The password must be of at least 6 characters
-      </div>
-      <div ng-show="regC.mailTaken">
-        The inserted mail has already been taken
-      </div>
+        <h2>Registration</h2>
+        <br>
+        <input name="orgName" class="form-control" type="text" placeholder="Organization Name" required ng-model="regC.orgName">
+        <div ng-show="regC.validFields.orgNameReq" class="text-danger">
+          You did not insert an organization name
+        </div>
+        <br>
+        <input name="orgEmail" class="form-control" type="email" placeholder="Contact Email" required ng-model="regC.orgEmail">
+        <div ng-show="regC.validFields.orgMailReq" class="text-danger">
+          You did not insert an email address
+        </div>
+        <div ng-show="regC.validFields.orgMailVal" class="text-danger">
+          You did not insert a valid email address
+        </div>
+        <br>
+        <input name="orgPwd" class="form-control" ng-minlength="6" type="Password" placeholder="password" required ng-model="regC.orgPwd">
+        <div ng-show="regC.validFields.orgPwdReq" class="text-danger">
+          You did not insert a password
+        </div>
+        <div ng-show="regC.validFields.orgPwdLength" class="text-danger">
+          The password must be of at least 6 characters
+        </div>
+        <br>
+        <input name="orgPwdC" class="form-control" type="password" placeholder="Confirm Password" required ng-model="regC.orgPwdC">
+        <div ng-show="regC.validFields.orgPwdCmatch" class="text-danger">
+          The two passwords don't match
+        </div>
+        <br>
+          <p class="text-danger" ng-repeat="error in regC.errors.name">{{error}}</p>
+          <p class="text-danger" ng-repeat="error in regC.errors.email">{{error}}</p>
+        <button type="submit" class="btn btn-default">Register!</button>
+        </br><br>
+        <i>Already registered? <a href="/#/orgsignin">Sign in here!</a></i>
+
       </div>
     </form>
+</div> 

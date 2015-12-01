@@ -1,10 +1,25 @@
-<div>
-  <h1>Success! Your are logged (employee)</h1>
-  <a href="/#/employee/profile">Profile</a>
-  <button ng-click="dashEmpC.logout()">Logout</button>
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- HEADER -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Plunner</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/#/employee/profile">
+            <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
+          <li><a href="#">How To</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><button type="button" class="btn btn-danger navbar-btn" ng-click="dashEmpC.logout()">Sign Out</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="page-content">
 
   <h2>Meetings</h2>
-  <a href="/#/employee/newmeeting">Make a meeting</a>
+  <a href="/#/user/newmeeting">Make a meeting</a>
   <div style="width: 100%">
     <div>
       <div ng-click="dashEmpC.meetingsList.groupA.show()" class="text-center" style="float:left; width:50%">TO BE PLANNED</div>

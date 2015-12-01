@@ -1,121 +1,222 @@
-<div>
-  <h1>Success! Your are logged</h1>
-  <a href="/#/organization/profile">Profile</a>
-  <button ng-click="dashOrgC.logout()">Logout</button>
-  <interrors code="{{dashOrgC.code}}"></interrors>
-  <div>
-    <h2>Employees</h2>
-    <input type="search" placeholder="search" ng-model="searchEmployee">
-    <button class="btn btn-primary" data-target="#addEmployee" data-toggle="modal">Add employee</button>
-    <table class="table">
-      <thead>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Group</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr ng-repeat="employee in dashOrgC.data.employees | filter:searchEmployee | limitTo:10">
-          <td>{{employee.name}}</td>
-          <td>{{employee.email}}</td>
-          <td>
-            <a href="/#/organization/groups/{{group.id}}" ng-repeat="group in employee.groups">{{group.name}}</p>
-          </td>
-          <td><a href="/#/organization/users/{{employee.id}}">GO</a></td>
-        </tr>
-      </tbody>
-    </table>
-    <p ng-show="dashOrgC.data.employees.length > 10">....</p>
-  </div>
-  <div>
-    <h2>Groups</h2>
-    <input type="search" placeholder="search" ng-model="searchGroup">
-    <button class="btn btn-primary" data-toggle="modal" data-target="#addGroup">Add group</button>
-    <table class="table">
-      <thead>
-        <th>Name</th>
-        <th>Planner</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr ng-repeat="group in dashOrgC.data.groups | filter:searchGroup | limitTo:10">
-          <td>{{group.name}}</td>
-          <td><a href="/#/organization/employees/{{group.planner_name}}"></a>{{group.planner_name}}</td>
-          <td><a href="/#/organization/groups/{{group.id}}">GO</a></td>
-        </tr>
-      </tbody>
-    </table>
-    <p ng-show="dashOrgC.data.groups.length > 10">....</p>
-  </div>
-  <div id="addGroup" class="modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          Add group
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Plunner</a>
         </div>
-        <div class="modal-body">
-            <p>Name</p>
-            <input type="search" ng-model="dashOrgC.addGroup.name" >
-            <p ng-show="dashOrgC.addGroup.invalidFields.nameReq">Insert a name</p>
-            <p>Description</p>
-            <p ng-show="dashOrgC.addGroup.invalidFields.descReq">Insert a desc</p>
-            <input type="text" ng-model="dashOrgC.addGroup.desc">
-            <table class="table">
-              <thead>
-                <th></th>
-                <th>Member</th>
-              </thead>
-              <tbody>
-                <tr ng-repeat="emp in dashOrgC.data.employees | filter: searchedPlanner" id="{{emp.id}}">
-                  <td>{{emp.name}}</td>
-                  <td ng-click="dashOrgC.addGroup.selectPlanner(emp.id)"><input type="checkbox" ng-model="dashOrgC.addGroup.members[emp.id]"></td>
-                  <td ng-click=""><input type="radio" name="plannerasd" ng-model="dashOrgC.addGroup.planner" ng-value="emp.id"></td>
-                </tr>
-              </tbody>
-            </table>
-            <p ng-show="dashOrgC.addGroup.invalidFields.membersReq">Insert at least one member</p>
-            <p ng-show="dashOrgC.addGroup.invalidFields.plannerReq">Insert one planner</p>
-            <p ng-show="dashOrgC.addGroup.invalidFields.nonMatchingPlanner">Non matching planner</p>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/#/organization/profile">
+                    <span class="glyphicon glyphicon-user"></span> Organisation Name</a></li>
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Contact</a></li>
+                <li>
+                    <button type="button" class="btn btn-danger navbar-btn" ng-click="dashOrgC.logout()">Sign Out
+                    </button>
+                </li>
+            </ul>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="dashOrgC.addGroup.submit()">Create</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <div id="addEmployee" class="modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          Add employee
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-          <form name="addEmployeeForm" novalidate>
-            <p>Name</p>
-            <input type="text" ng-model="dashOrgC.addEmployee.name" required name="name">
-            <p>Email</p>
-            <input type="email" ng-model="dashOrgC.addEmployee.email" required name="email">
-            <p>Password</p>
-            <input ng-minlength="6" type="password" ng-model="dashOrgC.addEmployee.password" required name="password">
-            <p>Password confirmation</p>
-            <input type="password" ng-model="dashOrgC.addEmployee.confirmation_password" name="password_confirmation">
-            {{dashOrgC.addEmployee.password_confirmation}}
-            <p class="text-danger" ng-show="dashOrgC.addEmployee.invalidFields.nameReq">Insert a name</p>
-            <p class="text-danger" ng-show="dashOrgC.addEmployee.invalidFields.passwordReq">Insert a password</p>
-            <p class="text-danger" ng-show="dashOrgC.addEmployee.invalidFields.emailReq" required>Insert a mail</p>
-            <p class="text-danger" ng-show="dashOrgC.addEmployee.invalidFields.emailVal">Insert a valid email address</p>
-            <p class="text-danger" ng-show="dashOrgC.addEmployee.invalidFields.passwordLength">The password is too short</p>
-            <p class="text-danger" ng-show="dashOrgC.addEmployee.invalidFields.passwordMatch">The two password do not match</p>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="dashOrgC.addEmployee.submit()">Create</button>
-        </div>
-      </div>
+</div>
+<div class="page-content">
+    <div>
+        <h2>Employees</h2><br>
+        <ul class="list-inline list-unstyled">
+            <li>
+                <input type="text" class="form-control" placeholder="Search for..." ng-model="searchEmployee">
+            </li>
+            <li style="margin-left:30px">
+                <button class="btn btn-default" ng-click="dashOrgC.seeAllEmp()">
+                    See all users
+                </button>
+            </li>
+            <li class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addEmployee"
+                style="margin-left:30px; font-size:27px; vertical-align: middle; padding-bottom: 4px">
+            </li>
+        </ul>
+
+        <br>
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Group</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="employee in dashOrgC.data.employees | filter:searchEmployee | limitTo:10">
+                <td>{{employee.name}}</td>
+                <td>{{employee.email}}</td>
+                <td><a href="/#/organization/groups/{{group.id}}"
+                       ng-repeat="group in employee.groups">{{group.name}}, </a></td>
+                <td><a href="/#/organization/users/{{employee.id}}" class="glyphicon glyphicon-chevron-right"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
     </div>
-  </div>
+    <br>
+    <hr>
+    <div>
+        <h2>Groups</h2>
+        <br/>
+        <ul class="list-inline list-unstyled">
+            <li>
+                <input type="text" class="form-control" placeholder="Search for..." ng-model="searchGroup">
+            </li>
+            <li style="margin-left:30px">
+                <button class="btn btn-default" ng-click="dashOrgC.seeAllGroups()">
+                    See all groups
+                </button>
+            </li>
+            <li class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addGroup"
+                style="margin-left:30px; font-size:27px; vertical-align: middle; padding-bottom: 4px">
+            </li>
+        </ul>
+        <br>
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th>Planner</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="group in dashOrgC.data.groups | filter:searchGroup | limitTo: 10">
+                <td>{{group.name}}</td>
+                <td><a href="/#/organization/employees/{{group.planner_id}}">{{group.planner_name}}</a></td>
+                <td><a class="glyphicon glyphicon-chevron-right" href="/#/organization/groups/{{group.id}}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="addGroup" class="modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 style="display: inline-block;">Add group</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>Name</p>
+                    <input type="search" class="form-control" ng-model="dashOrgC.addGroup.name">
+                    <br/>
+                    <p>Description</p>
+                    <input type="text" class="form-control" ng-model="dashOrgC.addGroup.desc">
+                    <br/>
+                    <table class="table">
+                        <thead>
+                        <th></th>
+                        <th>Members</th>
+                        <th>Planner</th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="emp in dashOrgC.data.employees | filter: searchedPlanner" id="{{emp.id}}">
+                            <td>{{emp.name}}</td>
+                            <td ng-click="dashOrgC.addGroup.selectPlanner(emp.id)"><input type="checkbox"
+                                                                                          ng-model="dashOrgC.addGroup.members[emp.id]">
+                            </td>
+                            <td ng-click=""><input type="radio" name="plannerasd" ng-model="dashOrgC.addGroup.planner"
+                                                   ng-value="emp.id"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p ng-show="dashOrgC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>
+
+                    <p ng-show="dashOrgC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one
+                        member</p>
+
+                    <p ng-show="dashOrgC.addGroup.invalidFields.plannerReq" class="text-danger">Insert one planner</p>
+
+                    <p ng-show="dashOrgC.addGroup.invalidFields.nonMatchingPlanner" class="text-danger">Non matching
+                        planner</p>
+                    <p class="text-danger" ng-repeat="error in dashOrgC.addGroup.errors.name">
+                        {{name}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="dashOrgC.addGroup.submit()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addEmployee" class="modal" role="dialog" tabindex="-2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 style="display: inline-block">Add an Employee</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <form name="addEmployeeForm" ng-submit="dashOrgC.addEmployee.submit()" novalidate>
+                    <div class="modal-body">
+                        <p>Name</p>
+                        <input name="name" type="text" class="form-control" required
+                               ng-model="dashOrgC.addEmployee.name">
+                        <br/>
+
+                        <p>Email</p>
+                        <input name="email" type="email" class="form-control" required
+                               ng-model="dashOrgC.addEmployee.email">
+                        <br/>
+
+                        <p>Password</p>
+                        <input name="password" type="password" class="form-control" required
+                               ng-model="dashOrgC.addEmployee.password" ng-minlength="6">
+                        <br/>
+
+                        <p>Confirm Password</p>
+                        <input name="confirmation_password" type="password" class="form-control"
+                               ng-model="dashOrgC.addEmployee.confirmation_password">
+                        <br/>
+
+                        <div>
+                            <p class="text-danger" ng-repeat="error in dashOrgC.addEmployee.errors.email">{{error}}</p>
+                        </div>
+                        <p ng-show="dashOrgC.addEmployee.invalidFields.passwordReq" class="text-danger">Insert the
+                            user password</p>
+
+                        <p ng-show="dashOrgC.addEmployee.invalidFields.passwordLength" class="text-danger">The password
+                            must contains at least 6 characters</p>
+
+                        <p ng-show="dashOrgC.addEmployee.invalidFields.emailReq" class="text-danger">Insert the user
+                            email address</p>
+
+                        <p ng-show="dashOrgC.addEmployee.invalidFields.emailVal" class="text-danger">The email address is not valid</p>
+
+                        <p ng-show="dashOrgC.addEmployee.invalidFields.passwordMatch" class="text-danger">The two
+                            passwords do not match</p>
+
+                        <p ng-show="dashOrgC.addEmployee.invalidFields.nameReq" class="text-danger">Insert the user name</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center">{{dashOrgC.confirmPopup.message}}</h3>
+            </div>
+            <!--<div class="modal-footer">
+            </div>-->
+            <br/>
+        </div>
+    </div>
 </div>

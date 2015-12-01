@@ -11,19 +11,19 @@
 
     c.errors = {};
     //an object that encapsulate the validity status of input fields
-    c.validFields = {
+    c.invalidFields = {
       passwordReq : false,
       emailReq : false,
       emailVal : false
-    }
+    };
     c.loaderVisibility = false;
     c.login = function(){
       //Processes the submit of usiForm (organization sign in)
       var form = $scope.signinForm;
       //Validity status of input fields checking
-      c.validFields.inputReq = form.password.$error.required;
-      c.validFields.emailReq = form.email.$error.required;
-      c.validFields.emailVal = form.email.$error.email;
+      c.invalidFields.passwordReq = form.password.$error.required;
+      c.invalidFields.emailReq = form.email.$error.required;
+      c.invalidFields.emailVal = form.email.$error.email;
       if(!form.$invalid){
         //shows loader gif
         c.loaderVisibility = true;
@@ -41,8 +41,8 @@
         });
       }
     }
-  }
+  };
 
   var app = angular.module('Plunner');
   app.controller('osiController',controller);
-}())
+}());
