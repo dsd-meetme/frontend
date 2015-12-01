@@ -42,6 +42,7 @@
           },
           function(response){
             if(response.status===422){
+              c.errors = response.data;
             }
           }
         );

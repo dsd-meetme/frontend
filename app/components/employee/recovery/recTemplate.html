@@ -23,6 +23,8 @@
         <p ng-show="emprecC.invalidFields.nameReq" class="text-danger">Insert the name of your company</p>
         <p ng-show="emprecC.invalidFields.emailReq" class="text-danger">Insert an email address</p>
         <p ng-show="emprecC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</p>
+        <p class="text-danger" ng-repeat="error in emprecC.errors.company ">{{error}}</p>
+        <p class="text-danger" >{{emprecC.errors.error}}</p>
         <p ng-show="emprecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
         <br/>
 	  <button class="btn btn-default">Recover Password</button>

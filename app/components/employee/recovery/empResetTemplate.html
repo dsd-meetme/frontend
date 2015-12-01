@@ -1,20 +1,40 @@
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- HEADER -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Plunner</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-right">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">How To</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><button type="button" class="btn btn-default navbar-btn" ng-click="rootC.presentation()">Home</button></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
-    <form name="resetForm" ng-submit="empresetC.reset()" novalidate>
+    <form name="resetForm" ng-submit="empresC.reset()" novalidate>
       <h3>Employee password reset</h3>
       <p>Insert the name of your company</p>
-      <input type="text" name="company" ng-model="empresetC.company" required>
+      <input class="form-control" type="text" name="company" ng-model="empresC.company" required>
+      <br/>
       <p>Insert your email</p>
-      <input name="email" type="email" ng-model="empresetC.email" required>
+      <input class="form-control" name="email" type="email" ng-model="empresC.email" required>
+      <br/>
       <p>Insert your new password</p>
-      <input name="password" type="password" ng-model="empresetC.password" ng-minlength="6">
-      <br>
+      <input class="form-control" name="password" type="password" ng-model="empresC.password" ng-minlength="6" required>
+      <br/>
+      <p class="text-danger" ng-show="empresC.invalidFields.passwordReq">Insert a password</p>
+      <p class="text-danger" ng-show="empresC.invalidFields.company">Insert your company's name</p>
+      <p class="text-danger" ng-show="empresC.invalidFields.emailReq">Insert your email</p>
+      <p class="text-danger" ng-show="empresC.invalidFields.pwdLength">The pwd must contain at least 6 chars</p>
+      <p class="text-danger" ng-show="empresC.invalidFields.emailVal">Insert a valid mail</p>
       <br>
       <button class="btn btn-primary">CHANGE YOUR PASSWORD</button>
-      <p ng-show="empresetC.invalidFields.companyReq">Insert your company's name</p>
-      <p ng-show="empresetC.invalidFields.emailReq">Insert your email</p>
-      <p ng-show="empresetC.invalidFields.pwdLength">The pwd must contain at least 6 chars</p>
-      <p ng-show="empresetC.invalidFields.emailVal">Insert a valid mail</p>
+
     </form>
   </div>
 </div>

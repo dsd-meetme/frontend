@@ -11,6 +11,9 @@
     };
     this.userSignIn = function(){
       $location.path('/usersignin');
+    };
+    this.signup = function(){
+      $location.path('/signup');
     }
   };
 

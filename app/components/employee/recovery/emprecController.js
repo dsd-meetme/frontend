@@ -20,9 +20,11 @@
                     email : c.email
                 })
                     .then(function(response){
+                        c.errors = {};
                         c.success = true;
+                        jQuery('input').val('');
                     }, function(response){
-
+                        c.errors = response.data;
                     })
             }
 

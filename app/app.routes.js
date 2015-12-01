@@ -66,7 +66,7 @@
         }).
         when('/userpwdreset/:token', {
           templateUrl: 'app/components/employee/recovery/empResetTemplate.html',
-          controller : 'empResetController',
+          controller : 'empresetController',
           controllerAs : 'empresC'
         }).
         when('/orgpwdreset/:token', {
