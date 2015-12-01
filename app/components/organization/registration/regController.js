@@ -16,7 +16,7 @@
       orgMailVal : false,
       orgPwdCmatch : false,
       orgPwdLength : false
-    }
+    };
     //Processes the submit of dsiForm (domain sign in)
     c.process = function(){
       var form = $scope.regForm;

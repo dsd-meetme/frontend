@@ -17,16 +17,15 @@
 <div class="page-content">
 	<form name="recoveryForm" ng-submit="emprecC.recover()" novalidate>
 	  <input class="form-control" type="text" name="name" ng-model="emprecC.name" placeholder="Insert the name of you company" required>
-	  <div ng-show="emprecC.invalidFields.nameReq" class="text-danger">Insert the name of your company</div>
 	  <br>
 	  <input class="form-control" type="email" name="email" ng-model="emprecC.email" placeholder="Insert your mail" required>
-	  <div ng-show="emprecC.invalidFields.emailReq" class="text-danger">Insert an email address</div>
-	  <div ng-show="emprecC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</div>
-	  <br>
-	  <p ng-repeat="error in emprecC.errors" class="text-danger">{{emprecC.errors}}</p>
-	  <br>
+        <br/>
+        <p ng-show="emprecC.invalidFields.nameReq" class="text-danger">Insert the name of your company</p>
+        <p ng-show="emprecC.invalidFields.emailReq" class="text-danger">Insert an email address</p>
+        <p ng-show="emprecC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</p>
+        <p ng-show="emprecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
+        <br/>
 	  <button class="btn btn-default">Recover Password</button>
-	  <br><br>
-	  <div ng-show="emprecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</div>
+
 	</form>
 </div>

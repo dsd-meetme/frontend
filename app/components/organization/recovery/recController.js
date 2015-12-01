@@ -14,8 +14,10 @@
       c.invalidFields.emailReq = form.email.$error.required;
       c.invalidFields.emailVal = form.email.$error.email;
       if(!form.$invalid){
-        dataPublisher.publish('http://api.plunner.com/companies/password/email',{email : c.email}).$promise
+        dataPublisher.publish('http://api.plunner.com/companies/password/email',{email : c.email})
         .then(function(response){
+              c.errors = {};
+              jQuery('input').val('');
           c.success = true;
         },function(response){
           if(response.status === 422) {

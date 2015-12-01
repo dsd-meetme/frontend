@@ -30,7 +30,7 @@
                     See all users
                 </button>
             </li>
-            <li class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addGroup"
+            <li class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addEmployee"
                 style="margin-left:30px; font-size:27px; vertical-align: middle; padding-bottom: 4px">
             </li>
         </ul>
@@ -48,7 +48,7 @@
                 <td>{{employee.name}}</td>
                 <td>{{employee.email}}</td>
                 <td><a href="/#/organization/groups/{{group.id}}"
-                       ng-repeat="group in employee.groups">{{group.name}}</a></td>
+                       ng-repeat="group in employee.groups">{{group.name}}, </a></td>
                 <td><a href="/#/organization/employees/{{employee.id}}" class="glyphicon glyphicon-chevron-right"></a>
                 </td>
             </tr>
@@ -131,6 +131,9 @@
 
                     <p ng-show="dashOrgC.addGroup.invalidFields.nonMatchingPlanner" class="text-danger">Non matching
                         planner</p>
+                    <p class="text-danger" ng-repeat="error in dashOrgC.addGroup.errors.name">
+                        {{name}}
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -156,7 +159,7 @@
                         <br/>
 
                         <p>Email</p>
-                        <input name="email" type="text" class="form-control" required
+                        <input name="email" type="email" class="form-control" required
                                ng-model="dashOrgC.addEmployee.email">
                         <br/>
 
@@ -182,15 +185,12 @@
                         <p ng-show="dashOrgC.addEmployee.invalidFields.emailReq" class="text-danger">Insert the user
                             email address</p>
 
-                        <p ng-show="dashOrgC.addEmployee.invalidFields.emailVal" class="text-danger">The email address
-                            is
-                            not valid</p>
+                        <p ng-show="dashOrgC.addEmployee.invalidFields.emailVal" class="text-danger">The email address is not valid</p>
 
                         <p ng-show="dashOrgC.addEmployee.invalidFields.passwordMatch" class="text-danger">The two
                             passwords do not match</p>
 
-                        <p ng-show="dashOrgC.addEmployee.invalidFields.nameReq" class="text-danger">Insert the user
-                            name</p>
+                        <p ng-show="dashOrgC.addEmployee.invalidFields.nameReq" class="text-danger">Insert the user name</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -202,4 +202,21 @@
     </div>
 </div>
 
+</div>
+
+<div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center">{{dashOrgC.confirmPopup.message}}</h3>
+            </div>
+            <!--<div class="modal-footer">
+            </div>-->
+            <br/>
+        </div>
+    </div>
 </div>
