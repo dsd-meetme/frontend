@@ -66,13 +66,12 @@
                 this.invalidFields.nameReq = (this.name === '');
                 this.invalidFields.membersReq = (this.members.length === 0);
                 this.invalidFields.plannerReq = (this.planner == null || angular.isUndefined(this.planner));
-                this.invalidFields.nonMatchingPlanner = (validMembers.indexOf(this.planner) === -1) && !this.invalidFields.plannerReq;
+                //this.invalidFields.nonMatchingPlanner = (validMembers.indexOf(this.planner) === -1) && !this.invalidFields.plannerReq;
 
                 //Submits everything to the server if data is valid
                 if (this.invalidFields.nameReq === false
                     && this.invalidFields.plannerReq === false
-                    && this.invalidFields.membersReq === false
-                    && this.invalidFields.nonMatchingPlanner === false) {
+                    && this.invalidFields.membersReq === false) {
                     //Updates the group name and planner
                     orgResources.group().save({groupId: ''}, jQuery.param({
                         name: this.name,
