@@ -33,5 +33,5 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('empRecController',controller)
+    app.controller('urecController',controller)
 }());

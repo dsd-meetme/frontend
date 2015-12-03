@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var sync = require('browser-sync');
+var concat = require('gulp-concat');
 
 
 gulp.task('index_sass',function(){
@@ -26,7 +27,11 @@ gulp.task('form_sass',function(){
     .pipe(sass([{ includePaths: ['sass'], outputStyle: 'expanded'}]))
     .pipe(gulp.dest('assets/css'))
 })
-
+gulp.task('concat',function(){
+  return gulp.src('app/components/*/*/*.js')
+      .pipe(concat('controllers.js'))
+      .pipe(gulp.dest('app/'));
+})
 gulp.task('broswer-sync',function(){
   sync.init(["assets/css/*.css","app/*/*/*/*.js","app/*/*/*/*.html", "app/*/*/*.js","*.html","app/*/*/*.html","app/*.js"], {
         server: {

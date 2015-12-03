@@ -15,16 +15,16 @@
   </div>
 
 <div class="page-content">
-	<form name="recoveryForm" ng-submit="recC.recover()" novalidate>
-	  <input class="form-control" type="email" name="email" ng-model="recC.email" placeholder="Recovering Email" required>
+	<form name="recoveryForm" ng-submit="orecC.recover()" novalidate>
+	  <input class="form-control" type="email" name="email" ng-model="orecC.email" placeholder="Recovering Email" required>
       <br/>
-	  <p ng-show="recC.invalidFields.emailReq" class="text-danger">Insert an email address</p>
-	  <p ng-show="recC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</p>
-	  <p class="text-danger">{{recC.errors["error"]}}</p>
-      <p ng-show="recC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
+	  <p ng-show="orecC.invalidFields.emailReq" class="text-danger">Insert an email address</p>
+	  <p ng-show="orecC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</p>
+	  <p class="text-danger">{{orecC.errors["error"]}}</p>
+      <p ng-show="orecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
 	  <button class="btn btn-default">Recover password</button>
     <br>
 
-	  
+
 	</form>
 </div>

@@ -6,11 +6,11 @@
       </div>
       <div class="navbar-collapse collapse navbar-right">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/#/employee/profile">
+          <li><a href="/#/user/profile">
             <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
           <li><a href="#">How To</a></li>
           <li><a href="#">Contact</a></li>
-          <li><button type="button" class="btn btn-danger navbar-btn" ng-click="dashEmpC.logout()">Sign Out</button></li>
+          <li><button type="button" class="btn btn-danger navbar-btn" ng-click="udashC.logout()">Sign Out</button></li>
         </ul>
       </div>
     </div>
@@ -22,10 +22,10 @@
   <a href="/#/user/newmeeting">Make a meeting</a>
   <div style="width: 100%">
     <div>
-      <div ng-click="dashEmpC.meetingsList.groupA.show()" class="text-center" style="float:left; width:50%">TO BE PLANNED</div>
-      <div ng-click="dashEmpC.meetingsList.groupB.show()" class="text-center" style="float:left; width:50%">PLANNED</div>
+      <div ng-click="udashC.meetingsList.groupA.show()" class="text-center" style="float:left; width:50%">TO BE PLANNED</div>
+      <div ng-click="udashC.meetingsList.groupB.show()" class="text-center" style="float:left; width:50%">PLANNED</div>
     </div>
-    <table ng-show="dashEmpC.meetingsList.groupA.isVisible" class="table">
+    <table ng-show="udashC.meetingsList.groupA.isVisible" class="table">
       <thead>
         <th>Name</th>
         <th>Group</th>
@@ -41,7 +41,7 @@
         </tr>
       </tbody>
     </table>
-    <table class="table" ng-show="dashEmpC.meetingsList.groupB.isVisible">
+    <table class="table" ng-show="udashC.meetingsList.groupB.isVisible">
       <thead>
         <th>Name</th>
         <th>Group</th>

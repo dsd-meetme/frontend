@@ -15,18 +15,18 @@
 </div>
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
-    <form name="resetForm" ng-submit="resetC.reset()" novalidate>
+    <form name="resetForm" ng-submit="orstC.reset()" novalidate>
       <h3>Organization password reset</h3>
       <p>Insert your email</p>
-      <input class="form-control" name="email" type="email" ng-model="resetC.email" required>
+      <input class="form-control" name="email" type="email" ng-model="orstC.email" required>
       <br/>
       <p>Insert your new password</p>
-      <input class="form-control" name="password" type="password" ng-model="resetC.password" ng-minlength="6" required>
+      <input class="form-control" name="password" type="password" ng-model="orstC.password" ng-minlength="6" required>
       <br>
-      <p ng-show="resetC.invalidFields.passwordReq">Insert your new password</p>
-      <p ng-show="resetC.invalidFields.emailReq">Insert your email</p>
-      <p ng-show="resetC.invalidFields.passwordLength">The pwd must contain at least 6 chars</p>
-      <p ng-show="resetC.invalidFields.emailVal">Insert a valid mail</p>
+      <p ng-show="orstC.invalidFields.passwordReq">Insert your new password</p>
+      <p ng-show="orstC.invalidFields.emailReq">Insert your email</p>
+      <p ng-show="orstC.invalidFields.passwordLength">The pwd must contain at least 6 chars</p>
+      <p ng-show="orstC.invalidFields.emailVal">Insert a valid mail</p>
       <br/>
       <button class="btn btn-primary">CHANGE YOUR PASSWORD</button>
 

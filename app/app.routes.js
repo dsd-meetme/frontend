@@ -10,7 +10,7 @@
           controllerAs: 'osiC'
         }).
         when('/usersignin', {
-          templateUrl: 'app/components/employee/signIn/usiTemplate.html',
+          templateUrl: 'app/components/user/signIn/usiTemplate.html',
           controller: 'usiController',
           controllerAs: 'usiC'
         }).
@@ -25,9 +25,9 @@
           controllerAs: 'odashC'
         }).
         when('/user', {
-          templateUrl: 'app/components/employee/dashboard/edTemplate.html',
-          controller: 'dashEmpController',
-          controllerAs: 'dashEmpC'
+          templateUrl: 'app/components/user/dashboard/udashTemplate.html',
+          controller: 'udashController',
+          controllerAs: 'udashC'
         }).
         when('/organization/profile',{
           templateUrl: 'app/components/organization/profile/opTemplate.html',
@@ -35,7 +35,7 @@
           controllerAs: 'opC'
         }).
         when('/orgrecovery',{
-          templateUrl: 'app/components/organization/recovery/recTemplate.html',
+          templateUrl: 'app/components/organization/recovery/orecTemplate.html',
           controller: 'orecController',
           controllerAs: 'orecC'
         }).
@@ -55,17 +55,17 @@
           controllerAs : 'groupC'
         }).
         when('/user/newmeeting', {
-          templateUrl: 'app/components/employee/meeting/nmTemplate.html',
+          templateUrl: 'app/components/user/meeting/nmTemplate.html',
           controller : 'nmController',
           controllerAs : 'nmC'
         }).
         when('/userecovery', {
-          templateUrl: 'app/components/employee/recovery/urecTemplate.html',
+          templateUrl: 'app/components/user/recovery/urecTemplate.html',
           controller : 'urecController',
           controllerAs : 'urecC'
         }).
         when('/usereset/:token', {
-          templateUrl: 'app/components/employee/recovery/urstTemplate.html',
+          templateUrl: 'app/components/user/recovery/urstTemplate.html',
           controller : 'urstController',
           controllerAs : 'urstC'
         }).

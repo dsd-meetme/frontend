@@ -36,5 +36,5 @@
     }
 
     var app = angular.module('Plunner');
-    app.controller('empresetController', controller);
+    app.controller('urestController', controller);
 }())
