@@ -17,7 +17,12 @@
   }
   </style>
 
-  <div ng-show="rootC.comError" class="container">A communication error occured</div>
+  <div ng-show="rootC.comErrors.general" class="bg-danger text-center" style="padding: 7px 0 7px 0">
+      A communication error occured, please refresh the page
+  </div>
+  <div ng-show="rootC.comErrors.auth" class="bg-danger text-center" style="padding: 7px 0 7px 0">
+    You're not authorized to access these data
+  </div>
   <div ng-view>
   <!-- TEMPLATE INJECTED -->
   </div>

@@ -2,10 +2,19 @@
   /**
   A controller that manages global events
   **/
-  var controller = function($scope,$location,$rootScope){
-    this.comError = false;
-    $rootScope.$on('event:comError',function(){
-      $scope.rootController.comError = true;
+  var controller = function($location,$rootScope){
+    var c = this;
+    c.comErrors = {
+      general : false,
+      auth : false
+    }
+    $rootScope.$on('event:comErrorGeneral',function(){
+      c.comErrors.auth = false;
+      c.comErrors.general = true;
+    });
+    $rootScope.$on('event:comErrorAuth',function(){
+      c.comErrors.general = false;
+      c.comErrors.auth = true;
     });
     this.presentation = function(){
       $location.path('/presentation');

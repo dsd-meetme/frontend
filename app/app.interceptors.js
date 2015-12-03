@@ -59,9 +59,12 @@
           return response;
         },
         responseError : function(response){
-          if(response.status !== 422 && response.status !== 401 && response.status !== 403 ){
+          if(response.status === 401 || response.status === 403){
+            $rootScope.$broadcast('event:comErrorAuth')
+          }
+          else if(response.status !== 422){
             //General com error broadcast
-            $rootScope.$broadcast('event:comError');
+            $rootScope.$broadcast('event:comErrorGeneral');
           }
           return $q.reject(response);
         }
