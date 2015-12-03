@@ -3,8 +3,9 @@
   A controller that manages global events
   **/
   var controller = function($scope,$location,$rootScope){
+    this.comError = false;
     $rootScope.$on('event:comError',function(){
-      $scope.rootController.comError = true
+      $scope.rootController.comError = true;
     });
     this.presentation = function(){
       $location.path('/presentation');

@@ -1,4 +1,9 @@
 (function(){
+  /**
+  A controller to manage existing groups inside an organization
+  @param orgResources A service that provides objects that incapsulate restful communication
+  logic
+  **/
   var controller = function($routeParams, orgResources,$location,$timeout){
 
     var c = this;
@@ -12,16 +17,20 @@
     c.invalidFields = {
       nameReq : false
     };
+    c.confirmPopup = {
+      message : ""
+    };
     c.inchange = false;
-
-    //Get employee info in the context of an org
+    //Gets user info in the context of an organization
     c.getInfo = function(){
       //restful show
       orgResources.group().get({groupId:id}).$promise
       .then(function(response){
         c.data.group = response;
+        //A copy of the retrieved data
+        //This copy will be used
         c.data.groupC = response;
-        c.getEmployees();
+        c.getUsers();
       },function(response){
         c.errors.unauthorized = (response.status === 401);
         c.errors.forbidden = (response.status === 403);
@@ -32,7 +41,7 @@
       //restful delete
       orgResources.group().remove({groupId:id}).$promise
       .then(function(response){
-            c.confirmPopup.message = "Group successfully deleted";
+        c.confirmPopup.message = "Group successfully deleted";
         jQuery('#confirmPopup').modal('show');
         $timeout(function(){
           jQuery('#confirmPopup').modal('hide');
@@ -47,40 +56,45 @@
     };
     c.updatePlanner = function(plannerId){
       if(plannerId !== c.data.group.planner_id){
-        orgResources.group().update({groupId:id},jQuery.param({
-          name : c.data.group.name,
-          description : c.data.group.desc,
-          planner_id : plannerId
-        })).$promise
-      .then(function(){
-              c.confirmPopup.message = "Changes successfully made!";
-              jQuery('#confirmPopup').modal('show');
-              setTimeout(function(){
-                jQuery('#confirmPopup').modal('hide');
-              },1000);
-        c.getInfo();
-      },function(){
-        c.errors.unauthorized = (response.status === 401);
-        c.errors.forbidden = (response.status === 403);
-      })
+        orgResources.group().update({groupId:id},jQuery.param(
+          {
+            name : c.data.group.name,
+            description : c.data.group.desc,
+            planner_id : plannerId
+          })
+        ).$promise
+        .then(function(){
+          c.confirmPopup.message = "Changes successfully made";
+          jQuery('#confirmPopup').modal('show');
+          setTimeout(function(){
+            jQuery('#confirmPopup').modal('hide');
+          },1000);
+          //Update view
+          c.getInfo();
+        },function(){
+          c.errors.unauthorized = (response.status === 401);
+          c.errors.forbidden = (response.status === 403);
+        })
       }
     };
-    //Update employee info
+    //Update user info
     c.updateInfo = function(){
-        c.invalidFields.nameReq = (c.data.groupC.name === '');
-        if(c.invalidFields.nameReq === false){
-          orgResources.group().update({groupId:id},jQuery.param({
-            name : c.data.groupC.name,
-            description : c.data.groupC.description,
-            planner_id : c.data.group.planner_id
-          })).$promise
+      //Checks the validity status of input fields
+      c.invalidFields.nameReq = (c.data.groupC.name === '');
+      if(!c.invalidFields.nameReq){
+        orgResources.group().update({groupId:id},jQuery.param(
+          {
+          name : c.data.groupC.name,
+          description : c.data.groupC.description,
+          planner_id : c.data.group.planner_id
+        })).$promise
         .then(function(response){
           c.inchange = false;
-                c.confirmPopup.message = "Changes successfully made!";
+          c.confirmPopup.message = "Changes successfully made!";
           jQuery('#confirmPopup').modal('show');
-                setTimeout(function(){
-                  jQuery('#confirmPopup').modal('hide');
-                },2000);
+          setTimeout(function(){
+            jQuery('#confirmPopup').modal('hide');
+          },2000);
           c.getInfo();
         },function(response){
           c.errors.unauthorized = (response.status === 401);
@@ -88,8 +102,8 @@
         })
       }
     };
-    c.getEmployees = function(){
-      orgResources.employeeInGroup().query({groupId:id, employeeId: ''}).$promise
+    c.getUsers = function(){
+      orgResources.userInGroup().query({groupId:id, userId: ''}).$promise
       .then(
         function(response){
           c.data.members = response;
@@ -99,27 +113,26 @@
         }
       )
     };
-    c.deleteFromGroup = function(eid){
-      orgResources.employeeInGroup().remove({groupId:id, employeeId: eid}).$promise
+    c.deleteFromGroup = function(userId){
+      orgResources.userInGroup().remove({groupId:id, userId: userId}).$promise
       .then(
         function(response){
-          c.confirmPopup.message = "Changes successfully made!";
+          c.confirmPopup.message = "Changes successfully made";
           jQuery('#confirmPopup').modal('show');
           setTimeout(function(){
             jQuery('#confirmPopup').modal('hide');
           },2000);
-          c.getEmployees();
+          c.getUsers();
         }, function(response){
           c.errors.unauthorized = (response.status === 401);
           c.errors.forbidden = (response.status === 403);
         }
       )
     };
-    c.confirmPopup = {
-        message : ""
-        };
+
     c.getInfo();
+
   };
   var app = angular.module('Plunner');
-  app.controller('groupOrgController',controller);
+  app.controller('groupController',controller);
 }());

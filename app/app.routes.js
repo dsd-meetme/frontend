@@ -20,9 +20,9 @@
           controllerAs: 'regC'
         }).
         when('/organization', {
-          templateUrl: 'app/components/organization/dashboard/dashTemplate.html',
-          controller: 'dashOrgController',
-          controllerAs: 'dashOrgC'
+          templateUrl: 'app/components/organization/dashboard/odashTemplate.html',
+          controller: 'odashController',
+          controllerAs: 'odashC'
         }).
         when('/user', {
           templateUrl: 'app/components/employee/dashboard/edTemplate.html',
@@ -34,10 +34,10 @@
           controller: 'opController',
           controllerAs: 'opC'
         }).
-        when('/orgpwdrecovery',{
+        when('/orgrecovery',{
           templateUrl: 'app/components/organization/recovery/recTemplate.html',
-          controller: 'recController',
-          controllerAs: 'recC'
+          controller: 'orecController',
+          controllerAs: 'orecC'
         }).
         when('/presentation',{
           templateUrl: 'app/components/presentation/presTemplate.html',
@@ -45,34 +45,34 @@
           controllerAs: 'presC'
         }).
         when('/organization/users/:id',{
-          templateUrl: 'app/components/organization/employee/empOrgTemplate.html',
-          controller: 'empOrgController',
-          controllerAs: 'empOrgC'
+          templateUrl: 'app/components/organization/user/userTemplate.html',
+          controller: 'userController',
+          controllerAs: 'userC'
         }).
         when('/organization/groups/:id', {
-          templateUrl: 'app/components/organization/group/groupOrgTemplate.html',
-          controller : 'groupOrgController',
-          controllerAs : 'groupOrgC'
+          templateUrl: 'app/components/organization/group/groupTemplate.html',
+          controller : 'groupController',
+          controllerAs : 'groupC'
         }).
         when('/user/newmeeting', {
           templateUrl: 'app/components/employee/meeting/nmTemplate.html',
           controller : 'nmController',
           controllerAs : 'nmC'
         }).
-        when('/userpwdrecovery', {
-          templateUrl: 'app/components/employee/recovery/recTemplate.html',
-          controller : 'empRecController',
-          controllerAs : 'emprecC'
+        when('/userecovery', {
+          templateUrl: 'app/components/employee/recovery/urecTemplate.html',
+          controller : 'urecController',
+          controllerAs : 'urecC'
         }).
-        when('/userpwdreset/:token', {
-          templateUrl: 'app/components/employee/recovery/empResetTemplate.html',
-          controller : 'empresetController',
-          controllerAs : 'empresC'
+        when('/usereset/:token', {
+          templateUrl: 'app/components/employee/recovery/urstTemplate.html',
+          controller : 'urstController',
+          controllerAs : 'urstC'
         }).
-        when('/orgpwdreset/:token', {
-          templateUrl: 'app/components/organization/recovery/resetTemplate.html',
-          controller : 'resetController',
-          controllerAs : 'resetC'
+        when('/orgreset/:token', {
+          templateUrl: 'app/components/organization/recovery/orstTemplate.html',
+          controller : 'orstController',
+          controllerAs : 'orstC'
         }).
         otherwise({
           redirectTo: '/presentation'

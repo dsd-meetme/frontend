@@ -1,7 +1,5 @@
 (function(){
-  /**
-  A service that manages the logout of a plunner's organization
-  **/
+  //A service that manages the logout of an organization or an employee
   var service = function($location,$cookies){
     return {
       logout : function(url){

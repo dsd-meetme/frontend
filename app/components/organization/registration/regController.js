@@ -3,38 +3,37 @@
   A controller that manages a plunner's organization registration
   @param regService A service used to perform the actual plunner's organization registration
   **/
-  var controller = function($scope,$location,dataPublisher,$rootScope){
+  var controller = function($scope,$location,dataPublisher){
     var c = this;
     //In case of account already registered, sets a property to true so that
     //an error can be displayed on the view
     c.errors = {};
     //an object that encapsulate the validity status of input fields
-    c.validFields = {
-      orgNameReq : false,
-      orgMailReq : false,
-      orgPwdReq : false,
-      orgMailVal : false,
-      orgPwdCmatch : false,
-      orgPwdLength : false
+    c.invalidFields = {
+      nameReq : false,
+      emailReq : false,
+      passwordReq : false,
+      emailVal : false,
+      passwordMatch : false,
+      passwordLength : false
     };
     //Processes the submit of dsiForm (domain sign in)
     c.process = function(){
       var form = $scope.regForm;
-      console.log(form);
-      //validity status of input fields checking
-      c.validFields.orgPwdReq = form.orgPwd.$error.required;
-      c.validFields.orgNameReq = form.orgName.$error.required;
-      c.validFields.orgMailReq = form.orgEmail.$error.required;
-      c.validFields.orgPwdLength = form.orgPwd.$error.minlength;
-      c.validFields.orgMailVal = form.orgEmail.$error.email;
-      c.validFields.orgPwdCmatch = (form.orgPwd.$modelValue !== form.orgPwdC.$modelValue);
-      console.log(this.validFields);
-      if(!form.$invalid && !c.validFields.orgPwdCmatch){
+      //Validity status of input fields checking
+      c.invalidFields.orgPwdReq = form.password.$error.required;
+      c.invalidFields.nameReq = form.name.$error.required;
+      c.invalidFields.emailReq = form.email.$error.required;
+      c.invalidFields.passwordLength = form.password.$error.minlength;
+      c.invalidFields.emailVal = form.email.$error.email;
+      c.invalidFields.passwordMatch = (form.password.$modelValue !== form.passwordC.$modelValue);
+
+      if(!form.$invalid && !c.invalidFields.passwordMatch){
         dataPublisher.publish('http://api.plunner.com/companies/auth/register',{
-          email : c.orgEmail,
-          password : c.orgPwd,
-          password_confirmation : c.orgPwdC,
-          name : c.orgName
+          name : c.orgName,
+          email : c.email,
+          password : c.password,
+          password_confirmation : c.passwordC
         })
         .then(
           function(response){

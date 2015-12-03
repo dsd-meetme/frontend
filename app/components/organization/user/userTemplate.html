@@ -1,0 +1,77 @@
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- HEADER -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Plunner</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/#/organization">Dashboard</a></li>
+          <li><a href="/#/organization/profile">
+            <span class="glyphicon glyphicon-user"></span> Organization Name</a></li>
+          <li><a href="#">How To</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><button type="button" class="btn btn-danger navbar-btn" ng-click="opC.logout()">Sign Out</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <style>
+    .disabled {
+      border: none;
+    }
+    input {
+      cursor: text;
+    }
+  </style>
+  <div class="row">
+    <h2>Employee detail</h2>
+    <div class="col-md-6">
+      <form name="changeForm" novalidate>
+      <ul class="list-unstyled">
+        <li>Name :
+          <input required name="name" type="text" ng-model="userC.dataC.name" ng-readonly="!userC.changeNameMail.inChange" ng-class="{disabled : !userC.changeNameMail.inChange}">
+        </li>
+        <li>Email :
+          <input required name="email" type="email" ng-model="userC.dataC.email" ng-readonly="!userC.changeNameMail.inChange" ng-class="{disabled : !userC.changeNameMail.inChange}">
+        </li>
+        <li>Password :
+          <input name="password" ng-minlength="6" type="password" ng-model="userC.dataC.password" ng-readonly="!userC.changePassword.inChange" ng-class="{disabled : !userC.changePassword.inChange}" >
+        </li>
+        <li ng-show="userC.changePassword.inChange">
+          Confirm password :
+          <input name="password_confirmation" type="password" ng-model="userC.dataC.password_confirmation" >
+        </li>
+        </ul>
+        <p ng-show="userC.changeNameMail.invalidFields.nameReq">Insert a name</p>
+        <p ng-show="userC.changeNameMail.invalidFields.emailReq">Insert a mail</p>
+        <p ng-show="userC.changeNameMail.invalidFields.emailVal">Insert a validmail</p>
+        <p ng-show="userC.changePassword.invalidFields.passwordLen">password too short</p>
+        <p ng-show="userC.changePassword.invalidFields.passwordMatch">password don't match</p>
+        <button class="btn btn-default" ng-show="userC.changeNameMail.inChange" ng-click="userC.changeNameMail.submit()">CHANGE</button>
+        <button class="btn btn-default" ng-show="userC.changePassword.inChange" ng-click="userC.changePassword.submit()">CHANGE</button>
+        <button class="btn btn-default" ng-show="userC.changeNameMail.inChange" ng-click="userC.changeNameMail.abort()">ABORT</button>
+        <button class="btn btn-default" ng-show="userC.changePassword.inChange" ng-click="userC.changePassword.abort()">ABORT</button>
+      </form>
+
+      <button class="btn btn-default" ng-hide="userC.changeNameMail.inChange"  ng-click="userC.changeNameMail.show()">Change name and email</button>
+      <br>
+      <br>
+      <button class="btn btn-default" ng-click="userC.changePassword.show()">Change password</button>
+      <br>
+      <br>
+      <button class="btn btn-default" ng-click="userC.delete()">Delete employee</button>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Joined groups</h3>
+      <ul class="list-unstyled">
+        <li ng-repeat="group in userC.data.groups">
+          <a href="/#/organization/groups/{{group.id}}">{{group.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

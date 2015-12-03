@@ -7,32 +7,32 @@
             //Gets the decoded jwt
             var mode;
             var token = $cookies.get('auth_token');
-
-            if(token != null || !angular.isUndefined(token)){
-                mode = jwt_decode($cookies.get('auth_token')).mode;
-            }
             //Gets the url the user want to reach
             var path = next.originalPath;
 
+            if(token){
+                mode = jwt_decode(token).mode;
+            }
             //Mode checking(organizations)
-            if(!angular.isUndefined(path)){
-                if(path.search('organization')!== -1 && path.search('auth') === -1){
+            if(path){
+                if(path.search('organization') !== -1){
                     if(angular.isUndefined(mode) || mode !== 'cn'){
                         $location.path('/orgsignin');
                     }
                 }
                 //Mode checking(employees)
-                else if(path.search('employee')!== -1 && path.search('auth') === -1){
+                else if(path.search('employee') !== -1){
                     if(mode === undefined || mode !== 'en'){
                         $location.path('/usignin');
                     }
                 }
-                if(path.search('/orgsignin')!== -1 ){
+                //Redirect if the user is already logged in
+                else if(path.search('/orgsignin') !== -1 ){
                     if(mode === 'cn'){
                         $location.path('/organization');
                     }
                 }
-                if(path.search('/usersignin') !== -1){
+                else if(path.search('/usersignin') !== -1){
                     if(mode === 'en'){
                         $location.path('/user');
                     }

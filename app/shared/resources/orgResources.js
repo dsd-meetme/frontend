@@ -1,6 +1,8 @@
 (function(){
+    //A service that returns resource objects that encapsulate the restful communication logic relative
+    //to groups, employees and others
     var service = function($resource){
-        var employeeResource = $resource('http://api.plunner.com/companies/employees/:employeeId',null,{
+        var userResource = $resource('http://api.plunner.com/companies/employees/:userId',null,{
             'update' : {
                 method : 'PUT'
             }
@@ -10,7 +12,7 @@
                 method : 'PUT'
             }
         });
-        var employeesWithinGroup = $resource('http://api.plunner.com/companies/groups/:groupId/employees/:employeeId',null, {
+        var userWithinGroup = $resource('http://api.plunner.com/companies/groups/:groupId/employees/:userId',null, {
             'update' : {
                 method : 'PUT'
             },
@@ -42,14 +44,14 @@
             }
         })
         return {
-            employee : function(){
-                return employeeResource;
+            user : function(){
+                return userResource;
             },
             group : function(){
                 return groupResource;
             },
-            employeeInGroup : function(){
-                return employeesWithinGroup;
+            userInGroup : function(){
+                return userWithinGroup;
             },
             planner : function(){
                 return planner;
