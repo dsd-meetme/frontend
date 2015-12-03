@@ -10,19 +10,11 @@
       orgResources.company().query().$promise
       .then(
         function(response){
-            c.data = response;
-        }, function(response){
-          if(response.status === 401){
-            c.errors.unauthorized = true;
-          }
-          else if(response.status === 403){
-            c.errors.forbidden = true;
-          }
-        }
-      );
-    }
-  };
+          c.data = response;
+        });
+      }
+    };
 
-  var app = angular.module('Plunner');
-  app.controller('opController',controller);
-}());
+    var app = angular.module('Plunner');
+    app.controller('opController',controller);
+  }());

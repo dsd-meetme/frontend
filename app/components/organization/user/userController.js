@@ -8,13 +8,10 @@
     var c = this;
     //user id
     var id = $routeParams.id;
-    c.errors = {
-      unauthorized : false,
-      forbidden : false
-    }
     c.data = {};
     c.dataC = {};
     c.changeNameMail = {
+      errors : {},
       inChange : false,
       form : $scope.nmeForm,
       invalidFields : {
@@ -41,12 +38,15 @@
             c.changeNameMail.abort();
             c.getInfo();
           },function(){
-
-          })
+            if(response.status===422){
+              this.errors = response.data;
+            }
+          });
         }
       }
     };
     c.changePassword = {
+      errors : {},
       inChange : false,
       form : $scope.nmeForm,
       invalidFields : {
@@ -70,7 +70,9 @@
             c.changePassword.abort();
             c.getInfo();
           },function(){
-
+            if(response.status===422){
+              this.errors = response.data;
+            }
           })
         }
       }
@@ -83,9 +85,7 @@
         c.data = response;
         c.dataC.name = c.data.name;
         c.dataC.email = c.data.email;
-      },function(response){
-
-      })
+      });
     };
     //Delete an employee in the context of an org
     c.delete = function(){
@@ -94,16 +94,7 @@
       .then(function(response){
         alert('Evviva');
         $location.path('/organization');
-      },function(response){
-        if(response.status === 401){
-          c.errors.unauth = true;
-          c.errors.forb = false;
-        }
-        else if(response.status === 403){
-          c.errors.unauth = false;
-          c.errors.forb = true;
-        }
-      })
+      });
     }
     c.getInfo();
   }

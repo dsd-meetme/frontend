@@ -9,10 +9,6 @@
   **/
   var controller = function ($scope, logoutService, orgResources, arrayToUrlParams, $cookies,$timeout) {
     var c = this;
-    c.errors = {
-      unauthorized: false,
-      forbidden: false
-    };
     c.data = {};
     c.confirmPopup = {
       message : ''
@@ -40,11 +36,7 @@
       orgResources.group().query({groupId: ''}).$promise
       .then(function (response) {
         c.data.groups = response;
-      },
-      function (response) {
-        c.errors.unauthorized = (response.status === 401);
-        c.errors.forbidden = (response.status === 403);
-      })
+      });
     };
     c.addGroup = {
       planner: null,
@@ -75,94 +67,100 @@
 
         //Submits everything to the server if data is valid
         if (!this.invalidFields.nameReq && !this.invalidFields.plannerReq && !this.invalidFields.membersReq) {
-            //Updates the group name and planner
-            orgResources.group().save({groupId: ''}, jQuery.param({
-              name: this.name,
-              planner_id: this.planner
-            })).$promise
+          //Updates the group name and planner
+          orgResources.group().save({groupId: ''}, jQuery.param({
+            name: this.name,
+            planner_id: this.planner
+          })).$promise
+          .then(function (response) {
+            //Updates the group members
+            orgResources.usersInGroup().save({
+              groupId: response.id,
+              employeeId: ''
+            }, arrayToUrlParams.process('id', validMembers)).$promise
             .then(function (response) {
-              //Updates the group members
-              orgResources.usersInGroup().save({
-                groupId: response.id,
-                employeeId: ''
-              }, arrayToUrlParams.process('id', validMembers)).$promise
-              .then(function (response) {
-                c.getGroups();
-                c.confirmPopup.message = "Group successfully added";
-                jQuery('#addGroup').modal('hide');
-                jQuery('#confirmPopup').modal('show');
-                $timeout(function(){
-                  jQuery('#confirmPopup').modal('hide');
-                },2000);
-                jQuery('#addGroup input').val('');
-                jQuery('#addGroup input:checked').removeAttr('checked');
-              }, function () {
-
-              })
-            },
-            function (response) {
-              this.errors = response.data;
-            });
-          }
-        }
-      };
-      c.addUser = {
-        name: '',
-        email: '',
-        password: '',
-        errors: {},
-        confirmation_password: '',
-        invalidFields: {
-          nameReq: false,
-          emailReq: false,
-          passwordReq: false,
-          passwordMatch: false,
-          passwordLength: false,
-          emailVal: false
-        },
-        submit: function () {
-          var form = $scope.addUserForm;
-          //Checks the validity of input fields
-          this.invalidFields.nameReq = form.name.$error.required;
-          this.invalidFields.emailReq = form.email.$error.required;
-          this.invalidFields.passwordReq = form.password.$error.required;
-          this.invalidFields.passwordLength = form.password.$error.minlength;
-          this.invalidFields.emailVal = form.email.$error.email;
-          this.invalidFields.passwordMatch = (this.password !== this.confirmation_password);
-
-          //Submits everything to the server if data is valid
-          if (!form.$invalid && !this.invalidFields.passwordMatch) {
-            //Updates the group name and planner
-            orgResources.user().save({userId: ''}, jQuery.param({
-              name: this.name,
-              email: this.email,
-              password: this.password,
-              password_confirmation: this.confirmation_password
-            })).$promise
-            .then(function (response) {
-              //Updates the group members
-              //orgResources.employeeInGroup().save({groupId: response.id, employeeId: ''}).$promise
-              //.then(function(response){
-              c.getUsers();
-              c.confirmPopup.message = "User successfully added";
-              jQuery('#addUser').modal('hide');
+              c.getGroups();
+              c.confirmPopup.message = "Group successfully added";
+              jQuery('#addGroup').modal('hide');
               jQuery('#confirmPopup').modal('show');
-              setTimeout(function(){
+              $timeout(function(){
                 jQuery('#confirmPopup').modal('hide');
               },2000);
-              jQuery('#addUser input').val('');
-              jQuery('#addUser input:checked').removeAttr('checked');
-            },
-            function (response) {
-              c.addUser.errors = response.data;
-            });
-          }
+              jQuery('#addGroup input').val('');
+              jQuery('#addGroup input:checked').removeAttr('checked');
+            }, function (response) {
+              if(response.status === 422){
+                this.errors = response.data;
+              }
+            })
+          },
+          function (response) {
+            if(response.status === 422){
+              this.errors = response.data;
+            }
+          });
         }
-      };
+      }
+    };
+    c.addUser = {
+      name: '',
+      email: '',
+      password: '',
+      errors: {},
+      confirmation_password: '',
+      invalidFields: {
+        nameReq: false,
+        emailReq: false,
+        passwordReq: false,
+        passwordMatch: false,
+        passwordLength: false,
+        emailVal: false
+      },
+      submit: function () {
+        var form = $scope.addUserForm;
+        //Checks the validity of input fields
+        this.invalidFields.nameReq = form.name.$error.required;
+        this.invalidFields.emailReq = form.email.$error.required;
+        this.invalidFields.passwordReq = form.password.$error.required;
+        this.invalidFields.passwordLength = form.password.$error.minlength;
+        this.invalidFields.emailVal = form.email.$error.email;
+        this.invalidFields.passwordMatch = (this.password !== this.confirmation_password);
 
-      c.getUsers();
+        //Submits everything to the server if data is valid
+        if (!form.$invalid && !this.invalidFields.passwordMatch) {
+          //Updates the group name and planner
+          orgResources.user().save({userId: ''}, jQuery.param({
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            password_confirmation: this.confirmation_password
+          })).$promise
+          .then(function (response) {
+            //Updates the group members
+            //orgResources.employeeInGroup().save({groupId: response.id, employeeId: ''}).$promise
+            //.then(function(response){
+            c.getUsers();
+            c.confirmPopup.message = "User successfully added";
+            jQuery('#addUser').modal('hide');
+            jQuery('#confirmPopup').modal('show');
+            setTimeout(function(){
+              jQuery('#confirmPopup').modal('hide');
+            },2000);
+            jQuery('#addUser input').val('');
+            jQuery('#addUser input:checked').removeAttr('checked');
+          },
+          function (response) {
+            if(response.status === 422){
+              this.errors = response.data;
+            }  
+          });
+        }
+      }
     };
 
-    var app = angular.module('Plunner');
-    app.controller('odashController', controller);
-  }());
+    c.getUsers();
+  };
+
+  var app = angular.module('Plunner');
+  app.controller('odashController', controller);
+}());

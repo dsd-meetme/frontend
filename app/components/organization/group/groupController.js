@@ -10,10 +10,7 @@
     //group id
     var id = $routeParams.id;
     c.data = {};
-    c.errors = {
-      unauthorized : false,
-      forbidden : false
-    };
+    c.errors = {};
     c.invalidFields = {
       nameReq : false
     };
@@ -31,10 +28,7 @@
         //This copy will be used
         c.data.groupC = response;
         c.getUsers();
-      },function(response){
-        c.errors.unauthorized = (response.status === 401);
-        c.errors.forbidden = (response.status === 403);
-      })
+      });
     };
     //Delete an employee in the context of an org
     c.delete = function(){
@@ -49,10 +43,7 @@
         },2000);
         //Show success popup wait for some time
         //redirect
-      },function(response){
-        c.errors.unauthorized = (response.status === 401);
-        c.errors.forbidden = (response.status === 403);
-      })
+      });
     };
     c.updatePlanner = function(plannerId){
       if(plannerId !== c.data.group.planner_id){
@@ -71,10 +62,11 @@
           },1000);
           //Update view
           c.getInfo();
-        },function(){
-          c.errors.unauthorized = (response.status === 401);
-          c.errors.forbidden = (response.status === 403);
-        })
+        },function(response){
+          if(response.status === 422){
+            c.errors = response.data;
+          }
+        });
       }
     };
     //Update user info
@@ -84,55 +76,52 @@
       if(!c.invalidFields.nameReq){
         orgResources.group().update({groupId:id},jQuery.param(
           {
-          name : c.data.groupC.name,
-          description : c.data.groupC.description,
-          planner_id : c.data.group.planner_id
-        })).$promise
-        .then(function(response){
-          c.inchange = false;
-          c.confirmPopup.message = "Changes successfully made!";
-          jQuery('#confirmPopup').modal('show');
-          setTimeout(function(){
-            jQuery('#confirmPopup').modal('hide');
-          },2000);
-          c.getInfo();
-        },function(response){
-          c.errors.unauthorized = (response.status === 401);
-          c.errors.forbidden = (response.status === 403);
-        })
-      }
-    };
-    c.getUsers = function(){
-      orgResources.userInGroup().query({groupId:id, userId: ''}).$promise
-      .then(
-        function(response){
-          c.data.members = response;
-        }, function(response){
-          c.errors.unauthorized = (response.status === 401);
-          c.errors.forbidden = (response.status === 403);
+            name : c.data.groupC.name,
+            description : c.data.groupC.description,
+            planner_id : c.data.group.planner_id
+          })).$promise
+          .then(function(response){
+            c.inchange = false;
+            c.confirmPopup.message = "Changes successfully made!";
+            jQuery('#confirmPopup').modal('show');
+            setTimeout(function(){
+              jQuery('#confirmPopup').modal('hide');
+            },2000);
+            c.getInfo();
+          },function(response){
+            if(response.status === 422){
+              c.errors = response.data;
+            }
+          });
         }
-      )
-    };
-    c.deleteFromGroup = function(userId){
-      orgResources.userInGroup().remove({groupId:id, userId: userId}).$promise
-      .then(
-        function(response){
-          c.confirmPopup.message = "Changes successfully made";
-          jQuery('#confirmPopup').modal('show');
-          setTimeout(function(){
-            jQuery('#confirmPopup').modal('hide');
-          },2000);
-          c.getUsers();
-        }, function(response){
-          c.errors.unauthorized = (response.status === 401);
-          c.errors.forbidden = (response.status === 403);
-        }
-      )
-    };
+      };
+      c.getUsers = function(){
+        orgResources.userInGroup().query({groupId:id, userId: ''}).$promise
+        .then(
+          function(response){
+            c.data.members = response;
+          })
+        };
+        c.deleteFromGroup = function(userId){
+          orgResources.userInGroup().remove({groupId:id, userId: userId}).$promise
+          .then(
+            function(response){
+              c.confirmPopup.message = "Changes successfully made";
+              jQuery('#confirmPopup').modal('show');
+              setTimeout(function(){
+                jQuery('#confirmPopup').modal('hide');
+              },2000);
+              c.getUsers();
+            }, function(response){
+              c.errors.unauthorized = (response.status === 401);
+              c.errors.forbidden = (response.status === 403);
+            }
+          )
+        };
 
-    c.getInfo();
+        c.getInfo();
 
-  };
-  var app = angular.module('Plunner');
-  app.controller('groupController',controller);
-}());
+      };
+      var app = angular.module('Plunner');
+      app.controller('groupController',controller);
+    }());
