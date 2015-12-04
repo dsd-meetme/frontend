@@ -1,6 +1,7 @@
 (function(){
   var controller = function($scope, dataPublisher, $routeParams,$cookies){
     c = this;
+    c.success = false;
     c.invalidFields = {
       emailReq : false,
       pwdLength : false,
@@ -25,7 +26,8 @@
           token : $routeParams.token
         }).then(
           function(){
-            alert('successo')
+            c.success = true;
+            jQuery('input').val('');
           },
           function(response){
             if(response.status === 422){

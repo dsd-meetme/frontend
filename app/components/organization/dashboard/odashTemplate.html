@@ -98,103 +98,100 @@
       <div class="modal-content">
         <div class="modal-header">
           <h3 style="display: inline-block;">Add group</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-            aria-hidden="true">&times;</span></button>
-          </div>
-          <div class="modal-body">
-            <p>Name</p>
-            <input type="search" class="form-control" ng-model="odashC.addGroup.name">
-            <br/>
-            <p>Description</p>
-            <input type="text" class="form-control" ng-model="odashC.addGroup.desc">
-            <br/>
-            <table class="table">
-              <thead>
-                <th></th>
-                <th>Members</th>
-                <th>Planner</th>
-              </thead>
-              <tbody>
-                <tr ng-repeat="user in odashC.data.users | filter: searchedPlanner">
-                  <td>{{user.name}}</td>
-                  <td ng-click="odashC.addGroup.selectPlanner(user.id)"><input type="checkbox"
-                    ng-model="odashC.addGroup.members[user.id]">
-                  </td>
-                  <td ng-click=""><input type="radio" name="plannerasd" ng-model="odashC.addGroup.planner" ng-value="user.id">
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="errorsContainer">
-              <p ng-show="odashC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>
-              <p ng-show="odashC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one member</p>
-              <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="text-danger">Insert one planner</p>
-              <p class="text-danger" ng-repeat="error in odashC.addGroup.errors.name">{{name}}</p>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" ng-click="odashC.addGroup.submit()">Create</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="addUser" class="modal" role="dialog" tabindex="-2">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 style="display: inline-block">Add an Employee</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-              aria-hidden="true">&times;</span></button>
-            </div>
-            <form name="addUserForm" ng-submit="odashC.addUser.submit()" novalidate>
-              <div class="modal-body">
-                <p>Name</p>
-                <input name="name" type="text" class="form-control" required ng-model="odashC.addUser.name">
-                <br/>
-                <p>Email</p>
-                <input name="email" type="email" class="form-control" required ng-model="odashC.addUser.email">
-                <br/>
-                <p>Password</p>
-                <input name="password" type="password" class="form-control" required ng-model="odashC.addUser.password" ng-minlength="6">
-                <br/>
-                <p>Confirm Password</p>
-                <input name="confirmation_password" type="password" class="form-control" ng-model="odashC.addUser.confirmation_password">
-                <br/>
-                <div class="errorsContainer">
-                  <p class="text-danger" ng-repeat="error in odashC.addUser.errors.email">{{error}}</p>
-                  <p ng-show="odashC.addUser.invalidFields.passwordReq" class="text-danger">Insert the user password</p>
-                  <p ng-show="odashC.addUser.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>
-                  <p ng-show="odashC.addUser.invalidFields.emailReq" class="text-danger">Insert the user email address</p>
-                  <p ng-show="odashC.addUser.invalidFields.emailVal" class="text-danger">The email address is not valid</p>
-                  <p ng-show="odashC.addUser.invalidFields.passwordMatch" class="text-danger">The two passwords do not match</p>
-                  <p ng-show="odashC.addUser.invalidFields.nameReq" class="text-danger">Insert the user name</p>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Create</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
-          <h3 class="text-center">{{odashC.confirmPopup.message}}</h3>
+          <p>Name</p>
+          <input type="search" class="form-control" ng-model="odashC.addGroup.name">
+          <br/>
+          <p>Description</p>
+          <input type="text" class="form-control" ng-model="odashC.addGroup.desc">
+          <br/>
+          <table class="table">
+            <thead>
+              <th></th>
+              <th>Members</th>
+              <th>Planner</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in odashC.data.users | filter: searchedPlanner">
+                <td>{{user.name}}</td>
+                <td ng-click="odashC.addGroup.selectPlanner(user.id)"><input type="checkbox" ng-model="odashC.addGroup.members[user.id]">
+                </td>
+                <td ng-click=""><input type="radio" name="plannerasd" ng-model="odashC.addGroup.planner" ng-value="user.id">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="errorsContainer">
+            <div class="text-danger" ng-repeat="(key,value) in odashC.addGroup.errors">
+              <p ng-repeat="error in value">{{error}}</p>
+            </div>
+            <p ng-show="odashC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>
+            <p ng-show="odashC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one member</p>
+            <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="text-danger">Insert one planner</p>
+          </div>
         </div>
-        <!--<div class="modal-footer">
-      </div>-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ng-click="odashC.addGroup.submit()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="addUser" class="modal" role="dialog" tabindex="-2">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 style="display: inline-block">Add an Employee</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+          </div>
+          <form name="addUserForm" ng-submit="odashC.addUser.submit()" novalidate>
+            <div class="modal-body">
+              <p>Name</p>
+              <input name="name" type="text" class="form-control" required ng-model="odashC.addUser.name">
+              <br/>
+              <p>Email</p>
+              <input name="email" type="email" class="form-control" required ng-model="odashC.addUser.email">
+              <br/>
+              <p>Password</p>
+              <input name="password" type="password" class="form-control" required ng-model="odashC.addUser.password" ng-minlength="6">
+              <br/>
+              <p>Confirm Password</p>
+              <input name="confirmation_password" type="password" class="form-control" ng-model="odashC.addUser.confirmation_password">
+              <br/>
+              <div class="errorsContainer">
+                <div class="text-danger" ng-repeat="(key,value) in odashC.addUser.errors">
+                  <p ng-repeat="error in value">{{error}}</p>
+                </div>
+                <p ng-show="odashC.addUser.invalidFields.passwordReq" class="text-danger">Insert the user password</p>
+                <p ng-show="odashC.addUser.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>
+                <p ng-show="odashC.addUser.invalidFields.emailReq" class="text-danger">Insert the user email address</p>
+                <p ng-show="odashC.addUser.invalidFields.emailVal" class="text-danger">The email address is not valid</p>
+                <p ng-show="odashC.addUser.invalidFields.passwordMatch" class="text-danger">The two passwords do not match</p>
+                <p ng-show="odashC.addUser.invalidFields.nameReq" class="text-danger">Insert the user name</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="text-center">{{odashC.confirmPopup.message}}</h3>
+      </div>
       <br/>
     </div>
   </div>

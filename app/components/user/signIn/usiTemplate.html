@@ -50,8 +50,8 @@
             <div ng-show="usiC.invalidFields.nameReq" class="text-danger">
                 <p>You did not insert your organization name</p>
             </div>
-            <div>
-                <p ng-repeat="error in usiC.errors" class="text-danger">{{error}}</p>
+            <div ng-repeat="(key,value) in usiC.errors">
+                <p ng-repeat="error in value" class="text-danger">{{error}}</p>
             </div>
             <button type="submit" class="btn btn-default">Sign in</button>
             <a style="float:right;" href="/#/userecovery">Password forgotten?</a><br><br>

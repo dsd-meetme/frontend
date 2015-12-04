@@ -38,9 +38,10 @@
       <div ng-show="osiC.invalidFields.passwordReq" class="text-danger">
         <p>You did not insert a password</p>
       </div>
-      <div class="text-danger">
-        <p ng-repeat="error in osiC.errors">{{error}}</p>
-      </div>
+      <form-errors errors-container="osiC.errors"></form-errors>
+      <!--<div ng-repeat="(key,value) in osiC.errors">
+        <p ng-repeat="error in value">{{error}}</p>
+      </div>-->
       <button type="submit" class="btn btn-default btn lg">Sign in</button>
 
       <a style="float:right" href="/#/orgrecovery">Password forgotten?</a><br><br>

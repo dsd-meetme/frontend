@@ -49,9 +49,11 @@
           </li>
         </ul>
         <br>
-        <button class="btn btn-default" ng-hide="groupC.inchange" ng-disabled="groupC.inchange"
-        ng-click="groupC.inchange = true">Edit name and description
+        <button class="btn btn-default" ng-hide="groupC.inchange" ng-disabled="groupC.inchange" ng-click="groupC.inchange = true">Edit name and description
       </button>
+      <div ng-repeat="(key,value) in groupC.errors.info">
+        <p class="text-danger" ng-repeat="error in value">{{error}}</p>
+      </div>
       <button class="btn btn-default" ng-show="groupC.inchange" ng-disabled="!groupC.inchange"
       ng-click="groupC.updateInfo()">Change
     </button>

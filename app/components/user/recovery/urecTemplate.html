@@ -24,7 +24,9 @@
         <p ng-show="urecC.invalidFields.emailReq" class="text-danger">Insert an email address</p>
         <p ng-show="urecC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</p>
         <p class="text-danger" ng-repeat="error in urecC.errors.company ">{{error}}</p>
-        <p class="text-danger" >{{urecC.errors.error}}</p>
+        <div ng-repeat="(key,value) in urecC.errors">
+          <p class="text-danger" ng-repeat="error in value">{{error}}</p>
+        </div>
         <p ng-show="urecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
         <br/>
 	  <button class="btn btn-default">Recover Password</button>

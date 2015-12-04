@@ -20,8 +20,10 @@
       <br/>
 	  <p ng-show="orecC.invalidFields.emailReq" class="text-danger">Insert an email address</p>
 	  <p ng-show="orecC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</p>
-	  <p class="text-danger">{{orecC.errors["error"]}}</p>
-      <p ng-show="orecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
+    <div ng-repeat="(key,value) in orecC.errors">
+      <p class="text-danger" ng-repeat="error in value">{{error}}</p>
+    </div>
+    <p ng-show="orecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
 	  <button class="btn btn-default">Recover password</button>
     <br>
 

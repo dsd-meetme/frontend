@@ -50,6 +50,12 @@
         <p ng-show="userC.changeNameMail.invalidFields.emailVal">Insert a validmail</p>
         <p ng-show="userC.changePassword.invalidFields.passwordLen">password too short</p>
         <p ng-show="userC.changePassword.invalidFields.passwordMatch">password don't match</p>
+        <div ng-repeat="(key,value) in userC.changeNameMail.errors">
+          <p class="text-danger" ng-repeat="error in value">{{error}}</p>
+        </div>
+        <div ng-repeat="(key,value) in userC.changePassword.errors">
+          <p class="text-danger" ng-repeat="error in value">{{error}}</p>
+        </div>
         <button class="btn btn-default" ng-show="userC.changeNameMail.inChange" ng-click="userC.changeNameMail.submit()">CHANGE</button>
         <button class="btn btn-default" ng-show="userC.changePassword.inChange" ng-click="userC.changePassword.submit()">CHANGE</button>
         <button class="btn btn-default" ng-show="userC.changeNameMail.inChange" ng-click="userC.changeNameMail.abort()">ABORT</button>
@@ -64,7 +70,6 @@
       <br>
       <button class="btn btn-default" ng-click="userC.delete()">Delete employee</button>
     </div>
-
     <div class="col-md-6">
       <h3>Joined groups</h3>
       <ul class="list-unstyled">
@@ -72,6 +77,19 @@
           <a href="/#/organization/groups/{{group.id}}">{{group.name}}</a>
         </li>
       </ul>
+    </div>
+  </div>
+  <div id="confirmPopupa" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <h3 class="text-center">{{userC.confirmPopup.message}}</h3>
+        </div>
+        <br/>
+      </div>
     </div>
   </div>
 </div>

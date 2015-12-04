@@ -74,9 +74,9 @@
           })).$promise
           .then(function (response) {
             //Updates the group members
-            orgResources.usersInGroup().save({
+            orgResources.userInGroup().save({
               groupId: response.id,
-              employeeId: ''
+              userId: ''
             }, arrayToUrlParams.process('id', validMembers)).$promise
             .then(function (response) {
               c.getGroups();
@@ -96,7 +96,7 @@
           },
           function (response) {
             if(response.status === 422){
-              this.errors = response.data;
+              c.addGroup.errors = response.data;
             }
           });
         }
@@ -151,8 +151,9 @@
           },
           function (response) {
             if(response.status === 422){
-              this.errors = response.data;
-            }  
+
+              c.addUser.errors = response.data;
+            }
           });
         }
       }

@@ -64,7 +64,7 @@
           c.getInfo();
         },function(response){
           if(response.status === 422){
-            c.errors = response.data;
+            c.errors.planner = response.data;
           }
         });
       }
@@ -81,6 +81,7 @@
             planner_id : c.data.group.planner_id
           })).$promise
           .then(function(response){
+            c.errors.info = {};
             c.inchange = false;
             c.confirmPopup.message = "Changes successfully made!";
             jQuery('#confirmPopup').modal('show');
@@ -90,7 +91,7 @@
             c.getInfo();
           },function(response){
             if(response.status === 422){
-              c.errors = response.data;
+              c.errors.info = response.data;
             }
           });
         }
@@ -112,9 +113,6 @@
                 jQuery('#confirmPopup').modal('hide');
               },2000);
               c.getUsers();
-            }, function(response){
-              c.errors.unauthorized = (response.status === 401);
-              c.errors.forbidden = (response.status === 403);
             }
           )
         };
