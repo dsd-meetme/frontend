@@ -50,29 +50,10 @@
     c.logout = function(){
         logoutService.logout('/usignin');
     }
-    var calendar = jQuery('#calendar').fullCalendar({
-    header: {
-        //left: 'prev,next today',
-        //center: 'title',
-        right: 'prev,next today'
-    },
-    defaultView: 'agendaWeek',
-    events: c.events,
-    editable : true,
-    selectable: true,
-    selectHelper : true,
-    select: function (start, end, jsEvent, view) {
-      calendar.fullCalendar('renderEvent',
-			{
-          title : '',
-					start: start,
-					end: end
-			},
-			true // make the event "stick"
-		  );
-      calendar.fullCalendar('unselect');
+    c.saveSchedule = function(){
+      console.log(calendar.fullCalendar('clientEvents'));
     }
-  });
+    //var calendar = jQuery('#calendar').fullCalendar();
   };
 
   var app = angular.module('Plunner');

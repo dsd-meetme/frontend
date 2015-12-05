@@ -34,6 +34,11 @@
           controller: 'opController',
           controllerAs: 'opC'
         }).
+        when('/user/schedules/compose', {
+          templateUrl: 'app/components/user/composeSchedule/cschedTemplate.html',
+          controller: 'cschedController',
+          controllerAs: 'cschedC'
+        }).
         when('/orgrecovery',{
           templateUrl: 'app/components/organization/recovery/orecTemplate.html',
           controller: 'orecController',
