@@ -46,31 +46,33 @@
         }
       },
     };
+    c.events = [];
     c.logout = function(){
         logoutService.logout('/usignin');
     }
-    jQuery('#calendar').fullCalendar({
-      header: {
-        center: 'prev,next,today',
-        right: 'month,agendaWeek,agendaDay'
-      },
-
-      events: [
-        {
-            title  : 'event1',
-            start  : '2016-01-01',
-            editable : true
-        },
-        {
-            title  : 'event2',
-            start  : '2016-01-05',
-        },
-        {
-            title  : 'event3',
-            start  : '2016-01-09T12:30:00',
-            allDay : false // will make the time show
-        }
-    ]})
+    var calendar = jQuery('#calendar').fullCalendar({
+    header: {
+        //left: 'prev,next today',
+        //center: 'title',
+        right: 'prev,next today'
+    },
+    defaultView: 'agendaWeek',
+    events: c.events,
+    editable : true,
+    selectable: true,
+    selectHelper : true,
+    select: function (start, end, jsEvent, view) {
+      calendar.fullCalendar('renderEvent',
+			{
+          title : '',
+					start: start,
+					end: end
+			},
+			true // make the event "stick"
+		  );
+      calendar.fullCalendar('unselect');
+    }
+  });
   };
 
   var app = angular.module('Plunner');
