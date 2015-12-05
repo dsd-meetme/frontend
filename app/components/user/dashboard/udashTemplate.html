@@ -1,3 +1,32 @@
+<style>
+  .meetingsList div {
+    float:left;
+    width:50%;
+    border:1px solid black;
+    cursor: pointer;
+  }
+  .meetingsList div:last-child {
+    border-left: none;
+  }
+  .schedulesList div {
+    float:left;
+    width:50%;
+    border:1px solid black;
+    cursor: pointer;
+  }
+  .schedulesList div:nth-child(2),
+  .schedulesList div:last-child {
+    border-left: none;
+  }
+  .selected {
+    background-color: black;
+    color: white;
+  }
+  #addSchedule .modal-header h3 {
+    display: inline-block;
+  }
+
+</style>
 <div class="navbar navbar-default">
   <div class="container-fluid">
     <!-- HEADER -->
@@ -19,12 +48,16 @@
 <div class="page-content">
 
   <h2>Meetings</h2>
-  <a href="/#/user/newmeeting">Make a meeting</a>
+  <a class="btn btn-primary" href="/#/user/newmeeting">Make a meeting</a>
+  <br>
+  <br>
   <div style="width: 100%">
-    <div>
-      <div ng-click="udashC.meetingsList.groupA.show()" class="text-center" style="float:left; width:50%">TO BE PLANNED</div>
-      <div ng-click="udashC.meetingsList.groupB.show()" class="text-center" style="float:left; width:50%">PLANNED</div>
+    <div class="meetingsList">
+      <div ng-class="{selected : udashC.meetingsList.groupA.isVisible}" ng-click="udashC.meetingsList.groupA.show()" class="text-center" >TO BE PLANNED</div>
+      <div ng-class="{selected : udashC.meetingsList.groupB.isVisible}" ng-click="udashC.meetingsList.groupB.show()" class="text-center" >PLANNED</div>
     </div>
+    <br>
+    <br>
     <table ng-show="udashC.meetingsList.groupA.isVisible" class="table">
       <thead>
         <th>Name</th>
@@ -58,5 +91,86 @@
       </tbody>
     </table>
   </div>
-
+  <h2>Schedules</h2>
+  <div>
+      <button class="btn btn-primary" data-target="#addSchedule" data-toggle="modal">Import schedule</button>
+      <button class="btn btn-primary">Compose schedule</button>
+  </div>
+  <br>
+  <div style="width: 100%">
+    <div class="schedulesList">
+      <div ng-class="{selected : udashC.schedulesList.groupA.isVisible}" ng-click="udashC.schedulesList.groupB.show()" class="text-center" >IMPORTED</div>
+      <div ng-class="{selected : udashC.schedulesList.groupB.isVisible}" ng-click="udashC.schedulesList.groupC.show()" class="text-center"  >COMPOSED BY HAND</div>
+    </div>
+    <br>
+    <br>
+    <table class="table" ng-show="udashC.schedulesList.groupA.isVisible">
+      <thead>
+        <th>Name</th>
+        <th>Info</th>
+        <th>Service</th>
+        <th>Enabled</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td>Bla</td>
+          <td><input type="checkbox"></td>
+          <td>Remove</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table" ng-show="udashC.schedulesList.groupB.isVisible">
+      <thead>
+        <th>Name</th>
+        <th>Info</th>
+        <th>Enabled</th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>sda</td>
+          <td>sadas</td>
+          <td></td>
+          <td>Edit</td>
+          <td>Remove</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+  <div id="calendar">
+    
+  </div>
+</div>
+<div id="addSchedule" class="modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add schedule</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <form name="addSchedulForm" novalidate>
+          <p>Insert a caldav url</p>
+          <input class="form-control" type="url" ng-model="udashC.addSchedule.url" required>
+          <br>
+          <p>Popular services url template</p>
+          <ul class="list-inline list-unstyled">
+            <li>Google calendar</li>
+            <li>Microsoft Outlook</li>
+            <li>Unknown</li>
+          </ul>
+          <p>Available schedules</p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-label="Close">Abort</button>
+        <button class="btn btn-primary">Add</button>
+      </div>
+      <br/>
+    </div>
+  </div>
 </div>
