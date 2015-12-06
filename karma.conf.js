@@ -23,7 +23,7 @@ module.exports = function(config) {
       'node_modules/jwt-decode/build/jwt-decode.min.js',
       'app/app.module.js',
       'app/*/*/*.js',
-      'test/unit/*/*/*.js'
+      'test/unit/*/*.js'
     ],
 
     plugins: [

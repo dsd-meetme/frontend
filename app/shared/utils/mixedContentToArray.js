@@ -2,13 +2,17 @@
   var service = function(){
     return {
       process : function(object,container,clearContainerBefore){
+        function InvalidArgumentException(msg,argumentIndex){
+          this.message = msg;
+          this.argumentIndex = argumentIndex;
+        };
         var key, i;
         var clearFlag = clearContainerBefore || false;
-        if(!angular.isObject(object)){
-          throw "This method's first argument must be an object";
+        if(!angular.isObject(object) || angular.isArray(object)){
+          throw new InvalidArgumentException("This method's first argument must be an object",0);
         }
         else if(!angular.isArray(container)){
-          throw "This method's second argument must be an array";
+          throw new InvalidArgumentException("This method's second argument must be an array",1);
         }
         else{
           if(clearFlag){

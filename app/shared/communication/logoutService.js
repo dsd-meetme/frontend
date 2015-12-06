@@ -3,8 +3,18 @@
   var service = function($location,$cookies){
     return {
       logout : function(url){
-        $cookies.remove('auth_token');
-        $location.path(url);
+        function InvalidArgumentException(msg,argumentIndex){
+          this.message = msg;
+          this.argumentIndex = argumentIndex;
+        }
+        if(!angular.isString(url)){
+          throw new InvalidArgumentException("This method's unique argument must be a string",0);
+
+        }
+        else{
+          $cookies.remove('auth_token');
+          $location.path(url);
+        }
       }
     }
   }
