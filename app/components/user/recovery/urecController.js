@@ -1,7 +1,7 @@
 (function(){
-  var controller = function($scope, dataPublisher){
+  var controller = function($scope, dataPublisher,mixedContentToArray){
     var c = this;
-    c.errors = {};
+    c.errors = [];
     c.success = false;
     c.invalidFields = {
       nameReq : false,
@@ -25,7 +25,7 @@
           jQuery('input').val('');
         }, function(response){
           if(response.status === 422){
-            c.errors = response.data;
+            mixedContentToArray.process(response.data, c.errors,true);
           }
         })
       }

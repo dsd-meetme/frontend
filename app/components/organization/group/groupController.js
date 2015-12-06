@@ -4,13 +4,16 @@
   @param orgResources A service that provides objects that incapsulate restful communication
   logic
   **/
-  var controller = function($routeParams, orgResources,$location,$timeout){
+  var controller = function($routeParams,$location,$timeout, mixedContentToArray){
 
     var c = this;
     //group id
     var id = $routeParams.id;
     c.data = {};
-    c.errors = {};
+    c.errors = {
+      planner : [],
+      info : []
+    };
     c.invalidFields = {
       nameReq : false
     };
@@ -64,7 +67,7 @@
           c.getInfo();
         },function(response){
           if(response.status === 422){
-            c.errors.planner = response.data;
+            mixedContentToArray.process(response.data, c.errors.planner, true);
           }
         });
       }
@@ -91,7 +94,7 @@
             c.getInfo();
           },function(response){
             if(response.status === 422){
-              c.errors.info = response.data;
+              mixedContentToArray.process(response.data, c.errors.info, true);
             }
           });
         }

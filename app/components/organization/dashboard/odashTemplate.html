@@ -124,9 +124,7 @@
             </tbody>
           </table>
           <div class="errorsContainer">
-            <div class="text-danger" ng-repeat="(key,value) in odashC.addGroup.errors">
-              <p ng-repeat="error in value">{{error}}</p>
-            </div>
+            <p class="text-danger" ng-repeat="error in odashC.addGroup.errors">{{error}}</p>
             <p ng-show="odashC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>
             <p ng-show="odashC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one member</p>
             <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="text-danger">Insert one planner</p>
@@ -162,9 +160,7 @@
               <input name="confirmation_password" type="password" class="form-control" ng-model="odashC.addUser.confirmation_password">
               <br/>
               <div class="errorsContainer">
-                <div class="text-danger" ng-repeat="(key,value) in odashC.addUser.errors">
-                  <p ng-repeat="error in value">{{error}}</p>
-                </div>
+                <p ng-repeat="error in odashC.addUser.errors">{{error}}</p>
                 <p ng-show="odashC.addUser.invalidFields.passwordReq" class="text-danger">Insert the user password</p>
                 <p ng-show="odashC.addUser.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>
                 <p ng-show="odashC.addUser.invalidFields.emailReq" class="text-danger">Insert the user email address</p>

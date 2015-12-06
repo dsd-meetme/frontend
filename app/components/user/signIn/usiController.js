@@ -6,9 +6,9 @@
   @param loginService A service that is used to manage the login of a plunner's organization
   @param dataPublisher A service that is used to perform a http post request
   **/
-  var controller = function ($rootScope, $scope, $location, dataPublisher) {
+  var controller = function ($rootScope, $scope, $location, dataPublisher,mixedContentToArray) {
     var c = this;
-    c.errors = {};
+    c.errors = [];
     //an object that encapsulate the validity status of input fields
     c.invalidFields = {
       passwordReq: false,
@@ -37,7 +37,8 @@
         }, function (response) {
           c.loaderVisibility = false;
           if (response.status === 422) {
-            c.errors = response.data;
+            c.errors.length = 0;
+            mixedContentToArray.process(response.data, c.errors,true);
           }
         });
       }

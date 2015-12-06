@@ -4,9 +4,9 @@
   reset of the previous one
   @param dataPublisher A service used to perform an http post request
   **/
-  var controller = function($scope, dataPublisher, $routeParams,$location){
+  var controller = function($scope, $routeParams,$location,mixedContentToArray){
     var c = this;
-    c.errors = {};
+    c.errors = [];
     c.invalidFields = {
       emailReq : false,
       passwordLength : false,
@@ -37,7 +37,7 @@
           },
           function(response){
             if(response.status === 422){
-              c.errors = response.data;
+              mixedContentToArray.process(response.data,c.errors, true);
             }
           }
         )

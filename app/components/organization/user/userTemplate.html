@@ -50,12 +50,8 @@
         <p ng-show="userC.changeNameMail.invalidFields.emailVal">Insert a validmail</p>
         <p ng-show="userC.changePassword.invalidFields.passwordLen">password too short</p>
         <p ng-show="userC.changePassword.invalidFields.passwordMatch">password don't match</p>
-        <div ng-repeat="(key,value) in userC.changeNameMail.errors">
-          <p class="text-danger" ng-repeat="error in value">{{error}}</p>
-        </div>
-        <div ng-repeat="(key,value) in userC.changePassword.errors">
-          <p class="text-danger" ng-repeat="error in value">{{error}}</p>
-        </div>
+        <p class="text-danger" ng-repeat="error in userC.changeNameMail.errors">{{error}}</p>
+        <p class="text-danger" ng-repeat="error in userC.changePassword.errors">{{error}}</p>
         <button class="btn btn-default" ng-show="userC.changeNameMail.inChange" ng-click="userC.changeNameMail.submit()">CHANGE</button>
         <button class="btn btn-default" ng-show="userC.changePassword.inChange" ng-click="userC.changePassword.submit()">CHANGE</button>
         <button class="btn btn-default" ng-show="userC.changeNameMail.inChange" ng-click="userC.changeNameMail.abort()">ABORT</button>

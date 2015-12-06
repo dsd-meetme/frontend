@@ -1,5 +1,5 @@
 (function(){
-  var controller = function($scope, dataPublisher, $routeParams,$cookies){
+  var controller = function($scope,$routeParams,$cookies, dataPublisher,mixedContentToArray){
     c = this;
     c.success = false;
     c.invalidFields = {
@@ -8,6 +8,7 @@
       emailVal : false,
       companyReq : false
     };
+    c.errors = [];
     /*$cookies.remove('auth_token');
     $cookies.put('auth_token',$routeParams.token)*/
     c.reset = function(){
@@ -31,7 +32,8 @@
           },
           function(response){
             if(response.status === 422){
-              c.errors = response.data;
+              c.errors.length = 0;
+              mixedContentToArray.process(response.data, c.errors,true);
             }
           }
         )

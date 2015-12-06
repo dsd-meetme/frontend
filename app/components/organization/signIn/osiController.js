@@ -4,10 +4,10 @@
   @author Giorgio Pea
   @param dataPublisher A service used to perform an http post request
   **/
-  var controller = function($scope,$location,dataPublisher){
+  var controller = function($scope,$location,dataPublisher,mixedContentToArray){
     /*This controller instance */
     var c = this;
-    c.errors = {};
+    c.errors = [];
     //an object that encapsulate the validity status of input fields
     c.invalidFields = {
       passwordReq : false,
@@ -34,7 +34,7 @@
         },function(response){
           c.loaderVisibility = false;
           if(response.status === 422){
-            c.errors = response.data;
+            mixedContentToArray.process(response.data, c.errors,true);
           }
         });
       }

@@ -1,35 +1,32 @@
 <div class="navbar navbar-default">
   <div class="container-fluid">
     <!-- HEADER -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Plunner</a>
-      </div>
-      <div class="navbar-collapse collapse navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">How To</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><button type="button" class="btn btn-default navbar-btn" ng-click="rootC.presentation()">Home</button></li>
-        </ul>
-      </div>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Plunner</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-right">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">How To</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><button type="button" class="btn btn-default navbar-btn" ng-click="rootC.presentation()">Home</button></li>
+      </ul>
     </div>
   </div>
+</div>
 
 <div class="page-content">
-	<form name="recoveryForm" ng-submit="urecC.recover()" novalidate>
-	  <input class="form-control" type="text" name="name" ng-model="urecC.name" placeholder="Insert the name of you company" required>
-	  <br>
-	  <input class="form-control" type="email" name="email" ng-model="urecC.email" placeholder="Insert your mail" required>
-        <br/>
-        <p ng-show="urecC.invalidFields.nameReq" class="text-danger">Insert the name of your company</p>
-        <p ng-show="urecC.invalidFields.emailReq" class="text-danger">Insert an email address</p>
-        <p ng-show="urecC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</p>
-        <p class="text-danger" ng-repeat="error in urecC.errors.company ">{{error}}</p>
-        <div ng-repeat="(key,value) in urecC.errors">
-          <p class="text-danger" ng-repeat="error in value">{{error}}</p>
-        </div>
-        <p ng-show="urecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
-        <br/>
-	  <button class="btn btn-default">Recover Password</button>
+  <form name="recoveryForm" ng-submit="urecC.recover()" novalidate>
+    <input class="form-control" type="text" name="name" ng-model="urecC.name" placeholder="Insert the name of you company" required>
+    <br>
+    <input class="form-control" type="email" name="email" ng-model="urecC.email" placeholder="Insert your mail" required>
+    <br/>
+    <p ng-show="urecC.invalidFields.nameReq" class="text-danger">Insert the name of your company</p>
+    <p ng-show="urecC.invalidFields.emailReq" class="text-danger">Insert an email address</p>
+    <p ng-show="urecC.invalidFields.emailVal" class="text-danger">You have not inserted a valid mail</p>
+    <p class="text-danger" ng-repeat="error in urecC.errors">{{error}}</p>
+    <p ng-show="urecC.success" class="text-success">Success! We have sent you a link that you can use to reset your password</p>
+    <br/>
+    <button class="btn btn-default">Recover Password</button>
 
-	</form>
+  </form>
 </div>

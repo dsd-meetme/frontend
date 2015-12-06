@@ -4,7 +4,7 @@
   @param orgResources A service that provides objects that incapsulate restful communication
   logic
   **/
-  var controller = function($scope,$routeParams,orgResources,$location,$timeout){
+  var controller = function($scope,$routeParams,$location,$timeout,mixedContentToArray,orgResources){
     var c = this;
     //user id
     var id = $routeParams.id;
@@ -20,7 +20,7 @@
       }
     }
     c.changeNameMail = {
-      errors : {},
+      errors : [],
       inChange : false,
       form : $scope.nmeForm,
       invalidFields : {
@@ -42,7 +42,7 @@
         this.invalidFields.nameReq = form.name.$error.required;
         if(!form.$invalid){
           orgResources.user().update({userId: id},jQuery.param(c.dataC)).$promise
-          .then(function(){
+          .then(function(response){
             c.confirmPopup.message = 'Changes successfully made';
             c.confirmPopup.show();
             $timeout(function(){
@@ -50,16 +50,17 @@
             },2000);
             c.changeNameMail.abort();
             c.getInfo();
-          },function(){
+          },function(response){
             if(response.status===422){
-              c.changeNameMail.errors = response.data;
+              c.changeNameMail.errors.length = 0;
+              mixedContentToArray.process(response.data, c.changeNameMail.errors,true);
             }
           });
         }
       }
     };
     c.changePassword = {
-      errors : {},
+      errors : [],
       inChange : false,
       form : $scope.nmeForm,
       invalidFields : {
@@ -79,8 +80,7 @@
         if(!form.$invalid && !this.invalidFields.passwordMatch ){
           c.dataC.pass
           orgResources.user().update({userId: id},jQuery.param(c.dataC)).$promise
-          .then(function(){
-            console.log('entro qui');
+          .then(function(response){
             c.confirmPopup.message = 'Changes successfully made';
             c.confirmPopup.show();
             $timeout(
@@ -89,9 +89,9 @@
               },2000);
               c.changePassword.abort();
               c.getInfo();
-            },function(){
+            },function(response){
               if(response.status===422){
-                c.changePassword.errors = response.data;
+                mixedContentToArray.process(response.data, c.changePassword.errors,true);
               }
             })
           }

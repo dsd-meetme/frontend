@@ -32,9 +32,7 @@
       <p class="text-danger" ng-show="urstC.invalidFields.emailReq">Insert your email</p>
       <p class="text-danger" ng-show="urstC.invalidFields.pwdLength">The pwd must contain at least 6 chars</p>
       <p class="text-danger" ng-show="urstC.invalidFields.emailVal">Insert a valid mail</p>
-      <div ng-repeat="(key,value) in urstC.errors">
-        <p class="text-danger" ng-repeat="error in value">{{error}}</p>
-      </div>
+      <p class="text-danger" ng-repeat="error in urstC.errors">{{error}}</p>
       <p class="text-success" ng-show="urstC.success">You have successfully resetted your password!</p>
       <br>
       <button class="btn btn-primary">CHANGE YOUR PASSWORD</button>

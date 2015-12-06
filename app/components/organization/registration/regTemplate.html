@@ -43,9 +43,7 @@
           The two passwords don't match
         </div>
         <br>
-        <div ng-repeat="(key,value) in regC.errors">
-          <p class="text-danger" ng-repeat="error in value">{{error}}</p>
-        </div>
+        <p class="text-danger" ng-repeat="error in regC.errors">{{error}}</p>
         <button type="submit" class="btn btn-default">Register!</button>
         </br><br>
         <i>Already registered? <a href="/#/orgsignin">Sign in here!</a></i>

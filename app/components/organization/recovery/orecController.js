@@ -3,9 +3,9 @@
   A controller that  manages the registration of an organization
   @param dataPublisher A service used to perform an http post request
   **/
-  var controller = function(dataPublisher,$scope){
+  var controller = function($scope, dataPublisher, mixedContentToArray){
     var c = this;
-    c.errors = {};
+    c.errors = [];
     c.success = false;
     c.invalidFields = {
       emailReq : false,
@@ -27,7 +27,7 @@
           c.success = true;
         },function(response){
           if(response.status === 422) {
-            c.errors = response.data;
+            mixedContentToArray.process(response.data, c.errors, true);
           }
         });
       }

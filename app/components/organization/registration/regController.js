@@ -3,11 +3,11 @@
   A controller that manages a plunner's organization registration
   @param regService A service used to perform the actual plunner's organization registration
   **/
-  var controller = function($scope,$location,dataPublisher){
+  var controller = function($scope,$location,dataPublisher,mixedContentToArray){
     var c = this;
     //In case of account already registered, sets a property to true so that
     //an error can be displayed on the view
-    c.errors = {};
+    c.errors = [];
     //an object that encapsulate the validity status of input fields
     c.invalidFields = {
       nameReq : false,
@@ -41,7 +41,7 @@
           },
           function(response){
             if(response.status===422){
-              c.errors = response.data;
+              mixedContentToArray.process(response.data, c.errors, true);
             }
           }
         );

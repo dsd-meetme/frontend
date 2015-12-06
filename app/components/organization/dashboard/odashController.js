@@ -7,7 +7,7 @@
   logic
   @param arrayToUrlParams A service that encodes an array in a url like form
   **/
-  var controller = function ($scope, logoutService, orgResources, arrayToUrlParams, $cookies,$timeout) {
+  var controller = function ($scope, logoutService, orgResources, arrayToUrlParams, $cookies,$timeout, mixedContentToArray) {
     var c = this;
     c.data = {};
     c.confirmPopup = {
@@ -24,10 +24,6 @@
       .then(function (response) {
         c.data.users = response;
         c.getGroups();
-      },
-      function (response) {
-        c.errors.unauthorized = (response.status === 401);
-        c.errors.forbidden = (response.status === 403);
       });
     };
     //Get groups
@@ -43,7 +39,7 @@
       members: [],
       name: '',
       desc: '',
-      errors: {},
+      errors: [],
       invalidFields: {
         nameReq: false,
         plannerReq: false,
@@ -90,7 +86,7 @@
               jQuery('#addGroup input:checked').removeAttr('checked');
             }, function (response) {
               if(response.status === 422){
-                this.errors = response.data;
+                mixedContentToArray.process(response.data, this.errors, true);
               }
             })
           },
@@ -106,7 +102,7 @@
       name: '',
       email: '',
       password: '',
-      errors: {},
+      errors: [],
       confirmation_password: '',
       invalidFields: {
         nameReq: false,
@@ -151,8 +147,7 @@
           },
           function (response) {
             if(response.status === 422){
-
-              c.addUser.errors = response.data;
+              mixedContentToArray.process(response.data, this.errors, true);
             }
           });
         }

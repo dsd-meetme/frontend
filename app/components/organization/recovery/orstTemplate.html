@@ -27,9 +27,7 @@
       <p ng-show="orstC.invalidFields.emailReq">Insert your email</p>
       <p ng-show="orstC.invalidFields.passwordLength">The pwd must contain at least 6 chars</p>
       <p ng-show="orstC.invalidFields.emailVal">Insert a valid mail</p>
-      <div ng-repeat="(key,value) in orstC.errors">
-        <p class="text-danger" ng-repeat="error in value">{{error}}</p>
-      </div>
+      <p ng-repeat="error in orstC.errors"> in value">{{error}}</p>
       <br/>
       <button class="btn btn-primary">CHANGE YOUR PASSWORD</button>
 
