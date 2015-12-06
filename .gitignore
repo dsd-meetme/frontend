@@ -124,6 +124,3 @@ _ide_helper.php
 
 ### DEPLOYING ###
 .git_utility
-
-#karma config
-karma.conf.js

@@ -22,8 +22,8 @@ module.exports = function(config) {
       'node_modules/angular-resource/angular-resource.min.js',
       'node_modules/jwt-decode/build/jwt-decode.min.js',
       'app/app.module.js',
-      'app/*/*/*.js',
-      'test/unit/*/*.js'
+      'app/*/*/*/*.js',
+      'test/unit/*/*/*.js'
     ],
 
     plugins: [
