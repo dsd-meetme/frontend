@@ -2,18 +2,18 @@
   <div class="container-fluid">
     <!-- HEADER -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Plunner</a>
+      <a class="navbar-brand" href="#">PLUNNER</a>
     </div>
     <div class="navbar-collapse collapse navbar-right">
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a href="/#/organization/profile">
             <span class="glyphicon glyphicon-user"></span>
-            Organisation Name
+            Organization Name
           </a>
         </li>
-        <li><a href="#">How To</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#" class="navbar-right-item">How To</a></li>
+        <li><a href="#" class="navbar-right-item">Contact</a></li>
         <li>
           <button type="button" class="btn btn-danger navbar-btn" ng-click="odashC.logout()">Sign Out
           </button>
@@ -23,7 +23,15 @@
   </div>
 </div>
 <div class="page-content">
-  <div>
+  <div class="page-content-top">
+    <div class="btn-group btn-group-lg" role="group" aria-label="...">
+    <button type="button" ng-click="odashC.showEmployees()" class="btn btn-default">Users</button>
+    <button type="button" ng-click="odashC.showGroups()" class="btn btn-default">Groups</button>
+    </div>
+  </div>
+  </br><br>
+
+  <div ng-show="odashC.employeeSection">
     <h2>Users</h2><br>
     <ul class="list-inline list-unstyled">
       <li>
@@ -60,11 +68,8 @@
       </tbody>
     </table>
   </div>
-  <br>
-  <hr>
-  <div>
-    <h2>Groups</h2>
-    <br/>
+  
+  <div ng-show="odashC.groupSection">
     <ul class="list-inline list-unstyled">
       <li>
         <input type="text" class="form-control" placeholder="Search for..." ng-model="searchGroup">

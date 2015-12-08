@@ -34,6 +34,14 @@
         c.data.groups = response;
       });
     };
+    c.showEmployees = function() {
+      c.employeeSection = true;
+      c.groupSection = false;
+    }
+    c.showGroups = function() {
+      c.employeeSection = false;
+      c.groupSection = true;
+    }
     c.addGroup = {
       planner: null,
       members: [],
