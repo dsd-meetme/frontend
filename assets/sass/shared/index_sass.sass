@@ -4,9 +4,16 @@
 
 body
 	font-family: $font-stack
+	color: $main-color
+
+a
+	color: $second-color
+
+h2
+	font-style: bold
 
 div.page-content
-	margin: $small-margin $large-margin $small-margin $large-margin
+	margin: $large-norm $large-norm $small-norm $large-norm
 
 div.page-content.page-content-top
 	background-color: $main-color
@@ -14,80 +21,20 @@ div.page-content.page-content-top
 
 div.content-left
 	float: left
-	margin-left: $small-margin
+	margin-left: $small-norm
 
 div.content-left.organization
 	background-color: light-blue
 
-div.content-right
+.content-right
 	float: right
-	margin-right: $small-margin
-
-div.form-register
-	width: 400px
-	margin: 0 auto
-	padding: 0 50 0 50
-    border-style: solid
-    border-radius: 25
-
-div.form-signin
-	width: 400px
-	margin: 0 auto
-	padding: 0 50 0 50
-    border-style: solid
-    border-radius: 25
-
-.top-banner
-	background-color: $second-color
-	border: 0
-	border-radius: 0
-	margin: 0 0 0 0
-	padding: 10 0 10 0 
-	height: 50px
-
-.top-banner2
-	background-color: $edit-color
-	border: 0
-	border-radius: 0
-	margin: 0 0 0 0
-	padding: 10 0 10 0 
-	height: 50px
-
+	margin-right: $small-norm
+ 
 .col-md-4
 	text-align: center
 
-.banner-button
-	border-left: thin solid black
 
 .img-country
 	height: 30px
 	width: 40px
 
-.navbar-default
-	-webkit-box-shadow: 0px 10px 29px -10px rgba(0,0,0,0.75)
-	-moz-box-shadow: 0px 10px 29px -10px rgba(0,0,0,0.75)
-	box-shadow: 0px 10px 29px -10px rgba(0,0,0,0.75)
-
-	background-color: $main-color
-	border: 0
-	border-radius: 0
-
-
-.navbar-default .navbar-nav>li>a
-	color: $white
-
-.navbar-default .navbar-brand
-	color: $white
-
-.btn-primary
-	background-color: $main-color
-	border-color: $white
-
-.btn-primary:hover
-	background-color: $main-color
-
-.btn-default
-	border-color: $main-color
-
-.btn-default:hover
-	color: $main-color

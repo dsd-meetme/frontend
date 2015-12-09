@@ -19,23 +19,25 @@
     </div>
   </div>
 </div>
-<div ng-show="opC.showCurrentState" class="top-banner">
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4"><b>CURRENT STATE</b></div>
-    <div class="col-md-4"><a href="" class="banner-button">EDIT</a></div>
+<div class="container">
+  <div ng-show="opC.showCurrentState" class="top-banner">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"><b>CURRENT STATE</b></div>
+      <div class="col-md-4"><a href="" class="banner-button">EDIT</a></div>
+    </div>
+  </div>
+
+  <div ng-show="opC.showEditMode" class="top-banner2">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"><b>EDIT MODE</b></div>
+      <div class="col-md-4"></div>
+    </div>
   </div>
 </div>
 
-<div ng-show="opC.showEditMode" class="top-banner2">
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4"><b>EDIT MODE</b></div>
-    <div class="col-md-4"></div>
-  </div>
-</div>
-
-<div class="page-content">
+<div class="page-content container">
 
 detected :
         <img class="img-country" src="assets/img/italia.png">Milano - ITALY<br>09:00pm
