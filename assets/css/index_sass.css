@@ -5,6 +5,10 @@ body {
 div.page-content {
   margin: 30px 80px 30px 80px; }
 
+div.page-content.page-content-top {
+  background-color: #6858df;
+  opacity: 0.6; }
+
 div.content-left {
   float: left;
   margin-left: 30px; }
@@ -29,3 +33,27 @@ div.form-signin {
   padding: 0 50 0 50;
     padding-border-style: solid;
     padding-border-radius: 25; }
+
+.navbar-default {
+  background-color: #6858df;
+  border: 0;
+  border-radius: 0; }
+
+.navbar-default .navbar-nav > li > a {
+  color: #FFFFFF; }
+
+.navbar-default .navbar-brand {
+  color: #FFFFFF; }
+
+.btn-primary {
+  background-color: #6858df;
+  border-color: #FFFFFF; }
+
+.btn-primary:hover {
+  background-color: #6858df; }
+
+.btn-default {
+  border-color: #6858df; }
+
+.btn-default:hover {
+  color: #6858df; }

@@ -11,7 +11,7 @@
             <span class="glyphicon glyphicon-user"></span> Organization Name</a></li>
           <li><a href="#">How To</a></li>
           <li><a href="#">Contact</a></li>
-          <li><button type="button" class="btn btn-danger navbar-btn" ng-click="opC.logout()">Sign Out</button></li>
+          <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/presentation">Sign Out</button></li>
         </ul>
       </div>
     </div>
@@ -19,88 +19,58 @@
 </div>
 
 <div class="page-content">
-
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6"><h1><b>{{opC.data.name}}</b></h1></div>
-    <div class="col-md-3"></div>
+  <h3>My profile</h3>
+  <div>
+    <br>
+    <div>Name: {{opC.data.name}}</div>
+    <br>
+    <div>Email: {{opC.data.email}}</div>
+    <br>
+    <div>Password: .......</div>
+    <br><br>
+    <button data-target="#editProfile" data-toggle="modal" class="btn btn-default">Change</button>
   </div>
-  <br>
-  <div class="row">
-    <div class="col-md-3">Registration Email: </div>
-    <div class="col-md-6">{{opC.data.email}}</div>
-    <div class="col-md-3"></div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-3">Password: </div>
-    <div class="col-md-6">XXXXXXX</div>
-    <div class="col-md-3">
-      <button class="btn btn-default" data-toggle="modal" data-target="#editProfile"><a href>
-        <span style="font-size:30px" class="glyphicon glyphicon-wrench"></span> Edit my Profile
-      </a></button>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6"></div>
-    <div class="col-md-3">
-      <button class="btn btn-danger" data-toggle="modal" data-target="#deleteOrganisation">Delete this account</button></div>
-  </div>
-  
-  <div id="editProfile" class="modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          Edit my Profile
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <form name="editProfileForm" ng-submit="opC.editProfile.submit()" novalidate>
-          <div class="modal-body">
-              <p>Type here to change your Organization name</p>
-              <input name="name" type="text" class="form-control" ng-model="opC.editProfile.name" placeholder="{{opC.data.name}}">
-              <hr>
-              <p>Type here to change Email address</p>
-              <input name="email" type="text" class="form-control" ng-model="opC.editProfile.email" placeholder="{{opC.data.email}}">
-              <p ng-show="opC.editProfile.invalidFields.emailVal" class="text-danger">The new email address is not valid</p>
-              <hr>
-              <p>Type here to change Password</p>
-              <input name="newPwd" type="password" class="form-control" ng-model="opC.editProfile.newPwd">
-              <p ng-show="opC.editProfile.invalidFields.newPwdReq" class="text-danger">Your new password must contain at least 6 characters</p>
-              <p>Confirm new Password</p>
-              <input name="newPwdCheck" type="password" class="form-control" ng-model="opC.editProfile.newPwdCheck">
-              <p ng-show="opC.editProfile.invalidFields.newPwdCheckReq" class="text-danger">You typed two different new passwords</p>
-              <hr>
-              <i>Mandatory for changes validation</i>
-              <p>Current Password</p>
-              <input name="currentPwd" type="password" class="form-control" ng-model="opC.editProfile.pwd">
-              <p ng-show="opC.editProfile.invalidFields.oneChangeReq" class="text-danger">You didn't change any of your datas</p>
-              <p ng-show="opC.editProfile.invalidFields.pwdReq" class="text-danger">Password not valid</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-          </div>
-        </form>
+</div>
+<div id="editProfile" class="modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="display:inline-block; margin:5px 0">Edit my profile</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-    </div>
-  </div>
-
-  <div id="deleteOrganisation" class="modal" role="dialog" tabindex="-2">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          Delete my Organisation Acccount
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
+      <form name="editProfileForm" ng-submit="opC.editProfile.submit()" novalidate>
         <div class="modal-body">
-          Are you sure you want to delete your account?<br><br>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-danger" ng-click="opC.deleteOrg()">Confirm</button>
+            <p>Organization name</p>
+            <input name="name" type="text" class="form-control" ng-model="opC.dataCopy.name" placeholder="Insert a new name for your organization">
+            <hr>
+            <p>Password</p>
+            <input name="newPwd" type="password" class="form-control" ng-model="opC.editProfile.password" placeholder="Insert a new password">
+            <br>
+            <p>Confirm new Password</p>
+            <input name="newPwdCheck" type="password" class="form-control" placeholder="Confirm your new password" ng-model="opC.editProfile.password_confirmation">
+            <br>
+            <p ng-show="opC.editProfile.invalidFields.passwordMatch" class="text-danger">The two inserted password don't match</p>
+            <p ng-show="opC.editProfile.invalidFields.passwordLength" class="text-danger">Your password must contain at least 6 characters</p>
         </div>
-      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Abort</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
     </div>
   </div>
-
+</div>
+<div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+        <div class="modal-body">
+            <h3>Changes successfully made</h3>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+  </div>
 </div>

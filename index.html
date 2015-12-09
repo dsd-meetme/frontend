@@ -1,68 +1,70 @@
 <!DOCTYPE html>
 <html ng-app="Plunner">
 <head>
-  <title>Plunner</title>
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/index_sass.css">
-  <link rel="stylesheet" href="assets/css/presentation.css">
-  <link rel="stylesheet" href="assets/css/form.css">
-  <link rel="stylesheet" href="assets/jquery-ui.min.css">
-  <link rel="stylesheet" href="assets/css/fullcalendar.min.css">
+    <title>Plunner</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/index_sass.css">
+    <link rel="stylesheet" href="assets/css/presentation.css">
+    <link rel="stylesheet" href="assets/css/form.css">
+    <link rel="stylesheet" href="assets/jquery-ui.min.css">
+    <link rel="stylesheet" href="assets/css/fullcalendar.min.css">
+    <base href="/"/>
 </head>
 <body ng-controller="rootController as rootC">
-  <style>
-  .date-range-selected > .ui-state-active,
-  .date-range-selected > .ui-state-default {
-   background: none;
-   background-color: lightsteelblue;
-  }
-  </style>
+<style>
+    .date-range-selected > .ui-state-active,
+    .date-range-selected > .ui-state-default {
+        background: none;
+        background-color: lightsteelblue;
+    }
+</style>
 
-  <div ng-show="rootC.comErrors.general" class="bg-danger text-center" style="padding: 7px 0 7px 0">
-      A communication error occured, please refresh the page
-  </div>
-  <div ng-show="rootC.comErrors.auth" class="bg-danger text-center" style="padding: 7px 0 7px 0">
+<div ng-if="rootC.comErrors.general" class="bg-danger text-center" style="padding: 7px 0 7px 0">
+    A communication error occured, please refresh the page
+</div>
+<div ng-if="rootC.comErrors.auth" class="bg-danger text-center" style="padding: 7px 0 7px 0">
     You're not authorized to access these data
-  </div>
-  <div ng-view>
-  <!-- TEMPLATE INJECTED -->
-  </div>
-  <!-- FOOTER -->
+</div>
+<div ng-view>
+    <!-- TEMPLATE INJECTED -->
+</div>
+<!-- FOOTER -->
 
-  <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-  <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
-  <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
-  <script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
-  <script type="text/javascript" src="node_modules/jwt-decode/build/jwt-decode.min.js"></script>
-  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="node_modules/moment/min/moment.min.js"></script>
-  <script type="text/javascript" src="assets/js/fullcalendar.min.js"></script>
-  <script type="text/javascript" src="app/app.module.js"></script>
-  <script type="text/javascript" src="app/app.routes.js"></script>
-  <script type="text/javascript" src="app/app.run.js"></script>
-  <script type="text/javascript" src="app/app.interceptors.js"></script>
-  <script type="text/javascript" src="app/shared/utils/mixedContentToArray.js"></script>
-  <script type="text/javascript" src="app/components/global/rootController.js"></script>
-  <script type="text/javascript" src="app/components/organization/signIn/osiController.js"></script>
-  <script type="text/javascript" src="app/components/organization/registration/regController.js"></script>
-  <script type="text/javascript" src="app/components/organization/dashboard/odashController.js"></script>
-  <script type="text/javascript" src="app/shared/communication/logoutService.js"></script>
-  <script type="text/javascript" src="app/components/organization/profile/opController.js"></script>
-  <script type="text/javascript" src="app/components/organization/recovery/orecController.js"></script>
-  <script type="text/javascript" src="app/components/user/signIn/usiController.js"></script>
-  <script type="text/javascript" src="app/shared/resources/orgResources.js"></script>
-  <script type="text/javascript" src="app/components/presentation/presController.js"></script>
-  <script type="text/javascript" src="app/components/organization/user/userController.js"></script>
-  <script type="text/javascript" src="app/components/organization/group/groupController.js"></script>
-  <script type="text/javascript" src="app/components/user/dashboard/udashController.js"></script>
-  <script type="text/javascript" src="app/components/user/meeting/nmController.js"></script>
-  <script type="text/javascript" src="app/shared/utils/arrayToUrlParams.js"></script>
-  <script type="text/javascript" src="app/components/organization/recovery/orstController.js"></script>
-  <script type="text/javascript" src="app/components/user/recovery/urecController.js"></script>
-  <script type="text/javascript" src="app/shared/communication/dataPublisher.js"></script>
-  <script type="text/javascript" src="app/components/user/recovery/urstController.js"></script>
-  <script type="text/javascript" src="app/components/user/composeSchedule/cschedController.js"></script>
+<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="node_modules/jwt-decode/build/jwt-decode.min.js"></script>
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="node_modules/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="assets/js/fullcalendar.min.js"></script>
+<script type="text/javascript" src="app/app.module.js"></script>
+<script type="text/javascript" src="app/app.routes.js"></script>
+<script type="text/javascript" src="app/app.run.js"></script>
+<script type="text/javascript" src="app/app.interceptors.js"></script>
+<script type="text/javascript" src="app/shared/utils/mixedContentToArray.js"></script>
+<script type="text/javascript" src="app/components/global/rootController.js"></script>
+<script type="text/javascript" src="app/components/organization/signIn/osiController.js"></script>
+<script type="text/javascript" src="app/components/organization/registration/regController.js"></script>
+<script type="text/javascript" src="app/components/organization/dashboard/odashController.js"></script>
+<script type="text/javascript" src="app/shared/communication/logoutService.js"></script>
+<script type="text/javascript" src="app/components/organization/profile/opController.js"></script>
+<script type="text/javascript" src="app/components/organization/recovery/orecController.js"></script>
+<script type="text/javascript" src="app/components/user/signIn/usiController.js"></script>
+<script type="text/javascript" src="app/shared/resources/orgResources.js"></script>
+<script type="text/javascript" src="app/components/presentation/presController.js"></script>
+<script type="text/javascript" src="app/components/organization/user/userController.js"></script>
+<script type="text/javascript" src="app/components/organization/group/groupController.js"></script>
+<script type="text/javascript" src="app/components/user/dashboard/udashController.js"></script>
+<script type="text/javascript" src="app/components/user/meeting/nmController.js"></script>
+<script type="text/javascript" src="app/shared/utils/arrayToUrlParams.js"></script>
+<script type="text/javascript" src="app/components/organization/recovery/orstController.js"></script>
+<script type="text/javascript" src="app/components/user/recovery/urecController.js"></script>
+<script type="text/javascript" src="app/shared/communication/dataPublisher.js"></script>
+<script type="text/javascript" src="app/components/user/recovery/urstController.js"></script>
+<script type="text/javascript" src="app/components/user/composeSchedule/cschedController.js"></script>
+<script type="text/javascript" src="app/shared/utils/logoutDirective.js"></script>
 </body>
 </html>
