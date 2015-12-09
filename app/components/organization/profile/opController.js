@@ -25,7 +25,7 @@
           if(!form.$invalid && !this.invalidFields.passwordMatch){
             orgResources.organization.update().$promise
             .then(
-              function(){
+              function(response){
                 jQuery('#editProfile').modal('hide');
                 jQuery('#confirmPopup').modal('show');
                 $timeout(function(){
@@ -33,6 +33,10 @@
                 },2000);
                 jQuery('#editProfile input').val('');
                 c.editProfile.name = c.dataCopy.name;
+              }, function(response){
+                if(response.status === 422){
+                  mixedContentToArray.process(response.data, c.errors )
+                }
               }
             )
           }

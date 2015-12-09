@@ -51,6 +51,7 @@
             <br>
             <p ng-show="opC.editProfile.invalidFields.passwordMatch" class="text-danger">The two inserted password don't match</p>
             <p ng-show="opC.editProfile.invalidFields.passwordLength" class="text-danger">Your password must contain at least 6 characters</p>
+            <p class="text-danger" ng-repeat="error in opC.errors">{{error}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Abort</button>
