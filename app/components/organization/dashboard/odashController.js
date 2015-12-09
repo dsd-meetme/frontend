@@ -13,10 +13,6 @@
     c.confirmPopup = {
       message : ''
     };
-    //Logout
-    c.logout = function () {
-      logoutService.logout('/osignin');
-    };
     //Get employees
     c.getUsers = function () {
       //employees restful index

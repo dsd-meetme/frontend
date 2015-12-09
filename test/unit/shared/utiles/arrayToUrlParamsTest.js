@@ -11,7 +11,7 @@ describe('arrayToUrlParams service tests', function(){
     }
     catch(e){
       flag = true;
-      //expect(e.constructor.name).toEqual("InvalidArgumentException");
+      expect(e.constructor.name).toEqual("InvalidArgumentException");
       expect(e.argumentIndex).toEqual(0);
     }
     expect(flag).toBe(true);

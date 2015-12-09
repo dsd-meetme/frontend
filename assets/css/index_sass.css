@@ -34,6 +34,7 @@ div.form-signin {
     padding-border-style: solid;
     padding-border-radius: 25; }
 
+<<<<<<< HEAD
 .top-banner {
   background-color: #b6abcc;
   border: 0;
@@ -75,6 +76,7 @@ div.form-signin {
   color: #FFFFFF; }
 
 .btn-primary {
+<<<<<<< HEAD
   background-color: #5e6371;
   border-color: #FFFFFF; }
 
@@ -86,3 +88,10 @@ div.form-signin {
 
 .btn-default:hover {
   color: #5e6371; }
+
+.btn-primary:hover {
+  background-color: #6858df; }
+
+.btn-default {
+  border-color: #6858df; }
+
