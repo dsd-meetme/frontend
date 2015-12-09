@@ -16,17 +16,23 @@ gulp.task('login_sass',function(){
     .pipe(gulp.dest('assets/css'))
 })
 
-gulp.task('presentation_sass',function(){
-  return gulp.src('assets/sass/components/presentation.sass')
+gulp.task('component_sass',function(){
+  return gulp.src('assets/sass/components/*.sass')
     .pipe(sass([{ includePaths: ['sass'], outputStyle: 'expanded'}]))
     .pipe(gulp.dest('assets/css'))
 })
-
+/*
 gulp.task('form_sass',function(){
   return gulp.src('assets/sass/components/form.sass')
     .pipe(sass([{ includePaths: ['sass'], outputStyle: 'expanded'}]))
     .pipe(gulp.dest('assets/css'))
 })
+gulp.task('presentation_sass',function(){
+  return gulp.src('assets/sass/components/presentation.sass')
+    .pipe(sass([{ includePaths: ['sass'], outputStyle: 'expanded'}]))
+    .pipe(gulp.dest('assets/css'))
+})
+*/
 gulp.task('concat',function(){
   return gulp.src('app/components/*/*/*.js')
       .pipe(concat('controllers.js'))
@@ -40,6 +46,6 @@ gulp.task('broswer-sync',function(){
     });
 })
 
-gulp.task('default',['index_sass','login_sass','presentation_sass','form_sass','broswer-sync'], function(){
+gulp.task('default',['index_sass','login_sass','component_sass','broswer-sync'], function(){
   gulp.watch('assets/sass/*/*',['login_sass'])
 })

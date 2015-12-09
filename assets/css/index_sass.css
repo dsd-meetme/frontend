@@ -5,6 +5,10 @@ body {
 div.page-content {
   margin: 30px 80px 30px 80px; }
 
+div.page-content.page-content-top {
+  background-color: #5e6371;
+  opacity: 0.6; }
+
 div.content-left {
   float: left;
   margin-left: 30px; }
@@ -29,3 +33,56 @@ div.form-signin {
   padding: 0 50 0 50;
     padding-border-style: solid;
     padding-border-radius: 25; }
+
+.top-banner {
+  background-color: #b6abcc;
+  border: 0;
+  border-radius: 0;
+  margin: 0 0 0 0;
+  padding: 10 0 10 0;
+  height: 50px; }
+
+.top-banner2 {
+  background-color: #cceac5;
+  border: 0;
+  border-radius: 0;
+  margin: 0 0 0 0;
+  padding: 10 0 10 0;
+  height: 50px; }
+
+.col-md-4 {
+  text-align: center; }
+
+.banner-button {
+  border-left: thin solid black; }
+
+.img-country {
+  height: 30px;
+  width: 40px; }
+
+.navbar-default {
+  -webkit-box-shadow: 0px 10px 29px -10px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 10px 29px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 10px 29px -10px rgba(0, 0, 0, 0.75);
+  background-color: #5e6371;
+  border: 0;
+  border-radius: 0; }
+
+.navbar-default .navbar-nav > li > a {
+  color: #FFFFFF; }
+
+.navbar-default .navbar-brand {
+  color: #FFFFFF; }
+
+.btn-primary {
+  background-color: #5e6371;
+  border-color: #FFFFFF; }
+
+.btn-primary:hover {
+  background-color: #5e6371; }
+
+.btn-default {
+  border-color: #5e6371; }
+
+.btn-default:hover {
+  color: #5e6371; }
