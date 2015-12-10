@@ -25,8 +25,10 @@
         <br>
         <input class="text-form" name="password" type="password" required ng-model="osiC.password" placeholder="Password"><br>
       </div>
-      
-      <input type="checkbox" ng-model="osiC.rmbMe"> Remember Me<br><br>
+      <div class="checkbox">
+        <input type="checkbox" ng-model="osiC.rmbMe"> 
+        <label>Remember Me</label></div>
+      <br><br>
       
       <div ng-show="osiC.loaderVisibility" class="text-right">
         <img class="image-loader" src="assets/img/loader.gif" alt="">

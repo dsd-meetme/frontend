@@ -20,7 +20,7 @@
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  border-bottom: 1; }
+  border-bottom: thin solid #000000; }
 
 .form-fields {
   margin: 30px 0 30px 0; }

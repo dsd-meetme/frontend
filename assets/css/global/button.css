@@ -1,3 +1,17 @@
+input[type=checkbox] {
+  display: none; }
+
+.checkbox label:before {
+  border-radius: 3px; }
+
+input[type=checkbox]:checked + label:before {
+  content: "\2713";
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  font-size: 15px;
+  color: #f3f3f3;
+  text-align: center;
+  line-height: 15px; }
+
 .btn-primary {
   background-color: #ffa500;
   opacity: 0.7;
