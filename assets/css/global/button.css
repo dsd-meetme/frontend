@@ -28,11 +28,10 @@ input[type=checkbox]:checked + label:before {
 .btn-default {
   background-color: white;
   color: #000000;
-  opacity: 0.7;
   border-width: 5px;
+  border-radius: 5px;
   border-color: #000000; }
 
 .btn-default:hover {
   color: #000000;
-  opacity: 0.7;
   border-color: #000000; }

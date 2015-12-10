@@ -9,15 +9,14 @@
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  border-bottom: 30px;
-  border-color: #000000;
+  border-bottom: 2px solid #ffa500;
   border-radius: 0; }
 
 .navbar-default .navbar-nav > li > a {
   color: #000000; }
 
 .navbar-default .navbar-brand {
-  color: #ffa500;
+  color: #000000;
   font-weight: 900; }
 
 .top-banner {
