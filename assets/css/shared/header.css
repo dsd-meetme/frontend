@@ -17,7 +17,8 @@
   color: #000000; }
 
 .navbar-default .navbar-brand {
-  color: #ffa500; }
+  color: #ffa500;
+  font-weight: 900; }
 
 .top-banner {
   background-color: #ffa500;

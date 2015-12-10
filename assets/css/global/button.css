@@ -8,8 +8,10 @@
   opacity: 1;
   border: 0; }
 
+.signin-btn {
+  width: 150px; }
+
 .btn-default {
-  width: 150px;
   background-color: white;
   color: #000000;
   opacity: 0.7;
