@@ -18,8 +18,10 @@
       var cur = -1, prv = -1;
       jQuery('#meetingDatepicker').datepicker(
         {
+          minDate : 0,
           beforeShowDay: function ( date ) {
-            return [true, ( (date.getTime() >= Math.min(prv, cur) && date.getTime() <= Math.max(prv, cur)) ? 'date-range-selected' : '')];
+            var now = new Date();
+            return [true, ( (date.getTime() >= Math.min(prv, cur) && date.getTime() <= Math.max(prv, cur) && date.getTime()> now.getTime()) ? 'date-range-selected' : '')];
           },
 
           onSelect: function ( dateText, inst ) {
