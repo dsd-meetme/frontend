@@ -2,6 +2,9 @@
 @import '../global/size.sass'
 @import '../global/fonts.sass'
 
+.ng-scope
+	position: relative
+
 body
 	font-family: $font-stack
 	color: $main-color
@@ -9,14 +12,10 @@ body
 a
 	color: $second-color
 
-h2
-	font-weight: bold
-
 div.page-content
-	margin: $large-norm $large-norm $small-norm $large-norm
+	margin: 0 $large-norm 0 $large-norm
 
 div.page-content.page-content-top
-	background-color: $main-color
 	opacity: 0.6
 
 div.content-left
@@ -33,8 +32,9 @@ div.content-left.organization
 .col-md-4
 	text-align: center
 
-
 .img-country
 	height: 30px
 	width: 40px
 
+.light
+	font-weight: 300

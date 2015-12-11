@@ -8,8 +8,6 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a href="/#/organization/profile">
-            <!--<span class="glyphicon glyphicon-user"></span>-->
-            <img class="img-profile" src="assets/img/company-logo.jpg">
             Organization Name
           </a>
         </li>
@@ -23,167 +21,165 @@
     </div>
   </div>
 </div>
+
+<div class="top-dash-banner">
+  <div class="user-gpe-banner"></div>
+  <div class="btn-group user-gpe" role="group" aria-label="...">
+    <button type="button" ng-class="{selectedSection : odashC.employeeSection}" ng-click="odashC.showEmployees()" class="btn btn-default">USERS</button>
+    <button type="button" ng-class="{selectedSection : odashC.groupSection}" ng-click="odashC.showGroups()" class="btn btn-default">GROUPS</button>
+  </div>
+</div>
+</br><br>
 <div class="page-content container">
-  <div class="page-content-top">
-    <div class="btn-group btn-group-lg" role="group" aria-label="...">
-    <button type="button" ng-click="odashC.showEmployees()" class="btn btn-default">Users</button>
-    <button type="button" ng-click="odashC.showGroups()" class="btn btn-default">Groups</button>
-    </div>
-  </div>
-  </br><br>
-
   <div ng-show="odashC.employeeSection">
-    <h2>Users</h2><br>
-    <ul class="list-inline list-unstyled">
-      <li>
-        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchUser">
-      </li>
-      <li style="margin-left:30px">
-        <button class="btn btn-default" ng-click="odashC.seeAllEmp()">
-          See all users
-        </button>
-      </li>
-      <li class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addUser" style="margin-left:30px; font-size:27px; vertical-align: middle; padding-bottom: 4px">
-      </li>
-    </ul>
-    <br>
-    <table class="table">
-      <thead>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Group</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr ng-repeat="user in odashC.data.users | filter:searchUser | limitTo:10">
-          <td>{{user.name}}</td>
-          <td>{{user.email}}</td>
-          <td>
-            <a href="/#/organization/groups/{{group.id}}" ng-repeat="group in user.groups">{{group.name}},
-            </a>
-          </td>
-          <td>
-            <a href="/#/organization/users/{{user.id}}" class="glyphicon glyphicon-chevron-right"></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="row action-section">
+      <div class="col-md-4">
+        <input type="text" class="search-field" placeholder="Search for..." ng-model="searchUser">
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-default" ng-click="odashC.seeAllEmp()">See all users</button>
+      </div>
+      <div class="col-md-4">
+        <span class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addUser"></span>
+      </div>
+    </div>
+  <br>
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Group</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in odashC.data.users | filter:searchUser | limitTo:10">
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>
+          <a href="/#/organization/groups/{{group.id}}" ng-repeat="group in user.groups">{{group.name}},
+          </a>
+        </td>
+        <td>
+          <a href="/#/organization/users/{{user.id}}" class="glyphicon glyphicon-chevron-right"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-  <div ng-show="odashC.groupSection">
-    <ul class="list-inline list-unstyled">
-      <li>
-        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchGroup">
-      </li>
-      <li style="margin-left:30px">
-        <button class="btn btn-default" ng-click="odashC.seeAllGroups()">
-          See all groups
-        </button>
-      </li>
-      <li class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addGroup" style="margin-left:30px; font-size:27px; vertical-align: middle; padding-bottom: 4px">
-      </li>
-    </ul>
-    <br>
-    <table class="table">
-      <thead>
-        <th>Name</th>
-        <th>Planner</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr ng-repeat="group in odashC.data.groups | filter:searchGroup | limitTo: 10">
-          <td>{{group.name}}</td>
-          <td><a href="/#/organization/employees/{{group.planner_id}}">{{group.planner_name}}</a></td>
-          <td><a class="glyphicon glyphicon-chevron-right" href="/#/organization/groups/{{group.id}}"></a></td>
-        </tr>
-      </tbody>
-    </table>
+<div ng-show="odashC.groupSection">
+  <div class="row action-section">
+    <div class="col-md-4">
+      <input type="text" class="search-field" placeholder="Search for..." ng-model="searchGroup">
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-default" ng-click="odashC.seeAllGroups()">See all groups</button>
+    </div>
+    <div class="col-md-4">
+      <span class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addGroup"></span>
+    </div>
   </div>
-  <div id="addGroup" class="modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 style="display: inline-block;">Add group</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <br>
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>Planner</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="group in odashC.data.groups | filter:searchGroup | limitTo: 10">
+        <td>{{group.name}}</td>
+        <td><a href="/#/organization/employees/{{group.planner_id}}">{{group.planner_name}}</a></td>
+        <td><a class="glyphicon glyphicon-chevron-right" href="/#/organization/groups/{{group.id}}"></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div id="addGroup" class="modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="display: inline-block;">Add group</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p>Name</p>
+        <input type="search" class="form-control" ng-model="odashC.addGroup.name">
+        <br/>
+        <p>Description</p>
+        <input type="text" class="form-control" ng-model="odashC.addGroup.desc">
+        <br/>
+        <table class="table">
+          <thead>
+            <th></th>
+            <th>Members</th>
+            <th>Planner</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in odashC.data.users | filter: searchedPlanner">
+              <td>{{user.name}}</td>
+              <td ng-click="odashC.addGroup.selectPlanner(user.id)"><input type="checkbox" ng-model="odashC.addGroup.members[user.id]">
+              </td>
+              <td ng-click=""><input type="radio" name="plannerasd" ng-model="odashC.addGroup.planner" ng-value="user.id">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="errorsContainer">
+          <p class="text-danger" ng-repeat="error in odashC.addGroup.errors">{{error}}</p>
+          <p ng-show="odashC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>
+          <p ng-show="odashC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one member</p>
+          <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="text-danger">Insert one planner</p>
         </div>
-        <div class="modal-body">
-          <p>Name</p>
-          <input type="search" class="form-control" ng-model="odashC.addGroup.name">
-          <br/>
-          <p>Description</p>
-          <input type="text" class="form-control" ng-model="odashC.addGroup.desc">
-          <br/>
-          <table class="table">
-            <thead>
-              <th></th>
-              <th>Members</th>
-              <th>Planner</th>
-            </thead>
-            <tbody>
-              <tr ng-repeat="user in odashC.data.users | filter: searchedPlanner">
-                <td>{{user.name}}</td>
-                <td ng-click="odashC.addGroup.selectPlanner(user.id)"><input type="checkbox" ng-model="odashC.addGroup.members[user.id]">
-                </td>
-                <td ng-click=""><input type="radio" name="plannerasd" ng-model="odashC.addGroup.planner" ng-value="user.id">
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="errorsContainer">
-            <p class="text-danger" ng-repeat="error in odashC.addGroup.errors">{{error}}</p>
-            <p ng-show="odashC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>
-            <p ng-show="odashC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one member</p>
-            <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="text-danger">Insert one planner</p>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="odashC.addGroup.submit()">Create</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="odashC.addGroup.submit()">Create</button>
       </div>
     </div>
   </div>
-  <div id="addUser" class="modal" role="dialog" tabindex="-2">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 style="display: inline-block">Add an Employee</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-            aria-hidden="true">&times;</span></button>
-          </div>
-          <form name="addUserForm" ng-submit="odashC.addUser.submit()" novalidate>
-            <div class="modal-body">
-              <p>Name</p>
-              <input name="name" type="text" class="form-control" required ng-model="odashC.addUser.name">
-              <br/>
-              <p>Email</p>
-              <input name="email" type="email" class="form-control" required ng-model="odashC.addUser.email">
-              <br/>
-              <p>Password</p>
-              <input name="password" type="password" class="form-control" required ng-model="odashC.addUser.password" ng-minlength="6">
-              <br/>
-              <p>Confirm Password</p>
-              <input name="confirmation_password" type="password" class="form-control" ng-model="odashC.addUser.confirmation_password">
-              <br/>
-              <div class="errorsContainer">
-                <p ng-repeat="error in odashC.addUser.errors">{{error}}</p>
-                <p ng-show="odashC.addUser.invalidFields.passwordReq" class="text-danger">Insert the user password</p>
-                <p ng-show="odashC.addUser.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>
-                <p ng-show="odashC.addUser.invalidFields.emailReq" class="text-danger">Insert the user email address</p>
-                <p ng-show="odashC.addUser.invalidFields.emailVal" class="text-danger">The email address is not valid</p>
-                <p ng-show="odashC.addUser.invalidFields.passwordMatch" class="text-danger">The two passwords do not match</p>
-                <p ng-show="odashC.addUser.invalidFields.nameReq" class="text-danger">Insert the user name</p>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Create</button>
-            </div>
-          </form>
+</div>
+<div id="addUser" class="modal" role="dialog" tabindex="-2">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="display: inline-block">Add an Employee</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
         </div>
+        <form name="addUserForm" ng-submit="odashC.addUser.submit()" novalidate>
+          <div class="modal-body">
+            <p>Name</p>
+            <input name="name" type="text" class="form-control" required ng-model="odashC.addUser.name">
+            <br/>
+            <p>Email</p>
+            <input name="email" type="email" class="form-control" required ng-model="odashC.addUser.email">
+            <br/>
+            <p>Password</p>
+            <input name="password" type="password" class="form-control" required ng-model="odashC.addUser.password" ng-minlength="6">
+            <br/>
+            <p>Confirm Password</p>
+            <input name="confirmation_password" type="password" class="form-control" ng-model="odashC.addUser.confirmation_password">
+            <br/>
+            <div class="errorsContainer">
+              <p ng-repeat="error in odashC.addUser.errors">{{error}}</p>
+              <p ng-show="odashC.addUser.invalidFields.passwordReq" class="text-danger">Insert the user password</p>
+              <p ng-show="odashC.addUser.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>
+              <p ng-show="odashC.addUser.invalidFields.emailReq" class="text-danger">Insert the user email address</p>
+              <p ng-show="odashC.addUser.invalidFields.emailVal" class="text-danger">The email address is not valid</p>
+              <p ng-show="odashC.addUser.invalidFields.passwordMatch" class="text-danger">The two passwords do not match</p>
+              <p ng-show="odashC.addUser.invalidFields.nameReq" class="text-danger">Insert the user name</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 </div>
 <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
   <div class="modal-dialog">

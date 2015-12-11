@@ -13,6 +13,7 @@
     c.confirmPopup = {
       message : ''
     };
+    c.employeeSection = true;
     //Get employees
     c.getUsers = function () {
       //employees restful index
