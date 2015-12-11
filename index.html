@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/css/fullcalendar.min.css">
   <base href="/"/>
 </head>
-<body ng-controller="rootController as rootC">
+<body>
 <style>
     .date-range-selected > .ui-state-active,
     .date-range-selected > .ui-state-default {
@@ -32,7 +32,6 @@
 <div ng-if="rootC.comErrors.auth" class="bg-danger text-center" style="padding: 7px 0 7px 0">
     You're not authorized to access these data
 </div>
-
 <div ng-view>
     <!-- TEMPLATE INJECTED -->
 </div>
@@ -53,7 +52,6 @@
 <script type="text/javascript" src="app/app.run.js"></script>
 <script type="text/javascript" src="app/app.interceptors.js"></script>
 <script type="text/javascript" src="app/shared/utils/mixedContentToArray.js"></script>
-<script type="text/javascript" src="app/components/global/rootController.js"></script>
 <script type="text/javascript" src="app/components/organization/signIn/osiController.js"></script>
 <script type="text/javascript" src="app/components/organization/registration/regController.js"></script>
 <script type="text/javascript" src="app/components/organization/dashboard/odashController.js"></script>
@@ -74,5 +72,6 @@
 <script type="text/javascript" src="app/components/user/recovery/urstController.js"></script>
 <script type="text/javascript" src="app/components/user/composeSchedule/cschedController.js"></script>
 <script type="text/javascript" src="app/shared/utils/logoutDirective.js"></script>
+<script type="text/javascript" src="app/components/user/profile/upController.js"></script>
 </body>
 </html>
