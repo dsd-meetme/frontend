@@ -4,7 +4,7 @@
   @author Giorgio Pea
   @param logoutService A service used to manage the logout of a plunner's organization
   **/
-  var controller = function(logoutService){
+  var controller = function($scope,dataPublisher, mixedContentToArray){
     var c = this;
     c.errors = {
       unauthorized : false,
@@ -47,11 +47,44 @@
       },
     };
     c.events = [];
-    c.logout = function(){
-        logoutService.logout('/usignin');
-    }
     c.saveSchedule = function(){
       console.log(calendar.fullCalendar('clientEvents'));
+    }
+    c.importSchedule = {
+      calendars : [],
+      errors : [],
+      invalidFields : {
+        urlRequired : false,
+        urlValid : false,
+        usernameRequired : false,
+        passwordRequired : false
+      },
+      showLoader : false,
+      getCalendars : function(){
+        var form = $scope.importScheduleForm;
+        this.invalidFields.urlRequired = form.url.$error.required;
+        this.invalidFields.urlVal = form.url.$error.url;
+        this.invalidFields.usernameRequired = form.username.$error.required;
+        this.invalidFields.passwordRequired = form.password.$error.required;
+        if(!form.$invalid){
+          this.showLoader = true;
+          dataPublisher.publish("http://api.plunner.com/employees/calendars/calendars", {
+            url : this.url,
+            username : this.username,
+            password : this.password
+          })
+          .then(function(response){
+            c.importSchedule.calendars = response.data;
+            this.showLoader = false;
+          },function(response){
+            c.importSchedule.showLoader = false;
+            if(response.status === 422){
+              mixedContentToArray.process(response.data, c.importSchedule.errors,true);
+            }
+          })
+        }
+
+      }
     }
     //var calendar = jQuery('#calendar').fullCalendar();
   };
