@@ -1,0 +1,83 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
+.top-dash-banner {
+  position: relative;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid black;
+  margin: 0 0 30px 0;
+  padding: 10 0 10 0;
+  height: 80px; }
+
+.meetg-sched-banner {
+  height: 79px;
+  background-image: url("../../img/dashboard.jpg");
+  opacity: 1; }
+
+.meetg-sched-btn {
+  height: 30px;
+  width: 200px;
+  position: absolute;
+  left: calc(50% - 90px);
+  bottom: -15px;
+  opacity: 1; }
+
+.action-section {
+  margin-bottom: 30px; }
+
+.dashboard-page {
+  padding: 80px 0; }
+
+.add-btn {
+  position: absolute;
+  top: -50px;
+  left: 90%; }
+  .add-btn .add {
+    background: url("../../img/add.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0;
+    width: 80px;
+    height: 80px; }
+  .add-btn .import {
+    background: url("../../img/import.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0;
+    width: 60px;
+    height: 60px; }
+  .add-btn .compose {
+    background: url("../../img/compose.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: 0;
+    width: 50px;
+    height: 90px; }
+  .add-btn .label-text {
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    margin-left: 40px; }
+
+.imported-section {
+  margin-bottom: 80px; }
+
+.schedule-card {
+  height: 150px;
+  border: thin solid #000000;
+  border-radius: 5px;
+  padding: 30px 30px; }
+
+label.schedule-checkbox input[type=checkbox] {
+  display: none; }
+  label.schedule-checkbox input[type=checkbox] + .label-text:before {
+    content: url("../../img/schedule.png"); }
+  label.schedule-checkbox input[type=checkbox]:checked + .label-text:before {
+    content: url("../../img/schedule-off.png"); }

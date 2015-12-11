@@ -1,0 +1,88 @@
+@import '../global/colors.sass'
+@import '../global/size.sass'
+@import '../global/fonts.sass'
+
+.top-dash-banner
+	position: relative
+	border-top: 0
+	border-left: 0
+	border-right: 0
+	border-bottom: 1px solid black
+	margin: 0 0 $medium-norm 0
+	padding: 10 0 10 0 
+	height: 80px
+
+.meetg-sched-banner
+	height: $xlarge-norm - 1px
+	background-image: url("../../img/dashboard.jpg")
+	opacity: 1
+
+.meetg-sched-btn
+	height: 30px
+	width: 200px
+	position: absolute
+	left: calc(50% - 90px)
+	bottom: -15px
+	opacity: 1
+
+.action-section
+	margin-bottom: $medium-norm
+
+.dashboard-page
+	padding: $xlarge-norm 0
+
+
+.add-btn
+	position: absolute
+	top: - $large-norm
+	left: 90%
+
+	.add
+		background: url("../../img/add.png")
+		background-repeat: no-repeat
+		background-size: 100%
+		border: 0
+		width: 80px	
+		height: 80px
+
+	.import
+		background: url("../../img/import.png")
+		background-repeat: no-repeat
+		background-size: 100%
+		border: 0
+		width: 60px	
+		height: 60px
+
+	.compose
+		background: url("../../img/compose.png")
+		background-repeat: no-repeat
+		background-size: 100%
+		border: 0
+		width: 50px	
+		height: 90px
+
+	.label-text
+		font-size: 12px
+		position: absolute
+		top: 50%
+		margin-left: 40px
+
+.imported-section
+	margin-bottom: $xlarge-norm
+
+.schedule-card
+	height: $xxlarge-norm
+	border: thin solid $main-color
+	border-radius: 5px
+	padding: $medium-norm $medium-norm
+
+label.schedule-checkbox
+
+	input[type=checkbox]
+		display: none
+
+		+ .label-text:before
+			content: url("../../img/schedule.png")
+
+		&:checked + .label-text:before
+			content: url("../../img/schedule-off.png")

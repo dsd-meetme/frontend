@@ -1,11 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
 .ng-scope {
   position: relative; }
 
 body {
   font-family: "Open Sans", Helvetica, Arial sans-serif;
   color: #000000; }
+
+.raleway-font {
+  font-family: "Raleway", Helvetica, Arial sans-serif; }
 
 a {
   color: #ffa500; }
@@ -33,6 +42,3 @@ div.content-left.organization {
 .img-country {
   height: 30px;
   width: 40px; }
-
-.light {
-  font-weight: 300; }

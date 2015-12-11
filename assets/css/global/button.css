@@ -32,10 +32,6 @@ button.selectedSection {
   background-color: black;
   color: white; }
 
-.signin-btn {
-  width: 150px;
-  margin-top: 15px; }
-
 .btn-default {
   background-color: white;
   color: #000000;

@@ -10,6 +10,15 @@
       unauthorized : false,
       forbidden : false
     };
+    c.meetingSection = true;
+    c.showMeetings = function() {
+      c.meetingSection = true;
+      c.scheduleSection = false;
+    }
+    c.showSchedules = function() {
+      c.meetingSection = false;
+      c.scheduleSection = true;
+    }
     c.meetingsList = {
       groupA : {
         isVisible : true,
