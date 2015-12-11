@@ -19,6 +19,24 @@
       c.meetingSection = false;
       c.scheduleSection = true;
     }
+    var selectedCalsArrayBuilder = function(source, dest){
+        for(var i = 0; i<source.length; i++){
+            dest.push({
+                value : source[i],
+                selected : false
+            });
+        }
+    };
+    var getSelectedCals = function(array){
+        var tmpArr = [];
+        for(var i = 0; i<array.length; i++){
+            if(array[i].selected){
+                tmpArr.push(array[i].value);
+            }
+        }
+        return tmpArr;
+    };
+
     c.meetingsList = {
       groupA : {
         isVisible : true,
@@ -90,14 +108,46 @@
             if(response.status === 422){
               mixedContentToArray.process(response.data, c.importSchedule.errors,true);
             }
-          })
+            })
         }
 
-      }
-    }
-    //var calendar = jQuery('#calendar').fullCalendar();
-  };
+        },
+        submit : function(){
+            console.log(this.selectedCals);
+            if(this.calendars.length === 0){
+                alert('entro');
+                this.errors.push('Before importing a calendar select one after having pressed get calendars')
+            }
+            else if(!getSelectedCals(this.selectedCals)){
+                this.errors.push('Select at least one schedule to import');
+            }
+            else{
+                var selectedCalendars = getSelectedCals(this.selectedCals);
+                console.log(selectedCalendars);
+                for(var i=0; i<selectedCalendars.length; i++){
+                    dataPublisher.publish('http://api.plunner.com/employees/calendars/caldav',{
+                        name : selectedCalendars[i],
+                        url : this.credentials.url,
+                        username : this.credentials.username,
+                        password : this.credentials.password,
+                        calendar_name : selectedCalendars[i],
+                        enabled : 'true'
+                    })
+                        .then(function(){
+                            alert('pohhg');
+                        },function(response){
+                            if(response.status === 422) {
+                                mixedContentToArray.process(response.data, c.importSchedule.errors, true);
+                            }
+                        })
+                }
 
-  var app = angular.module('Plunner');
-  app.controller('udashController',controller);
-}())
+            }
+        }
+    };
+        //var calendar = jQuery('#calendar').fullCalendar();
+};
+
+var app = angular.module('Plunner');
+app.controller('udashController',controller);
+}());
