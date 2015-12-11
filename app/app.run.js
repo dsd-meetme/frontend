@@ -5,11 +5,12 @@
         //Route filtering
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             //Gets the decoded jwt
-            var mode;
-            var token = $cookies.get('auth_token');
+            var mode,token, path;
+            token = $cookies.get('auth_token');
             //Gets the url the user want to reach
-            var path = next.originalPath;
+            path = next.originalPath;
 
+            $rootScope['event:comErrorGeneral']
             if(token){
                 mode = jwt_decode(token).mode;
             }

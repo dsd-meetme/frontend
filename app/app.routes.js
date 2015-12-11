@@ -44,7 +44,7 @@
                     controller: 'orecController',
                     controllerAs: 'orecC'
                 }).
-                when('/presentation',{
+                when('/',{
                     templateUrl: 'app/components/presentation/presTemplate.html',
                     controller: 'presController',
                     controllerAs: 'presC'
@@ -84,8 +84,20 @@
                     controller: 'upController',
                     controllerAs : 'upC'
                 }).
+                when('/404', {
+                   templateUrl: 'app/components/errors/404.html'
+                }).
+                when('/403', {
+                    templateUrl: 'app/components/errors/403.html'
+                }).
+                when('/401', {
+                    templateUrl: 'app/components/errors/401.html'
+                }).
+                when('error', {
+                    templateUrl: 'app/components/errors/generic.html'
+                }).
                 otherwise({
-                    redirectTo: '/presentation'
+                    redirectTo: '/404'
                 });
         }]);
 }());
