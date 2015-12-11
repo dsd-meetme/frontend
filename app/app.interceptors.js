@@ -16,7 +16,7 @@
      **/
     app.config(['$httpProvider',
         function($httpProvider) {
-            $httpProvider.interceptors.push(function($q,$cookies,$rootScope) {
+            $httpProvider.interceptors.push(function($q,$cookies,$location) {
                 return {
                     request : function(config) {
                         //If not template retrieving requests
@@ -60,14 +60,17 @@
                     },
                     responseError : function(response){
                         if(response.status === 401){
-                            $location('/401');
+                            $location.path('/401');
                         }
                         else if(response.status === 403){
-                            $location('/401');
+                            $location.path('/401');
+                        }
+                        else if(response.status === 404){
+                            //General com error broadcast
+                            $location.path('/404')
                         }
                         else if(response.status !== 422){
-                            //General com error broadcast
-                            $rootScope.$broadcast('event:comErrorGeneral');
+                            $location.path('/error')
                         }
                         return $q.reject(response);
                     }
