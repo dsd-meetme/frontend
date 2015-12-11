@@ -24,6 +24,7 @@
 
 <div class="top-dash-banner">
   <div class="user-gpe-banner"></div>
+  <p class="light banner-title">DASHBOARD</p>
   <div class="btn-group user-gpe" role="group" aria-label="...">
     <button type="button" ng-class="{selectedSection : odashC.employeeSection}" ng-click="odashC.showEmployees()" class="btn btn-default">USERS</button>
     <button type="button" ng-class="{selectedSection : odashC.groupSection}" ng-click="odashC.showGroups()" class="btn btn-default">GROUPS</button>
@@ -34,6 +35,7 @@
   <div ng-show="odashC.employeeSection">
     <div class="row action-section">
       <div class="col-md-4">
+        <span class="icon"><i class="fa fa-search"></i></span>
         <input type="text" class="search-field" placeholder="Search for..." ng-model="searchUser">
       </div>
       <div class="col-md-4">

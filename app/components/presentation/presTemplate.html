@@ -8,19 +8,21 @@
 		    <ul class="nav navbar-nav navbar-right">
 		      <li><a href="#">How To</a></li>
 		      <li><a href="#">Contact</a></li>
-		      <li style="margin-left:30px">
-		      	<button type="button" class="btn btn-primary navbar-btn" ng-click="presC.signup()">Register my Organization</button>
+		      <li>
+		      	<button class="btn btn-primary navbar-btn right-btn" ng-click="presC.signup()">Register my Organization</button>
 		      </li>
 		    </ul>
 	    </div>
 	  </div>
 </div>
-<div class="presentation">
-	<div class="content-left organization">
-	  <button class="btn btn-default btn-lg" ng-click="presC.orgSignIn()">Organization Sign In</button>
-	</div>
-	<div class="content-right organization">
-	  <button class="btn btn-default btn-lg" ng-click="presC.userSignIn()">Employee Sign In</button>
+<div class="presentation-page container-fluid">
+	<div class="row">
+		<div class="col-md-3 col-md-offset-3 centered-col">
+			<button class="btn btn-default btn-lg light" ng-click="presC.orgSignIn()">ORGANISATION SIGN IN</button>
+		</div>
+		<div class="col-md-3 centered-col">
+			<button class="btn btn-default btn-lg light" ng-click="presC.userSignIn()">EMPLOYEE SIGN IN</button>
+		</div>
 	</div>
 </div>
 

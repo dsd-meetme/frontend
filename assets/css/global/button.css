@@ -16,8 +16,7 @@ label.circled-checkbox {
       width: 1em;
       margin-right: 7px; }
     label.circled-checkbox input[type=checkbox]:checked + .label-text:before {
-      content: "\f111";
-      color: #ffa500; }
+      content: "\f111"; }
 
 .btn-primary {
   background-color: #ffa500;
