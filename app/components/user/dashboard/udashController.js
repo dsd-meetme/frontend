@@ -78,6 +78,11 @@
             console.log(calendar.fullCalendar('clientEvents'));
         };
         c.importSchedule = {
+            credentials : {
+                url : '',
+                username : '',
+                password : ''
+            },
             selectedCals : [],
             calendars : [],
             errors : [],
@@ -95,6 +100,9 @@
                 this.invalidFields.usernameRequired = form.username.$error.required;
                 this.invalidFields.passwordRequired = form.password.$error.required;
                 if(!form.$invalid){
+                    this.credentials.url = this.url;
+                    this.credentials.username = this.username;
+                    this.credentials.password = this.password;
                     this.showLoader = true;
                     dataPublisher.publish("http://api.plunner.com/employees/calendars/calendars", {
                         url : this.url,
