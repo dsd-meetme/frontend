@@ -32,10 +32,6 @@ button.selectedSection {
   background-color: black;
   color: white; }
 
-.signin-btn {
-  width: 150px;
-  margin-top: 15px; }
-
 .btn-default {
   background-color: white;
   color: #000000;
@@ -43,5 +39,6 @@ button.selectedSection {
   border-color: #000000; }
 
 .btn-default:hover {
+  background-color: #000000;
   color: white;
-  border-color: white; }
+  border-color: #000000; }

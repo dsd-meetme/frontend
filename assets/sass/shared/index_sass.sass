@@ -3,17 +3,26 @@
 @import '../global/fonts.sass'
 
 .ng-scope
-	position: relative
+	height: 100%
 
 body
-	font-family: $font-stack
+	height: 100%
+	font-family: $open-font
 	color: $main-color
+
+.raleway-font
+	font-family: $raleway-font
 
 a
 	color: $second-color
 
-div.page-content
-	margin: $medium-norm $large-norm $medium-norm $large-norm
+.page-content
+	position: relative
+	height: 100%
+	width: 100%
+
+.marged-page
+	padding: $large-norm $xlarge-norm
 
 div.page-content.page-content-top
 	opacity: 0.6
@@ -35,6 +44,3 @@ div.content-left.organization
 .img-country
 	height: 30px
 	width: 40px
-
-.light
-	font-weight: 300

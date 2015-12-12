@@ -1,17 +1,32 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
 .ng-scope {
-  position: relative; }
+  height: 100%; }
 
 body {
+  height: 100%;
   font-family: "Open Sans", Helvetica, Arial sans-serif;
   color: #000000; }
+
+.raleway-font {
+  font-family: "Raleway", Helvetica, Arial sans-serif; }
 
 a {
   color: #ffa500; }
 
-div.page-content {
-  margin: 30px 50px 30px 50px; }
+.page-content {
+  position: relative;
+  height: 100%;
+  width: 100%; }
+
+.marged-page {
+  padding: 50px 80px; }
 
 div.page-content.page-content-top {
   opacity: 0.6; }
@@ -33,6 +48,3 @@ div.content-left.organization {
 .img-country {
   height: 30px;
   width: 40px; }
-
-.light {
-  font-weight: 300; }

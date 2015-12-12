@@ -1,9 +1,36 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
 .signin-body {
   position: absolute;
   left: 0;
-  top: 50px;
+  top: 0;
   width: 100%;
-  backgroung-color: #ffa500;
+  height: 100%;
+  background-color: #ffa500;
   opacity: 1; }
+
+.form-signin {
+  background-color: white;
+  margin: 2px 2px;
+  padding: 30px 50px 50px 50px;
+  border: thin solid white;
+    border-radius: 5px; }
+
+.extra-line {
+  position: relative;
+  text-align: center;
+  width: 60%;
+  margin: 50px auto;
+  background-color: #ffa500;
+  border: thin solid white;
+  border-radius: 5px; }
+
+.signin-btn {
+  width: 150px;
+  margin-top: 15px; }

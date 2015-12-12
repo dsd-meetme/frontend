@@ -6,6 +6,19 @@
      **/
     var controller = function($scope,dataPublisher, mixedContentToArray){
         var c = this;
+        c.errors = {
+            unauthorized : false,
+            forbidden : false
+        };
+        c.meetingSection = true;
+        c.showMeetings = function() {
+            c.meetingSection = true;
+            c.scheduleSection = false;
+        };
+        c.showSchedules = function() {
+            c.meetingSection = false;
+            c.scheduleSection = true;
+        };
         var selectedCalsArrayBuilder = function(source, dest){
             for(var i = 0; i<source.length; i++){
                 dest.push({
@@ -23,10 +36,7 @@
             }
             return tmpArr;
         };
-        c.errors = {
-            unauthorized : false,
-            forbidden : false
-        };
+
         c.meetingsList = {
             groupA : {
                 isVisible : true,
@@ -68,12 +78,7 @@
             console.log(calendar.fullCalendar('clientEvents'));
         };
         c.importSchedule = {
-            credentials : {
-                username : '',
-                url: '',
-                password: '',
-            },
-            form : $scope.importScheduleForm,
+            selectedCals : [],
             calendars : [],
             errors : [],
             invalidFields : {
@@ -82,19 +87,14 @@
                 usernameRequired : false,
                 passwordRequired : false
             },
-            selectedCals : [],
             showLoader : false,
             getCalendars : function(){
                 var form = $scope.importScheduleForm;
-                console.log(c.importSchedule.form);
                 this.invalidFields.urlRequired = form.url.$error.required;
                 this.invalidFields.urlVal = form.url.$error.url;
                 this.invalidFields.usernameRequired = form.username.$error.required;
                 this.invalidFields.passwordRequired = form.password.$error.required;
                 if(!form.$invalid){
-                    this.credentials.username = this.username;
-                    this.credentials.url = this.url;
-                    this.credentials.password = this.password;
                     this.showLoader = true;
                     dataPublisher.publish("http://api.plunner.com/employees/calendars/calendars", {
                         url : this.url,
@@ -104,21 +104,18 @@
                         .then(function(response){
                             c.importSchedule.calendars = response.data;
                             selectedCalsArrayBuilder(response.data, c.importSchedule.selectedCals);
-                            console.log(c.importSchedule.selectedCals);
                             c.importSchedule.showLoader = false;
                         },function(response){
                             c.importSchedule.showLoader = false;
                             if(response.status === 422){
                                 mixedContentToArray.process(response.data, c.importSchedule.errors,true);
                             }
-                        })
+                        });
                 }
-
             },
             submit : function(){
-                console.log(this.selectedCals);
+
                 if(this.calendars.length === 0){
-                    alert('entro');
                     this.errors.push('Before importing a calendar select one after having pressed get calendars')
                 }
                 else if(!getSelectedCals(this.selectedCals)){
@@ -147,9 +144,9 @@
 
                 }
             }
-        };
-        //var calendar = jQuery('#calendar').fullCalendar();
+        }
     };
+    //var calendar = jQuery('#calendar').fullCalendar();
 
     var app = angular.module('Plunner');
     app.controller('udashController',controller);
