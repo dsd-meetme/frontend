@@ -8,7 +8,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">How To</a></li>
         <li><a href="#">Contact</a></li>
-        <li><button type="button" class="btn btn-primary navbar-btn" ng-click="rootC.signup()">Register my Organization</button></li>
+        <li>
+          <button type="button" class="btn btn-primary navbar-btn" ng-click="rootC.signup()">
+            Register my Organization</button>
+        </li>
       </ul>
     </div>
   </div>
@@ -40,7 +43,6 @@
           </div>
         </div>
 
-
         <div ng-show="osiC.invalidFields.emailReq" class="text-danger">
           <p>You did not insert an email address</p>
         </div>
@@ -50,9 +52,10 @@
         <div ng-show="osiC.invalidFields.passwordReq" class="text-danger">
           <p>You did not insert a password</p>
         </div>
-        <i>If you are an employee it is <a href="/#/usersignin">here</a></i>
-        <br>
         <p class="text-danger" ng-repeat="error in osiC.errors">{{error}}</p>
+
+        <i>If you are a user it is <a href="/#/usersignin">here</a></i>
+        <br>
         <button type="submit" class="btn btn-default signin-btn">SIGN IN</button>
       </form>
       <div ng-show="osiC.loaderVisibility" class="centered-col">
