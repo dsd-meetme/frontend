@@ -6,14 +6,14 @@
   position: relative
   height: 150px
   background: url('../../../img/pattern.png')
+  border-bottom: 1px solid #eee
 
   h2
-    margin-top: $medium-norm
-    color: #384047
+    margin-top: 40px
+    color: $glob_gray
     font-family: $raleway-font
     font-weight: 600
     text-transform: uppercase
-    text-align: center
 
   .view-switcher
     position: absolute
@@ -24,12 +24,13 @@
     button
       width: 50%
       padding: 12px 24px
-      color: lighten(#384047, 15%)
+      color: $glob_gray_light
       font-family: $raleway-font
       font-size: 15px
       font-weight: 600
       float: left
-      border: 2px solid #384047
+      border: 2px solid $glob_gray
+      outline: none
 
       &:first-child
         border-top-right-radius: 0
@@ -40,16 +41,24 @@
         border-top-left-radius: 0
         border-bottom-left-radius: 0
         
-        &:hover
-          color: #384047
-          background-color: white
+      &:hover
+        color: $glob_gray
+        background-color: white
+
+      &:focus
+        outline: none
+
 
   .switchSelected
     color: white !important
-    background-color: #384047
+    background-color: $glob_gray
+
+    &:hover
+      color: white !important
+      background-color: $glob_gray !important
 
 
-.odash-users-action-bar
+.odash-action-bar
   margin-top: 70px
 
   > div > div
@@ -62,10 +71,12 @@
       input
         width: calc(100% - 34px)
         margin-left: 10px
+        border-bottom: 2px solid #ddd
         padding: 5px 0 5px 0
 
         &:focus
           outline: none
+          border-bottom: 2px solid $glob_gray
 
     &:last-child
       display: inline-block
@@ -73,11 +84,29 @@
 
       button
         margin-right: 10px
-        border: 2px solid #384047
-        color: lighten(#384047, 15%)
+        border: 2px solid $glob_gray
+        color: $glob_gray_light
         font-weight: 600
 
         &:hover
           background-color: white
-          color: #384047
+          color: $glob_gray
+
+
+
+
+.odash-users, .odash-groups
+  margin-top: $medium-norm
+
+  table
+    border-top: 2px solid #ddd
+
+    a.fa
+      text-decoration: none
+
+      &:hover
+        color: $second-color
+
+
+
 

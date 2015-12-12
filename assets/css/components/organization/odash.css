@@ -9,14 +9,14 @@
 .top-odash-banner {
   position: relative;
   height: 150px;
-  background: url("../../../img/pattern.png"); }
+  background: url("../../../img/pattern.png");
+  border-bottom: 1px solid #eee; }
   .top-odash-banner h2 {
-    margin-top: 30px;
+    margin-top: 40px;
     color: #384047;
     font-family: "Raleway", Helvetica, Arial, sans-serif;
     font-weight: 600;
-    text-transform: uppercase;
-    text-align: center; }
+    text-transform: uppercase; }
   .top-odash-banner .view-switcher {
     position: absolute;
     bottom: -20px;
@@ -30,7 +30,8 @@
       font-size: 15px;
       font-weight: 600;
       float: left;
-      border: 2px solid #384047; }
+      border: 2px solid #384047;
+      outline: none; }
       .top-odash-banner .view-switcher button:first-child {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0; }
@@ -38,33 +39,49 @@
         border-left: none;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0; }
-        .top-odash-banner .view-switcher button:last-child:hover {
-          color: #384047;
-          background-color: white; }
+      .top-odash-banner .view-switcher button:hover {
+        color: #384047;
+        background-color: white; }
+      .top-odash-banner .view-switcher button:focus {
+        outline: none; }
   .top-odash-banner .switchSelected {
     color: white !important;
     background-color: #384047; }
+    .top-odash-banner .switchSelected:hover {
+      color: white !important;
+      background-color: #384047 !important; }
 
-.odash-users-action-bar {
+.odash-action-bar {
   margin-top: 70px; }
-  .odash-users-action-bar > div > div:first-child {
+  .odash-action-bar > div > div:first-child {
     width: 400px;
     display: inline-block;
     float: left; }
-    .odash-users-action-bar > div > div:first-child input {
+    .odash-action-bar > div > div:first-child input {
       width: calc(100% - 34px);
       margin-left: 10px;
+      border-bottom: 2px solid #ddd;
       padding: 5px 0 5px 0; }
-      .odash-users-action-bar > div > div:first-child input:focus {
-        outline: none; }
-  .odash-users-action-bar > div > div:last-child {
+      .odash-action-bar > div > div:first-child input:focus {
+        outline: none;
+        border-bottom: 2px solid #384047; }
+  .odash-action-bar > div > div:last-child {
     display: inline-block;
     margin-left: 20px; }
-    .odash-users-action-bar > div > div:last-child button {
+    .odash-action-bar > div > div:last-child button {
       margin-right: 10px;
       border: 2px solid #384047;
       color: #5a6772;
       font-weight: 600; }
-      .odash-users-action-bar > div > div:last-child button:hover {
+      .odash-action-bar > div > div:last-child button:hover {
         background-color: white;
         color: #384047; }
+
+.odash-users, .odash-groups {
+  margin-top: 30px; }
+  .odash-users table, .odash-groups table {
+    border-top: 2px solid #ddd; }
+    .odash-users table a.fa, .odash-groups table a.fa {
+      text-decoration: none; }
+      .odash-users table a.fa:hover, .odash-groups table a.fa:hover {
+        color: #ffa500; }

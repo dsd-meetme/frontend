@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="assets/css/components/profile_us.css">
     <link rel="stylesheet" href="assets/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/fullcalendar.min.css">
-    <base href="/"/>
+    <link rel="stylesheet" href="assets/css/components/organization/groups.css"/>
 </head>
 <body>
 <style>
@@ -27,13 +27,6 @@
         background-color: lightsteelblue;
     }
 </style>
-
-<div ng-if="rootC.comErrors.general" class="bg-danger text-center" style="padding: 7px 0 7px 0">
-    A communication error occured, please refresh the page
-</div>
-<div ng-if="rootC.comErrors.auth" class="bg-danger text-center" style="padding: 7px 0 7px 0">
-    You're not authorized to access these data
-</div>
 <div ng-view>
     <!-- TEMPLATE INJECTED -->
 </div>

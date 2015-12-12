@@ -1,103 +1,123 @@
 <div class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- HEADER -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Plunner</a>
-    </div>
-    <div class="navbar-collapse collapse navbar-right">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/#/organization">Dashboard</a></li>
-        <li><a href="/#/organization/profile">
-          <span class="glyphicon glyphicon-user"></span> Organization Name</a></li>
-          <li><a href="#">How To</a></li>
-          <li><a href="#">Contact</a></li>
-          <li>
-            <button type="button" class="btn btn-danger navbar-btn" logout redirect="/">Sign Out</button>
-          </li>
-        </ul>
-      </div>
+    <div class="container-fluid">
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Plunner</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/#/organization">Dashboard</a></li>
+                <li><a href="/#/organization/profile">
+                    <span class="glyphicon glyphicon-user"></span> Organization Name</a></li>
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Contact</a></li>
+                <li>
+                    <button type="button" class="btn btn-danger navbar-btn" logout redirect="/">Sign Out</button>
+                </li>
+            </ul>
+        </div>
     </div>
 
-  </div>
+</div>
 
-  <div class="page-content">
-    <div class="container">
+<div class="container-fluid">
     <style>
-    .disabled {
-      border: none;
-      cursor: text;
-    }
+        .disabled {
+            border: none !important;
+            cursor: text;
+        }
 
-    textarea {
-      resize: none;
-      outline: none;
-    }
+        textarea {
+            resize: none;
+            outline: none;
+        }
     </style>
+    <div class="row top-odash-banner">
+        <h2 class="text-center">Group information</h2>
+    </div>
+    <div class="row editMode">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="text-center changeGroup">
+                <p class="text-danger" ng-repeat="error in groupC.errors.info">{{error}}</p>
+                <button class="btn btn-default" ng-show="groupC.editMode.flag" ng-disabled="!groupC.editMode.flag"
+                        ng-click="groupC.updateInfo()">Save changes
+                </button>
+                <button class="btn btn-default" ng-show="groupC.editMode.flag" ng-click="groupC.delete()">Delete group</button>
+            </div>
+            <div class="editSwitcherContainer">
+                <div><h5 ng-class="{highlighted : groupC.editMode.flag}">EDIT MODE</h5></div>
+                <div class="editSwitcher" ng-class="{switcherInEdit : groupC.editMode.flag}">
+                    <div ng-click="groupC.editMode.exit()" ng-class="{editSwitcherSelected: !groupC.editMode.flag}">&nbsp;</div>
+                    <div ng-click="groupC.editMode.enter()" ng-class="{editSwitcherSelected: groupC.editMode.flag}">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
-      <h2>Group detail</h2>
+        <div class="col-md-5 col-md-offset-1">
+            <div class="row groupInfo">
+                <div class="col-md-11">
+                    <h3>INFORMATION</h3>
+                    <table class="table">
+                        <thead>
+                            <th></th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Name</td>
+                                <td><input ng-model="groupC.data.groupC.name" ng-readonly="!groupC.editMode.flag"
+                                           ng-class="{disabled : !groupC.editMode.flag}"></td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td><textarea ng-model="groupC.data.groupC.description" ng-readonly="!groupC.editMode.flag"
+                                              ng-class="{disabled : !groupC.editMode.flag}"></textarea></td>
 
-      <div class="col-md-6">
-        <ul class="list-unstyled">
-          <li class="text-bold">
-            Name :
-            <input ng-model="groupC.data.groupC.name" ng-readonly="!groupC.inchange"
-            ng-class="{disabled : !groupC.inchange}">
-          </li>
-          <li>Description :
-            <textarea ng-model="groupC.data.groupC.description" ng-readonly="!groupC.inchange"
-            ng-class="{disabled : !groupC.inchange}"></textarea>
-          </li>
-        </ul>
-        <br>
-        <button class="btn btn-default" ng-hide="groupC.inchange" ng-disabled="groupC.inchange" ng-click="groupC.inchange = true">Edit name and description
-        </button>
-        <p class="text-danger" ng-repeat="error in groupC.errors.info">{{error}}</p>
-        <button class="btn btn-default" ng-show="groupC.inchange" ng-disabled="!groupC.inchange"
-        ng-click="groupC.updateInfo()">Change
-      </button>
-      <button class="btn btn-danger" ng-click="groupC.delete()">Delete group</button>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 groupMembers">
+            <h3>MEMBERS</h3>
+            <p class="text-danger" ng-repeat="error in groupC.errors.planner">{{error}}</p>
+            <br>
+            <div ng-repeat=" member in groupC.data.members" class="clearfix">
+                <div>
+                    <p>{{member.name}}</p>
+                    <p class="plannerUnderline" ng-show="member.id === groupC.data.group.planner_id" class="text-primary">PLANNER</p>
+                </div>
+                <div>
+                    <button class="btn btn-default btn-sm" ng-show="member.id !== groupC.data.group.planner_id" ng-click="groupC.updatePlanner(member.id)">Make planner
+                    </button>
+                    <span class="fa fa-trash-o fa-lg" ng-click="groupC.deleteFromGroup(member.id)">
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6">
-      <h3>Members</h3>
-      <p class="text-danger" ng-repeat="error in groupC.errors.planner">{{error}}</p>
-      <br>
-      <ul class="list-unstyled">
-        <li ng-repeat="member in groupC.data.members">
-          <div class="row">
-            <div class="col-md-4">
-              <p>{{member.name}}</p>
-            </div>
-            <div class="col-md-4">
-              <button class="btn btn-default btn-sm" ng-if="member.id !== groupC.data.group.planner_id" ng-click="groupC.updatePlanner(member.id)">Make planner
-            </button>
-            <p style="float:left; margin-left:20px" ng-show="member.id === groupC.data.group.planner_id" class="text-primary">Planner</p>
-            </div>
-            <div class="col-md-4">
-              <button class="btn btn-danger btn-sm" ng-click="groupC.deleteFromGroup(member.id)">
-                Remove from this group
-              </button>
-            </div>
-          </div>
-          <hr>
-        </li>
-      </ul>
+    <div class="row changeBar">
+        <div class="col-md-12">
+
+        </div>
     </div>
-  </div>
 </div>
 </div>
 <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-          aria-hidden="true">&times;</span></button>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center">{{groupC.confirmPopup.message}}</h3>
+            </div>
+            <!--<div class="modal-footer">
+          </div>-->
+            <br/>
         </div>
-        <div class="modal-body">
-          <h3 class="text-center">{{groupC.confirmPopup.message}}</h3>
-        </div>
-        <!--<div class="modal-footer">
-      </div>-->
-      <br/>
     </div>
-  </div>
 </div>

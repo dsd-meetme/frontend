@@ -9,9 +9,13 @@ gulp.task('styles', function() {
       .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest('assets/css/'))
 });
-
+gulp.task('index_sass', function(){
+    return gulp.src('assets/sass/shared/*.sass',{ style: 'expanded' })
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('assets/css/shared/'))
+});
 gulp.task('watch', function() {
-  gulp.watch('assets/sass/**/*.sass',['styles']);
+  gulp.watch('assets/sass/**/*.sass',['styles','index_sass']);
 });
 
 gulp.task('concat',function(){
@@ -35,6 +39,6 @@ gulp.task('broswer-sync',function(){
 })
 
 
-gulp.task('default',['watch','broswer-sync'], function(){
+gulp.task('default',['watch','broswer-sync','styles'], function(){
   
 })
