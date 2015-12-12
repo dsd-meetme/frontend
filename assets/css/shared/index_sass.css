@@ -7,9 +7,11 @@
   font-weight: 600; }
 
 .ng-scope {
+  height: 100%;
   position: relative; }
 
 body {
+  height: 100%;
   font-family: "Open Sans", Helvetica, Arial sans-serif;
   color: #000000; }
 
@@ -19,7 +21,8 @@ body {
 a {
   color: #ffa500; }
 
-div.page-content {
+.page-content {
+  height: 100%;
   margin: 30px 50px 30px 50px; }
 
 div.page-content.page-content-top {

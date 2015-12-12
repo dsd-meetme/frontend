@@ -11,8 +11,25 @@
   left: 0;
   top: 50px;
   width: 100%;
-  backgroung-color: #ffa500;
+  height: 100%;
+  background-color: #ffa500;
   opacity: 1; }
+
+.form-signin {
+  background-color: white;
+  margin: 2px 2px;
+  padding: 30px 50px 50px 50px;
+  border: thin solid white;
+    border-radius: 5px; }
+
+.extra-line {
+  position: relative;
+  text-align: center;
+  width: 60%;
+  margin: 50px auto;
+  background-color: #ffa500;
+  border: thin solid white;
+  border-radius: 5px; }
 
 .signin-btn {
   width: 150px;

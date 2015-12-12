@@ -8,24 +8,6 @@ img.image-loader {
     padding-border-style: solid;
     padding-border-radius: 25; }
 
-.form-signin {
-  background-color: white;
-  width: 99%;
-  height: 99%;
-  margin: auto auto;
-  padding: 30px 50px 50px 50px;
-  border: thin solid white;
-    border-radius: 5px; }
-
-.extra-line {
-  position: relative;
-  text-align: center;
-  width: 60%;
-  margin: 50px auto;
-  background-color: #ffa500;
-  border: thin solid white;
-  border-radius: 5px; }
-
 .search-field {
   width: 60%;
   border-top: 0;
