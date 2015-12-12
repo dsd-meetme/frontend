@@ -8,11 +8,11 @@
 
 body {
   height: 100%;
-  font-family: "Open Sans", Helvetica, Arial sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   color: #000000; }
 
 .raleway-font {
-  font-family: "Raleway", Helvetica, Arial sans-serif; }
+  font-family: "Raleway", Helvetica, Arial, sans-serif; }
 
 a {
   color: #ffa500; }
