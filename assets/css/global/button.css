@@ -39,5 +39,6 @@ button.selectedSection {
   border-color: #000000; }
 
 .btn-default:hover {
+  background-color: #000000;
   color: white;
-  border-color: white; }
+  border-color: #000000; }
