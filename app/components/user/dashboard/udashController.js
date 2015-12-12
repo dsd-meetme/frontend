@@ -134,7 +134,7 @@
                             username : this.credentials.username,
                             password : this.credentials.password,
                             calendar_name : selectedCalendars[i],
-                            enabled : 'true'
+                            enabled : 1
                         })
                             .then(function(){
                                 alert('pohhg');
