@@ -69,12 +69,6 @@
 .imported-section {
   margin-bottom: 80px; }
 
-.schedule-card {
-  height: 150px;
-  border: thin solid #000000;
-  border-radius: 5px;
-  padding: 30px 30px; }
-
 label.schedule-checkbox input[type=checkbox] {
   display: none; }
   label.schedule-checkbox input[type=checkbox] + .label-text:before {

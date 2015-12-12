@@ -6,6 +6,9 @@
 .bold {
   font-weight: 600; }
 
+.ng-scope {
+  height: 100%; }
+
 body {
   height: 100%;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -19,7 +22,7 @@ a {
 
 .page-content {
   position: relative;
-  height: 100%;
+  height: calc(100% - 51px);
   width: 100%; }
 
 .marged-page {

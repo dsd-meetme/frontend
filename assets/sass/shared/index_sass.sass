@@ -2,6 +2,8 @@
 @import '../global/size.sass'
 @import '../global/fonts.sass'
 
+.ng-scope
+	height: 100%
 
 body
 	height: 100%
@@ -16,7 +18,7 @@ a
 
 .page-content
 	position: relative
-	height: 100%
+	height: calc(100% - #{$navbar-size})
 	width: 100%
 
 .marged-page
