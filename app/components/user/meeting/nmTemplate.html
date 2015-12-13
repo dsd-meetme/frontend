@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <!-- HEADER -->
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Plunner</a>
+          <a class="navbar-brand" href="#">PLUNNER</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav navbar-right">
@@ -12,12 +12,52 @@
               <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
             <li><a href="#">How To</a></li>
             <li><a href="#">Contact</a></li>
-            <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">Sign Out</button></li>
+            <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">SIGN OUT</button></li>
           </ul>
         </div>
-      </div>
     </div>
+  </div>
 
+<div class="container-fluid">
+
+  <div class="top-odash-banner row">
+      <h2 class="text-center">NEW MEETING</h2>
+  </div>
+
+
+  <div class="marged-page">
+
+      <div class="row">
+        <div class="col-md-6">
+          <form class="form-norm">
+            <div class="text-fields">
+              <input type="title" placeholder="Title">
+              <textarea placeholder="Specific information about the meeting, topics..."></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          
+          <div id="meetingDatepicker">
+            <div></div>
+          </div>
+          <input id="meetingDatepickerInput" ng-model="nmC.formGroupB.data.meetingRange" type="hidden">
+          <p ng-show="nmC.formGroupB.data.invalidFields.range" class="text-danger">Please specify a date range(at least 2 days)</p>
+          <p>Meeting frequecy</p>
+          <select name="meetingRepeat" ng-model="nmC.formGroupB.data.meetingRepeat">
+            <option value="0">None</option>
+            <option value="1W">Every Week</option>
+            <option value="2W">Every Two Weeks</option>
+            <option value="1M">Every Month</option>
+          </select>
+
+        </div>
+      </div>
+
+  </div>
+</div>
+
+<!--
   <div class="page-content">
     <h2>Plan a meeting</h2>
     <div class="row">
@@ -121,3 +161,5 @@
     </div>
   </div>
 </div>
+
+-->

@@ -44,10 +44,37 @@ img.image-loader
 	input:focus
 		outline: none
 
-input[type=email].text-form:before
-	content: "bla"
+.form-norm
+	input
+	    padding: 5px 0 5px 0
+	    text-align: center
+	    width: 100%
+	    max-width: 400px
+	    margin-bottom: 30px
+	    border-top: 0
+	    border-left: 0
+	    border-right: 0
+	    border-bottom: 2px solid #ddd
+
+	input[type="password"]
+	    margin-bottom: 20px
+
+	    &:focus
+	      outline: none
+	      border-bottom: 2px solid $glob_gray
+
+	input[type="title"]
+	    font-weight: 500px
+	    font-size: 30px
+
+	textarea
+		border: 2px solid #ddd
+		border-radius: 5px
+		width: 90%
+		min-height: 80px
 
 
 .form-fields
 	text-align: center
 	margin: $medium-norm 0 $medium-norm 0
+
