@@ -70,10 +70,11 @@
     margin-left: 20px; }
     .odash-action-bar > div > div:last-child button {
       margin-right: 10px;
-      border: 2px solid #384047;
+      border: 2px solid #5a6772;
       color: #5a6772;
       font-weight: 600; }
       .odash-action-bar > div > div:last-child button:hover {
+        border-color: #384047;
         background-color: white;
         color: #384047; }
 
@@ -85,3 +86,60 @@
       text-decoration: none; }
       .odash-users table a.fa:hover, .odash-groups table a.fa:hover {
         color: #ffa500; }
+
+#addGroup .circled-radio input[type="radio"], #addUser .circled-radio input[type="radio"] {
+  display: none; }
+
+#addGroup .circled-radio input[type="radio"] + .label-text:before, #addUser .circled-radio input[type="radio"] + .label-text:before {
+  content: "\f10c";
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  width: 1em;
+  margin-right: 7px; }
+
+#addGroup .circled-radio input[type="radio"]:checked + .label-text:before, #addUser .circled-radio input[type="radio"]:checked + .label-text:before {
+  content: "\f111"; }
+
+#addGroup .modal-content, #addUser .modal-content {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px; }
+
+#addGroup .modal-header, #addUser .modal-header {
+  padding-left: 30px; }
+  #addGroup .modal-header h3, #addUser .modal-header h3 {
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 10px; }
+
+#addGroup .modal-body, #addUser .modal-body {
+  padding: 30px; }
+  #addGroup .modal-body p, #addUser .modal-body p {
+    margin-bottom: 2px; }
+  #addGroup .modal-body input[type="text"], #addGroup .modal-body input[type="email"], #addGroup .modal-body input[type="password"], #addUser .modal-body input[type="text"], #addUser .modal-body input[type="email"], #addUser .modal-body input[type="password"] {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 5px 0 5px 0;
+    margin-bottom: 15px;
+    width: 60%; }
+    #addGroup .modal-body input[type="text"]:focus, #addGroup .modal-body input[type="email"]:focus, #addGroup .modal-body input[type="password"]:focus, #addUser .modal-body input[type="text"]:focus, #addUser .modal-body input[type="email"]:focus, #addUser .modal-body input[type="password"]:focus {
+      outline: none;
+      border-bottom: 2px solid #384047; }
+
+#confirmPopup .modal-content {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px; }
+
+#confirmPopup .modal-header {
+  border-bottom: none; }
+
+#confirmPopup h3 {
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #384047; }

@@ -42,3 +42,13 @@ button.selectedSection {
   background-color: #000000;
   color: white;
   border-color: #000000; }
+
+.glob_button {
+  margin-right: 10px;
+  border: 2px solid #5a6772;
+  color: #5a6772;
+  font-weight: 600; }
+  .glob_button:hover {
+    border-color: #384047;
+    background-color: white;
+    color: #384047; }

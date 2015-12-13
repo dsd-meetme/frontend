@@ -9,7 +9,17 @@
         var c = this;
         //group id
         var id = $routeParams.id;
-        c.data = {};
+        c.data = {
+            group : {
+                name : '',
+                description: ''
+            },
+            members : [],
+            groupC : {
+                name: '',
+                description: ''
+            }
+        };
         c.errors = {
             planner : [],
             info : []
@@ -26,10 +36,12 @@
             //restful show
             orgResources.group().get({groupId:id}).$promise
                 .then(function(response){
-                    c.data.group = response;
+                    c.data.group.name = response.name;
+                    c.data.group.description = response.description;
                     //A copy of the retrieved data
                     //This copy will be used
-                    c.data.groupC = response;
+                    c.data.groupC.name = response.name;
+                    c.data.groupC.description = response.description;
                     c.getUsers();
                 });
         };
@@ -127,6 +139,8 @@
             },
             exit : function(){
                 this.flag = false;
+                c.data.groupC.name = c.data.group.name;
+                c.data.groupC.description = c.data.group.description;
             }
         };
         c.getInfo();

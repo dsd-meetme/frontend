@@ -54,7 +54,7 @@
                         <th></th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="user in odashC.data.users | filter:searchUser | limitTo:10">
+                        <tr ng-repeat="user in odashC.data.users | filter:{ name: searchUser} |  limitTo:10">
                             <td>{{user.name}}</td>
                             <td>{{user.email}}</td>
                             <td>
@@ -102,7 +102,7 @@
                             <th></th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="group in odashC.data.groups | filter:searchGroup | limitTo: 10">
+                            <tr ng-repeat="group in odashC.data.groups | filter:{name : searchGroup } | limitTo: 10">
                                 <td>{{group.name}}</td>
                                 <td><a href="/#/organization/employees/{{group.planner_id}}">{{group.planner_name}}</a></td>
                                 <td class="text-right"><a class="fa fa-chevron-circle-right" href="/#/organization/groups/{{group.id}}"></a></td>
@@ -122,37 +122,45 @@
                 </div>
                 <div class="modal-body">
                     <p>Name</p>
-                    <input type="search" class="form-control" ng-model="odashC.addGroup.name">
+                    <input type="text" placeholder="Insert a name" class="search-field" ng-model="odashC.addGroup.name">
                     <br/>
                     <p>Description</p>
-                    <input type="text" class="form-control" ng-model="odashC.addGroup.desc">
+                    <input type="text" placeholder="Insert a description" class="search-field" ng-model="odashC.addGroup.desc">
                     <br/>
                     <table class="table">
                         <thead>
                         <th></th>
-                        <th>Members</th>
-                        <th>Planner</th>
+                        <th class="text-center">Members</th>
+                        <th class="text-center">Planner</th>
                         </thead>
                         <tbody>
                         <tr ng-repeat="user in odashC.data.users | filter: searchedPlanner">
                             <td>{{user.name}}</td>
-                            <td ng-click="odashC.addGroup.selectPlanner(user.id)"><input type="checkbox" ng-model="odashC.addGroup.members[user.id]">
+                            <td class="text-center" >
+                                <label class="circled-checkbox" ng-click="odashC.addGroup.selectPlanner(user.id)">
+                                    <input type="checkbox" ng-model="odashC.addGroup.members[user.id]">
+                                    <span class="label-text"></span>
+                                </label>
                             </td>
-                            <td ng-click=""><input type="radio" name="plannerasd" ng-model="odashC.addGroup.planner" ng-value="user.id">
+                            <td class="text-center">
+                                <label class="circled-radio">
+                                    <input type="radio" name="plannerasd" ng-model="odashC.addGroup.planner" ng-value="user.id">
+                                    <span class="label-text"></span>
+                                </label>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <div class="errorsContainer">
-                        <p class="text-danger" ng-repeat="error in odashC.addGroup.errors">{{error}}</p>
+                        <p class="text-danger" class="text-danger" ng-repeat="error in odashC.addGroup.errors">{{error}}</p>
                         <p ng-show="odashC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>
                         <p ng-show="odashC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one member</p>
                         <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="text-danger">Insert one planner</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="odashC.addGroup.submit()">Create</button>
+                    <button type="button" class="btn btn-default glob_button" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default glob_button" ng-click="odashC.addGroup.submit()">Create</button>
                 </div>
             </div>
         </div>
@@ -161,23 +169,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 style="display: inline-block">Add an Employee</h3>
+                    <h3 style="display: inline-block">ADD A USER</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <form name="addUserForm" ng-submit="odashC.addUser.submit()" novalidate>
                     <div class="modal-body">
                         <p>Name</p>
-                        <input name="name" type="text" class="form-control" required ng-model="odashC.addUser.name">
+                        <input name="name" type="text"  required ng-model="odashC.addUser.name" placeholder="Insert a name">
                         <br/>
                         <p>Email</p>
-                        <input name="email" type="email" class="form-control" required ng-model="odashC.addUser.email">
+                        <input name="email" type="email"  required ng-model="odashC.addUser.email" placeholder="Insert an email">
                         <br/>
                         <p>Password</p>
-                        <input name="password" type="password" class="form-control" required ng-model="odashC.addUser.password" ng-minlength="6">
+                        <input name="password" type="password"  required ng-model="odashC.addUser.password" placeholder="Insert a password" ng-minlength="6">
                         <br/>
                         <p>Confirm Password</p>
-                        <input name="confirmation_password" type="password" class="form-control" ng-model="odashC.addUser.confirmation_password">
+                        <input name="confirmation_password" type="password" ng-model="odashC.addUser.confirmation_password" placeholder="Confirm the password">
                         <br/>
                         <div class="errorsContainer">
                             <p ng-repeat="error in odashC.addUser.errors">{{error}}</p>
@@ -190,8 +198,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-default glob_button" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-default glob_button">Create</button>
                     </div>
                 </form>
             </div>

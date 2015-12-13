@@ -91,11 +91,12 @@
   margin-left: 20px; }
 
 .groupMembers button {
-  border: 2px solid #384047;
+  border: 2px solid #5a6772;
   color: #5a6772;
   font-weight: 600;
   margin-right: 15px; }
   .groupMembers button:hover {
+    border-color: #384047;
     color: #384047;
     background-color: white; }
 
@@ -109,11 +110,12 @@
   float: left;
   display: inline-block; }
   .changeGroup button {
-    border: 2px solid #384047;
+    border: 2px solid #5a6772;
     color: #5a6772;
     font-weight: 600;
     margin-right: 15px; }
     .changeGroup button:hover {
+      border-color: #384047;
       color: #384047;
       background-color: white; }
     .changeGroup button:focus {
