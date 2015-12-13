@@ -40,10 +40,10 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="text-center changeGroup">
                 <p class="text-danger" ng-repeat="error in groupC.errors.info">{{error}}</p>
-                <button class="btn btn-default" ng-show="groupC.editMode.flag" ng-disabled="!groupC.editMode.flag"
+                <button class="btn btn-default glob_button" ng-show="groupC.editMode.flag" ng-disabled="!groupC.editMode.flag"
                         ng-click="groupC.updateInfo()">Save changes
                 </button>
-                <button class="btn btn-default" ng-show="groupC.editMode.flag" ng-click="groupC.delete()">Delete group</button>
+                <button class="btn btn-default glob_button" ng-show="groupC.editMode.flag" ng-click="groupC.delete()">Delete group</button>
             </div>
             <div class="editSwitcherContainer">
                 <div><h5 ng-class="{highlighted : groupC.editMode.flag}">EDIT MODE</h5></div>
@@ -59,7 +59,6 @@
             <div class="row groupInfo">
                 <div class="col-md-11">
                     <h3>INFORMATION</h3>
-                    <p class="text-danger" ng-show="groupC.invalidFields.nameReq">Insert a name</p>
                     <table class="table">
                         <thead>
                             <th></th>
@@ -68,6 +67,7 @@
                         <tbody>
                             <tr>
                                 <td>Name</td>
+
                                 <td><input ng-model="groupC.data.groupC.name" ng-readonly="!groupC.editMode.flag"
                                            ng-class="{disabled : !groupC.editMode.flag}"></td>
                             </tr>
@@ -79,6 +79,10 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="errorContainer" ng-show="groupC.editMode.flag && (groupC.thereErrors.info || groupC.errors.info.length > 0)">
+                        <p ng-show="groupC.invalidFields.nameReq">Insert a name</p>
+                        <p ng-repeat="error in groupC.errors.info">{{error}}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,9 +96,9 @@
                     <p class="plannerUnderline" ng-show="member.id === groupC.data.group.planner_id" class="text-primary">PLANNER</p>
                 </div>
                 <div>
-                    <button class="btn btn-default btn-sm" ng-show="member.id !== groupC.data.group.planner_id" ng-click="groupC.updatePlanner(member.id)">Make planner
+                    <button class="btn btn-default btn-sm glob_button" ng-show="(member.id !== groupC.data.group.planner_id) && groupC.editMode.flag" ng-click="groupC.updatePlanner(member.id)">Make planner
                     </button>
-                    <span class="fa fa-trash-o fa-lg" ng-click="groupC.deleteFromGroup(member.id)">
+                    <span class="fa fa-trash-o fa-lg" ng-show="groupC.editMode.flag" ng-click="groupC.deleteFromGroup(member.id)">
                     </span>
                 </div>
             </div>

@@ -6,7 +6,6 @@ label.circled-checkbox {
     label.circled-checkbox input[type=checkbox] + .label-text:before {
       content: "\f10c";
       font-family: "FontAwesome";
-      speak: none;
       font-style: normal;
       font-weight: normal;
       font-variant: normal;
@@ -52,3 +51,19 @@ button.selectedSection {
     border-color: #384047;
     background-color: white;
     color: #384047; }
+  .glob_button:focus {
+    outline: none !important; }
+  .glob_button:active {
+    border-color: #384047;
+    background-color: white;
+    color: #384047;
+    box-shadow: none; }
+
+.errorContainer {
+  border: 1px solid #FF2800;
+  background-color: rgba(255, 40, 0, 0.27);
+  padding: 8px;
+  padding-left: 10px;
+  border-radius: 4px; }
+  .errorContainer p {
+    color: #FF2800; }

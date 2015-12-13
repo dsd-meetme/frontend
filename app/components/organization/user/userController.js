@@ -49,6 +49,7 @@
                 });
         };
         c.update = {
+            thereErrors : false,
             invalidFields: {
                 passwordLength: false,
                 passwordMatch: false,
@@ -65,7 +66,11 @@
                 this.invalidFields.nameReq = form.name.$error.required;
                 this.invalidFields.passwordLen = form.password.$error.minlength;
                 this.invalidFields.passwordMatch = (c.dataC.password !== c.dataC.password_confirmation);
+                if(form.$invalid || this.invalidFields.passwordMatch){
+                    this.thereErrors = true;
+                }
                 if (!form.$invalid && !this.invalidFields.passwordMatch) {
+                    this.thereErrors = false;
                     orgResources.user().update({userId: id}, jQuery.param(c.dataC)).$promise
                         .then(function (response) {
                             c.confirmPopup.message = 'Changes successfully made';

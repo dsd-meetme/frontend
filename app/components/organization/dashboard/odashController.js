@@ -34,15 +34,16 @@
         c.showEmployees = function () {
             c.employeeSection = true;
             c.groupSection = false;
-        }
+        };
         c.showGroups = function () {
             c.employeeSection = false;
             c.groupSection = true;
-        }
+        };
         c.addGroup = {
             planner: null,
             members: [],
             name: '',
+            thereErrors: false,
             desc: '',
             errors: [],
             invalidFields: {
@@ -50,6 +51,11 @@
                 plannerReq: false,
                 membersReq: false,
                 nonMatchingPlanner: false
+            },
+            showPopup : function(){
+                var popup = jQuery('#addGroup');
+                popup.find('input').val('').removeAttr('checked');
+                popup.modal('show');
             },
             selectPlanner: function (id) {
                 this.selectedPlanner = id;
@@ -65,9 +71,15 @@
                 this.invalidFields.nameReq = (this.name === '');
                 this.invalidFields.membersReq = (this.members.length === 0);
                 this.invalidFields.plannerReq = (this.planner == null || angular.isUndefined(this.planner));
-
+                for(key in this.invalidFields){
+                    if(this.invalidFields[key]){
+                        this.thereErrors = true;
+                        break;
+                    }
+                }
                 //Submits everything to the server if data is valid
                 if (!this.invalidFields.nameReq && !this.invalidFields.plannerReq && !this.invalidFields.membersReq) {
+                    this.thereErrors = false;
                     //Updates the group name and planner
                     orgResources.group().save({groupId: ''}, jQuery.param({
                         name: this.name,
@@ -108,6 +120,7 @@
             email: '',
             password: '',
             errors: [],
+            thereErrors : false,
             confirmation_password: '',
             invalidFields: {
                 nameReq: false,
@@ -116,6 +129,11 @@
                 passwordMatch: false,
                 passwordLength: false,
                 emailVal: false
+            },
+            showPopup : function(){
+                var popup = jQuery('#addUser');
+                popup.find('input').val('').removeAttr('checked');
+                popup.modal('show');
             },
             submit: function () {
                 var form = $scope.addUserForm;
@@ -127,8 +145,12 @@
                 this.invalidFields.emailVal = form.email.$error.email;
                 this.invalidFields.passwordMatch = (this.password !== this.confirmation_password);
 
+                if(form.$invalid || this.invalidFields.passwordMatch){
+                    this.thereErrors = true;
+                }
                 //Submits everything to the server if data is valid
                 if (!form.$invalid && !this.invalidFields.passwordMatch) {
+                    this.thereErrors = false;
                     //Updates the group name and planner
                     orgResources.user().save({userId: ''}, jQuery.param({
                         name: this.name,

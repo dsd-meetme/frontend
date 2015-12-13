@@ -20,6 +20,15 @@
                 description: ''
             }
         };
+        var emptyInvalidFields = function(invalidFields){
+            for(key in invalidFields){
+                invalidFields[key] = false;
+            }
+        };
+        c.thereErrors = {
+            info : false,
+            planner : false
+        };
         c.errors = {
             planner : [],
             info : []
@@ -38,6 +47,7 @@
                 .then(function(response){
                     c.data.group.name = response.name;
                     c.data.group.description = response.description;
+                    c.data.group.planner_id = response.planner_id;
                     //A copy of the retrieved data
                     //This copy will be used
                     c.data.groupC.name = response.name;
@@ -56,8 +66,7 @@
                         jQuery('#confirmPopup').modal('hide');
                         $location.path('/organization')
                     },2000);
-                    //Show success popup wait for some time
-                    //redirect
+
                 });
         };
         c.updatePlanner = function(plannerId){
@@ -75,6 +84,7 @@
                         setTimeout(function(){
                             jQuery('#confirmPopup').modal('hide');
                         },1000);
+                        c.editMode.exit()
                         //Update view
                         c.getInfo();
                     },function(response){
@@ -88,7 +98,11 @@
         c.updateInfo = function(){
             //Checks the validity status of input fields
             c.invalidFields.nameReq = (c.data.groupC.name === '');
+            if(c.invalidFields.nameReq){
+                c.thereErrors.info = true;
+            }
             if(!c.invalidFields.nameReq){
+                c.thereErrors.info = false;
                 orgResources.group().update({groupId:id},jQuery.param(
                     {
                         name : c.data.groupC.name,
@@ -128,6 +142,7 @@
                     setTimeout(function(){
                         jQuery('#confirmPopup').modal('hide');
                     },2000);
+                    c.editMode.exit();
                     c.getUsers();
                 }
             )
@@ -141,6 +156,9 @@
                 this.flag = false;
                 c.data.groupC.name = c.data.group.name;
                 c.data.groupC.description = c.data.group.description;
+                c.thereErrors.info = false;
+                c.thereErrors.planner = false;
+                emptyInvalidFields(c.invalidFields);
             }
         };
         c.getInfo();

@@ -38,8 +38,8 @@
                         <input type="text" class="search-field" placeholder="Search for..." ng-model="searchUser">
                     </div>
                     <div>
-                        <button class="btn btn-default" ng-click="odashC.seeAllEmp()">See all users</button>
-                        <button class="btn btn-default" data-toggle="modal" data-target="#addUser">Add user</button>
+                        <button class="btn btn-default glob_button" ng-click="odashC.seeAllEmp()">See all users</button>
+                        <button class="btn btn-default glob_button" ng-click="odashC.addUser.showPopup()">Add user</button>
                     </div>
 
                 </div>
@@ -87,8 +87,8 @@
                         <input type="text" class="search-field" placeholder="Search for..." ng-model="searchGroup">
                     </div>
                     <div>
-                        <button class="btn btn-default" ng-click="odashC.seeAllGroups()">See all groups</button>
-                        <button class="btn btn-default" data-toggle="modal" data-target="#addGroup">Add group</button>
+                        <button class="btn btn-default glob_button" ng-click="odashC.seeAllGroups()">See all groups</button>
+                        <button class="btn btn-default glob_button" ng-click="odashC.addGroup.showPopup()">Add group</button>
                     </div>
 
                 </div>
@@ -151,7 +151,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <div class="errorsContainer">
+                    <div class="errorContainer" ng-show="odashC.addGroup.thereErrors || odashC.addUser.errors.length > 0">
                         <p class="text-danger" class="text-danger" ng-repeat="error in odashC.addGroup.errors">{{error}}</p>
                         <p ng-show="odashC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>
                         <p ng-show="odashC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one member</p>
@@ -187,7 +187,7 @@
                         <p>Confirm Password</p>
                         <input name="confirmation_password" type="password" ng-model="odashC.addUser.confirmation_password" placeholder="Confirm the password">
                         <br/>
-                        <div class="errorsContainer">
+                        <div class="errorContainer" ng-show="odashC.addUser.thereErrors || odashC.addUser.errors.length > 0">
                             <p ng-repeat="error in odashC.addUser.errors">{{error}}</p>
                             <p ng-show="odashC.addUser.invalidFields.passwordReq" class="text-danger">Insert the user password</p>
                             <p ng-show="odashC.addUser.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>

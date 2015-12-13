@@ -32,10 +32,10 @@
     <div class="row editMode">
         <div class="col-md-10 col-md-offset-1">
             <div class="text-center changeGroup">
-                <button class="btn btn-default" ng-show="userC.editMode.flag" ng-disabled="!userC.editMode.flag"
+                <button class="btn btn-default glob_button" ng-show="userC.editMode.flag" ng-disabled="!userC.editMode.flag"
                         ng-click="userC.update.submit()">Save changes
                 </button>
-                <button class="btn btn-default" ng-show="userC.editMode.flag" ng-click="userC.delete()">Delete user</button>
+                <button class="btn btn-default glob_button" ng-show="userC.editMode.flag" ng-click="userC.delete()">Delete user</button>
             </div>
             <div class="editSwitcherContainer">
                 <div><h5 ng-class="{highlighted : userC.editMode.flag}">EDIT MODE</h5></div>
@@ -52,13 +52,6 @@
                 <div class="col-md-11">
                     <form name="editForm" novalidate>
                         <h3>INFORMATION</h3>
-                        <p class="text-danger" ng-show="userC.update.invalidFields.emailReq">Insert a mail</p>
-                        <p class="text-danger" ng-show="userC.update.invalidFields.emailVal">Insert a validmail</p>
-                        <p class="text-danger" ng-show="userC.update.invalidFields.nameReq">Insert a name</p>
-                        <p class="text-danger" ng-show="userC.update.invalidFields.passwordLen">password too short</p>
-                        <p class="text-danger" ng-show="userC.update.invalidFields.passwordMatch">password don't match</p>
-                        <p class="text-danger" ng-repeat="error in userC.changeNameMail.errors">{{error}}</p>
-                        <p class="text-danger" ng-repeat="error in userC.changePassword.errors">{{error}}</p>
                         <table class="table">
                             <thead>
                             <th></th>
@@ -83,6 +76,14 @@
                             </tr>
                             </tbody>
                         </table>
+                        <div class="errorContainer" ng-show="userC.editMode.flag && (userC.update.thereErrors || userC.update.errors.length > 0)">
+                            <p class="text-danger" ng-show="userC.update.invalidFields.emailReq">Insert a email</p>
+                            <p class="text-danger" ng-show="userC.update.invalidFields.emailVal">Insert a valid email</p>
+                            <p class="text-danger" ng-show="userC.update.invalidFields.nameReq">Insert a name</p>
+                            <p class="text-danger" ng-show="userC.update.invalidFields.passwordLen">The must must be at least 6 chrs long</p>
+                            <p class="text-danger" ng-show="userC.update.invalidFields.passwordMatch">The passwords don't match</p>
+                            <p class="text-danger" ng-repeat="error in userC.update.errors">{{error}}</p>
+                        </div>
                     </form>
                 </div>
             </div>
