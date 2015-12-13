@@ -4,7 +4,7 @@
      @author Giorgio Pea
      @param logoutService A service used to manage the logout of a plunner's organization
      **/
-    var controller = function($scope,dataPublisher, mixedContentToArray){
+    var controller = function($scope,dataPublisher, mixedContentToArray, orgResources){
         var c = this;
         c.errors = {
             unauthorized : false,
@@ -76,6 +76,12 @@
         c.events = [];
         c.saveSchedule = function(){
             console.log(calendar.fullCalendar('clientEvents'));
+        };
+        c.getSchedules = function(){
+            orgResources.calendar().query({calendarId : ''}).$promise
+                .then(function(response){
+                    c.schedulesList.groupA.data = response;
+                });
         };
         c.importSchedule = {
             credentials : {
@@ -152,9 +158,70 @@
 
                 }
             }
-        }
+        };
+        c.deleteSchedule = function(id){
+          orgResources.calendar().remove({calendarId : id}).$promise
+              .then(function(){
+                  alert('evviva');
+                  c.getSchedules();
+              })
+        };
+        c.editSchedule = {
+            errors : [],
+            thereErrors : false,
+            invalidFields : {
+                nameReq : false,
+                urlReq : false,
+                usernameReq: false,
+                passwordLength: false,
+                passwordMatch: false
+            },
+            data : {},
+            showPopup : function(index){
+                var popup = jQuery('#editSchedule');
+                popup.find('input').val('').removeAttr('checked');
+                this.data = c.schedulesList.groupA.data[index];
+                popup.modal('show');
+            },
+            submit : function(index){
+                var form = $scope.editScheduleForm;
+                console.log(form);
+                this.invalidFields.nameReq = form.name.$error.required;
+                this.invalidFields.urlReq = form.url.$error.required;
+                this.invalidFields.urlVal = form.url.$error.url;
+                this.invalidFields.usernameReq = form.username.$error.required;
+                this.invalidFields.passwordLength = form.password.$error.minlength;
+                this.invalidFields.passwordMatch = (this.data.password !== this.confirmation_password);
+                console.log(this.invalidFields);
+                for(key in this.invalidFields){
+                    if(this.invalidFields[key]){
+                        this.thereErrors = true;
+                        break;
+                    }
+                }
+                console.log(this.thereErrors);
+                if(!form.$invalid && !this.invalidFields.passwordMatch){
+                    console.log(this.data);
+                    orgResources.calendar().update({calendarId : this.data.id},jQuery.param({
+                        name : this.data.name,
+                        enabled : this.data.enabled === 'true' ? '1':'0',
+                        username : this.data.caldav.username,
+                        url : this.data.caldav.url,
+                        password : this.data.caldav.password,
+                        calendar_name: this.data.caldav.calendar_name
+                    })).$promise.
+                        then(function(response){
+                            alert('whao');
+                        },function(response){
+                            if(response.status === 422){
+                                mixedContentToArray(response.data, c.editSchedule.errors, true);
+                            }
+                        })
+                }
+            }
+        };
+        c.getSchedules();
     };
-    //var calendar = jQuery('#calendar').fullCalendar();
 
     var app = angular.module('Plunner');
     app.controller('udashController',controller);

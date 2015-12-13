@@ -9,240 +9,304 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/#/user/profile">
                     <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
-                    <li><a href="#">How To</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">SIGN OUT</button></li>
-                </ul>
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">SIGN OUT</button></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="top-odash-banner row">
+        <h2 class="text-center">Dashboard</h2>
+        <div class="view-switcher" role="group" aria-label="...">
+            <button type="button" ng-class="{switchSelected : udashC.meetingSection}" ng-click="udashC.showMeetings()" class="btn btn-default">MEETINGS</button>
+            <button type="button" ng-class="{switchSelected : udashC.scheduleSection}" ng-click="udashC.showSchedules()" class="btn btn-default">SCHEDULES</button>
+        </div>
+    </div>
+
+    <div class="row" ng-show="udashC.meetingSection">
+        <div class="col-md-10 col-md-push-1">
+            <a class="right-content" href="/#/user/newmeeting">
+                <div class="add-btn">
+                    <button class="add"><span class="label-text bold">Add a Meeting</span></button>
+                </div>
+            </a>
+            <h4 class="light centered-col">TO BE PLANNED</h4>
+            <hr class="black-line">
+            <div class="container">
+                <div class="row bold">
+                    <div class="col-md-2">
+                        Title
+                    </div>
+                    <div class="col-md-4">
+                        Groups
+                    </div>
+                    <div class="col-md-4">
+                        Time Window (From/To)
+                    </div>
+                    <div class="col-md-2">
+                        Details
+                    </div>
+                </div>
+
+                <hr class="second-line">
+                <div class="row">
+                    <div class="col-md-2">
+                        An Amazing Meeting
+                    </div>
+                    <div class="col-md-4">
+                        <a href="">Group1</a>;<a href="">Group2</a>;<a href="">Group3</a>
+                    </div>
+                    <div class="col-md-4">
+                        10.12.2015 / 25.12.2015
+                    </div>
+                    <div class="col-md-2">
+                        See
+                    </div>
+                </div>
+            </div>
+
+            <br><br><br><br>
+            <h4 class="light centered-col">PLANNED</h4>
+            <hr class="black-line">
+            <div class="container">
+                <div class="row bold">
+                    <div class="col-md-2">
+                        Name
+                    </div>
+                    <div class="col-md-4">
+                        Groups
+                    </div>
+                    <div class="col-md-4">
+                        Planned For
+                    </div>
+                    <div class="col-md-2">
+                        Details
+                    </div>
+                </div>
+                <hr class="second-line">
+                <div class="row">
+                    <div class="col-md-2">
+                        An Other Amazing Meeting
+                    </div>
+                    <div class="col-md-4">
+                        <a href="">Group2</a>;<a href="">Group4</a>;<a href="">Group5</a>
+                    </div>
+                    <div class="col-md-4">
+                        12.12.2015
+                    </div>
+                    <div class="col-md-2">
+                        See
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="top-odash-banner row">
-            <h2 class="text-center">Dashboard</h2>
-            <div class="view-switcher" role="group" aria-label="...">
-                <button type="button" ng-class="{switchSelected : udashC.meetingSection}" ng-click="udashC.showMeetings()" class="btn btn-default">MEETINGS</button>
-                <button type="button" ng-class="{switchSelected : udashC.scheduleSection}" ng-click="udashC.showSchedules()" class="btn btn-default">SCHEDULES</button>
-            </div>
-        </div>
+    <div ng-show="udashC.scheduleSection">
+        <table>
+            <thead>
+            <th>Name</th>
+            <th>Synced on</th>
+            <th>Enabled</th>
+            <th></th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="calendar in udashC.schedulesList.groupA.data">
+                <td>{{calendar.name}}</td>
+                <td>{{calendar.updated_at}}</td>
+                <td><input type="checkbox" ng-checked="calendar.enabled === '1'"/></td>
+                <td><span class="fa fa-wrench" ng-click="udashC.editSchedule.showPopup($index)"></span></td>
+                <td><span class="fa fa-trash-o" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
+            </tr>
 
-        <div class="row" ng-show="udashC.meetingSection">
-            <div class="col-md-10 col-md-push-1">
-                <a class="right-content" href="/#/user/newmeeting">
-                    <div class="add-btn">
-                        <button class="add"><span class="label-text bold">Add a Meeting</span></button>
-                    </div>
-                </a>
-                <h4 class="light centered-col">TO BE PLANNED</h4>
-                <hr class="black-line">
-                <div class="container">
-                    <div class="row bold">
-                        <div class="col-md-2">
-                            Title
-                        </div>
-                        <div class="col-md-4">
-                            Groups
-                        </div>
-                        <div class="col-md-4">
-                            Time Window (From/To)
-                        </div>
-                        <div class="col-md-2">
-                            Details
-                        </div>
-                    </div>
+            </tbody>
+        </table>
+        <div class="container imported-section" style="position:relative">
+            <a class="right-content">
+                <div class="add-btn">
+                    <button class="import" data-target="#importSchedule" data-toggle="modal">
+                        <span class="label-text bold">Upload New Schedule</span></button>
+                </div>
+            </a>
+            <h4 class="light centered-col">IMPORTED</h4>
+            <hr class="black-line">
+            {{udashC.schedulesList.groupA.data}}
+            <div class="row">
+                <div class="col-md-6">
 
-                    <hr class="second-line">
                     <div class="row">
-                        <div class="col-md-2">
-                            An Amazing Meeting
+                        <div class="col-md-6 righted-col">
+                            <label class="schedule-checkbox">
+                                <input type="checkbox" selected>
+                                <span class="label-text schedule-img"></span>
+                            </label>
                         </div>
-                        <div class="col-md-4">
-                            <a href="">Group1</a>;<a href="">Group2</a>;<a href="">Group3</a>
-                        </div>
-                        <div class="col-md-4">
-                            10.12.2015 / 25.12.2015
-                        </div>
-                        <div class="col-md-2">
-                            See
+                        <div class="col-md-6 lefted-col">
+                            Google Calendar<br>My Business Calendar<br><a href="">Synced : 03.12.2015</a>
                         </div>
                     </div>
+
                 </div>
 
-                <br><br><br><br>
-                <h4 class="light centered-col">PLANNED</h4>
-                <hr class="black-line">
-                <div class="container">
-                    <div class="row bold">
-                        <div class="col-md-2">
-                            Name
-                        </div>
-                        <div class="col-md-4">
-                            Groups
-                        </div>
-                        <div class="col-md-4">
-                            Planned For
-                        </div>
-                        <div class="col-md-2">
-                            Details
-                        </div>
-                    </div>
-                    <hr class="second-line">
+                <div class="col-md-6">
                     <div class="row">
-                        <div class="col-md-2">
-                            An Other Amazing Meeting
+                        <div class="col-md-6 righted-col">
+                            <label class="schedule-checkbox">
+                                <input type="checkbox" selected>
+                                <span class="label-text schedule-img"></span>
+                            </label>
                         </div>
-                        <div class="col-md-4">
-                            <a href="">Group2</a>;<a href="">Group4</a>;<a href="">Group5</a>
-                        </div>
-                        <div class="col-md-4">
-                            12.12.2015
-                        </div>
-                        <div class="col-md-2">
-                            See
+                        <div class="col-md-6">
+                            Outlook Calendar<br>My Personnal Calendar<br><a href="">Synced : 05.10.2015</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <br><br><br>
 
-        <div class="row" ng-show="udashC.scheduleSection">
-            <div class="col-md-10 col-md-push-1 imported-section" style="position:relative">
-                <a class="right-content">
-                    <div class="add-btn">
-                        <button class="import" data-target="#importSchedule" data-toggle="modal">
-                            <span class="label-text bold">Upload New Schedule</span>
-                        </button>
-                        </div>
-                    </a>
-                    <h4 class="light centered-col">IMPORTED</h4>
-                    <hr class="black-line">
+        <div class="container composed-section" style="position:relative">
+            <a class="right-content" href="/#/user/schedules/compose">
+                <div class="add-btn">
+                    <button class="compose">
+                        <span class="label-text bold">Compose New Schedule</span></button>
+                </div>
+            </a>
+            <h4 class="light centered-col">COMPOSED</h4>
+            <hr class="black-line">
 
+            <div class="row">
+                <div class="col-md-6">
                     <div class="row">
-                        <div class="col-md-6">
-
-                            <div class="row">
-                                <div class="col-md-6 righted-col">
-                                    <label class="schedule-checkbox">
-                                        <input type="checkbox" selected>
-                                        <span class="label-text schedule-img"></span>
-                                    </label>
-                                </div>
-                                <div class="col-md-6 lefted-col">
-                                    Google Calendar<br>My Business Calendar<br><a href="">Synced : 03.12.2015</a>
-                                </div>
-                            </div>
-
+                        <div class="col-md-6 righted-col">
+                            <label class="schedule-checkbox">
+                                <input type="checkbox" selected>
+                                <span class="label-text schedule-img"></span>
+                            </label>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6 righted-col">
-                                    <label class="schedule-checkbox">
-                                        <input type="checkbox" selected>
-                                        <span class="label-text schedule-img"></span>
-                                    </label>
-                                </div>
-                                <div class="col-md-6">
-                                    Outlook Calendar<br>My Personnal Calendar<br><a href="">Synced : 05.10.2015</a>
-                                </div>
-                            </div>
+                        <div class="col-md-6 lefted-col">
+                            My Composed 1<br><a href="">View/Edit</a>
                         </div>
                     </div>
                 </div>
-                <br><br><br>
+                <div class="col-md-6">
+                    <br><br><br>
 
-                <div class="container composed-section" style="position:relative">
-                    <a class="right-content" href="/#/user/schedules/compose">
-                        <div class="add-btn">
-                            <button class="compose">
-                                <span class="label-text bold">Compose New Schedule</span></button>
+                    <div class="container composed-section" style="position:relative">
+                        <a class="right-content" href="/#/user/schedules/compose">
+                            <div class="add-btn">
+                                <button class="compose">
+                                    <span class="label-text bold">Compose New Schedule</span></button>
                             </div>
                         </a>
                         <h4 class="light centered-col">COMPOSED</h4>
                         <hr class="black-line">
-
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 righted-col">
-                                        <label class="schedule-checkbox">
-                                            <input type="checkbox" selected>
-                                            <span class="label-text schedule-img"></span>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6 lefted-col">
-                                        My Composed 1<br><a href="">View/Edit</a>
-                                    </div>
-                                </div>
+                            <div class="col-md-6 righted-col">
+                                <label class="schedule-checkbox">
+                                    <input type="checkbox" selected>
+                                    <span class="label-text schedule-img"></span>
+                                </label>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 righted-col">
-                                        <label class="schedule-checkbox">
-                                            <input type="checkbox" selected>
-                                            <span class="label-text schedule-img"></span>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6 lefted-col">
-                                        My Composed 2<br><a href="">View/Edit</a>
-                                    </div>
-                                </div>
+                            <div class="col-md-6 lefted-col">
+                                My Composed 2<br><a href="">View/Edit</a>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div id="importSchedule" class="modal" role="dialog" tabindex="-1">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3>Add schedule</h3>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                                </div>
-                                <form name="importScheduleForm" novalidate>
-                                    <div class="modal-body">
+            </div>
 
-                                        <p>Insert a caldav url</p>
-                                        <input name="url" class="form-control" type="url" ng-model="udashC.importSchedule.url" required>
+        </div>
 
-                                        <div>
-                                            Username <input type="text" name="username" ng-model="udashC.importSchedule.username"
+    </div>
+    <div id="importSchedule" class="modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add schedule</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <form name="importScheduleForm" novalidate>
+                    <div class="modal-body">
+
+                        <p>Insert a caldav url</p>
+                        <input name="url" class="form-control" type="url" ng-model="udashC.importSchedule.url" required>
+
+                        <div>
+                            Username <input type="text" name="username" ng-model="udashC.importSchedule.username"
                                             required>
-                                            Password <input type="password" name="password" ng-model="udashC.importSchedule.password"
+                            Password <input type="password" name="password" ng-model="udashC.importSchedule.password"
                                             required>
-                                        </div>
-                                        <div class="errorGroup">
-                                            <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlRequired">Insert a
-                                                caldav url</p>
+                        </div>
+                        <div class="errorGroup">
+                            <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlRequired">Insert a
+                                caldav url</p>
 
-                                                <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlVal">Insert a valid
-                                                    caldav url</p>
+                            <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlVal">Insert a valid
+                                caldav url</p>
 
-                                                    <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.usernameRequired">Insert
-                                                        a username</p>
+                            <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.usernameRequired">Insert
+                                a username</p>
 
-                                                        <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.passwordRequired">Insert
-                                                            a password</p>
-                                                        </div>
-                                                        <button class="btn btn-default" ng-click="udashC.importSchedule.getCalendars()">Get calendars
-                                                        </button>
-                                                        <img ng-show="udashC.importSchedule.showLoader" src="assets/img/loader.gif" width="24px" alt="">
+                            <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.passwordRequired">Insert
+                                a password</p>
+                        </div>
+                        <button class="btn btn-default" ng-click="udashC.importSchedule.getCalendars()">Get calendars
+                        </button>
+                        <img ng-show="udashC.importSchedule.showLoader" src="assets/img/loader.gif" width="24px" alt="">
 
-                                                        <p>Available schedules</p>
+                        <p>Available schedules</p>
 
-                                                        <div ng-repeat="calendar in udashC.importSchedule.calendars">
-                                                            {{calendar}} <input type="checkbox"
-                                                            ng-model="udashC.importSchedule.selectedCals[$index].selected">
-                                                        </div>
-                                                        <p class="text-danger" ng-repeat="error in udashC.importSchedule.errors">{{error}}</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-default" data-dismiss="modal" aria-label="Close">Abort</button>
-                                                        <button class="btn btn-primary" ng-click="udashC.importSchedule.submit()">Add</button>
-                                                    </div>
-                                                </form>
-                                                <br/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div ng-repeat="calendar in udashC.importSchedule.calendars">
+                            {{calendar}} <input type="checkbox"
+                                                ng-model="udashC.importSchedule.selectedCals[$index].selected">
+                        </div>
+                        <p class="text-danger" ng-repeat="error in udashC.importSchedule.errors">{{error}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" aria-label="Close">Abort</button>
+                        <button class="btn btn-primary" ng-click="udashC.importSchedule.submit()">Add</button>
+                    </div>
+                </form>
+                <br/>
+            </div>
+        </div>
+    </div>
+    <div id="editSchedule" class="modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Edit schedule</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form name="editScheduleForm" novalidate>
+                    <div class="modal-body">
+                        Name <input required name="name" type="text" ng-model="udashC.editSchedule.data.name"/><br/>
+                        Url <input required name="url" type="text" ng-model="udashC.editSchedule.data.caldav.url"/><br/>
+                        Username <input required name="username" type="text" ng-model="udashC.editSchedule.data.caldav.username"/><br/>
+                        Password <input name="password" type="password" ng-minLength="6" ng-model="udashC.editSchedule.data.caldav.password"/><br/>
+                        Confirm password <input name="password_confirmation" type="password" ng-model="udashC.editSchedule.password_confirmation"/><br/>
+                        Enabled <input type="checkbox" ng-checked="udashC.editSchedule.data.enabled" ng-model="udashC.editSchedule.data.enabled"/>
+                        <div class="errorContainer" ng-show="udashC.editSchedule.thereErrors || udashC.editSchedule.errors.length > 0">
+                            <p ng-repeat="error in udashC.editSchedule.errors">{{error}}</p>
+                            <p ng-show="udashC.editSchedule.invalidFields.nameReq" class="text-danger">Insert the user password</p>
+                            <p ng-show="udashC.editSchedule.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>
+                            <p ng-show="udashC.editSchedule.invalidFields.urlReq" class="text-danger">Insert the user email address</p>
+                            <p ng-show="udashC.editSchedule.invalidFields.urlVal" class="text-danger">The email address is not valid</p>
+                            <p ng-show="udashC.editSchedule.invalidFields.passwordMatch" class="text-danger">The two passwords do not match</p>
+                            <p ng-show="udashC.editSchedule.invalidFields.usernameReq" class="text-danger">Insert the user name</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" aria-label="Close">Abort</button>
+                        <button class="btn btn-primary" ng-click="udashC.editSchedule.submit()">Save changes</button>
+                    </div>
+                </form>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
