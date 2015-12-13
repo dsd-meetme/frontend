@@ -10,7 +10,7 @@
         'http://api.plunner.com/companies/password/reset',
         'http://api.plunner.com/employees/password/email',
         'http://api.plunner.com/employees/password/reset'
-    ]
+    ];
     /**
      Http interceptors
      **/

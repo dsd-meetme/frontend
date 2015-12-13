@@ -27,182 +27,151 @@
 
     <div class="row" ng-show="udashC.meetingSection">
         <div class="col-md-10 col-md-push-1">
-            <a class="right-content" href="/#/user/newmeeting">
-                <div class="add-btn">
-                    <button class="add"><span class="label-text bold">Add a Meeting</span></button>
-                </div>
-            </a>
-            <h4 class="light centered-col">TO BE PLANNED</h4>
-            <hr class="black-line">
-            <div class="container">
-                <div class="row bold">
-                    <div class="col-md-2">
-                        Title
-                    </div>
-                    <div class="col-md-4">
-                        Groups
-                    </div>
-                    <div class="col-md-4">
-                        Time Window (From/To)
-                    </div>
-                    <div class="col-md-2">
-                        Details
-                    </div>
-                </div>
-
-                <hr class="second-line">
-                <div class="row">
-                    <div class="col-md-2">
-                        An Amazing Meeting
-                    </div>
-                    <div class="col-md-4">
-                        <a href="">Group1</a>;<a href="">Group2</a>;<a href="">Group3</a>
-                    </div>
-                    <div class="col-md-4">
-                        10.12.2015 / 25.12.2015
-                    </div>
-                    <div class="col-md-2">
-                        See
-                    </div>
+            <div class="row imported-schedules-title-bar">
+                <div class="col-md-12">
+                    <h2>MEETINGS TO BE PLANNED</h2>
                 </div>
             </div>
-
-            <br><br><br><br>
-            <h4 class="light centered-col">PLANNED</h4>
-            <hr class="black-line">
-            <div class="container">
-                <div class="row bold">
-                    <div class="col-md-2">
-                        Name
+            <div class="row imported-schedules-bar">
+                <div class="col-md-12">
+                    <div>
+                        <span class="fa fa-search fa-lg"></span>
+                        <input class="search-field" type="search" ng-model="filterWord" placeholder="Search for..."/>
                     </div>
-                    <div class="col-md-4">
-                        Groups
-                    </div>
-                    <div class="col-md-4">
-                        Planned For
-                    </div>
-                    <div class="col-md-2">
-                        Details
-                    </div>
+                    <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.showPopup()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Import Schedule</button>
                 </div>
-                <hr class="second-line">
-                <div class="row">
-                    <div class="col-md-2">
-                        An Other Amazing Meeting
-                    </div>
-                    <div class="col-md-4">
-                        <a href="">Group2</a>;<a href="">Group4</a>;<a href="">Group5</a>
-                    </div>
-                    <div class="col-md-4">
-                        12.12.2015
-                    </div>
-                    <div class="col-md-2">
-                        See
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 imported-schedules-content">
+                    {{udashC.meetingsList.groupA.data}}
+                    <table class="table" ng-repeat="data in udashC.meetingsList.groupA.data">
+                        <thead>
+                            <th>Name</th>
+                            <th>Group</th>
+                            <th>Description</th>
+                            <th>Time window</th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in data.meetings">
+                            <td>{{row.title}}</td>
+                            <td>{{data.name}}</td>
+                            <td>{{row.description}}</td>
+
+                            <td class="text-right"><span class="fa fa-wrench fa-lg" ng-click="udashC.editSchedule.showPopup($index)"></span><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <div ng-show="udashC.scheduleSection">
-        <table>
-            <thead>
-            <th>Name</th>
-            <th>Synced on</th>
-            <th>Enabled</th>
-            <th></th>
-            <th></th>
-            </thead>
-            <tbody>
-            <tr ng-repeat="calendar in udashC.schedulesList.groupA.data">
-                <td>{{calendar.name}}</td>
-                <td>{{calendar.updated_at}}</td>
-                <td><input type="checkbox" ng-checked="calendar.enabled === '1'"/></td>
-                <td><span class="fa fa-wrench" ng-click="udashC.editSchedule.showPopup($index)"></span></td>
-                <td><span class="fa fa-trash-o" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
-            </tr>
-
-            </tbody>
-        </table>
-        <div class="container imported-section" style="position:relative">
-            <a class="right-content">
-                <div class="add-btn">
-                    <button class="import" data-target="#importSchedule" data-toggle="modal">
-                        <span class="label-text bold">Upload New Schedule</span></button>
-                </div>
-            </a>
-            <h4 class="light centered-col">IMPORTED</h4>
-            <hr class="black-line">
-            {{udashC.schedulesList.groupA.data}}
-            <div class="row">
-                <div class="col-md-6">
-
-                    <div class="row">
-                        <div class="col-md-6 righted-col">
-                            <label class="schedule-checkbox">
-                                <input type="checkbox" selected>
-                                <span class="label-text schedule-img"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-6 lefted-col">
-                            Google Calendar<br>My Business Calendar<br><a href="">Synced : 03.12.2015</a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6 righted-col">
-                            <label class="schedule-checkbox">
-                                <input type="checkbox" selected>
-                                <span class="label-text schedule-img"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            Outlook Calendar<br>My Personnal Calendar<br><a href="">Synced : 05.10.2015</a>
-                        </div>
-                    </div>
+    <div class="row" ng-show="udashC.scheduleSection">
+        <div class="col-md-10 col-md-push-1">
+            <div class="row imported-schedules-title-bar">
+                <div class="col-md-12">
+                    <h2>IMPORTED SCHEDULES</h2>
                 </div>
             </div>
-        </div>
-        <br><br><br>
-
-        <div class="container composed-section" style="position:relative">
-            <a class="right-content" href="/#/user/schedules/compose">
-                <div class="add-btn">
-                    <button class="compose">
-                        <span class="label-text bold">Compose New Schedule</span></button>
-                </div>
-            </a>
-            <h4 class="light centered-col">COMPOSED</h4>
-            <hr class="black-line">
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6 righted-col">
-                            <label class="schedule-checkbox">
-                                <input type="checkbox" selected>
-                                <span class="label-text schedule-img"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-6 lefted-col">
-                            My Composed 1<br><a href="">View/Edit</a>
-                        </div>
+            <div class="row imported-schedules-bar">
+                <div class="col-md-12">
+                    <div>
+                        <span class="fa fa-search fa-lg"></span>
+                        <input class="search-field" type="search" ng-model="filterWord" placeholder="Search for..."/>
                     </div>
+                    <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.showPopup()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Import Schedule</button>
                 </div>
-                <div class="col-md-6">
-                    <br><br><br>
+            </div>
+            <div class="row">
+                <div class="col-md-12 imported-schedules-content">
+                    <table class="table">
+                        <thead>
+                        <th>Name</th>
+                        <th>Synced on</th>
+                        <th class="text-center">Enabled</th>
+                        <th></th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="calendar in udashC.schedulesList.groupA.data | filter: {name : filterWord} | limitTo: 10">
+                            <td>{{calendar.name}}</td>
+                            <td>{{calendar.caldav.updated_at}}</td>
+                            <td class="text-center">
+                                <label class="circled-checkbox">
+                                    <input type="checkbox" ng-checked="calendar.enabled === '1'"/>
+                                    <span class="label-text"></span>
+                                </label>
+                            </td>
+                            <td class="text-right"><span class="fa fa-wrench fa-lg" ng-click="udashC.editSchedule.showPopup($index)"></span><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row imported-schedules-title-bar">
+                <div class="col-md-12">
+                    <h2>COMPOSED SCHEDULES</h2>
+                </div>
+            </div>
+            <div class="row imported-schedules-bar">
+                <div class="col-md-12">
+                    <div>
+                        <span class="fa fa-search fa-lg"></span>
+                        <input class="search-field" type="search" ng-model="filterWord" placeholder="Search for..."/>
+                    </div>
+                    <a class="btn btn-default glob_button" href="/#/user/schedules/compose"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Import Schedule</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 imported-schedules-content">
+                    <table class="table">
+                        <thead>
+                        <th>Name</th>
+                        <th>Synced on</th>
+                        <th class="text-center">Enabled</th>
+                        <th></th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="calendar in udashC.schedulesList.groupA.data | filter: {name : filterWord} | limitTo: 10">
+                            <td>{{calendar.name}}</td>
+                            <td>{{calendar.caldav.updated_at}}</td>
+                            <td class="text-center">
+                                <label class="circled-checkbox">
+                                    <input type="checkbox" ng-checked="calendar.enabled === '1'" disabled/>
+                                    <span class="label-text"></span>
+                                </label>
+                            </td>
+                            <td class="text-right"><span class="fa fa-wrench fa-lg" ng-click="udashC.editSchedule.showPopup($index)"></span><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--<div class="container imported-section" style="position:relative">
+                <a class="right-content">
+                    <div class="add-btn">
+                        <button class="import" data-target="#importSchedule" data-toggle="modal">
+                            <span class="label-text bold">Upload New Schedule</span></button>
+                    </div>
+                </a>
+                <h4 class="light centered-col">IMPORTED</h4>
+                <hr class="black-line">
+                <div class="row">
 
-                    <div class="container composed-section" style="position:relative">
-                        <a class="right-content" href="/#/user/schedules/compose">
-                            <div class="add-btn">
-                                <button class="compose">
-                                    <span class="label-text bold">Compose New Schedule</span></button>
-                            </div>
-                        </a>
-                        <h4 class="light centered-col">COMPOSED</h4>
-                        <hr class="black-line">
+                </div>
+            </div>
+            <br><br><br>-->
+
+            <!--<div class="container composed-section" style="position:relative">
+                <a class="right-content" href="/#/user/schedules/compose">
+                    <div class="add-btn">
+                        <button class="compose">
+                            <span class="label-text bold">Compose New Schedule</span></button>
+                    </div>
+                </a>
+                <h4 class="light centered-col">COMPOSED</h4>
+                <hr class="black-line">
+
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-6 righted-col">
                                 <label class="schedule-checkbox">
@@ -211,102 +180,161 @@
                                 </label>
                             </div>
                             <div class="col-md-6 lefted-col">
-                                My Composed 2<br><a href="">View/Edit</a>
+                                My Composed 1<br><a href="">View/Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <br><br><br>
+
+                        <div class="container composed-section" style="position:relative">
+                            <a class="right-content" href="/#/user/schedules/compose">
+                                <div class="add-btn">
+                                    <button class="compose">
+                                        <span class="label-text bold">Compose New Schedule</span></button>
+                                </div>
+                            </a>
+                            <h4 class="light centered-col">COMPOSED</h4>
+                            <hr class="black-line">
+                            <div class="row">
+                                <div class="col-md-6 righted-col">
+                                    <label class="schedule-checkbox">
+                                        <input type="checkbox" selected>
+                                        <span class="label-text schedule-img"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 lefted-col">
+                                    My Composed 2<br><a href="">View/Edit</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+            </div>-->
 
         </div>
+        <div id="importSchedule" class="modal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Import schedule</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form name="importScheduleForm" novalidate>
+                        <div class="modal-body">
+                            <div>
+                                <p>CalDav url</p>
+                                <input name="url" type="url" ng-model="udashC.importSchedule.url" placeholder="Insert CalDav url" required>
+                            </div>
+                            <div>
 
-    </div>
-    <div id="importSchedule" class="modal" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Add schedule</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                                <p>CalDav Username</p>
+                                <input type="text" name="username" ng-model="udashC.importSchedule.username" placeholder="Insert CalDav username" required>
+                                <p>CalDav Password</p>
+                                <input type="password" name="password" ng-model="udashC.importSchedule.password" required placeholder="Insert CalDav password">
+                            </div>
+
+                            <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.getCalendars()"><i class="fa fa-arrow-down"></i>&nbsp;&nbsp;Get schedules</button>
+                            <img ng-show="udashC.importSchedule.showLoader" src="assets/img/loader.gif" width="24px" alt="">
+                            <div ng-show="udashC.importSchedule.calendars.length > 0">
+                                <h4>Available schedules</h4>
+                                <table class="table">
+                                    <thead>
+                                    <th></th>
+                                    <th></th>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="calendar in udashC.importSchedule.calendars">
+                                        <td>{{calendar}}</td>
+                                        <td>
+                                            <label class="circled-checkbox">
+                                                <input type="checkbox" ng-model="udashC.importSchedule.selectedCals[$index].selected"/>
+                                                <span class="label-text"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="errorContainer" ng-show="udashC.importSchedule.thereErrors || udashC.importSchedule.errors.length > 0">
+                                <p class="text-danger" ng-repeat="error in udashC.importSchedule.errors">{{error}}</p>
+                                <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlRequired">Insert a caldav url</p>
+                                <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlVal">Insert a valid caldav url</p>
+                                <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.usernameRequired">Insert a username</p>
+                                <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.passwordRequired">Insert a password</p>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default glob_button" data-dismiss="modal" aria-label="Close">Close</button>
+                            <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.submit()">Import</button>
+                        </div>
+                    </form>
+                    <br/>
                 </div>
-                <form name="importScheduleForm" novalidate>
-                    <div class="modal-body">
-
-                        <p>Insert a caldav url</p>
-                        <input name="url" class="form-control" type="url" ng-model="udashC.importSchedule.url" required>
-
-                        <div>
-                            Username <input type="text" name="username" ng-model="udashC.importSchedule.username"
-                                            required>
-                            Password <input type="password" name="password" ng-model="udashC.importSchedule.password"
-                                            required>
-                        </div>
-                        <div class="errorGroup">
-                            <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlRequired">Insert a
-                                caldav url</p>
-
-                            <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlVal">Insert a valid
-                                caldav url</p>
-
-                            <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.usernameRequired">Insert
-                                a username</p>
-
-                            <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.passwordRequired">Insert
-                                a password</p>
-                        </div>
-                        <button class="btn btn-default" ng-click="udashC.importSchedule.getCalendars()">Get calendars
-                        </button>
-                        <img ng-show="udashC.importSchedule.showLoader" src="assets/img/loader.gif" width="24px" alt="">
-
-                        <p>Available schedules</p>
-
-                        <div ng-repeat="calendar in udashC.importSchedule.calendars">
-                            {{calendar}} <input type="checkbox"
-                                                ng-model="udashC.importSchedule.selectedCals[$index].selected">
-                        </div>
-                        <p class="text-danger" ng-repeat="error in udashC.importSchedule.errors">{{error}}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal" aria-label="Close">Abort</button>
-                        <button class="btn btn-primary" ng-click="udashC.importSchedule.submit()">Add</button>
-                    </div>
-                </form>
-                <br/>
             </div>
         </div>
-    </div>
-    <div id="editSchedule" class="modal" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Edit schedule</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div id="editSchedule" class="modal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Edit schedule</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form name="editScheduleForm" novalidate>
+                        <div class="modal-body">
+                            <p>Name</p>
+                            <input required name="name" type="text" ng-model="udashC.editSchedule.data.name"/>
+                            <p>CalDav calendar name</p>
+                            <input required name="cal_name" type="text" ng-model="udashC.editSchedule.data.cal_name"/><br/>
+                            <p>CalDav url</p>
+                            <input required name="url" type="url" ng-model="udashC.editSchedule.data.url"/><br/>
+                            <p>CalDav username</p>
+                            <input required name="username" type="text" ng-model="udashC.editSchedule.data.username"/><br/>
+                            <p>CalDav password</p>
+                            <input name="password" type="password" ng-minLength="6" ng-model="udashC.editSchedule.data.password"/><br/>
+                            <p>Confirm password</p>
+                            <input name="password_confirmation" type="password" ng-model="udashC.editSchedule.password_confirmation"/><br/>
+                            <p>Enabled</p>
+                            <label class="circled-checkbox">
+                                <input type="checkbox" ng-checked="udashC.editSchedule.data.enabled" ng-model="udashC.editSchedule.data.enabled"/>
+                                <span class="label-text"></span>
+                            </label>
+                            <div class="errorContainer" ng-show="udashC.editSchedule.thereErrors || udashC.editSchedule.errors.length > 0">
+                                <p ng-repeat="error in udashC.editSchedule.errors">{{error}}</p>
+                                <p ng-show="udashC.editSchedule.invalidFields.nameReq" class="text-danger">Insert the user password</p>
+                                <p ng-show="udashC.editSchedule.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>
+                                <p ng-show="udashC.editSchedule.invalidFields.urlReq" class="text-danger">Insert the user email address</p>
+                                <p ng-show="udashC.editSchedule.invalidFields.urlVal" class="text-danger">The email address is not valid</p>
+                                <p ng-show="udashC.editSchedule.invalidFields.passwordMatch" class="text-danger">The two passwords do not match</p>
+                                <p ng-show="udashC.editSchedule.invalidFields.usernameReq" class="text-danger">Insert the user name</p>
+                                <p ng-show="udashC.editSchedule.invalidFields.calnameReq" class="text-danger">Insert the calendar name</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default glob_button" data-dismiss="modal" aria-label="Close">Abort</button>
+                            <button class="btn btn-default glob_button" ng-click="udashC.editSchedule.submit()">Save changes</button>
+                        </div>
+                    </form>
                 </div>
-                <form name="editScheduleForm" novalidate>
-                    <div class="modal-body">
-                        Name <input required name="name" type="text" ng-model="udashC.editSchedule.data.name"/><br/>
-                        Url <input required name="url" type="text" ng-model="udashC.editSchedule.data.caldav.url"/><br/>
-                        Username <input required name="username" type="text" ng-model="udashC.editSchedule.data.caldav.username"/><br/>
-                        Password <input name="password" type="password" ng-minLength="6" ng-model="udashC.editSchedule.data.caldav.password"/><br/>
-                        Confirm password <input name="password_confirmation" type="password" ng-model="udashC.editSchedule.password_confirmation"/><br/>
-                        Enabled <input type="checkbox" ng-checked="udashC.editSchedule.data.enabled" ng-model="udashC.editSchedule.data.enabled"/>
-                        <div class="errorContainer" ng-show="udashC.editSchedule.thereErrors || udashC.editSchedule.errors.length > 0">
-                            <p ng-repeat="error in udashC.editSchedule.errors">{{error}}</p>
-                            <p ng-show="udashC.editSchedule.invalidFields.nameReq" class="text-danger">Insert the user password</p>
-                            <p ng-show="udashC.editSchedule.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>
-                            <p ng-show="udashC.editSchedule.invalidFields.urlReq" class="text-danger">Insert the user email address</p>
-                            <p ng-show="udashC.editSchedule.invalidFields.urlVal" class="text-danger">The email address is not valid</p>
-                            <p ng-show="udashC.editSchedule.invalidFields.passwordMatch" class="text-danger">The two passwords do not match</p>
-                            <p ng-show="udashC.editSchedule.invalidFields.usernameReq" class="text-danger">Insert the user name</p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal" aria-label="Close">Abort</button>
-                        <button class="btn btn-primary" ng-click="udashC.editSchedule.submit()">Save changes</button>
-                    </div>
-                </form>
-                <br/>
             </div>
         </div>
+        <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <h3 class="text-center">{{udashC.confirmPopup.message}}</h3>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

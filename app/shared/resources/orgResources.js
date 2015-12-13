@@ -43,6 +43,7 @@
                 isArray : true
             }
         });
+        var empGroups = $resource('http://api.plunner.com/employees/groups',null);
         var calendar = $resource('http://api.plunner.com/employees/calendars/:calendarId',null, {
             'update' : {
                 method : 'PUT'
@@ -63,6 +64,9 @@
             },
             calendar : function(){
                 return calendar;
+            },
+            empGroups : function(){
+                return empGroups;
             }
         }
     };
