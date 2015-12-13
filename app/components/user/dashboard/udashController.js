@@ -4,7 +4,7 @@
      @author Giorgio Pea
      @param logoutService A service used to manage the logout of a plunner's organization
      **/
-    var controller = function($scope,dataPublisher, mixedContentToArray){
+    var controller = function($scope,dataPublisher, mixedContentToArray, orgResources){
         var c = this;
         c.errors = {
             unauthorized : false,
@@ -76,6 +76,12 @@
         c.events = [];
         c.saveSchedule = function(){
             console.log(calendar.fullCalendar('clientEvents'));
+        };
+        c.getSchedules = function(){
+            orgResources.calendar().query({calendarId : ''}).$promise
+                .then(function(response){
+                    c.schedulesList.groupA.data = response;
+                });
         };
         c.importSchedule = {
             credentials : {
@@ -152,9 +158,16 @@
 
                 }
             }
-        }
+        };
+        c.deleteSchedule = function(id){
+          orgResources.calendar().remove({calendarId : id}).$promise
+              .then(function(){
+                  alert('evviva');
+                  c.getSchedules();
+              })
+        };
+        c.getSchedules();
     };
-    //var calendar = jQuery('#calendar').fullCalendar();
 
     var app = angular.module('Plunner');
     app.controller('udashController',controller);

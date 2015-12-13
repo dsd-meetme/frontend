@@ -141,6 +141,23 @@
         </div>
 
         <div ng-show="udashC.scheduleSection">
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Synced on</th>
+                    <th>Enabled</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="calendar in udashC.schedulesList.groupA.data">
+                        <td>{{calendar.name}}</td>
+                        <td>{{calendar.updated_at}}</td>
+                        <td><input type="checkbox" ng-checked="calendar.enabled === '1'"/></td>
+                        <td><span class="fa fa-trash-o" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
+                    </tr>
+
+                </tbody>
+            </table>
             <div class="container imported-section" style="position:relative">
                 <a class="right-content">
                     <div class="add-btn">
@@ -150,7 +167,7 @@
                 </a>
                 <h4 class="light centered-col">IMPORTED</h4>
                 <hr class="black-line">
-
+                {{udashC.schedulesList.groupA.data}}
                 <div class="row">
                     <div class="col-md-6">
                         

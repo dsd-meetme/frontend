@@ -42,7 +42,12 @@
                 method : 'DELETE',
                 isArray : true
             }
-        })
+        });
+        var calendar = $resource('http://api.plunner.com/employees/calendars/:calendarId',null, {
+            'update' : {
+                method : 'PUT'
+            }
+        });
         return {
             user : function(){
                 return userResource;
@@ -55,9 +60,12 @@
             },
             planner : function(){
                 return planner;
+            },
+            calendar : function(){
+                return calendar;
             }
         }
-    }
+    };
     var app = angular.module('Plunner');
     app.factory('orgResources', service);
-}())
+}());
