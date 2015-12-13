@@ -23,7 +23,7 @@
   .signInContainer h2 {
     font-family: "Raleway", Helvetica, Arial, sans-serif;
     font-weight: 600; }
-  .signInContainer input[type="email"], .signInContainer input[type="password"] {
+  .signInContainer input[type="email"], .signInContainer input[type="password"], .signInContainer input[type="text"] {
     padding: 5px 0 5px 0;
     text-align: center;
     width: 100%;
