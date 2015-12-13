@@ -5,6 +5,48 @@
      @param logoutService A service used to manage the logout of a plunner's organization
      **/
     var controller = function($scope,dataPublisher, mixedContentToArray, orgResources, $timeout){
+
+        var processMeetings = function(a){
+            var ArrayOne = [];
+            var ArrayTwo = [];
+            var tmp,key;
+            console.log(a)
+            for(key in a){
+                if(key.length === 1){
+                    console.log(key);
+                    for(var j=0; j<a[key].meetings.length; j++){
+                        tmp = a[key].meetings[j];
+                        tmp.group_name = a[key].name;
+                        if(tmp.start_time == null){
+
+                            ArrayOne.push(tmp);
+                        }
+                        else{
+                            ArrayTwo.push(tmp)
+                        }
+                    }
+                }
+
+            }
+            return [ArrayOne, ArrayTwo];
+        };
+        var processCaldav = function(a){
+            var ArrayOne = [];
+            var ArrayTwo = [];
+            var tmp,key;
+            for(key in a){
+                if(key.length === 1){
+                    if(a[key].caldav == null){
+                        ArrayOne.push(a[key]);
+                    }
+                    else{
+                        ArrayTwo.push(a[key]);
+                    }
+                }
+
+            }
+            return [ArrayOne, ArrayTwo];
+        };
         var c = this;
         c.errors = {
             unauthorized : false,
@@ -80,13 +122,18 @@
         c.getSchedules = function(){
             orgResources.calendar().query({calendarId : ''}).$promise
                 .then(function(response){
-                    c.schedulesList.groupA.data = response;
+                    var compute = processCaldav(response);
+                    c.schedulesList.groupA.data = compute[0];
+                    c.schedulesList.groupB.data = compute[1];
                 });
         };
         c.getMeetings = function(){
           orgResources.empGroups().query().$promise
               .then(function(response){
-                  c.meetingsList.groupA.data = response;
+                  var compute = processMeetings(response);
+                  console.log(compute);
+                  c.meetingsList.groupA.data = compute[0];
+                  c.meetingsList.groupB.data = compute[1];
               });
         };
         c.confirmPopup = {

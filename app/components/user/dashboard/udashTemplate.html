@@ -38,26 +38,59 @@
                         <span class="fa fa-search fa-lg"></span>
                         <input class="search-field" type="search" ng-model="filterWord" placeholder="Search for..."/>
                     </div>
-                    <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.showPopup()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Import Schedule</button>
+                    <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.showPopup()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Plan a meeting</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 imported-schedules-content">
                     {{udashC.meetingsList.groupA.data}}
-                    <table class="table" ng-repeat="data in udashC.meetingsList.groupA.data">
+                    {{udashC.meetingsList.groupB.data}}
+                    <table class="table">
                         <thead>
                             <th>Name</th>
                             <th>Group</th>
                             <th>Description</th>
                             <th>Time window</th>
                         </thead>
-                        <tbody>
-                        <tr ng-repeat="row in data.meetings">
-                            <td>{{row.title}}</td>
-                            <td>{{data.name}}</td>
-                            <td>{{row.description}}</td>
-
-                            <td class="text-right"><span class="fa fa-wrench fa-lg" ng-click="udashC.editSchedule.showPopup($index)"></span><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
+                        <tbody >
+                        <tr ng-repeat="data in udashC.meetingsList.groupA.data">
+                            <td>{{data.title}}</td>
+                            <td>{{data.group_name}}</td>
+                            <td>{{data.description}}</td>
+                            <td>jsjdj</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row imported-schedules-title-bar">
+                <div class="col-md-12">
+                    <h2>MEETINGS PLANNED</h2>
+                </div>
+            </div>
+            <div class="row imported-schedules-bar">
+                <div class="col-md-12">
+                    <div>
+                        <span class="fa fa-search fa-lg"></span>
+                        <input class="search-field" type="search" ng-model="filterWord" placeholder="Search for..."/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 imported-schedules-content">
+                    <table class="table">
+                        <thead>
+                        <th>Name</th>
+                        <th>Group</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        </thead>
+                        <tbody >
+                        <tr ng-repeat="data in udashC.meetingsList.groupB.data">
+                            <td>{{data.title}}</td>
+                            <td>{{data.group_name}}</td>
+                            <td>{{data.description}}</td>
+                            <td>jsjdj</td>
                         </tr>
                         </tbody>
                     </table>
@@ -91,7 +124,7 @@
                         <th></th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="calendar in udashC.schedulesList.groupA.data | filter: {name : filterWord} | limitTo: 10">
+                        <tr ng-repeat="calendar in udashC.schedulesList.groupB.data | filter: {name : filterWord} | limitTo: 10">
                             <td>{{calendar.name}}</td>
                             <td>{{calendar.caldav.updated_at}}</td>
                             <td class="text-center">
