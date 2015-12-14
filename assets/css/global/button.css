@@ -91,6 +91,8 @@ label.circled-radio {
   padding: 8px;
   padding-left: 10px;
   border-radius: 4px; }
+  .errorContainer p {
+    color: #FF2800; }
 
 .yellow-btn {
   position: absolute;

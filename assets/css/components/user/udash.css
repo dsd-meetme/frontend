@@ -124,6 +124,9 @@ label.schedule-checkbox input[type=checkbox] {
         outline: none;
         border-bottom: 2px solid #384047; }
 
+.imported-schedules-content tbody tr td {
+  width: 25%; }
+
 .imported-schedules-content tbody tr td:last-child {
   padding-right: 10px; }
   .imported-schedules-content tbody tr td:last-child span {
@@ -146,7 +149,7 @@ label.schedule-checkbox input[type=checkbox] {
 
 #importSchedule .modal-body, #editSchedule .modal-body {
   padding: 30px; }
-  #importSchedule .modal-body p, #editSchedule .modal-body p {
+  #importSchedule .modal-body > p, #editSchedule .modal-body > p {
     margin-bottom: 2px;
     font-weight: 600; }
   #importSchedule .modal-body input[type="text"], #importSchedule .modal-body input[type="email"], #importSchedule .modal-body input[type="password"], #importSchedule .modal-body input[type="url"], #editSchedule .modal-body input[type="text"], #editSchedule .modal-body input[type="email"], #editSchedule .modal-body input[type="password"], #editSchedule .modal-body input[type="url"] {

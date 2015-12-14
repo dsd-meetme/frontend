@@ -122,7 +122,9 @@
         c.getSchedules = function(){
             orgResources.calendar().query({calendarId : ''}).$promise
                 .then(function(response){
+                    console.log(response);
                     var compute = processCaldav(response);
+                    console.log(compute);
                     c.schedulesList.groupA.data = compute[0];
                     c.schedulesList.groupB.data = compute[1];
                 });
@@ -131,7 +133,6 @@
           orgResources.empGroups().query().$promise
               .then(function(response){
                   var compute = processMeetings(response);
-                  console.log(compute);
                   c.meetingsList.groupA.data = compute[0];
                   c.meetingsList.groupB.data = compute[1];
               });
@@ -235,8 +236,15 @@
         c.deleteSchedule = function(id){
             orgResources.calendar().remove({calendarId : id}).$promise
                 .then(function(){
-                    alert('evviva');
-                    c.getSchedules();
+                    c.confirmPopup.message = 'Schedule successfully deleted';
+                    jQuery('#confirmPopup').modal('show');
+                    $timeout(
+                        function(){
+                            jQuery('#confirmPopup').modal('hide');
+                            c.getSchedules();
+                        }, 2000
+                    );
+
                 })
         };
         c.editSchedule = {
@@ -258,12 +266,13 @@
             },
             showPopup : function(index){
                 var popup = jQuery('#editSchedule');
-                this.data.id = c.schedulesList.groupA.data[index].id;
-                this.data.name = c.schedulesList.groupA.data[index].name;
-                this.data.username = c.schedulesList.groupA.data[index].caldav.username;
-                this.data.url = c.schedulesList.groupA.data[index].caldav.url;
-                this.data.enabled = c.schedulesList.groupA.data[index].enabled;
-                this.data.cal_name = c.schedulesList.groupA.data[index].caldav.calendar_name;
+                this.data.id = c.schedulesList.groupB.data[index].id;
+                this.data.name = c.schedulesList.groupB.data[index].name;
+                this.data.username = c.schedulesList.groupB.data[index].caldav.username;
+                this.data.url = c.schedulesList.groupB.data[index].caldav.url;
+                this.data.enabled = c.schedulesList.groupB.data[index].enabled;
+                this.data.cal_name = c.schedulesList.groupB.data[index].caldav.calendar_name;
+                console.log(this.data.enabled);
                 popup.modal('show');
             },
             submit : function(index){
