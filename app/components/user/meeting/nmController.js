@@ -88,7 +88,7 @@
                 orgResources.meetings().save({groupId: this.selectedGroup, meetingsId: ''},jQuery.param({
                     title : this.title,
                     description : this.description,
-                    duration : (this.duration/15)
+                    duration : (this.duration*60)
                 })).$promise
                     .then(function(response){
                         console.log(response);
