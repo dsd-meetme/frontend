@@ -22,7 +22,7 @@
             if(mode === 0){
                 orgResources.timeslot().query({calendarId : this.id, timeslotId : ''}).$promise
                     .then(function(response){
-                        console.log(response)
+                        console.log(response);
                         for(var i=0; i<response.length; i++){
                             split = response[i].time_start.split(' ');
                             splito = response[i].time_end.split(' ');
