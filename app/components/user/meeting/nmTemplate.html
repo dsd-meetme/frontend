@@ -40,9 +40,10 @@
                         <p>Duration(in mins)</p>
                         <input type="number" ng-model="nmC.duration" name="duration" required/>
                         <p>Group</p>
-                        <select ng-model="nmC.selectedGroup">
-                            <option value="{{group.id}}" ng-repeat="group in nmC.groups">{{group.name}}</option>
-                        </select>
+                        <div ng-repeat="group in nmC.groups">
+                            <span>{{group.name}}</span>
+                            <input type="radio" name="group" ng-checked="nmC.selectedGroupAssign(group.id)" >
+                        </div>
                     </form>
                     <div class="errorContainer" ng-show="nmC.thereErrors || nmeC.errors.length > 0">
                         <p ng-show="nmC.invalidFields.nameReq">Insert a title</p>

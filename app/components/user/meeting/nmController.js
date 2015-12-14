@@ -10,7 +10,7 @@
                 right: 'prev,next today'
             },
             defaultView: 'agendaWeek',
-
+            slotDuration: '00:15:00',
             events: c.events,
             editable : true,
             selectable: true,
@@ -43,6 +43,9 @@
             oneEventLeast: false,
             durationConflict: false
         };
+        c.selectedGroupAssign = function(id){
+            this.selectedGroup = id;
+        };
         c.errors = [];
         c.thereErrors = false;
         c.submit = function(){
@@ -57,7 +60,7 @@
             console.log(this.duration);
             console.log(this.duration > 0 && this.duration <= 720);
             this.invalidFields.durationVal = form.duration.$error.number;
-            this.invalidFields.durationLimit = !(this.duration > 0 && this.duration <= 720);
+            this.invalidFields.durationLimit = !(this.duration > 15 && this.duration <= 720);
             this.invalidFields.oneEventLeast = this.events.length === 0;
 
             for(var i=0; i<this.events.length; i++){
@@ -80,10 +83,16 @@
             console.log(this.selectedGroup);
             if(!form.$invalid && !this.invalidFields.oneEventLeast && !this.invalidFields.durationConflict){
                 this.thereErrors = false;
-                orgResources.meetings().save({groupId: jQuery('option:selected').attr('value'), meetingsId: ''}).$promise
+                console.log(typeof(this.selectedGroup));
+                orgResources.meetings().save({groupId: this.selectedGroup, meetingsId: ''},jQuery.param({
+                    title : this.title,
+                    description : this.description,
+                    duration : (this.duration/15)
+                })).$promise
                     .then(function(response){
+                        console.log(response);
                         for(var i=0; i<processedEvents.length; i++){
-                            orgResources.meetings().save({groupId: c.selectedGroup, meetingId: response.id},
+                            orgResources.timers().save({groupId: c.selectedGroup, meetingsId: response.id},
                                 jQuery.param(processedEvents[i])
                             ).$promise.then(function(){
                                     alert('Evviva');
