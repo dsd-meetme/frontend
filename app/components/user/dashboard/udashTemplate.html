@@ -88,7 +88,7 @@
                         <th>Date</th>
                         </thead>
                         <tbody >
-                        <tr ng-repeat="data in udashC.meetingsList.groupB.data | filter: filterPMeetings | limitTo: 10">
+                        <tr ng-repeat="data in udashC.meetingsList.groupB.data | filter: {name: filterPMeetings} | limitTo: 10">
                             <td>{{data.title}}</td>
                             <td>{{data.group_name}}</td>
                             <td>{{data.description}}</td>
