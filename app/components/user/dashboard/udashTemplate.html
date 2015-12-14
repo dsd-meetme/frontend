@@ -152,7 +152,7 @@
                         <span class="fa fa-search fa-lg"></span>
                         <input class="search-field" type="search" ng-model="filterCSchedules" placeholder="Search for..."/>
                     </div>
-                    <a class="btn btn-default glob_button" href="/#/user/schedules/compose"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Compose Schedule</a>
+                    <a class="btn btn-default glob_button" href="/#/user/schedules/compose/_"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Compose Schedule</a>
                 </div>
             </div>
             <div class="row">
@@ -174,7 +174,7 @@
                                     <span class="label-text"></span>
                                 </label>
                             </td>
-                            <td class="text-right"><span class="fa fa-wrench fa-lg" ng-click="udashC.editSchedule.showPopup($index)"></span><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
+                            <td class="text-right"><a href="/#/user/schedules/compose/{{calendar.id}}&{{calendar.name}}&{{calendar.enabled}}" class="fa fa-wrench fa-lg" ></a><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
                         </tr>
                         </tbody>
                     </table>

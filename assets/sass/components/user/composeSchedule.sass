@@ -41,8 +41,35 @@
 
 
 
-.composeScheduleContent
+
+.namebar
   margin-top: $large-norm
+
+  .col-md-10
+    margin-bottom: 30px
+
+
+    .errorContainer
+      margin-top: 20px
+      width: 40%
+
+  input[type="text"]
+    border: none
+    border-bottom: 2px solid #ddd
+    padding: 5px 0 5px 0
+    width: 30%
+    margin-left: 10px
+
+    &:focus
+      outline: none
+      border-bottom: 2px solid $glob_gray
+
+  label
+    font-weight: 600
+    color: black
+    margin-left: 30px
+
+
 
 .fc-toolbar
   margin-bottom: $medium-norm
@@ -60,3 +87,6 @@
     text-transform: uppercase
     font-weight: 600
     color: $glob_gray
+
+.composeScheduleContent
+  margin-top: 15px

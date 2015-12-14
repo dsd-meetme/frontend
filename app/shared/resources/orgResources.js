@@ -49,6 +49,11 @@
                 method : 'PUT'
             }
         });
+        var timeslot = $resource('http://api.plunner.com/employees/calendars/:calendarId/timeslots/:timeslotId', null, {
+            'update' : {
+                method : 'PUT'
+            }
+        });
         return {
             user : function(){
                 return userResource;
@@ -67,6 +72,9 @@
             },
             empGroups : function(){
                 return empGroups;
+            },
+            timeslot : function(){
+                return timeslot;
             }
         }
     };

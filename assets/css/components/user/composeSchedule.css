@@ -40,8 +40,26 @@
     border: 2px solid #E74C3C;
     color: #E74C3C; }
 
-.composeScheduleContent {
+.namebar {
   margin-top: 50px; }
+  .namebar .col-md-10 {
+    margin-bottom: 30px; }
+    .namebar .col-md-10 .errorContainer {
+      margin-top: 20px;
+      width: 40%; }
+  .namebar input[type="text"] {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 5px 0 5px 0;
+    width: 30%;
+    margin-left: 10px; }
+    .namebar input[type="text"]:focus {
+      outline: none;
+      border-bottom: 2px solid #384047; }
+  .namebar label {
+    font-weight: 600;
+    color: black;
+    margin-left: 30px; }
 
 .fc-toolbar {
   margin-bottom: 30px; }
@@ -58,3 +76,6 @@
   text-transform: uppercase;
   font-weight: 600;
   color: #384047; }
+
+.composeScheduleContent {
+  margin-top: 15px; }

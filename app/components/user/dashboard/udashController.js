@@ -11,19 +11,16 @@
             var ArrayTwo = [];
             var tmp,key;
             console.log(a)
-            for(key in a){
-                if(key.length === 1){
-                    console.log(key);
-                    for(var j=0; j<a[key].meetings.length; j++){
-                        tmp = a[key].meetings[j];
-                        tmp.group_name = a[key].name;
-                        if(tmp.start_time == null){
+            for(var i=0; i< a.length; i++){
+                for(var j=0; j<a[i].meetings.length; j++){
+                    tmp = a[i].meetings[j];
+                    tmp.group_name = a[i].name;
+                    if(tmp.start_time == null){
 
-                            ArrayOne.push(tmp);
-                        }
-                        else{
-                            ArrayTwo.push(tmp)
-                        }
+                        ArrayOne.push(tmp);
+                    }
+                    else{
+                        ArrayTwo.push(tmp)
                     }
                 }
 
@@ -34,15 +31,14 @@
             var ArrayOne = [];
             var ArrayTwo = [];
             var tmp,key;
-            for(key in a){
-                if(key.length === 1){
-                    if(a[key].caldav == null){
-                        ArrayOne.push(a[key]);
-                    }
-                    else{
-                        ArrayTwo.push(a[key]);
-                    }
+            for(var i=0; i< a.length; i++){
+                if(a[i].caldav == null){
+                    ArrayOne.push(a[i]);
                 }
+                else{
+                    ArrayTwo.push(a[i]);
+                }
+
 
             }
             return [ArrayOne, ArrayTwo];

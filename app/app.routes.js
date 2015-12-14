@@ -34,7 +34,7 @@
                     controller: 'opController',
                     controllerAs: 'opC'
                 }).
-                when('/user/schedules/compose', {
+                when('/user/schedules/compose/:type', {
                     templateUrl: 'app/components/user/composeSchedule/cschedTemplate.html',
                     controller: 'cschedController',
                     controllerAs: 'cschedC'

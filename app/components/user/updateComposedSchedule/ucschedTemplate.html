@@ -26,16 +26,16 @@
             <div>
                 <span class="bold">Name: </span><input type="text" placeholder="Insert a name for the schedule" ng-model="cschedC.name"/>
                 <label class="circled-checkbox">
-                    <input type="checkbox" ng-checked="cschedC.enabled === '1'" ng-model="cschecC.selected"/>
+                    <input type="checkbox" ng-model="cschecC.selected"/>
                     <span class="label-text">Enabled</span>
                 </label>
                 <button style="float: right" class="btn btn-default glob_button" ng-click="cschedC.saveSchedule()">Save schedule</button>
             </div>
-           <div class="errorContainer" ng-show="cschedC.thereErrors || cschedC.errors.length > 0">
-               <p ng-repeat="error in cschedC.errors">{{error}}</p>
-               <p ng-show="cschedC.invalidFields.nameReq">Insert a name</p>
-               <p ng-show="cschedC.invalidFields.eventsReq">Insert at least one event</p>
-           </div>
+            <div class="errorContainer" ng-show="cschedC.thereErrors || cschedC.errors.length > 0">
+                <p ng-repeat="error in cschedC.errors">{{error}}</p>
+                <p ng-show="cschedC.invalidFields.nameReq">Insert a name</p>
+                <p ng-show="cschedC.invalidFields.eventsReq">Insert at least one event</p>
+            </div>
         </div>
     </div>
 
