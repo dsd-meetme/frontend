@@ -3,28 +3,6 @@
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
 
 
-label.circled-checkbox
-  cursor: pointer
-
-  input[type=checkbox]
-    display: none
-
-    + .label-text:before
-      content: "\f10c"
-      font-family: "FontAwesome"
-      font-style: normal
-      font-weight: normal
-      font-variant: normal
-      text-transform: none
-      line-height: 1
-      -webkit-font-smoothing: antialiased
-      width: 1em
-      margin-right: $mini-norm
-
-    &:checked + .label-text:before
-      content: "\f111"
-
-
 .btn-primary
   background-color: $second-color
   opacity: 0.7
@@ -72,12 +50,74 @@ button.selectedSection
       color: $glob_gray
       box-shadow: none
 
+label.circled-checkbox
+  cursor: pointer
+  color: #757575
+
+  input[type=checkbox]
+    display: none
+
+    + .label-text:before
+      content: "\f10c"
+      font-family: "FontAwesome"
+      font-style: normal
+      font-weight: normal
+      font-variant: normal
+      text-transform: none
+      line-height: 1
+      -webkit-font-smoothing: antialiased
+      width: 1em
+      margin-right: $mini-norm
+
+    &:checked + .label-text
+      color: black
+
+    &:checked + .label-text:before
+      color: black
+      content: "\f111"
+
+
+label.circled-radio
+  cursor: pointer
+  color: #757575
+
+  input[type=radio]
+    display: none
+
+    + .label-text:before
+      content: "\f10c"
+      font-family: "FontAwesome"
+      font-style: normal
+      font-weight: normal
+      font-variant: normal
+      text-transform: none
+      line-height: 1
+      -webkit-font-smoothing: antialiased
+      width: 1em
+      margin-right: $mini-norm
+
+    &:checked + .label-text
+      color: black
+
+    &:checked + .label-text:before
+      color: black
+      content: "\f111"
+
 .errorContainer
   border: 1px solid #FF2800
   background-color: rgba(255,40,0,.27)
   padding: 8px
   padding-left: 10px
   border-radius: 4px
+
+.yellow-btn
+  position: absolute
+  left: calc(50% - 100px)
+  width: 20%
+  background-color: #FFA500
+  color: #FFF
+  border: medium none
+  border-radius: 2px
 
   p
     color: #FF2800

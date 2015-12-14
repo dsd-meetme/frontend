@@ -8,3 +8,6 @@
 
 .bold {
   font-weight: 600; }
+
+div#calendar {
+  margin: 30px 30px; }

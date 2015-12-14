@@ -40,6 +40,9 @@ img.image-loader {
   border-right: 0;
   border-bottom: 2px solid #ddd; }
 
+.form-norm input.nm-input {
+  text-align: left; }
+
 .form-norm input[type="password"] {
   margin-bottom: 20px; }
   .form-norm input[type="password"]:focus {
@@ -48,12 +51,15 @@ img.image-loader {
 
 .form-norm input[type="title"] {
   font-weight: 500px;
-  font-size: 30px; }
+  font-size: 25px; }
 
 .form-norm textarea {
+  margin-bottom: 30px;
+  padding: 7px 7px;
   border: 2px solid #ddd;
   border-radius: 5px;
-  width: 90%;
+  width: 75%;
+    width-max-width: 400px;
   min-height: 80px; }
 
 .form-fields {

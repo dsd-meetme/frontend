@@ -1,22 +1,4 @@
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
-label.circled-checkbox {
-  cursor: pointer; }
-  label.circled-checkbox input[type=checkbox] {
-    display: none; }
-    label.circled-checkbox input[type=checkbox] + .label-text:before {
-      content: "\f10c";
-      font-family: "FontAwesome";
-      font-style: normal;
-      font-weight: normal;
-      font-variant: normal;
-      text-transform: none;
-      line-height: 1;
-      -webkit-font-smoothing: antialiased;
-      width: 1em;
-      margin-right: 7px; }
-    label.circled-checkbox input[type=checkbox]:checked + .label-text:before {
-      content: "\f111"; }
-
 .btn-primary {
   background-color: #ffa500;
   opacity: 0.7;
@@ -59,11 +41,64 @@ button.selectedSection {
     color: #384047;
     box-shadow: none; }
 
+label.circled-checkbox {
+  cursor: pointer;
+  color: #757575; }
+  label.circled-checkbox input[type=checkbox] {
+    display: none; }
+    label.circled-checkbox input[type=checkbox] + .label-text:before {
+      content: "\f10c";
+      font-family: "FontAwesome";
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      width: 1em;
+      margin-right: 7px; }
+    label.circled-checkbox input[type=checkbox]:checked + .label-text {
+      color: black; }
+    label.circled-checkbox input[type=checkbox]:checked + .label-text:before {
+      color: black;
+      content: "\f111"; }
+
+label.circled-radio {
+  cursor: pointer;
+  color: #757575; }
+  label.circled-radio input[type=radio] {
+    display: none; }
+    label.circled-radio input[type=radio] + .label-text:before {
+      content: "\f10c";
+      font-family: "FontAwesome";
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      width: 1em;
+      margin-right: 7px; }
+    label.circled-radio input[type=radio]:checked + .label-text {
+      color: black; }
+    label.circled-radio input[type=radio]:checked + .label-text:before {
+      color: black;
+      content: "\f111"; }
+
 .errorContainer {
   border: 1px solid #FF2800;
   background-color: rgba(255, 40, 0, 0.27);
   padding: 8px;
   padding-left: 10px;
   border-radius: 4px; }
-  .errorContainer p {
+
+.yellow-btn {
+  position: absolute;
+  left: calc(50% - 100px);
+  width: 20%;
+  background-color: #FFA500;
+  color: #FFF;
+  border: medium none;
+  border-radius: 2px; }
+  .yellow-btn p {
     color: #FF2800; }

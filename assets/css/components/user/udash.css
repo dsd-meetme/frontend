@@ -1,5 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.classic {
+  font-weight: 400; }
+
 .light {
   font-weight: 300; }
 
@@ -13,12 +16,12 @@
   border-right: 0;
   border-bottom: 1px solid black;
   margin: 0 0 30px 0;
-  padding: 10 0 10 0;
+  padding: 10px 0 10px 0;
   height: 80px; }
 
 .meetg-sched-banner {
   height: 79px;
-  background-image: url("../../img/dashboard.jpg");
+  background-image: url("../../../img/dashboard.jpg");
   opacity: 1; }
 
 .meetg-sched-btn {
@@ -40,21 +43,21 @@
   top: -50px;
   left: 90%; }
   .add-btn .add {
-    background: url("../../img/add.png");
+    background: url("../../../img/add.png");
     background-repeat: no-repeat;
     background-size: 100%;
     border: 0;
     width: 80px;
     height: 80px; }
   .add-btn .import {
-    background: url("../../img/import.png");
+    background: url("../../../img/import.png");
     background-repeat: no-repeat;
     background-size: 100%;
     border: 0;
     width: 60px;
     height: 60px; }
   .add-btn .compose {
-    background: url("../../img/compose.png");
+    background: url("../../../img/compose.png");
     background-repeat: no-repeat;
     background-size: 100%;
     border: 0;
@@ -72,6 +75,111 @@
 label.schedule-checkbox input[type=checkbox] {
   display: none; }
   label.schedule-checkbox input[type=checkbox] + .label-text:before {
-    content: url("../../img/schedule.png"); }
+    content: url("../../../img/schedule.png"); }
   label.schedule-checkbox input[type=checkbox]:checked + .label-text:before {
-    content: url("../../img/schedule-off.png"); }
+    content: url("../../../img/schedule-off.png"); }
+
+.circled-checkbox {
+  cursor: default; }
+  .circled-checkbox input[type="checkbox"] {
+    display: none; }
+
+.circled-checkbox input[type="checkbox"] + .label-text:before {
+  content: "\f10c";
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  width: 1em;
+  margin-right: 7px;
+  color: #5a6772; }
+
+.circled-checkbox input[type="checkbox"]:checked + .label-text:before {
+  content: "\f111"; }
+
+.imported-schedules-title-bar {
+  margin-top: 30px; }
+  .imported-schedules-title-bar h2 {
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: #384047; }
+
+.imported-schedules-bar {
+  margin-bottom: 30px;
+  margin-top: 15px; }
+  .imported-schedules-bar div div {
+    width: 400px;
+    display: inline-block;
+    float: left;
+    margin-right: 15px; }
+    .imported-schedules-bar div div input {
+      width: calc(100% - 34px);
+      margin-left: 10px;
+      border-bottom: 2px solid #ddd;
+      padding: 5px 0 5px 0; }
+      .imported-schedules-bar div div input:focus {
+        outline: none;
+        border-bottom: 2px solid #384047; }
+
+.imported-schedules-content tbody tr td:last-child {
+  padding-right: 10px; }
+  .imported-schedules-content tbody tr td:last-child span {
+    color: #5a6772;
+    margin-right: 15px;
+    cursor: pointer; }
+    .imported-schedules-content tbody tr td:last-child span:last-child {
+      margin-right: 0; }
+    .imported-schedules-content tbody tr td:last-child span:hover {
+      color: #384047; }
+
+#importSchedule .modal-header, #editSchedule .modal-header {
+  padding-left: 30px; }
+  #importSchedule .modal-header h3, #editSchedule .modal-header h3 {
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 10px;
+    display: inline-block; }
+
+#importSchedule .modal-body, #editSchedule .modal-body {
+  padding: 30px; }
+  #importSchedule .modal-body p, #editSchedule .modal-body p {
+    margin-bottom: 2px;
+    font-weight: 600; }
+  #importSchedule .modal-body input[type="text"], #importSchedule .modal-body input[type="email"], #importSchedule .modal-body input[type="password"], #importSchedule .modal-body input[type="url"], #editSchedule .modal-body input[type="text"], #editSchedule .modal-body input[type="email"], #editSchedule .modal-body input[type="password"], #editSchedule .modal-body input[type="url"] {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 5px 0 5px 0;
+    margin-bottom: 15px;
+    width: 60%; }
+    #importSchedule .modal-body input[type="text"]:focus, #importSchedule .modal-body input[type="email"]:focus, #importSchedule .modal-body input[type="password"]:focus, #importSchedule .modal-body input[type="url"]:focus, #editSchedule .modal-body input[type="text"]:focus, #editSchedule .modal-body input[type="email"]:focus, #editSchedule .modal-body input[type="password"]:focus, #editSchedule .modal-body input[type="url"]:focus {
+      outline: none;
+      border-bottom: 2px solid #384047; }
+  #importSchedule .modal-body input[type="url"], #editSchedule .modal-body input[type="url"] {
+    width: 80%; }
+  #importSchedule .modal-body h4, #editSchedule .modal-body h4 {
+    margin-bottom: 0;
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 20px; }
+  #importSchedule .modal-body table, #editSchedule .modal-body table {
+    margin-bottom: 0; }
+  #importSchedule .modal-body .errorContainer, #editSchedule .modal-body .errorContainer {
+    margin-top: 15px; }
+
+#confirmPopup .modal-content {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px; }
+
+#confirmPopup .modal-header {
+  border-bottom: none; }
+
+#confirmPopup h3 {
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #384047; }

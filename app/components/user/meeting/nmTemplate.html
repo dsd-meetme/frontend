@@ -24,39 +24,136 @@
       <h2 class="text-center">NEW MEETING</h2>
   </div>
 
-
   <div class="marged-page">
 
-      <div class="row">
+      <div class="row section-123 imported-schedules-title-bar">
         <div class="col-md-6">
+
+          <h2 class="raleway">GENERAL</h2><br>
           <form class="form-norm">
             <div class="text-fields">
-              <input type="title" placeholder="Title">
+              <input class="nm-input" type="title" placeholder="Title">
+              <input class="nm-input" type="text" placeholder="Place">
               <textarea placeholder="Specific information about the meeting, topics..."></textarea>
+              <label class="circled-checkbox">
+                <input type="checkbox" ng-model="usiC.rmbMe">
+                <span class="label-text classic">Export the planned meeting to my schedule</span>
+              </label>
             </div>
           </form>
-        </div>
-        <div class="col-md-6">
-          
-          <div id="meetingDatepicker">
-            <div></div>
+
+          <div class="m-frequency imported-schedules-title-bar">
+            <h2 class="raleway">MEETING FREQUENCY</h2><br>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="circled-radio classic">
+                  <input type="radio" ng-model="nmC.formGroupB.data.meetingRepeat" value="0" ng-value="0" checked>
+                  <span class="label-text">None</span>
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label class="circled-radio classic">
+                  <input type="radio" ng-model="nmC.formGroupB.data.meetingRepeat" value="2W" ng-value="2W">
+                  <span class="label-text">Every Two Week</span>
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label class="circled-radio classic">
+                  <input type="radio" ng-model="nmC.formGroupB.data.meetingRepeat" value="M" ng-value="M">
+                  <span class="label-text">Every Month</span>
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label class="circled-radio classic">
+                  <input type="radio" ng-model="nmC.formGroupB.data.meetingRepeat" value="1W" ng-value="1W">
+                  <span class="label-text">Every Week</span>
+                </label>
+              </div>
+            </div>
+            <ul style="list-style-type: none;">
+              <li>
+                
+              </li>
+              <li>
+                
+              </li>
+              <li>
+                
+              </li>
+              <li>
+                
+              </li>
+            </ul>
           </div>
-          <input id="meetingDatepickerInput" ng-model="nmC.formGroupB.data.meetingRange" type="hidden">
-          <p ng-show="nmC.formGroupB.data.invalidFields.range" class="text-danger">Please specify a date range(at least 2 days)</p>
-          <p>Meeting frequecy</p>
+
+        </div>
+        <div class="col-md-6 imported-schedules-title-bar">
+          <div class="time-window">
+            <h2 class="raleway">TIME WINDOW</h2><br>
+            <div id="meetingDatepicker">
+              <div></div>
+            </div>
+            <input id="meetingDatepickerInput" ng-model="nmC.formGroupB.data.meetingRange" type="hidden">
+            <p ng-show="nmC.formGroupB.data.invalidFields.range" class="text-danger">Please specify a date range(at least 2 days)</p>
+          </div>
+
+          
+          
+          
+          
+          
+          
+          
+<!--
           <select name="meetingRepeat" ng-model="nmC.formGroupB.data.meetingRepeat">
             <option value="0">None</option>
             <option value="1W">Every Week</option>
             <option value="2W">Every Two Weeks</option>
             <option value="1M">Every Month</option>
           </select>
-
+-->
         </div>
       </div>
 
+      <div class="row section-4 imported-schedules-title-bar">
+        <div class="col-md-12">
+          <form name="formGroupC">
+            <h2 class="raleway">PARTICIPANTS</h2><br>
+            <table class="table">
+              <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Required</th>
+                <th>Excluded</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>Bla</td>
+                  <td>
+                    <label class="circled-checkbox">
+                      <input type="checkbox" ng-model="nmC.formGroupC.data.partecipants[0].required">
+                      <span class="label-text classic"></span>
+                    </label>
+                  </td>
+                  <td>
+                    <label class="circled-checkbox">
+                      <input type="checkbox" ng-model="nmC.formGroupC.data.partecipants[0].excluded">
+                      <span class="label-text classic"></span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </form>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default yellow-btn">CREATE</button>
+
   </div>
 </div>
-
 <!--
   <div class="page-content">
     <h2>Plan a meeting</h2>
@@ -161,5 +258,4 @@
     </div>
   </div>
 </div>
-
 -->

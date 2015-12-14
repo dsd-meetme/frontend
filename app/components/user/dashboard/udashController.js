@@ -4,7 +4,49 @@
      @author Giorgio Pea
      @param logoutService A service used to manage the logout of a plunner's organization
      **/
-    var controller = function($scope,dataPublisher, mixedContentToArray, orgResources){
+    var controller = function($scope,dataPublisher, mixedContentToArray, orgResources, $timeout){
+
+        var processMeetings = function(a){
+            var ArrayOne = [];
+            var ArrayTwo = [];
+            var tmp,key;
+            console.log(a)
+            for(key in a){
+                if(key.length === 1){
+                    console.log(key);
+                    for(var j=0; j<a[key].meetings.length; j++){
+                        tmp = a[key].meetings[j];
+                        tmp.group_name = a[key].name;
+                        if(tmp.start_time == null){
+
+                            ArrayOne.push(tmp);
+                        }
+                        else{
+                            ArrayTwo.push(tmp)
+                        }
+                    }
+                }
+
+            }
+            return [ArrayOne, ArrayTwo];
+        };
+        var processCaldav = function(a){
+            var ArrayOne = [];
+            var ArrayTwo = [];
+            var tmp,key;
+            for(key in a){
+                if(key.length === 1){
+                    if(a[key].caldav == null){
+                        ArrayOne.push(a[key]);
+                    }
+                    else{
+                        ArrayTwo.push(a[key]);
+                    }
+                }
+
+            }
+            return [ArrayOne, ArrayTwo];
+        };
         var c = this;
         c.errors = {
             unauthorized : false,
@@ -80,8 +122,22 @@
         c.getSchedules = function(){
             orgResources.calendar().query({calendarId : ''}).$promise
                 .then(function(response){
-                    c.schedulesList.groupA.data = response;
+                    var compute = processCaldav(response);
+                    c.schedulesList.groupA.data = compute[0];
+                    c.schedulesList.groupB.data = compute[1];
                 });
+        };
+        c.getMeetings = function(){
+          orgResources.empGroups().query().$promise
+              .then(function(response){
+                  var compute = processMeetings(response);
+                  console.log(compute);
+                  c.meetingsList.groupA.data = compute[0];
+                  c.meetingsList.groupB.data = compute[1];
+              });
+        };
+        c.confirmPopup = {
+            message : ''
         };
         c.importSchedule = {
             credentials : {
@@ -98,6 +154,13 @@
                 usernameRequired : false,
                 passwordRequired : false
             },
+            showPopup : function(){
+                var popup = jQuery('#importSchedule');
+                this.thereErrors = false;
+                popup.find('input').val('');
+                popup.modal('show');
+            },
+            thereErrors: false,
             showLoader : false,
             getCalendars : function(){
                 var form = $scope.importScheduleForm;
@@ -105,7 +168,11 @@
                 this.invalidFields.urlVal = form.url.$error.url;
                 this.invalidFields.usernameRequired = form.username.$error.required;
                 this.invalidFields.passwordRequired = form.password.$error.required;
+                if(form.$invalid){
+                    this.thereErrors = true;
+                }
                 if(!form.$invalid){
+                    this.thereErrors = false;
                     this.credentials.url = this.url;
                     this.credentials.username = this.username;
                     this.credentials.password = this.password;
@@ -130,7 +197,7 @@
             submit : function(){
 
                 if(this.calendars.length === 0){
-                    this.errors.push('Before importing a calendar select one after having pressed get calendars')
+                    this.errors.push('Before importing a schedule select it after having pressed get schedules')
                 }
                 else if(!getSelectedCals(this.selectedCals)){
                     this.errors.push('Select at least one schedule to import');
@@ -148,7 +215,13 @@
                             enabled : 1
                         })
                             .then(function(){
-                                alert('pohhg');
+                                c.confirmPopup.message = 'Schedules successfully imported!';
+                                jQuery('#importSchedule').modal('hide');
+                                jQuery('#confirmPopup').modal('show');
+                                $timeout(function(){
+                                    jQuery('#confirmPopup').modal('hide');
+                                    c.getSchedules();
+                                },2000)
                             },function(response){
                                 if(response.status === 422) {
                                     mixedContentToArray.process(response.data, c.importSchedule.errors, true);
@@ -160,11 +233,11 @@
             }
         };
         c.deleteSchedule = function(id){
-          orgResources.calendar().remove({calendarId : id}).$promise
-              .then(function(){
-                  alert('evviva');
-                  c.getSchedules();
-              })
+            orgResources.calendar().remove({calendarId : id}).$promise
+                .then(function(){
+                    alert('evviva');
+                    c.getSchedules();
+                })
         };
         c.editSchedule = {
             errors : [],
@@ -176,11 +249,21 @@
                 passwordLength: false,
                 passwordMatch: false
             },
-            data : {},
+            data : {
+                name : '',
+                username : '',
+                url: '',
+                enabled: 0,
+                calendar_name: ''
+            },
             showPopup : function(index){
                 var popup = jQuery('#editSchedule');
-                popup.find('input').val('').removeAttr('checked');
-                this.data = c.schedulesList.groupA.data[index];
+                this.data.id = c.schedulesList.groupA.data[index].id;
+                this.data.name = c.schedulesList.groupA.data[index].name;
+                this.data.username = c.schedulesList.groupA.data[index].caldav.username;
+                this.data.url = c.schedulesList.groupA.data[index].caldav.url;
+                this.data.enabled = c.schedulesList.groupA.data[index].enabled;
+                this.data.cal_name = c.schedulesList.groupA.data[index].caldav.calendar_name;
                 popup.modal('show');
             },
             submit : function(index){
@@ -201,26 +284,51 @@
                 }
                 console.log(this.thereErrors);
                 if(!form.$invalid && !this.invalidFields.passwordMatch){
-                    console.log(this.data);
-                    orgResources.calendar().update({calendarId : this.data.id},jQuery.param({
-                        name : this.data.name,
-                        enabled : this.data.enabled === 'true' ? '1':'0',
-                        username : this.data.caldav.username,
-                        url : this.data.caldav.url,
-                        password : this.data.caldav.password,
-                        calendar_name: this.data.caldav.calendar_name
-                    })).$promise.
+                    var config_obj,enabled;
+                    if(this.data.enabled === 'true'){
+                        enabled = 1;
+                    }
+                    else{
+                        enabled = 0;
+                    }
+                    if(this.data.password !== ''){
+                        config_obj = {
+                            name : this.data.name,
+                            enabled : this.data.enabled === 'true' ? '1':'0',
+                            username : this.data.username,
+                            url : this.data.url,
+                            password : this.data.password,
+                            calendar_name: this.data.cal_name
+                        }
+                    }
+                    else {
+                        config_obj = config_obj = {
+                            name : this.data.name,
+                            enabled : this.data.enabled === 'true' ? '1':'0',
+                            username : this.data.username,
+                            url : this.data.url,
+                            calendar_name: this.data.cal_name
+                        }
+                    }
+                    orgResources.calendar().update({calendarId : this.data.id},jQuery.param(config_obj)).$promise.
                         then(function(response){
-                            alert('whao');
+                            c.confirmPopup.message = 'Changes successfully saved!';
+                            jQuery('#editSchedule').modal('hide');
+                            jQuery('#confirmPopup').modal('show');
+                            $timeout(function(){
+                                jQuery('#confirmPopup').modal('hide');
+                                c.getSchedules();
+                            },2000)
                         },function(response){
                             if(response.status === 422){
-                                mixedContentToArray(response.data, c.editSchedule.errors, true);
+                                mixedContentToArray.process(response.data, c.editSchedule.errors, true);
                             }
                         })
                 }
             }
         };
         c.getSchedules();
+        c.getMeetings();
     };
 
     var app = angular.module('Plunner');
