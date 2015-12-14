@@ -54,7 +54,7 @@
                         <th>Duration</th>
                         </thead>
                         <tbody >
-                        <tr ng-repeat="data in udashC.meetingsList.groupA.data | filter: {title : filterTBPMeetings} | limitTo: 10">
+                        <tr ng-repeat="data in udashC.meetingsList.groupA.data | filter: {title : filterTBPMeetings}">
                             <td>{{data.title}}</td>
                             <td>{{data.group_name}}</td>
                             <td>{{data.description}}</td>
@@ -88,7 +88,7 @@
                         <th>Date</th>
                         </thead>
                         <tbody >
-                        <tr ng-repeat="data in udashC.meetingsList.groupB.data | filter: {name: filterPMeetings} | limitTo: 10">
+                        <tr ng-repeat="data in udashC.meetingsList.groupB.data | filter: {name: filterPMeetings}">
                             <td>{{data.title}}</td>
                             <td>{{data.group_name}}</td>
                             <td>{{data.description}}</td>
@@ -127,7 +127,7 @@
                         <th></th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="calendar in udashC.schedulesList.groupB.data | filter: {name : filterISchedules} | limitTo: 10">
+                        <tr ng-repeat="calendar in udashC.schedulesList.groupB.data | filter: {name : filterISchedules}">
                             <td>{{calendar.name}}</td>
                             <td>{{calendar.caldav.updated_at}}</td>
                             <td class="text-center">
@@ -167,7 +167,7 @@
                         <th></th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="calendar in udashC.schedulesList.groupA.data | filter: {name : filterCSchedules} | limitTo: 10">
+                        <tr ng-repeat="calendar in udashC.schedulesList.groupA.data | filter: {name : filterCSchedules}">
                             <td>{{calendar.name}}</td>
                             <td>{{calendar.updated_at}}</td>
                             <td class="text-center">
