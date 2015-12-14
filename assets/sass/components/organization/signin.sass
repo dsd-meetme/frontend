@@ -4,7 +4,7 @@
 
 
 .signIn
-  height: calc(100% - 51px)
+  height: 100vh
   background-color: $second-color
 .signInContainer
   position: relative
@@ -34,12 +34,14 @@
     border-right: 0
     border-bottom: 2px solid #ddd
 
-  input[type="password"]
-    margin-bottom: 20px
-
     &:focus
       outline: none
       border-bottom: 2px solid $glob_gray
+
+  input[type="password"]
+    margin-bottom: 20px
+
+
 
   .form-fields
     width: 60%
@@ -56,4 +58,7 @@
 
       &:hover
         background-color: darken($second-color, 2%)
+        
+      &:focus
+        outline: none
 

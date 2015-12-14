@@ -67,7 +67,7 @@
                 right: 'deleteBtn, prev,next today'
             },
             defaultView: 'agendaWeek',
-
+            slotDuration: '00:15:00',
             events: c.events,
             editable : true,
             selectable: true,

@@ -10,7 +10,7 @@
   font-weight: 600; }
 
 .signIn {
-  height: calc(100% - 51px);
+  height: 100vh;
   background-color: #ffa500; }
 
 .signInContainer {
@@ -36,11 +36,11 @@
     border-left: 0;
     border-right: 0;
     border-bottom: 2px solid #ddd; }
-  .signInContainer input[type="password"] {
-    margin-bottom: 20px; }
-    .signInContainer input[type="password"]:focus {
+    .signInContainer input[type="email"]:focus, .signInContainer input[type="password"]:focus, .signInContainer input[type="text"]:focus {
       outline: none;
       border-bottom: 2px solid #384047; }
+  .signInContainer input[type="password"] {
+    margin-bottom: 20px; }
   .signInContainer .form-fields {
     width: 60%;
     margin-left: auto;
@@ -54,3 +54,5 @@
       margin-top: 30px; }
       .signInContainer .form-fields button:hover {
         background-color: #f59e00; }
+      .signInContainer .form-fields button:focus {
+        outline: none; }
