@@ -51,12 +51,14 @@
                         <th>Name</th>
                         <th>Group</th>
                         <th>Description</th>
+                        <th>Duration</th>
                         </thead>
                         <tbody >
                         <tr ng-repeat="data in udashC.meetingsList.groupA.data | filter: {title : filterTBPMeetings} | limitTo: 10">
                             <td>{{data.title}}</td>
                             <td>{{data.group_name}}</td>
                             <td>{{data.description}}</td>
+                            <td>{{(data.duration)/60 }}</td>
                         </tr>
                         </tbody>
                     </table>

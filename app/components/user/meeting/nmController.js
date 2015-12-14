@@ -61,11 +61,11 @@
             console.log(this.duration);
             console.log(this.duration > 0 && this.duration <= 720);
             this.invalidFields.durationVal = form.duration.$error.number;
-            this.invalidFields.durationLimit = !(this.duration > 15 && this.duration <= 720);
+            this.invalidFields.durationLimit = !(this.duration > 15 && this.duration <= 300);
             this.invalidFields.oneEventLeast = this.events.length === 0;
 
             for(var i=0; i<this.events.length; i++){
-               exp = (this.events[i]._end._d.getTime() - this.events[i]._start._d.getTime())/60000;
+               exp = (this.events[i]._end._d.getTime() - this.events[i]._start._d.getTime())/1000;
                 if(exp < this.duration){
                     this.invalidFields.durationConflict = true;
                     break;
