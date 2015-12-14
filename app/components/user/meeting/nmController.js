@@ -10,6 +10,7 @@
                 right: 'prev,next today'
             },
             defaultView: 'agendaWeek',
+            firstDay: 1,
             slotDuration: '00:15:00',
             events: c.events,
             editable : true,

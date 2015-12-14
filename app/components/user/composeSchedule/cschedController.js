@@ -61,6 +61,7 @@
                     }
                 }
             },
+            firstDay: 1,
             allDaySlot: false,
             header: {
                 right: 'deleteBtn, prev,next today'
