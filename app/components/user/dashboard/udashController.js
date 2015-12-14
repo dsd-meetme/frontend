@@ -18,7 +18,7 @@
                 }
 
             }
-            return [ArrayOne, ArrayTwo];
+            return Array;
         };
         var processCaldav = function (a) {
             var ArrayOne = [];
