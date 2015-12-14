@@ -131,12 +131,12 @@
                     var a,b;
                     //var compute = processMeetings(response);
                     c.meetingsList.groupB.data = response;
-                    for(var i=0; i< c.meetingsList.groupB.data.length; i++){
+                    /*for(var i=0; i< c.meetingsList.groupB.data.length; i++){
                         a = new moment(c.meetingsList.groupB.data[i].start_time);
                         b = parseInt(c.meetingsList.groupB.data[i].duration)/60;
                         c.meetingsList.groupB.data[i].finalDate = a.add(b, 'm').format('dddd, MMMM Do YYYY, h:mm:ss a');
                         console.log(c.meetingsList.groupB.data[i].finalDate)
-                    }
+                    }*/
                 });
 
         };
