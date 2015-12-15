@@ -48,7 +48,7 @@
                .then(function(){
                    alert('evviva');
                })
-        }
+        };
         c.calendarConfig = {
             customButtons : {
                 saveBtn : {

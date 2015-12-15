@@ -1,36 +1,50 @@
-<div>
-  <div class="navbar navbar-default">
+<div class="navbar navbar-default">
     <div class="container-fluid">
-      <!-- HEADER -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">PLUNNER</a>
-      </div>
-      <div class="navbar-collapse collapse navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">How To</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a class="btn btn-default" href="/#/">Home</a></li>
-        </ul>
-      </div>
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">PLUNNER</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="/#/">Home</a></li>
+            </ul>
+        </div>
     </div>
-  </div>
+</div>
 
-  <div class="page-content marged-page">
-    <form name="recoveryForm" ng-submit="urecC.recover()" novalidate>
-      <div class="form-fields">
-        <input class="text-form" type="text" name="name" ng-model="urecC.name" placeholder="Insert the Name of your Company" required>
-        <br>
-        <input class="text-form" type="email" name="email" ng-model="urecC.email" placeholder="Insert your Email" required>
-        <br/>
-        <p ng-show="urecC.invalidFields.nameReq" class="text-danger">Company Name Missing</p>
-        <p ng-show="urecC.invalidFields.emailReq" class="text-danger">Email Address Missing</p>
-        <p ng-show="urecC.invalidFields.emailVal" class="text-danger">Email address format not recognized</p>
-        <p class="text-danger" ng-repeat="error in urecC.errors">{{error}}</p>
-        <p ng-show="urecC.success" class="text-success">Success! We just sent you a link that you can use to reset your password</p>
-        <br/>
-        <button class="btn btn-default">Recover Password</button>
-      </div>
+<div class="container-fluid recovery-container">
+    <div class="row">
+        <div class="col-md-10 col-md-push-1">
+            <form name="recoveryForm" class="recoveryorg text-center" ng-submit="urecC.recover()" novalidate>
+                <h2>Password recovery</h2>
 
-    </form>
-  </div>
+                <p>For users</p>
+                <input class="text-form" type="text" name="name" ng-model="urecC.name"
+                       placeholder="Insert the Name of your Company" required>
+                <br>
+                <input class="text-form" type="email" name="email" ng-model="urecC.email"
+                       placeholder="Insert your Email" required>
+                <br/>
+
+                <div>
+                    <p ng-show="urecC.invalidFields.nameReq" class="text-danger">Company Name Missing</p>
+
+                    <p ng-show="urecC.invalidFields.emailReq" class="text-danger">Email Address Missing</p>
+
+                    <p ng-show="urecC.invalidFields.emailVal" class="text-danger">Email address format not
+                        recognized</p>
+
+                    <p class="text-danger" ng-repeat="error in urecC.errors">{{error}}</p>
+
+                    <p ng-show="urecC.success" class="text-success">Success! We just sent you a link that you can use to
+                        reset your password</p>
+                </div>
+                <button class="btn btn-default">Recover Password</button>
+
+            </form>
+        </div>
+    </div>
+
 </div>
