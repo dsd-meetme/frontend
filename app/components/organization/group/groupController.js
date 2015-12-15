@@ -61,8 +61,10 @@
             orgResources.group().remove({groupId:id}).$promise
                 .then(function(response){
                     c.confirmPopup.message = "Group successfully deleted";
+                    c.editMode.exit();
                     jQuery('#confirmPopup').modal('show');
                     $timeout(function(){
+
                         jQuery('#confirmPopup').modal('hide');
                         $location.path('/organization')
                     },2000);
@@ -74,7 +76,7 @@
                 orgResources.group().update({groupId:id},jQuery.param(
                         {
                             name : c.data.group.name,
-                            description : c.data.group.desc,
+                            description : c.data.group.description,
                             planner_id : plannerId
                         })
                 ).$promise
@@ -84,7 +86,7 @@
                         setTimeout(function(){
                             jQuery('#confirmPopup').modal('hide');
                         },1000);
-                        c.editMode.exit()
+                        c.editMode.exit();
                         //Update view
                         c.getInfo();
                     },function(response){

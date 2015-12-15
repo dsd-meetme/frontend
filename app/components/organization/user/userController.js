@@ -18,10 +18,10 @@
         c.confirmPopup = {
             message : '',
             show : function(){
-                jQuery('#confirmPopupa').modal('show');
+                jQuery('#confirmPopup').modal('show');
             },
             hide : function(){
-                jQuery('#confirmPopupa').modal('hide');
+                jQuery('#confirmPopup').modal('hide');
             }
         };
         //Get user info in the context of an org
@@ -78,6 +78,7 @@
                             $timeout(function () {
                                 c.confirmPopup.hide();
                             }, 2000);
+                            c.editMode.flag = false;
                             c.getInfo();
                         }, function (response) {
                             if (response.status === 422) {

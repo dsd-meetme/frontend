@@ -83,7 +83,8 @@
                     //Updates the group name and planner
                     orgResources.group().save({groupId: ''}, jQuery.param({
                         name: this.name,
-                        planner_id: this.planner
+                        planner_id: this.planner,
+                        description: this.desc
                     })).$promise
                         .then(function (response) {
                             //Updates the group members
