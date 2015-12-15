@@ -314,10 +314,10 @@
                 if (!form.$invalid && !this.invalidFields.passwordMatch) {
                     var config_obj, enabled;
                     if (this.data.enabled === 'true') {
-                        enabled = 1;
+                        enabled = '1';
                     }
                     else {
-                        enabled = 0;
+                        enabled = '0';
                     }
                     if (this.data.password !== '') {
                         config_obj = {
