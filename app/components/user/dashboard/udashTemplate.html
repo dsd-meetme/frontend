@@ -16,7 +16,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid udash">
     <div class="top-odash-banner row">
         <h2 class="text-center">Dashboard</h2>
         <div class="view-switcher" role="group" aria-label="...">
@@ -40,6 +40,7 @@
                     <a href="/#/user/newmeeting">
                         <button class="btn btn-default glob_button"><i class="fa fa-plus"></i>&nbsp;&nbsp;Plan a meeting</button>
                     </a>
+                    <button style="float: left" class="btn btn-default glob_button" ng-click="udashC.limits.change('tpmeetings', '')">See all</button>
                 </div>
             </div>
             <div class="row">
@@ -54,7 +55,7 @@
                         <th>Duration</th>
                         </thead>
                         <tbody >
-                        <tr ng-repeat="data in udashC.meetingsList.groupA.data | filter: {title : filterTBPMeetings}">
+                        <tr ng-repeat="data in udashC.meetingsList.groupA.data | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
                             <td>{{data.title}}</td>
                             <td>{{data.group_name}}</td>
                             <td>{{data.description}}</td>
@@ -76,6 +77,7 @@
                         <span class="fa fa-search fa-lg"></span>
                         <input class="search-field" type="search" ng-model="filterPMeetings" placeholder="Search for..."/>
                     </div>
+                    <button class="btn btn-default glob_button" ng-click="udashC.limits.change('pmeetings', '')">See all</button>
                 </div>
             </div>
             <div class="row">
@@ -88,7 +90,7 @@
                         <th>Date</th>
                         </thead>
                         <tbody >
-                        <tr ng-repeat="data in udashC.meetingsList.groupB.data | filter: {name: filterPMeetings}">
+                        <tr ng-repeat="data in udashC.meetingsList.groupB.data | filter: {name: filterPMeetings} | limitTo : udashC.limits.pmeetings">
                             <td>{{data.title}}</td>
                             <td>{{data.group_name}}</td>
                             <td>{{data.description}}</td>
@@ -114,6 +116,7 @@
                         <span class="fa fa-search fa-lg"></span>
                         <input class="search-field" type="search" ng-model="filterISchedules" placeholder="Search for..."/>
                     </div>
+                    <button class="btn btn-default glob_button" ng-click="udashC.limits.change('ischedules', '')">See all</button>
                     <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.showPopup()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Import Schedule</button>
                 </div>
             </div>
@@ -127,7 +130,7 @@
                         <th></th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="calendar in udashC.schedulesList.groupB.data | filter: {name : filterISchedules}">
+                        <tr ng-repeat="calendar in udashC.schedulesList.groupB.data | filter: {name : filterISchedules} | limitTo : udashC.limits.ischedules">
                             <td>{{calendar.name}}</td>
                             <td>{{calendar.caldav.updated_at}}</td>
                             <td class="text-center">
@@ -154,6 +157,7 @@
                         <span class="fa fa-search fa-lg"></span>
                         <input class="search-field" type="search" ng-model="filterCSchedules" placeholder="Search for..."/>
                     </div>
+                    <button class="btn btn-default glob_button" ng-click="udashC.limits.change('cschedules', '')">See all</button>
                     <a class="btn btn-default glob_button" href="/#/user/schedules/compose/_"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Compose Schedule</a>
                 </div>
             </div>
@@ -176,7 +180,7 @@
                                     <span class="label-text"></span>
                                 </label>
                             </td>
-                            <td class="text-right"><a href="/#/user/schedules/compose/{{calendar.id}}&{{calendar.name}}&{{calendar.enabled}}" class="fa fa-wrench fa-lg" ></a><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
+                            <td class="text-right"><a href="/#/user/schedules/compose/{{calendar.id}}&{{calendar.name}}&{{calendar.enabled}}" class="wrench-link fa fa-wrench fa-lg" ></a><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
                         </tr>
                         </tbody>
                     </table>

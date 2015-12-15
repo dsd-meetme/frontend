@@ -118,6 +118,15 @@
                     c.schedulesList.groupB.data = compute[1];
                 });
         };
+        c.limits = {
+            pmeetings : 10,
+            tpmeetings : 10,
+            ischedules : 10,
+            cschedules : 10,
+            change : function(param, value){
+                this[param] = value;
+            }
+        };
         c.getMeetings = function () {
             orgResources.empGroups().query().$promise
                 .then(function (response) {

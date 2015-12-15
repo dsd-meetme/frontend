@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid nm">
 
     <div class="top-odash-banner row">
         <h2 class="text-center">NEW MEETING</h2>
@@ -26,38 +26,41 @@
 
     <div class="row">
         <div class="col-md-10 col-md-push-1">
-            <div class="row">
+            <div class="row nm-content">
                 <div class="col-md-5">
                     <h2>INFORMATION</h2>
-
                     <form name="meetingInfoForm" novalidate>
                         <p>Title</p>
-                        <input type="text" name="title" ng-model="nmC.title" required/>
+                        <input type="text" name="title" ng-model="nmC.title" required placeholder="Insert a title"/>
                         <p>Description</p>
-                            <textarea name="description" ng-model="nmC.description" required>
+                            <textarea name="description" ng-model="nmC.description" required placeholder="Insert a description">
 
                             </textarea>
                         <p>Duration(in mins)</p>
-                        <input type="number" ng-model="nmC.duration" name="duration" required/>
-                        <p>Group</p>
+                        <input type="number" ng-model="nmC.duration" name="duration" required placeholder="Insert a duration" />
+                        <p>Groups</p>
                         <div ng-repeat="group in nmC.groups">
-                            <span>{{group.name}}</span>
-                            <input type="radio" name="group" ng-checked="nmC.selectedGroupAssign(group.id)" >
+                            <span style="margin-right: 10px">{{group.name}}</span>
+                            <label class="circled-radio">
+                                <input type="radio" name="group" ng-value="group.id" ng-model="nmC.selectedGroup">
+                                <span class="label-text"></span>
+                            </label>
+                            <!--<input type="radio" name="group" ng-checked="nmC.selectedGroupAssign(group.id)" >-->
                         </div>
                     </form>
-                    <div class="errorContainer" ng-show="nmC.thereErrors || nmeC.errors.length > 0">
+                    <div class="errorContainer" style="margin-top: 10px" ng-show="nmC.thereErrors || nmeC.errors.length > 0">
                         <p ng-show="nmC.invalidFields.nameReq">Insert a title</p>
                         <p ng-show="nmC.invalidFields.descriptionReq">Insert a description</p>
                         <p ng-show="nmC.invalidFields.durationReq">Insert a duration</p>
-                        <p ng-show="nmC.invalidFields.durationVal">Insert a valid duration</p>
-                        <p ng-show="nmC.invalidFields.durationLimit">Insert a shorter duration(max 720mins)</p>
+                        <p ng-show="nmC.invalidFields.durationVal">Insert a valid duration(a number)</p>
+                        <p ng-show="nmC.invalidFields.durationLimit">Insert a valid duration duration(max 300mins, min 15mins)</p>
                         <p ng-show="nmC.invalidFields.oneEventLeast">Insert at least one time window for the meeting</p>
                         <p ng-show="nmC.invalidFields.durationConflict">One time window is too short for the meeting</p>
+                        <p ng-show="nmC.invalidFields.oneGroup">Select the group for the meeting</p>
                         <p ng-repeat="error in nmeC.errors">{{error}}</p>
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <div></div>
                     <h2>TIME WINDOW</h2>
                     <div id="meetingTimeslots">
 
@@ -67,13 +70,32 @@
                 </div>
 
             </div>
-            <div class="row">
-                <button class="btn btn-default yellow-btn" ng-click="nmC.submit()">Plan meeting</button>
+            <br/>
+            <hr/>
+            <div class="row text-center">
+                <br/>
+                <button class="btn btn-default spec-btn" ng-click="nmC.submit()">Plan meeting</button>
             </div>
+            <br/>
+            <br/>
+            <br/>
 
         </div>
 
     </div>
     <br/>
     <br/>
+    <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="text-center">{{nmC.confirmPopup.message}}</h3>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
 </div>

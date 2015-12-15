@@ -1,6 +1,6 @@
 (function () {
 
-    var controller = function (orgResources, $timeout, mixedContentToArray, $scope) {
+    var controller = function (orgResources, $timeout, mixedContentToArray, $scope, $location) {
         console.log(this);
         var c = this;
         c.events = [];
@@ -42,13 +42,17 @@
             durationVal: false,
             durationLimit: false,
             oneEventLeast: false,
-            durationConflict: false
+            durationConflict: false,
+            oneGroup: false
         };
         c.selectedGroupAssign = function(id){
             this.selectedGroup = id;
         };
         c.errors = [];
         c.thereErrors = false;
+        c.confirmPopup = {
+            message : ''
+        };
         c.submit = function(){
             var form = $scope.meetingInfoForm;
             var processedEvents = [];
@@ -58,10 +62,11 @@
             this.invalidFields.nameReq = form.title.$error.required;
             this.invalidFields.descriptionReq = form.description.$error.required;
             this.invalidFields.durationReq = form.duration.$error.required;
-            console.log(this.duration);
-            console.log(this.duration > 0 && this.duration <= 720);
+            this.invalidFields.oneGroup = !angular.isDefined(this.selectedGroup);
             this.invalidFields.durationVal = form.duration.$error.number;
-            this.invalidFields.durationLimit = !(this.duration > 15 && this.duration <= 300);
+            if(!this.invalidFields.durationReq){
+                this.invalidFields.durationLimit = !(this.duration >= 15 && this.duration <= 300);
+            }
             this.invalidFields.oneEventLeast = this.events.length === 0;
 
             for(var i=0; i<this.events.length; i++){
@@ -96,9 +101,20 @@
                             orgResources.timers().save({groupId: c.selectedGroup, meetingsId: response.id},
                                 jQuery.param(processedEvents[i])
                             ).$promise.then(function(){
-                                    alert('Evviva');
+                                    if(i=== processedEvents.length){
+                                        c.confirmPopup.message = 'Meeting successfully planned'
+                                        jQuery('#confirmPopup').modal('show');
+                                        $timeout(function(){
+                                            jQuery('#confirmPopup').modal('hide');
+                                            $location.path('/user');
+                                        },2000)
+                                    }
+                                }, function(response){
+                                    mixedContentToArray.process(response.data, c.errors, true);
                                 })
                         }
+                    }, function(response){
+                        mixedContentToArray.process(response.data, c.errors, true);
                     })
             }
         };
