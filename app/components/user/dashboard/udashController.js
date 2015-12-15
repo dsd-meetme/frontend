@@ -104,6 +104,13 @@
                 }
             },
         };
+        c.deleteInPMeeting = function(groupId, meetingId){
+            orgResources.meetings().remove({groupId: groupId, meetingsId: meetingId}).$promise
+                .then(function(){
+                    alert('evviva');
+                    c.getMeetings();
+                })
+        };
         c.events = [];
         c.saveSchedule = function () {
             console.log(calendar.fullCalendar('clientEvents'));

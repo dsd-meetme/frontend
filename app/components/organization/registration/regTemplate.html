@@ -12,41 +12,57 @@
         </div>
     </div>
 </div>
-<div class="page-content">
-   <form name="regForm" ng-submit="regC.process()" novalidate>
-      <div class="form-register">
-        <h2>Registration</h2>
-        <br>
-        <input name="name" class="form-control" type="text" placeholder="Organization Name" required ng-model="regC.name">
-        <div ng-show="regC.invalidFields.nameReq" class="text-danger">
-          You did not insert an organization name
+<div class="container-fluid reg-container">
+    <form name="regForm" ng-submit="regC.process()" novalidate>
+        <div class="form-register text-center">
+            <h2 >Registration</h2>
+            <br>
+            <p>Name</p>
+            <input name="name" type="text" placeholder="Organization Name" required
+                   ng-model="regC.name">
+            <br>
+            <p>Email</p>
+            <input name="email" type="email" placeholder="Contact Email" required
+                   ng-model="regC.email">
+
+
+
+            <br>
+            <p>Password</p>
+            <input name="password" ng-minlength="6" type="Password" placeholder="password" required
+                   ng-model="regC.password">
+
+
+            <br>
+            <p>Confirm password</p>
+            <input name="passwordC" type="password" placeholder="Confirm Password" required
+                   ng-model="regC.passwordC">
+            <br>
+            <div>
+                <p class="text-danger" ng-repeat="error in regC.errors">{{error}}</p>
+                <p ng-show="regC.invalidFields.nameReq" class="text-danger">
+                    You did not insert an organization name
+                </p>
+                <p ng-show="regC.invalidFields.emailReq" class="text-danger">
+                    You did not insert an email address
+                </p>
+                <p ng-show="regC.invalidFields.emailVal" class="text-danger">
+                    You did not insert a valid email address
+                </p>
+                <p ng-show="regC.invalidFields.passwordReq" class="text-danger">
+                    You did not insert a password
+                </p>
+                <p ng-show="regC.invalidFields.passwordLength" class="text-danger">
+                    The password must be of at least 6 characters
+                </p>
+                <p ng-show="regC.invalidFields.passwordMatch" class="text-danger">
+                    The two passwords don't match
+                </p>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-default">Register!</button>
+            </br><br>
+            <i>Already registered? <a href="/#/orgsignin">Sign in here!</a></i>
         </div>
-        <br>
-        <input name="email" class="form-control" type="email" placeholder="Contact Email" required ng-model="regC.email">
-        <div ng-show="regC.invalidFields.emailReq" class="text-danger">
-          You did not insert an email address
-        </div>
-        <div ng-show="regC.invalidFields.emailVal" class="text-danger">
-          You did not insert a valid email address
-        </div>
-        <br>
-        <input name="password" class="form-control" ng-minlength="6" type="Password" placeholder="password" required ng-model="regC.password">
-        <div ng-show="regC.invalidFields.passwordReq" class="text-danger">
-          You did not insert a password
-        </div>
-        <div ng-show="regC.invalidFields.passwordLength" class="text-danger">
-          The password must be of at least 6 characters
-        </div>
-        <br>
-        <input name="passwordC" class="form-control" type="password" placeholder="Confirm Password" required ng-model="regC.passwordC">
-        <div ng-show="regC.invalidFields.passwordMatch" class="text-danger">
-          The two passwords don't match
-        </div>
-        <br>
-        <p class="text-danger" ng-repeat="error in regC.errors">{{error}}</p>
-        <button type="submit" class="btn btn-default">Register!</button>
-        </br><br>
-        <i>Already registered? <a href="/#/orgsignin">Sign in here!</a></i>
-      </div>
     </form>
 </div>

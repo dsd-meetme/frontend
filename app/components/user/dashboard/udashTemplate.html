@@ -53,6 +53,7 @@
                         <th>Group</th>
                         <th>Description</th>
                         <th>Duration</th>
+                        <th></th>
                         </thead>
                         <tbody >
                         <tr ng-repeat="data in udashC.meetingsList.groupA.data | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
@@ -60,6 +61,7 @@
                             <td>{{data.group_name}}</td>
                             <td>{{data.description}}</td>
                             <td>{{(data.duration)/60 }}</td>
+                            <td><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteInPMeeting(data.group_id, data.id)"></span></td>
                         </tr>
                         </tbody>
                     </table>
@@ -134,10 +136,12 @@
                             <td>{{calendar.name}}</td>
                             <td>{{calendar.caldav.updated_at}}</td>
                             <td class="text-center">
-                                <label class="circled-checkbox">
+                                <span ng-show="calendar.enabled === '1'" class="fa fa-circle"></span>
+                                <span ng-show="calendar.enabled !=='1'" class="fa fa-circle-o"></span>
+                                <!--<label class="circled-checkbox">
                                     <input type="checkbox" ng-checked="calendar.enabled === '1'"/>
                                     <span class="label-text"></span>
-                                </label>
+                                </label>-->
                             </td>
                             <td class="text-right"><span class="fa fa-wrench fa-lg" ng-click="udashC.editSchedule.showPopup($index)"></span><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
                         </tr>
@@ -175,10 +179,13 @@
                             <td>{{calendar.name}}</td>
                             <td>{{calendar.updated_at}}</td>
                             <td class="text-center">
-                                <label class="circled-checkbox">
+                                <span ng-show="calendar.enabled === '1'" class="fa fa-circle"></span>
+                                <span ng-show="calendar.enabled !=='1'" class="fa fa-circle-o"></span>
+
+                                <!--<label class="circled-checkbox">
                                     <input type="checkbox" ng-checked="calendar.enabled === '1'" disabled/>
                                     <span class="label-text"></span>
-                                </label>
+                                </label>-->
                             </td>
                             <td class="text-right"><a href="/#/user/schedules/compose/{{calendar.id}}&{{calendar.name}}&{{calendar.enabled}}" class="wrench-link fa fa-wrench fa-lg" ></a><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
                         </tr>

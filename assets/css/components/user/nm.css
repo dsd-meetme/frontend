@@ -65,6 +65,7 @@
   width: 250px;
   padding: 12px 24px;
   text-transform: uppercase;
+  border-radius: 2px;
   outline: none; }
   .nm .spec-btn:hover {
     background-color: #db8e00; }
