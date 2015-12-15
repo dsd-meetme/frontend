@@ -29,7 +29,8 @@
                             c.events.push({
                                 title: '',
                                 start: split[0]+'T'+split[1],
-                                end: splito[0]+'T'+splito[1]
+                                end: splito[0]+'T'+splito[1],
+                                specificId: response[i].id
                             });
                             //console.log(c.events);
                         }
@@ -41,7 +42,13 @@
             }
 
         };
-        c.eventRemoveId = '';
+        c.eventRemoveId = [2];
+        c.removeTimeslot = function(id){
+           orgResources.timeslot().remove({calendarId : this.id, timeslotId : id}).$promise
+               .then(function(){
+                   alert('evviva');
+               })
+        }
         c.calendarConfig = {
             customButtons : {
                 saveBtn : {
@@ -53,10 +60,13 @@
                 deleteBtn : {
                     text: 'Delete event',
                     click : function(){
-                        if(c.eventRemoveId !== ''){
-                            calendar.fullCalendar('removeEvents', c.eventRemoveId);
+                        if(c.eventRemoveId.length !== 0){
+                            if(mode === 0){
+                                c.removeTimeslot(c.eventRemoveId.two);
+                            }
+                            calendar.fullCalendar('removeEvents', c.eventRemoveId.one);
                             jQuery('.fc-deleteBtn-button').removeAttr('style');
-                            c.eventRemoveId = '';
+                            c.eventRemoveId = {};
                         }
                     }
                 }
@@ -75,8 +85,10 @@
             eventClick: function(calEvent, jsEvent, view){
 
                 jQuery('.fc-deleteBtn-button').show();
-                c.eventRemoveId = calEvent._id;
-                console.log(c.eventRemoveId);
+                c.eventRemoveId = {
+                    one : calEvent._id,
+                    two : calEvent.specificId
+                };
             },
             select: function (start, end, jsEvent, view) {
                 calendar.fullCalendar('renderEvent',
