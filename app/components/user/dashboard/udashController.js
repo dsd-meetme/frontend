@@ -322,7 +322,7 @@
                     if (this.data.password !== '') {
                         config_obj = {
                             name: this.data.name,
-                            enabled: this.data.enabled === enabled,
+                            enabled: enabled,
                             username: this.data.username,
                             url: this.data.url,
                             password: this.data.password,
@@ -332,7 +332,7 @@
                     else {
                         config_obj = config_obj = {
                             name: this.data.name,
-                            enabled: this.data.enabled === enabled,
+                            enabled: enabled,
                             username: this.data.username,
                             url: this.data.url,
                             calendar_name: this.data.cal_name
