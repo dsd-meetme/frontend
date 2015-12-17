@@ -1,0 +1,174 @@
+@import '../../global/colors'
+@import '../../global/size'
+@import '../../global/fonts'
+
+.top-odash-banner
+  position: relative
+  height: 150px
+  background: url('../../../img/pattern.png')
+  border-bottom: 1px solid #eee
+
+  h2
+    margin-top: 40px
+    color: $glob_gray
+    font-family: $raleway-font
+    font-weight: 600
+    text-transform: uppercase
+
+  .view-switcher
+    position: absolute
+    bottom: -20px
+    left: calc(50% - 125px)
+    width: 250px
+
+    button
+      width: 50%
+      padding: 12px 24px
+      color: $glob_gray_light
+      font-family: $raleway-font
+      font-size: 15px
+      font-weight: 600
+      float: left
+      border: 2px solid $glob_gray
+      outline: none
+
+      &:first-child
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+
+      &:last-child
+        border-left: none
+        border-top-left-radius: 0
+        border-bottom-left-radius: 0
+
+      &:hover
+        color: $glob_gray
+        background-color: white
+
+      &:focus
+        outline: none
+
+
+  .switchSelected
+    color: white !important
+    background-color: $glob_gray
+
+    &:hover
+      color: white !important
+      background-color: $glob_gray !important
+
+
+.odash-action-bar
+  margin-top: 70px
+
+  > div > div
+    &:first-child
+      width: 400px
+      display: inline-block
+      float: left
+
+
+      input
+        width: calc(100% - 34px)
+        margin-left: 10px
+        border-bottom: 2px solid #ddd
+        padding: 5px 0 5px 0
+
+        &:focus
+          outline: none
+          border-bottom: 2px solid $glob_gray
+
+    &:last-child
+      display: inline-block
+      margin-left: 20px
+
+      button
+        margin-right: 10px
+        border: 2px solid $glob_gray_light
+        color: $glob_gray_light
+        font-weight: 600
+
+        &:hover
+          border-color: $glob_gray
+          background-color: white
+          color: $glob_gray
+
+
+
+
+.odash-users, .odash-groups
+  margin-top: $medium-norm
+
+  table
+    border-top: 2px solid #ddd
+
+    a.fa
+      text-decoration: none
+
+      &:hover
+        color: $second-color
+
+
+
+
+#addGroup, #addUser
+  .circled-radio
+    input[type="radio"]
+      display: none
+
+  .circled-radio input[type="radio"] + .label-text:before
+    content: "\f10c"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    width: 1em
+    margin-right: 7px
+
+  .circled-radio input[type="radio"]:checked + .label-text:before
+    content: "\f111"
+
+  .modal-content
+    border: 1px solid rgba(0,0,0,.1)
+    border-radius: 4px
+
+  .modal-header
+    padding-left: 30px
+
+    h3
+      font-family: $raleway-font
+      text-transform: uppercase
+      font-weight: 600
+      margin-top: 10px
+
+  .modal-body
+    padding: 30px
+    p
+      margin-bottom: 2px
+    input[type="text"], input[type="email"], input[type="password"]
+      border: none
+      border-bottom: 2px solid #ddd
+      padding: 5px 0 5px 0
+      margin-bottom: 15px
+      width: 60%
+
+      &:focus
+        outline: none
+        border-bottom: 2px solid $glob_gray
+
+
+#confirmPopup
+  .modal-content
+    border: 1px solid rgba(0,0,0,.1)
+    border-radius: 4px
+  .modal-header
+    border-bottom: none
+
+  h3
+    font-family: $raleway-font
+    text-transform: uppercase
+    font-weight: 600
+    color: $glob_gray

@@ -1,0 +1,15 @@
+.centered-col {
+  text-align: center; }
+
+.lefted-col {
+  text-align: left; }
+
+.righted-col {
+  text-align: right; }
+
+hr.black-line {
+  border-color: #000000; }
+
+hr.second-line {
+  border-color: #ffa500;
+  border-width: 2px; }

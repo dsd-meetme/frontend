@@ -1,121 +1,101 @@
-<div class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- HEADER -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Plunner</a>
-      </div>
-      <div class="navbar-collapse collapse navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/#/user">Dashboard</a></li>
-          <li><a href="/#/user/profile">
-            <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
-          <li><a href="#">How To</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/presentation">Sign Out</button></li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-<div class="page-content">
-  <h2>Plan a meeting</h2>
-  <div class="row">
-    <div class="col-md-6">
-      <form name="formGroupA" novalidate>
-        <p>
-          Title
-        </p>
-        <input type="text" name="title" ng-model="nmC.formGroupA.data.title" required>
-        <p class="text-danger" ng-show="nmC.formGroupA.invalidFields.titleReq">Insert a title for the meeeting</p>
-        <p>
-          Description
-        </p>
-        <textarea name="desc" rows="8" cols="40" ng-model="nmC.formGroupA.data.desc"></textarea>
-        <p>Meeting place</p>
-        <input type="text" name="meetingPlace" ng-model="nmC.formGroupA.data.meetingPlace">
-        <p>Exported the planned meeting date to your schedules</p>
-        <select name="exportDate" ng-model=" nmC.formGroupA.data.exportDate">
-          <option value="YES">Yes</option>
-          <option value="NO">No</option>
-        </select>
-      </form>
-    </div>
-    <div class="col-md-6">
-      <form name="formGroupB" novalidate>
-        <div id="meetingDatepicker">
-          <div></div>
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">PLUNNER</a>
         </div>
-        <input id="meetingDatepickerInput" ng-model="nmC.formGroupB.data.meetingRange" type="hidden">
-        <p ng-show="nmC.formGroupB.data.invalidFields.range" class="text-danger">Please specify a date range(at least 2 days)</p>
-        <p>Meeting repetion</p>
-        <select name="meetingRepeat" ng-model="nmC.formGroupB.data.meetingRepeat">
-          <option value="1W">every week</option>
-          <option value="2W">every two weeks</option>
-          <option value="1M">every month</option>
-        </select>
-        <p>Deadline</p>
-        <button ng-click="nmC.formGroupB.showDlDatepicker()">Add deadline</button>
-        <div id="deadlineDatepicker" ng-show="nmC.formGroupB.dlDatepickerVisibility">
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/#/user">Dashboard</a></li>
+                <li><a href="/#/user/profile">
+                    <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">SIGN OUT</button></li>
+            </ul>
         </div>
-        <input type="hidden"  ng-model="nmC.formGroupB.data.deadline">
-      </form>
     </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-12">
-      <form name="formGroupC">
-        <h2>Partecipants</h2>
-        <table class="table">
-          <thead>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Required</th>
-            <th>Exluded</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td>Bla</td>
-              <td><input type="checkbox" ng-model="nmC.formGroupC.data.partecipants[0].required"></td>
-              <td><input type="checkbox" ng-model="nmC.formGroupC.data.schedules[0].excluded"></td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+</div>
+
+<div class="container-fluid nm">
+
+    <div class="top-odash-banner row">
+        <h2 class="text-center">NEW MEETING</h2>
     </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-12">
-      <form name="formGroupD">
-        <h2>Schedules for the meeting</h2>
-        <p ng-show="nmC.formGroupD.invalidFields.notimeslots" class="text-danger">If u not chose to use one of
-        your schedule allow the use of timeslots or import you schedule in you dashboard</p>
-        <ul class="list-unstyled">
-          <li>sadasdsad
-            <input type="hidden" ng-model="nmC.formGroupD.data.schedules[0]">
-          </li>
-          <li></li>
-        </ul>
-      </form>
+
+    <div class="row">
+        <div class="col-md-10 col-md-push-1">
+            <div class="row nm-content">
+                <div class="col-md-5">
+                    <h2>INFORMATION</h2>
+                    <form name="meetingInfoForm" novalidate>
+                        <p>Title</p>
+                        <input type="text" name="title" ng-model="nmC.title" required placeholder="Insert a title"/>
+                        <p>Description</p>
+                            <textarea name="description" ng-model="nmC.description" required placeholder="Insert a description">
+
+                            </textarea>
+                        <p>Duration(in mins)</p>
+                        <input type="number" ng-model="nmC.duration" name="duration" required placeholder="Insert a duration" />
+                        <p>Groups</p>
+                        <div ng-repeat="group in nmC.groups">
+                            <span style="margin-right: 10px">{{group.name}}</span>
+                            <label class="circled-radio">
+                                <input type="radio" name="group" ng-value="group.id" ng-model="nmC.selectedGroup">
+                                <span class="label-text"></span>
+                            </label>
+                            <!--<input type="radio" name="group" ng-checked="nmC.selectedGroupAssign(group.id)" >-->
+                        </div>
+                    </form>
+                    <div class="errorContainer" style="margin-top: 10px" ng-show="nmC.thereErrors || nmeC.errors.length > 0">
+                        <p ng-show="nmC.invalidFields.nameReq">Insert a title</p>
+                        <p ng-show="nmC.invalidFields.descriptionReq">Insert a description</p>
+                        <p ng-show="nmC.invalidFields.durationReq">Insert a duration</p>
+                        <p ng-show="nmC.invalidFields.durationVal">Insert a valid duration(a number)</p>
+                        <p ng-show="nmC.invalidFields.durationLimit">Insert a valid duration duration(max 300mins, min 15mins)</p>
+                        <p ng-show="nmC.invalidFields.oneEventLeast">Insert at least one time window for the meeting</p>
+                        <p ng-show="nmC.invalidFields.durationConflict">One time window is too short for the meeting</p>
+                        <p ng-show="nmC.invalidFields.oneGroup">Select the group for the meeting</p>
+                        <p ng-repeat="error in nmeC.errors">{{error}}</p>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <h2>TIME WINDOW</h2>
+                    <div id="meetingTimeslots">
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <br/>
+            <hr/>
+            <div class="row text-center">
+                <br/>
+                <button class="btn btn-default spec-btn" ng-click="nmC.submit()">Plan meeting</button>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+
+        </div>
+
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <form name="formGroupE">
-        <h2>Do you want to use your free time slots</h2>
-        <select name="timeSlots" ng-model="nmC.formGroupD.data.timeSlots">
-          <option value="YES">YES</option>
-          <option value="NO">NO</option>
-        </select>
-      </form>
+    <br/>
+    <br/>
+    <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="text-center">{{nmC.confirmPopup.message}}</h3>
+                </div>
+                <br/>
+            </div>
+        </div>
     </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <button class="btn btn-primary btn-lg">PLAN MEETING</button>
-    </div>
-  </div>
 </div>

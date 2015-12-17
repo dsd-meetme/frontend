@@ -10,7 +10,6 @@
             //Gets the url the user want to reach
             path = next.originalPath;
 
-            $rootScope['event:comErrorGeneral']
             if(token){
                 mode = jwt_decode(token).mode;
             }

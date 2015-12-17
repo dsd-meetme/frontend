@@ -1,91 +1,116 @@
 <div class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- HEADER -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Plunner</a>
-      </div>
-      <div class="navbar-collapse collapse navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/#/organization">Dashboard</a></li>
-          <li><a href="/#/organization/profile">
-            <span class="glyphicon glyphicon-user"></span> Organization Name</a></li>
-          <li><a href="#">How To</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/presentation">Sign Out</button></li>
-        </ul>
-      </div>
+    <div class="container-fluid">
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Plunner</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/#/organization">Dashboard</a></li>
+                <li><a href="/#/organization/profile">
+                    <span class="glyphicon glyphicon-user"></span> Organization Name</a></li>
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">Sign Out</button></li>
+            </ul>
+        </div>
     </div>
-  </div>
 </div>
-<div class="container">
-  <style>
-    .disabled {
-      border: none;
-    }
-    input {
-      cursor: text;
-    }
-  </style>
-  <div class="row">
-    <h2>Employee detail</h2>
-    <div class="col-md-6">
-      <form name="changeForm" novalidate>
-      <ul class="list-unstyled">
-        <li>Name :
-          <input required name="name" type="text" ng-model="userC.dataC.name" ng-readonly="!userC.changeNameMail.inChange" ng-class="{disabled : !userC.changeNameMail.inChange}">
-        </li>
-        <li>Email :
-          <input required name="email" type="email" ng-model="userC.dataC.email" ng-readonly="!userC.changeNameMail.inChange" ng-class="{disabled : !userC.changeNameMail.inChange}">
-        </li>
-        <li>Password :
-          <input name="password" ng-minlength="6" type="password" ng-model="userC.dataC.password" ng-readonly="!userC.changePassword.inChange" ng-class="{disabled : !userC.changePassword.inChange}" >
-        </li>
-        <li ng-show="userC.changePassword.inChange">
-          Confirm password :
-          <input name="password_confirmation" type="password" ng-model="userC.dataC.password_confirmation" >
-        </li>
-        </ul>
-        <p ng-show="userC.changeNameMail.invalidFields.nameReq">Insert a name</p>
-        <p ng-show="userC.changeNameMail.invalidFields.emailReq">Insert a mail</p>
-        <p ng-show="userC.changeNameMail.invalidFields.emailVal">Insert a validmail</p>
-        <p ng-show="userC.changePassword.invalidFields.passwordLen">password too short</p>
-        <p ng-show="userC.changePassword.invalidFields.passwordMatch">password don't match</p>
-        <p class="text-danger" ng-repeat="error in userC.changeNameMail.errors">{{error}}</p>
-        <p class="text-danger" ng-repeat="error in userC.changePassword.errors">{{error}}</p>
-        <button class="btn btn-default" ng-show="userC.changeNameMail.inChange" ng-click="userC.changeNameMail.submit()">CHANGE</button>
-        <button class="btn btn-default" ng-show="userC.changePassword.inChange" ng-click="userC.changePassword.submit()">CHANGE</button>
-        <button class="btn btn-default" ng-show="userC.changeNameMail.inChange" ng-click="userC.changeNameMail.abort()">ABORT</button>
-        <button class="btn btn-default" ng-show="userC.changePassword.inChange" ng-click="userC.changePassword.abort()">ABORT</button>
-      </form>
+</div>
+<div class="container-fluid">
+    <style>
+        .disabled {
+            border: none;
+        }
+        input {
+            cursor: text;
+        }
+    </style>
+    <div class="row top-odash-banner">
+        <h2 class="text-center">User information</h2>
+    </div>
+    <div class="row editMode">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="text-center changeGroup">
+                <button class="btn btn-default glob_button" ng-show="userC.editMode.flag" ng-disabled="!userC.editMode.flag"
+                        ng-click="userC.update.submit()">Save changes
+                </button>
+                <button class="btn btn-default glob_button" ng-show="userC.editMode.flag" ng-click="userC.delete()">Delete user</button>
+            </div>
+            <div class="editSwitcherContainer">
+                <div><h5 ng-class="{highlighted : userC.editMode.flag}">EDIT MODE</h5></div>
+                <div class="editSwitcher" ng-class="{switcherInEdit : userC.editMode.flag}">
+                    <div ng-click="userC.editMode.exit()" ng-class="{editSwitcherSelected: !userC.editMode.flag}">&nbsp;</div>
+                    <div ng-click="userC.editMode.enter()" ng-class="{editSwitcherSelected: userC.editMode.flag}">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <div class="row groupInfo">
+                <div class="col-md-11">
+                    <form name="editForm" novalidate>
+                        <h3>INFORMATION</h3>
+                        <table class="table">
+                            <thead>
+                            <th></th>
+                            <th></th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Name:</td>
+                                <td><input required name="name" type="text" ng-model="userC.dataC.name" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td><input required name="email" type="email" ng-model="userC.dataC.email" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td><input placeholder="yourpassword" name="password" ng-minlength="6" type="password" ng-model="userC.dataC.password" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
+                            </tr>
+                            <tr ng-show="userC.editMode.flag">
+                                <td>Confirm password</td>
+                                <td><input name="password_confirmation" type="password" ng-model="userC.dataC.password_confirmation" ></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="errorContainer" ng-show="userC.editMode.flag && (userC.update.thereErrors || userC.update.errors.length > 0)">
+                            <p class="text-danger" ng-show="userC.update.invalidFields.emailReq">Insert a email</p>
+                            <p class="text-danger" ng-show="userC.update.invalidFields.emailVal">Insert a valid email</p>
+                            <p class="text-danger" ng-show="userC.update.invalidFields.nameReq">Insert a name</p>
+                            <p class="text-danger" ng-show="userC.update.invalidFields.passwordLen">The must must be at least 6 chrs long</p>
+                            <p class="text-danger" ng-show="userC.update.invalidFields.passwordMatch">The passwords don't match</p>
+                            <p class="text-danger" ng-repeat="error in userC.update.errors">{{error}}</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-      <button class="btn btn-default" ng-hide="userC.changeNameMail.inChange"  ng-click="userC.changeNameMail.show()">Change name and email</button>
-      <br>
-      <br>
-      <button class="btn btn-default" ng-click="userC.changePassword.show()">Change password</button>
-      <br>
-      <br>
-      <button class="btn btn-default" ng-click="userC.delete()">Delete employee</button>
-    </div>
-    <div class="col-md-6">
-      <h3>Joined groups</h3>
-      <ul class="list-unstyled">
-        <li ng-repeat="group in userC.data.groups">
-          <a href="/#/organization/groups/{{group.id}}">{{group.name}}</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div id="confirmPopupa" class="modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="col-md-5 groupInfo">
+            <h3>JOINED GROUPS</h3>
+            <table class="table" style="margin-top: 26px">
+                <tbody>
+                    <tr ng-repeat="group in userC.data.groups">
+                        <td><a href="/#/organization/groups/{{group.id}}">{{group.name}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="modal-body">
-          <h3 class="text-center">{{userC.confirmPopup.message}}</h3>
-        </div>
-        <br/>
-      </div>
     </div>
-  </div>
+    <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="text-center">{{userC.confirmPopup.message}}</h3>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
 </div>

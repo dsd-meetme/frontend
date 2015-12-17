@@ -30,7 +30,7 @@
 
       if(!form.$invalid && !c.invalidFields.passwordMatch){
         dataPublisher.publish('http://api.plunner.com/companies/auth/register',{
-          name : c.orgName,
+          name : c.name,
           email : c.email,
           password : c.password,
           password_confirmation : c.passwordC

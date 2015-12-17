@@ -1,57 +1,59 @@
-<div class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- HEADER -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Plunner</a>
-        </div>
-        <div class="navbar-collapse collapse navbar-right">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/#/user/profile">
-                    <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
-                <li><a href="#">How To</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/presentation">Sign Out</button></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="page-content">
 <div>
-    <div>
-        Name : {{upC.data.name}}
-    </div>
-    <div>
-        Email : {{upC.data.email}}
-    </div>
-    <div ng-hide="upC.changePassword.showValue">
-        Password : ......
-    </div>
-    <form ng-show="upC.changePassword.showValue" name="changePasswordForm" ng-submit="upC.changePassword.submit()">
-        <input type="password" name="password" required ng-minlength="6"/>
-        <div class="errorsGroup">
-            <p class="text-danger" ng-show="upC.changePassword.invalidFields.passwordRequired">Insert a password</p>
-            <p class="text-danger" ng-show="upC.changePassword.invalidFields.passwordLength">Insert a password of at least 6 characters</p>
-        </div>
-        <button class="btn btn-primary" type="submit">Save changes</button>
-        <button class="btn btn-default" ng-click="upC.changePassword.abort()">Abort</button>
-    </form>
-    <button class="btn btn-default" ng-click="upC.changePassword.show()">Change</button>
-
-
-
-
-</div>
-<div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- HEADER -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Plunner</a>
             </div>
-            <div class="modal-body">
-                <h3 class="text-center">Changes successfully saved!</h3>
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/#/user/profile">
+                        <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
+                    <li><a href="#">How To</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">Sign Out</button></li>
+                </ul>
             </div>
-            <br/>
         </div>
     </div>
-</div>
+    <div class="page-content">
+    <div>
+        <div>
+            Name : {{upC.data.name}}
+        </div>
+        <div>
+            Email : {{upC.data.email}}
+        </div>
+        <div ng-hide="upC.changePassword.showValue">
+            Password : ......
+        </div>
+        <form ng-show="upC.changePassword.showValue" name="changePasswordForm" ng-submit="upC.changePassword.submit()">
+            <input type="password" name="password" required ng-minlength="6"/>
+            <div class="errorsGroup">
+                <p class="text-danger" ng-show="upC.changePassword.invalidFields.passwordRequired">Insert a password</p>
+                <p class="text-danger" ng-show="upC.changePassword.invalidFields.passwordLength">Insert a password of at least 6 characters</p>
+            </div>
+            <button class="btn btn-primary" type="submit">Save changes</button>
+            <button class="btn btn-default" ng-click="upC.changePassword.abort()">Abort</button>
+        </form>
+        <button class="btn btn-default" ng-click="upC.changePassword.show()">Change</button>
+
+
+
+
+    </div>
+    <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="text-center">Changes successfully saved!</h3>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
+    </div>
 </div>

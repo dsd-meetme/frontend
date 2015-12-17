@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.classic {
+  font-weight: 400; }
+
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
+.signIn {
+  height: 100vh;
+  background-color: #ffa500; }
+
+.signInContainer {
+  position: relative;
+  text-align: center;
+  width: 40%;
+  margin: 50px auto 0 auto;
+  border-radius: 2px;
+  border: 1px solid #ffa500;
+  background-color: white;
+  padding: 30px 50px 50px 50px;
+  border: 1px solid #f59e00; }
+  .signInContainer h2 {
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    font-weight: 600; }
+  .signInContainer input[type="email"], .signInContainer input[type="password"], .signInContainer input[type="text"] {
+    padding: 5px 0 5px 0;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 30px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid #ddd; }
+    .signInContainer input[type="email"]:focus, .signInContainer input[type="password"]:focus, .signInContainer input[type="text"]:focus {
+      outline: none;
+      border-bottom: 2px solid #384047; }
+  .signInContainer input[type="password"] {
+    margin-bottom: 20px; }
+  .signInContainer .form-fields {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto; }
+    .signInContainer .form-fields button {
+      width: 100%;
+      background-color: #ffa500;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      margin-top: 30px; }
+      .signInContainer .form-fields button:hover {
+        background-color: #f59e00; }
+      .signInContainer .form-fields button:focus {
+        outline: none; }

@@ -1,0 +1,92 @@
+@import "../../global/size.sass"
+@import "../../global/fonts.sass"
+@import "../../global/colors.sass"
+
+#composeScheduleCal
+  button
+    margin-right: 10px
+    border: 2px solid $glob_gray_light
+    color: $glob_gray_light
+    font-weight: 600
+    background-color: white
+    background-image: none
+    text-shadow: none
+    box-shadow: none
+    padding: 6px 12px
+    height: auto
+
+    &:hover
+      border-color: $glob_gray
+      background-color: white
+      color: $glob_gray
+
+    &:focus
+      outline: none !important
+
+    &:active
+      border-color: $glob_gray
+      background-color: white
+      color: $glob_gray
+      box-shadow: none
+
+  .fc-deleteBtn-button
+    display: none
+    border: 2px solid lighten(#E74C3C, 15%)
+    color: lighten(#E74C3C, 15%)
+
+    &:hover
+      border: 2px solid #E74C3C
+      color: #E74C3C
+
+
+
+
+
+.namebar
+  margin-top: $large-norm
+
+  .col-md-10
+    margin-bottom: 30px
+
+
+    .errorContainer
+      margin-top: 20px
+      width: 40%
+
+  input[type="text"]
+    border: none
+    border-bottom: 2px solid #ddd
+    padding: 5px 0 5px 0
+    width: 30%
+    margin-left: 10px
+
+    &:focus
+      outline: none
+      border-bottom: 2px solid $glob_gray
+
+  label
+    font-weight: 600
+    color: black
+    margin-left: 3s0px
+
+
+
+.fc-toolbar
+  margin-bottom: $medium-norm
+
+
+#confirmPopup
+  .modal-content
+    border: 1px solid rgba(0,0,0,.1)
+    border-radius: 4px
+  .modal-header
+    border-bottom: none
+
+  h3
+    font-family: $raleway-font
+    text-transform: uppercase
+    font-weight: 600
+    color: $glob_gray
+
+.composeScheduleContent
+  margin-top: 15px

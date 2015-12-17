@@ -2,23 +2,74 @@
   <div class="container-fluid">
     <!-- HEADER -->
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Plunner</a>
+        <a class="navbar-brand" href="#">PLUNNER</a>
       </div>
       <div class="navbar-collapse collapse navbar-right">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/#/organization">Dashboard</a></li>
           <li><a href="/#/organization/profile">
-            <span class="glyphicon glyphicon-user"></span> Organization Name</a></li>
+            <!--<span class="glyphicon glyphicon-user"></span> -->
+            <img class="img-profile" src="assets/img/company-logo.jpg">
+            Organization Name</a></li>
           <li><a href="#">How To</a></li>
           <li><a href="#">Contact</a></li>
-          <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/presentation">Sign Out</button></li>
+          <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">Sign Out</button></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
+<div class="container">
+  <div ng-show="opC.showCurrentState" class="top-banner">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"><b>CURRENT STATE</b></div>
+      <div class="col-md-4"><a href="" class="banner-button">EDIT</a></div>
+    </div>
+  </div>
 
-<div class="page-content">
+  <div ng-show="opC.showEditMode" class="top-banner2">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"><b>EDIT MODE</b></div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-content container">
+
+detected :
+        <img class="img-country" src="assets/img/italia.png">Milano - ITALY<br>09:00pm
+
+  <div class="row">
+    <div class="col-md-3"><img class="img-profile2" src="assets/img/company-logo.jpg" ng-click="opC.enterEditMode()"></div>
+    <div class="col-md-6"><h1><b>ORGANIZATION NAME</b></h1></div>
+    <div class="col-md-3"></div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3">Registration Email: </div>
+    <div class="col-md-6">{{opC.data.email}}</div>
+    <div class="col-md-3"></div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3">Password: </div>
+    <div class="col-md-6">XXXXXXX</div>
+    <div class="col-md-3">
+      <button class="btn btn-default" data-toggle="modal" data-target="#editProfile"><a href>
+        <span style="font-size:30px" class="glyphicon glyphicon-wrench"></span> Edit my Profile
+      </a></button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6"></div>
+    <div class="col-md-3">
+      <button class="btn btn-danger" data-toggle="modal" data-target="#deleteOrganisation">Delete this account</button></div>
+
   <h3>My profile</h3>
   <div>
     <br>
@@ -29,6 +80,7 @@
     <div>Password: .......</div>
     <br><br>
     <button data-target="#editProfile" data-toggle="modal" class="btn btn-default">Change</button>
+
   </div>
 </div>
 <div id="editProfile" class="modal" role="dialog" tabindex="-1">

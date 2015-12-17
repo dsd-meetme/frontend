@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.classic {
+  font-weight: 400; }
+
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
+.recovery-container {
+  height: 100vh;
+  background-color: #ffa500; }
+
+.recoveryorg {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 50px;
+  background-color: white;
+  padding: 20px;
+  padding-bottom: 40px;
+  border: 1px solid #f59e00; }
+  .recoveryorg > p {
+    margin-bottom: 30px; }
+  .recoveryorg h2 {
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase; }
+  .recoveryorg input {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 5px 0 5px 0;
+    margin-bottom: 25px;
+    width: 80%;
+    text-align: center; }
+    .recoveryorg input:focus {
+      outline: none;
+      border-bottom: 2px solid #384047; }
+  .recoveryorg button {
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    width: 250px;
+    padding: 12px 24px;
+    text-transform: uppercase;
+    outline: none;
+    border-radius: 2px;
+    margin-top: 30px; }
+    .recoveryorg button:hover {
+      background-color: #db8e00; }
+    .recoveryorg button:focus {
+      outline: none; }

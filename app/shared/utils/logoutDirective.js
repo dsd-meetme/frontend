@@ -9,8 +9,6 @@
         }
       }],
       link : function(scope, element, attrs, controllers){
-        console.log(controllers);
-        console.log(attrs.redirect);
         element.on('click', function(e){
           e.preventDefault();
           controllers.logout(attrs.redirect);

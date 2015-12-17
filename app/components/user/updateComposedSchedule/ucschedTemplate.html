@@ -1,0 +1,62 @@
+
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Plunner</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/#/user/profile">
+                    <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">Sign Out</button></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="top-odash-banner row">
+        <h2 class="text-center">COMPOSE SCHEDULE</h2>
+    </div>
+    <div class="row namebar">
+        <div class="col-md-10 col-md-push-1">
+            <div>
+                <span class="bold">Name: </span><input type="text" placeholder="Insert a name for the schedule" ng-model="cschedC.name"/>
+                <label class="circled-checkbox">
+                    <input type="checkbox" ng-model="cschecC.selected"/>
+                    <span class="label-text">Enabled</span>
+                </label>
+                <button style="float: right" class="btn btn-default glob_button" ng-click="cschedC.saveSchedule()">Save schedule</button>
+            </div>
+            <div class="errorContainer" ng-show="cschedC.thereErrors || cschedC.errors.length > 0">
+                <p ng-repeat="error in cschedC.errors">{{error}}</p>
+                <p ng-show="cschedC.invalidFields.nameReq">Insert a name</p>
+                <p ng-show="cschedC.invalidFields.eventsReq">Insert at least one event</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row composeScheduleContent">
+        <div class="col-md-10 col-md-push-1">
+            <div id="composeScheduleCal"></div>
+        </div>
+    </div>
+    <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="text-center">{{cschedC.confirmPopup.message}}</h3>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>

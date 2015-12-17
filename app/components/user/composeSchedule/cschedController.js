@@ -1,47 +1,195 @@
 (function(){
-  var controller = function(){
-    var c = this;
-    c.events = [
-      { title: '',start : '2016-01-05T13:11:59', end : '2016-01-05T17:11:59'}
-    ]
-    c.calendarConfig = {
-      customButtons : {
-        saveBtn : {
-          text : 'Save schedule',
-          click : function(){
-            c.saveSchedule();
-          }
+    var controller = function(orgResources, mixedContentToArray, $routeParams, $timeout, $location){
+        var c = this;
+        var mode = 1;
+        console.log($routeParams);
+        c.events = [];
+        var calendar;
+        c.processUrl = function(){
+            if($routeParams.type.length === 1 && $routeParams.type === '_'){
+                mode = 1;
+            }
+            else{
+                mode = 0;
+                var a = $routeParams.type.split('&');
+                this.id = a[0];
+                this.name = a[1];
+                this.enabled = a[2];
+            }
+        };
+        c.getTimeslots = function(){
+            var split, splito;
+            if(mode === 0){
+                orgResources.timeslot().query({calendarId : this.id, timeslotId : ''}).$promise
+                    .then(function(response){
+                        console.log(response);
+                        for(var i=0; i<response.length; i++){
+                            split = response[i].time_start.split(' ');
+                            splito = response[i].time_end.split(' ');
+                            c.events.push({
+                                title: '',
+                                start: split[0]+'T'+split[1],
+                                end: splito[0]+'T'+splito[1],
+                                specificId: response[i].id
+                            });
+                            //console.log(c.events);
+                        }
+                        calendar =  jQuery('#composeScheduleCal').fullCalendar(c.calendarConfig);
+                    })
+            }
+            else{
+                calendar =  jQuery('#composeScheduleCal').fullCalendar(c.calendarConfig);
+            }
+
+        };
+        c.eventRemoveId = [2];
+        c.removeTimeslot = function(id){
+           orgResources.timeslot().remove({calendarId : this.id, timeslotId : id}).$promise
+               .then(function(){
+                   alert('evviva');
+               })
+        };
+        c.calendarConfig = {
+            customButtons : {
+                saveBtn : {
+                    text : 'Save schedule',
+                    click : function(){
+                        c.saveSchedule();
+                    }
+                },
+                deleteBtn : {
+                    text: 'Delete event',
+                    click : function(){
+                        if(c.eventRemoveId.length !== 0){
+                            if(mode === 0){
+                                c.removeTimeslot(c.eventRemoveId.two);
+                            }
+                            calendar.fullCalendar('removeEvents', c.eventRemoveId.one);
+                            jQuery('.fc-deleteBtn-button').removeAttr('style');
+                            c.eventRemoveId = {};
+                        }
+                    }
+                }
+            },
+            firstDay: 1,
+            allDaySlot: false,
+            header: {
+                right: 'deleteBtn, prev,next today'
+            },
+            defaultView: 'agendaWeek',
+            slotDuration: '00:15:00',
+            events: c.events,
+            editable : true,
+            selectable: true,
+            selectHelper : true,
+            eventClick: function(calEvent, jsEvent, view){
+
+                jQuery('.fc-deleteBtn-button').show();
+                c.eventRemoveId = {
+                    one : calEvent._id,
+                    two : calEvent.specificId
+                };
+            },
+            select: function (start, end, jsEvent, view) {
+                calendar.fullCalendar('renderEvent',
+                    {
+                        start: start,
+                        end: end
+                    },
+                    true // make the event "stick"
+                );
+                calendar.fullCalendar('unselect');
+            }
+        };
+
+
+        c.errors = [];
+        c.invalidFields = {
+            nameReq : false,
+            eventsReq: false
+        };
+        c.confirmPopup = {
+            message : ''
         }
-      },
-      header: {
-        right: 'saveBtn, prev,next today'
-      },
-      defaultView: 'agendaWeek',
-      events: c.events,
-      editable : true,
-      selectable: true,
-      selectHelper : true,
-      select: function (start, end, jsEvent, view) {
-        calendar.fullCalendar('renderEvent',
-        {
-          start: start,
-          end: end
-        },
-        true // make the event "stick"
-      );
-      calendar.fullCalendar('unselect');
-    }
-  }
-  var calendar = jQuery('#calendar').fullCalendar(c.calendarConfig);
+        c.thereErrors = false;
+        c.saveSchedule = function(){
+            var array = [];
+            var events = calendar.fullCalendar('clientEvents');
+            console.log(events);
 
-  c.saveSchedule = function(){
-    console.log(calendar.fullCalendar('clientEvents'));
-  }
+            this.invalidFields.nameReq = (c.name === '' || c.name === undefined);
+            this.invalidFields.eventsReq = (events.length === 0);
 
+            console.log(c.name);
+            if(this.invalidFields.nameReq || this.invalidFields.eventsReq){
+                this.thereErrors = true;
+            }
+            if(!this.invalidFields.nameReq && !this.invalidFields.eventsReq){
+                this.thereErrors = false;
+                var enabled;
+                if(this.enabled){
+                    enabled = '1'
+                }
+                else{
+                    enabled = '0'
+                }
+                for(var i=0; i<events.length; i++){
+                    array.push({
+                        time_start : events[i]._start._d.toISOString().split('.')[0].replace('T', ' '),
+                        time_end : events[i]._end._d.toISOString().split('.')[0].replace('T', ' ')
+                    })
+                }
+                if(mode === 1){
+                    console.log('entro nuovo');
+                    orgResources.calendar().save({calendarId: ''},jQuery.param({
+                        name : this.name,
+                        enabled : enabled
+                    })).$promise.then(function(response){
+                            for(i= 0; i<array.length; i++){
+                                orgResources.timeslot().save({calendarId: response.id, timeslotId : ''},
+                                    jQuery.param(array[i])).$promise.then(function(response){
+                                        if(i === array.length) {
+                                            c.confirmPopup.message = "Schedule successfully created";
+                                            jQuery('#confirmPopup').modal('show');
 
+                                            $timeout(function(){
+                                                jQuery('#confirmPopup').modal('hide');
+                                                $location.path('/user');
+                                            },2000)
+                                        }
 
-}
-var app = angular.module('Plunner');
-app.controller('cschedController',controller);
+                                    });
+                            }
+                        })
+                }
+                else{
+                    orgResources.calendar().update({calendarId: this.id},jQuery.param({
+                        name : this.name,
+                        enabled : enabled
+                    })).$promise.then(function(response){
+                            for(var i= 0; i<events.length; i++){
+                                orgResources.timeslot().save({calendarId: response.id, timeslotId : ''},
+                                    jQuery.param(array[i])).$promise.then(function(response){
+                                        console.log('evviva')
+                                    });
+                                //}
+
+                            }
+                        })
+                }
+
+            }
+
+            console.log(array);
+        };
+        c.confirmPopup = {
+            message : ''
+        }
+
+        c.processUrl();
+        c.getTimeslots();
+    };
+    var app = angular.module('Plunner');
+    app.controller('cschedController',controller);
 
 }())

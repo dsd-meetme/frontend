@@ -1,62 +1,47 @@
-@import '../global/colors'
-@import '../global/fonts'
-@import '../shared/header'
+@import '../global/colors.sass'
+@import '../global/size.sass'
+@import '../global/fonts.sass'
 
+html, body
+  height: 100%
+
+.genCont
+  min-height: 100%
 body
-	font-family: $font-stack
+  font-family: $open-font
+  color: $main-color
 
-div.page-content
-	margin: $small-margin $large-margin $small-margin $large-margin
+.raleway-font
+  font-family: $raleway-font
+
+a
+  color: $second-color
+
+.page-content
+  position: relative
+  height: calc(100% - #{$navbar-size})
+  width: 100%
+
+.marged-page
+  padding: $large-norm $xlarge-norm
 
 div.page-content.page-content-top
-	background-color: $purple
-	opacity: 0.6
+  opacity: 0.6
 
 div.content-left
-	float: left
-	margin-left: $small-margin
+  float: left
+  margin-left: $small-norm
 
 div.content-left.organization
-	background-color: light-blue
+  background-color: light-blue
 
-div.content-right
-	float: right
-	margin-right: $small-margin
+.content-right
+  float: right
+  margin-right: $small-norm
 
-div.form-register
-	width: 400px
-	margin: 0 auto
-	padding: 0 50 0 50
-    border-style: solid
-    border-radius: 25
+.col-md-4
+  text-align: center
 
-div.form-signin
-	width: 400px
-	margin: 0 auto
-	padding: 0 50 0 50
-    border-style: solid
-    border-radius: 25
-
-.navbar-default
-	background-color: $purple
-	border: 0
-	border-radius: 0
-
-.navbar-default .navbar-nav>li>a
-	color: $white
-
-.navbar-default .navbar-brand
-	color: $white
-
-.btn-primary
-	background-color: $purple
-	border-color: $white
-
-.btn-primary:hover
-	background-color: $purple
-
-.btn-default
-	border-color: $purple
-
-.btn-default:hover
-	color: $purple
+.img-country
+  height: 30px
+  width: 40px

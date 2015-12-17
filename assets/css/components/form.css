@@ -1,0 +1,67 @@
+img.image-loader {
+  width: 30px; }
+
+.form-register {
+  width: 400px;
+  margin: 0 auto;
+  padding: 0 50 0 50;
+    padding-border-style: solid;
+    padding-border-radius: 25; }
+
+.search-field {
+  width: 60%;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: thin solid #000000; }
+  .search-field input:focus {
+    outline: none; }
+
+.text-form {
+  text-align: center;
+  width: 50%;
+  max-width: 400px;
+  margin-bottom: 30px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: thin solid #000000; }
+  .text-form input:focus {
+    outline: none; }
+
+.form-norm input {
+  padding: 5px 0 5px 0;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 30px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 2px solid #ddd; }
+
+.form-norm input.nm-input {
+  text-align: left; }
+
+.form-norm input[type="password"] {
+  margin-bottom: 20px; }
+  .form-norm input[type="password"]:focus {
+    outline: none;
+    border-bottom: 2px solid #384047; }
+
+.form-norm input[type="title"] {
+  font-weight: 500px;
+  font-size: 25px; }
+
+.form-norm textarea {
+  margin-bottom: 30px;
+  padding: 7px 7px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  width: 75%;
+    width-max-width: 400px;
+  min-height: 80px; }
+
+.form-fields {
+  text-align: center;
+  margin: 30px 0 30px 0; }

@@ -1,0 +1,55 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.classic {
+  font-weight: 400; }
+
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
+html, body {
+  height: 100%; }
+
+.genCont {
+  min-height: 100%; }
+
+body {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  color: #000000; }
+
+.raleway-font {
+  font-family: "Raleway", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #ffa500; }
+
+.page-content {
+  position: relative;
+  height: calc(100% - 51px);
+  width: 100%; }
+
+.marged-page {
+  padding: 50px 80px; }
+
+div.page-content.page-content-top {
+  opacity: 0.6; }
+
+div.content-left {
+  float: left;
+  margin-left: 15px; }
+
+div.content-left.organization {
+  background-color: light-blue; }
+
+.content-right {
+  float: right;
+  margin-right: 15px; }
+
+.col-md-4 {
+  text-align: center; }
+
+.img-country {
+  height: 30px;
+  width: 40px; }

@@ -10,7 +10,7 @@
         'http://api.plunner.com/companies/password/reset',
         'http://api.plunner.com/employees/password/email',
         'http://api.plunner.com/employees/password/reset'
-    ]
+    ];
     /**
      Http interceptors
      **/
@@ -60,9 +60,11 @@
                     },
                     responseError : function(response){
                         if(response.status === 401){
+                            $cookies.remove('auth_token');
                             $location.path('/401');
                         }
                         else if(response.status === 403){
+                            $cookies.remove('auth_token');
                             $location.path('/401');
                         }
                         else if(response.status === 404){
@@ -70,6 +72,7 @@
                             $location.path('/404')
                         }
                         else if(response.status !== 422){
+                            $cookies.remove('auth_token');
                             $location.path('/error')
                         }
                         return $q.reject(response);

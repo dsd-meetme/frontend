@@ -1,0 +1,126 @@
+@import '../../global/colors'
+@import '../../global/size'
+@import '../../global/fonts'
+
+.editSwitcherContainer
+  float: right
+  display: inline-block
+
+  > div
+    float: left
+    height: 30px
+
+  h5
+    margin-right: 20px
+    font-family: $raleway-font
+    color: #ddd
+    margin-top: 8px
+    font-weight: 600
+
+.editMode
+  margin-top: 20px
+  margin-bottom: 20px
+.editSwitcher
+  width: 90px
+  border: 1px solid #ddd
+  padding: 3px
+  border-radius: 24px
+  background-color: #eee
+  div
+    width: 41px
+    height: 22px
+    float: left
+    display: inline-block
+    border-radius: 24px
+    cursor: pointer
+
+.editSwitcherSelected
+  border: 1px solid #ddd
+  background-color: white
+
+.switcherInEdit
+  background-color: $second-color
+
+.highlighted
+  color: $second-color !important
+
+.groupInfo
+  h3
+    font-family: $raleway-font
+    font-weight: 600
+  table
+    thead
+      th
+        border: none
+    tbody
+      tr:first-child
+        td
+          border: none
+  input
+    width: 100%
+  textarea
+    width: 100%
+    height: 80px
+    border: 1px solid #ddd
+
+.groupMembers
+  > div
+    width: 100%
+    padding: 6px 0 6px 0
+    border-bottom: 1px solid #ddd
+    div
+      display: inline-block
+      float: left
+
+      &:last-child
+        padding-right: 5px
+        float: right
+
+  h3
+    font-family: $raleway-font
+    font-weight: 600
+  p
+    padding-top: 4px
+    margin-bottom: 0
+    float: left
+
+  .plannerUnderline
+    font-family: $raleway-font
+    color: $second-color
+    margin-left: 20px
+
+  button
+    border: 2px solid $glob_gray_light
+    color: $glob_gray_light
+    font-weight: 600
+    margin-right: 15px
+
+    &:hover
+      border-color: $glob_gray
+      color: $glob_gray
+      background-color: white
+  span
+    color: $glob_gray_light
+    cursor: pointer
+
+    &:hover
+      color: $glob_gray
+
+
+.changeGroup
+      float : left
+      display: inline-block
+
+      button
+        border: 2px solid $glob_gray_light
+        color: $glob_gray_light
+        font-weight: 600
+        margin-right: 15px
+
+        &:hover
+          border-color: $glob_gray
+          color: $glob_gray
+          background-color: white
+
+        &:focus
+          outline: none
