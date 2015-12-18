@@ -10,11 +10,30 @@
     var controller = function ($scope, logoutService, orgResources, arrayToUrlParams, $cookies, $timeout, mixedContentToArray) {
         var c = this;
         c.data = {};
+
         c.confirmPopup = {
-            message: ''
+            message : '',
+            show : function(){
+                jQuery('#confirmPopup').modal('show');
+            },
+            hide : function(){
+                jQuery('#confirmPopup').modal('hide');
+            }
         };
-        c.employeeSection = true;
-        //Get employees
+        //Flags for deciding what view show to the user
+        c.viewSections = {
+            users : true,
+            groups : false,
+            showUsers : function(){
+                this.groups = false;
+                this.users = true;
+            },
+            showGroups : function(){
+                this.users = false;
+                this.groups = true;
+            }
+        };
+        //Gets employees
         c.getUsers = function () {
             //employees restful index
             orgResources.user().query({userId: ''}).$promise
@@ -23,7 +42,7 @@
                     c.getGroups();
                 });
         };
-        //Get groups
+        //Gets groups
         c.getGroups = function () {
             //employees restful groups index
             orgResources.group().query({groupId: ''}).$promise
@@ -31,14 +50,7 @@
                     c.data.groups = response;
                 });
         };
-        c.showEmployees = function () {
-            c.employeeSection = true;
-            c.groupSection = false;
-        };
-        c.showGroups = function () {
-            c.employeeSection = false;
-            c.groupSection = true;
-        };
+        //Adds a group
         c.addGroup = {
             planner: null,
             members: [],
@@ -49,24 +61,26 @@
             invalidFields: {
                 nameReq: false,
                 plannerReq: false,
-                membersReq: false,
-                nonMatchingPlanner: false
+                membersReq: false
             },
             showPopup : function(){
                 var popup = jQuery('#addGroup');
                 popup.find('input').val('').removeAttr('checked');
                 popup.modal('show');
             },
-            selectPlanner: function (id) {
-                this.selectedPlanner = id;
+            hidePopup : function(){
+                var popup = jQuery('#addGroup');
+                popup.modal('hide');
             },
             submit: function () {
                 var validMembers = [];
+                var counter = 0;
                 angular.forEach(this.members, function (value, key) {
                     if (value === true) {
                         validMembers.push(key.toString());
                     }
                 });
+                console.log(this.members);
                 //Checks tha validity status of input fields
                 this.invalidFields.nameReq = (this.name === '');
                 this.invalidFields.membersReq = (this.members.length === 0);
@@ -76,10 +90,15 @@
                         this.thereErrors = true;
                         break;
                     }
+                    else{
+                        counter++;
+                    }
+                }
+                if(counter === Object.keys(this.invalidFields).length){
+                    this.thereErrors = false;
                 }
                 //Submits everything to the server if data is valid
-                if (!this.invalidFields.nameReq && !this.invalidFields.plannerReq && !this.invalidFields.membersReq) {
-                    this.thereErrors = false;
+                if (!this.thereErrors) {
                     //Updates the group name and planner
                     orgResources.group().save({groupId: ''}, jQuery.param({
                         name: this.name,
@@ -92,30 +111,31 @@
                                 groupId: response.id,
                                 userId: ''
                             }, arrayToUrlParams.process('id', validMembers)).$promise
-                                .then(function (response) {
+                                .then(function () {
                                     c.getGroups();
                                     c.confirmPopup.message = "Group successfully added";
-                                    jQuery('#addGroup').modal('hide');
-                                    jQuery('#confirmPopup').modal('show');
+                                    c.addGroup.hidePopup();
+                                    c.confirmPopup.show();
                                     $timeout(function () {
-                                        jQuery('#confirmPopup').modal('hide');
+                                        c.confirmPopup.hide();
                                     }, 2000);
-                                    jQuery('#addGroup input').val('');
-                                    jQuery('#addGroup input:checked').removeAttr('checked');
                                 }, function (response) {
+                                    //Puts relevant errors in array
                                     if (response.status === 422) {
-                                        mixedContentToArray.process(response.data, this.errors, true);
+                                        mixedContentToArray.process(response.data, c.addGroup.errors, true);
                                     }
                                 })
                         },
                         function (response) {
+                            //Puts relevant errors in array 
                             if (response.status === 422) {
-                                c.addGroup.errors = response.data;
+                                mixedContentToArray.process(response.data, c.addGroup.errors, true);
                             }
                         });
                 }
             }
         };
+        //Adds a user
         c.addUser = {
             name: '',
             email: '',
@@ -146,12 +166,9 @@
                 this.invalidFields.emailVal = form.email.$error.email;
                 this.invalidFields.passwordMatch = (this.password !== this.confirmation_password);
 
-                if(form.$invalid || this.invalidFields.passwordMatch){
-                    this.thereErrors = true;
-                }
+                this.thereErrors = (form.$invalid || this.invalidFields.passwordMatch);
                 //Submits everything to the server if data is valid
-                if (!form.$invalid && !this.invalidFields.passwordMatch) {
-                    this.thereErrors = false;
+                if (!this.thereErrors) {
                     //Updates the group name and planner
                     orgResources.user().save({userId: ''}, jQuery.param({
                         name: this.name,
@@ -159,7 +176,7 @@
                         password: this.password,
                         password_confirmation: this.confirmation_password
                     })).$promise
-                        .then(function (response) {
+                        .then(function () {
                             //Updates the group members
                             //orgResources.employeeInGroup().save({groupId: response.id, employeeId: ''}).$promise
                             //.then(function(response){
@@ -167,21 +184,19 @@
                             c.confirmPopup.message = "User successfully added";
                             jQuery('#addUser').modal('hide');
                             jQuery('#confirmPopup').modal('show');
-                            setTimeout(function () {
+                            $timeout(function () {
                                 jQuery('#confirmPopup').modal('hide');
                             }, 2000);
-                            jQuery('#addUser input').val('');
-                            jQuery('#addUser input:checked').removeAttr('checked');
                         },
                         function (response) {
                             if (response.status === 422) {
-                                mixedContentToArray.process(response.data, this.errors, true);
+                                mixedContentToArray.process(response.data, c.addUser.errors, true);
                             }
                         });
                 }
             }
         };
-
+        //Gets the users
         c.getUsers();
     };
 

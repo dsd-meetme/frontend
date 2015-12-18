@@ -60,19 +60,19 @@
                             <tbody>
                             <tr>
                                 <td>Name:</td>
-                                <td><input required name="name" type="text" ng-model="userC.dataC.name" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
+                                <td><input required name="name" type="text" ng-model="userC.dataCopy.name" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td><input required name="email" type="email" ng-model="userC.dataC.email" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
+                                <td><input required name="email" type="email" ng-model="userC.dataCopy.email" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
                             </tr>
                             <tr>
                                 <td>Password:</td>
-                                <td><input placeholder="yourpassword" name="password" ng-minlength="6" type="password" ng-model="userC.dataC.password" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
+                                <td><input placeholder="yourpassword" name="password" ng-minlength="6" type="password" ng-model="userC.dataCopy.password" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
                             </tr>
                             <tr ng-show="userC.editMode.flag">
                                 <td>Confirm password</td>
-                                <td><input name="password_confirmation" type="password" ng-model="userC.dataC.password_confirmation" ></td>
+                                <td><input name="password_confirmation" type="password" ng-model="userC.dataCopy.password_confirmation" ></td>
                             </tr>
                             </tbody>
                         </table>

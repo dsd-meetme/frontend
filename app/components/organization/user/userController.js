@@ -14,7 +14,7 @@
             }
         };
         c.data = {};
-        c.dataC = {};
+        c.dataCopy = {};
         c.confirmPopup = {
             message : '',
             show : function(){
@@ -30,8 +30,8 @@
             orgResources.user().get({userId:id}).$promise
                 .then(function(response){
                     c.data = response;
-                    c.dataC.name = c.data.name;
-                    c.dataC.email = c.data.email;
+                    c.dataCopy.name = c.data.name;
+                    c.dataCopy.email = c.data.email;
                 });
         };
         //Delete an user in the context of an org
@@ -65,21 +65,19 @@
                 this.invalidFields.emailReq = form.email.$error.required;
                 this.invalidFields.nameReq = form.name.$error.required;
                 this.invalidFields.passwordLen = form.password.$error.minlength;
-                this.invalidFields.passwordMatch = (c.dataC.password !== c.dataC.password_confirmation);
-                if(form.$invalid || this.invalidFields.passwordMatch){
-                    this.thereErrors = true;
-                }
-                if (!form.$invalid && !this.invalidFields.passwordMatch) {
-                    this.thereErrors = false;
-                    orgResources.user().update({userId: id}, jQuery.param(c.dataC)).$promise
+                this.invalidFields.passwordMatch = (c.dataCopy.password !== c.dataCopy.password_confirmation);
+                this.thereErrors = (form.$invalid || this.invalidFields.passwordMatch);
+
+                if (!this.thereErrors) {
+                    orgResources.user().update({userId: id}, jQuery.param(c.dataCopy)).$promise
                         .then(function (response) {
                             c.confirmPopup.message = 'Changes successfully made';
                             c.confirmPopup.show();
                             $timeout(function () {
                                 c.confirmPopup.hide();
                             }, 2000);
-                            c.editMode.flag = false;
                             c.getInfo();
+                            c.editMode.exit();
                         }, function (response) {
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.update.errors, true);
@@ -96,10 +94,10 @@
             },
             exit : function(){
                 this.flag = false;
-                c.dataC.name = c.data.name;
-                c.dataC.email = c.data.email;
-                c.dataC.password = '';
-                c.dataC.password_confirmation = '';
+                c.dataCopy.name = c.data.name;
+                c.dataCopy.email = c.data.email;
+                c.dataCopy.password = '';
+                c.dataCopy.password_confirmation = '';
                 emptyInvalidFields(c.update.invalidFields);
             }
         };

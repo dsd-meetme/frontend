@@ -14,8 +14,7 @@
                 <li><a href="#" class="navbar-right-item">How To</a></li>
                 <li><a href="#" class="navbar-right-item">Contact</a></li>
                 <li>
-                    <button type="button" class="btn btn-danger navbar-btn" logout redirect="/">Sign Out
-                    </button>
+                    <button type="button" class="btn btn-danger navbar-btn" logout redirect="/">Sign Out</button>
                 </li>
             </ul>
         </div>
@@ -25,11 +24,11 @@
     <div class="top-odash-banner row">
         <h2 class="text-center">Dashboard</h2>
         <div class="view-switcher" role="group" aria-label="...">
-            <button type="button" ng-class="{switchSelected : odashC.employeeSection}" ng-click="odashC.showEmployees()" class="btn btn-default">USERS</button>
-            <button type="button" ng-class="{switchSelected : odashC.groupSection}" ng-click="odashC.showGroups()" class="btn btn-default">GROUPS</button>
+            <button type="button" ng-class="{switchSelected : odashC.viewSections.users}" ng-click="odashC.viewSections.showUsers()" class="btn btn-default">USERS</button>
+            <button type="button" ng-class="{switchSelected : odashC.viewSections.groups}" ng-click="odashC.viewSections.showGroups()" class="btn btn-default">GROUPS</button>
         </div>
     </div>
-    <div class="row" ng-show="odashC.employeeSection">
+    <div class="row" ng-show="odashC.viewSections.users">
         <div class="col-md-10 col-md-push-1">
             <div class="row odash-action-bar">
                 <div class="col-md-12">
@@ -77,7 +76,7 @@
 
     </div>
 
-    <div class="row" ng-show="odashC.groupSection">
+    <div class="row" ng-show="odashC.viewSections.groups">
         <div class="col-md-10 col-md-offset-1">
 
             <div class="row odash-action-bar">
@@ -151,7 +150,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <div class="errorContainer" ng-show="odashC.addGroup.thereErrors || odashC.addUser.errors.length > 0">
+                    <div class="errorContainer" ng-show="odashC.addGroup.thereErrors || odashC.addGroup.errors.length > 0">
                         <p class="text-danger" class="text-danger" ng-repeat="error in odashC.addGroup.errors">{{error}}</p>
                         <p ng-show="odashC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>
                         <p ng-show="odashC.addGroup.invalidFields.membersReq" class="text-danger">Insert at least one member</p>

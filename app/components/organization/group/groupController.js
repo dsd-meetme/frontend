@@ -15,14 +15,9 @@
                 description: ''
             },
             members : [],
-            groupC : {
+            groupCopy : {
                 name: '',
                 description: ''
-            }
-        };
-        var emptyInvalidFields = function(invalidFields){
-            for(key in invalidFields){
-                invalidFields[key] = false;
             }
         };
         c.thereErrors = {
@@ -36,10 +31,30 @@
         c.invalidFields = {
             nameReq : false
         };
-        c.confirmPopup = {
-            message : ""
+        c.editMode = {
+            flag : false,
+            enter : function(){
+                this.flag = true;
+            },
+            exit : function(){
+                this.flag = false;
+                c.data.groupCopy.name = c.data.group.name;
+                c.data.groupCopy.description = c.data.group.description;
+                c.thereErrors.info = false;
+                c.thereErrors.planner = false;
+                c.invalidFields.nameReq = false;
+            }
         };
-        c.inchange = false;
+        c.confirmPopup = {
+            message : '',
+            show : function(){
+                jQuery('#confirmPopup').modal('show');
+            },
+            hide : function(){
+                jQuery('#confirmPopup').modal('hide');
+            }
+        };
+        c.inChange = false;
         //Gets user info in the context of an organization
         c.getInfo = function(){
             //restful show
@@ -50,8 +65,8 @@
                     c.data.group.planner_id = response.planner_id;
                     //A copy of the retrieved data
                     //This copy will be used
-                    c.data.groupC.name = response.name;
-                    c.data.groupC.description = response.description;
+                    c.data.groupCopy.name = response.name;
+                    c.data.groupCopy.description = response.description;
                     c.getUsers();
                 });
         };
@@ -59,13 +74,12 @@
         c.delete = function(){
             //restful delete
             orgResources.group().remove({groupId:id}).$promise
-                .then(function(response){
+                .then(function(){
                     c.confirmPopup.message = "Group successfully deleted";
                     c.editMode.exit();
-                    jQuery('#confirmPopup').modal('show');
+                    c.confirmPopup.show();
                     $timeout(function(){
-
-                        jQuery('#confirmPopup').modal('hide');
+                        c.confirmPopup.hide();
                         $location.path('/organization')
                     },2000);
 
@@ -82,13 +96,14 @@
                 ).$promise
                     .then(function(){
                         c.confirmPopup.message = "Changes successfully made";
-                        jQuery('#confirmPopup').modal('show');
+                        c.confirmPopup.show();
                         setTimeout(function(){
-                            jQuery('#confirmPopup').modal('hide');
-                        },1000);
-                        c.editMode.exit();
+                            c.confirmPopup.hide();
+                        },2000);
+
                         //Update view
                         c.getInfo();
+                        c.editMode.exit();
                     },function(response){
                         if(response.status === 422){
                             mixedContentToArray.process(response.data, c.errors.planner, true);
@@ -99,28 +114,25 @@
         //Update user info
         c.updateInfo = function(){
             //Checks the validity status of input fields
-            c.invalidFields.nameReq = (c.data.groupC.name === '');
-            if(c.invalidFields.nameReq){
-                c.thereErrors.info = true;
-            }
-            if(!c.invalidFields.nameReq){
-                c.thereErrors.info = false;
+            c.invalidFields.nameReq = (c.data.groupCopy.name === '');
+            c.thereErrors.info = c.invalidFields.nameReq;
+
+            if(!c.thereErrors.info){
                 orgResources.group().update({groupId:id},jQuery.param(
                     {
-                        name : c.data.groupC.name,
-                        description : c.data.groupC.description,
+                        name : c.data.groupCopy.name,
+                        description : c.data.groupCopy.description,
                         planner_id : c.data.group.planner_id
                     })).$promise
-                    .then(function(response){
-                        c.errors.info = {};
+                    .then(function(){
                         c.inchange = false;
                         c.confirmPopup.message = "Changes successfully made!";
-                        jQuery('#confirmPopup').modal('show');
+                        c.confirmPopup.show();
                         setTimeout(function(){
-                            jQuery('#confirmPopup').modal('hide');
+                            c.confirmPopup.hide();
                         },2000);
-                        c.editMode.flag = false;
                         c.getInfo();
+                        c.editMode.exit();
                     },function(response){
                         if(response.status === 422){
                             mixedContentToArray.process(response.data, c.errors.info, true);
@@ -138,31 +150,18 @@
         c.deleteFromGroup = function(userId){
             orgResources.userInGroup().remove({groupId:id, userId: userId}).$promise
                 .then(
-                function(response){
+                function(){
                     c.confirmPopup.message = "Changes successfully made";
-                    jQuery('#confirmPopup').modal('show');
+                    c.confirmPopup.show();
                     setTimeout(function(){
-                        jQuery('#confirmPopup').modal('hide');
+                        c.confirmPopup.hide();
                     },2000);
-                    c.editMode.exit();
                     c.getUsers();
+                    c.editMode.exit();
                 }
             )
         };
-        c.editMode = {
-            flag : false,
-            enter : function(){
-                this.flag = true;
-            },
-            exit : function(){
-                this.flag = false;
-                c.data.groupC.name = c.data.group.name;
-                c.data.groupC.description = c.data.group.description;
-                c.thereErrors.info = false;
-                c.thereErrors.planner = false;
-                emptyInvalidFields(c.invalidFields);
-            }
-        };
+
         c.getInfo();
 
     };
