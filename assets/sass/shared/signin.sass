@@ -1,0 +1,69 @@
+//
+// Project            : Plunner
+// Authors            : G.Pea and J.Barré
+// Template Target(s) : components/organization/signIn/osiTemplate.html
+//                      components/user/signIn/usiTemplate.html
+//
+
+@import '../global/colors.sass'
+@import '../global/size.sass'
+@import '../global/fonts.sass'
+
+
+.signIn
+  height: 100vh
+  background-color: $second-color
+.signInContainer
+  position: relative
+  text-align: center
+  width: 40%
+  margin: 50px auto 0 auto
+  border-radius: 2px
+  border: 1px solid $second_color
+  background-color: white
+  padding: 30px 50px 50px 50px
+  border: 1px solid darken($second-color, 2%)
+
+
+  h2
+    font-family: $raleway-font
+    font-weight: 600
+
+
+  input[type="email"], input[type="password"], input[type="text"]
+    padding: 5px 0 5px 0
+    text-align: center
+    width: 100%
+    max-width: 400px
+    margin-bottom: 30px
+    border-top: 0
+    border-left: 0
+    border-right: 0
+    border-bottom: 2px solid #ddd
+
+    &:focus
+      outline: none
+      border-bottom: 2px solid $glob_gray
+
+  input[type="password"]
+    margin-bottom: 20px
+
+  .form-fields
+    width: 60%
+    margin-left: auto
+    margin-right: auto
+
+    button
+      width: 100%
+      background-color: $second-color
+      color: white
+      border: none
+      border-radius: 2px
+      margin-top: $medium-norm
+
+      &:hover
+        background-color: darken($second-color, 2%)
+        
+      &:focus
+        outline: none
+

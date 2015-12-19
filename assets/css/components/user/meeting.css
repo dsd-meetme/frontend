@@ -1,0 +1,71 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.classic {
+  font-weight: 400; }
+
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
+.nm-content > div > h2 {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  font-weight: 600; }
+
+.nm-content form p {
+  font-weight: 600;
+  margin-top: 15px; }
+
+.nm-content form input[type="number"], .nm-content form input[type="text"] {
+  border: none;
+  border-bottom: 2px solid #ddd;
+  padding: 5px 0 5px 0;
+  margin-bottom: 15px;
+  width: 60%; }
+  .nm-content form input[type="number"]:focus, .nm-content form input[type="text"]:focus {
+    outline: none;
+    border-bottom: 2px solid #384047; }
+
+.nm-content form textarea {
+  margin-bottom: 15px;
+  width: 60%;
+  height: 160px;
+  border: 1px solid #ddd;
+  resize: none;
+  font-size: 95%; }
+  .nm-content form textarea:focus {
+    border: 1px solid #5a6772;
+    outline: none; }
+
+.nm-content .fc-left h2 {
+  font-size: 25px; }
+
+.nm-content .fc-right button {
+  margin-right: 10px;
+  border: 2px solid #5a6772;
+  color: #5a6772;
+  font-weight: 600;
+  outline: none;
+  background-color: white;
+  background-image: none;
+  height: auto;
+  padding: 6px 12px; }
+  .nm-content .fc-right button:hover {
+    border-color: #384047;
+    background-color: white;
+    color: #384047; }
+
+.nm .spec-btn {
+  background-color: #FFA500;
+  color: white;
+  border: none;
+  width: 250px;
+  padding: 12px 24px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  outline: none; }
+  .nm .spec-btn:hover {
+    background-color: #db8e00; }

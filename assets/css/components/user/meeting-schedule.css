@@ -1,0 +1,36 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.classic {
+  font-weight: 400; }
+
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
+.meetingsList div {
+  float: left;
+  width: 50%;
+  border: 1px solid black;
+  cursor: pointer; }
+
+.meetingsList div:last-child {
+  border-left: none; }
+
+.schedulesList div {
+  float: left;
+  width: 50%;
+  border: 1px solid black;
+  cursor: pointer; }
+
+.schedulesList div:nth-child(2),
+.schedulesList div:last-child {
+  border-left: none; }
+
+.selected {
+  background-color: black;
+  color: white; }
+
+#addSchedule .modal-header h3 {
+  display: inline-block; }

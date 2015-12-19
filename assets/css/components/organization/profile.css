@@ -9,18 +9,15 @@
 .bold {
   font-weight: 600; }
 
-.centered-col {
-  text-align: center; }
+.img-profile {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px; }
 
-.lefted-col {
-  text-align: left; }
+.img-profile2 {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px; }
 
-.righted-col {
-  text-align: right; }
-
-hr.black-line {
-  border-color: #000000; }
-
-hr.second-line {
-  border-color: #ffa500;
-  border-width: 2px; }
+.img-profile2:hover {
+  opacity: 0.7; }

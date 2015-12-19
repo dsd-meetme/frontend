@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+.classic {
+  font-weight: 400; }
+
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
+#confirmPopup .modal-content {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px; }
+
+#confirmPopup .modal-header {
+  border-bottom: none; }
+
+#confirmPopup h3 {
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #384047; }

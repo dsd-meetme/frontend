@@ -64,18 +64,5 @@
 .fc-toolbar {
   margin-bottom: 30px; }
 
-#confirmPopup .modal-content {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px; }
-
-#confirmPopup .modal-header {
-  border-bottom: none; }
-
-#confirmPopup h3 {
-  font-family: "Raleway", Helvetica, Arial, sans-serif;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #384047; }
-
 .composeScheduleContent {
   margin-top: 15px; }
