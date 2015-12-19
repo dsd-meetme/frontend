@@ -20,11 +20,11 @@
     <div class="top-odash-banner row">
         <h2 class="text-center">Dashboard</h2>
         <div class="view-switcher" role="group" aria-label="...">
-            <button type="button" ng-class="{switchSelected : udashC.meetingSection}" ng-click="udashC.showMeetings()" class="btn btn-default">MEETINGS</button>
-            <button style="padding-left: 17px" type="button" ng-class="{switchSelected : udashC.scheduleSection}" ng-click="udashC.showSchedules()" class="btn btn-default">SCHEDULES</button>
+            <button type="button" ng-class="{switchSelected : udashC.viewSections.meetings}" ng-click="udashC.viewSections.showMeetings()" class="btn btn-default">MEETINGS</button>
+            <button style="padding-left: 17px" type="button" ng-class="{switchSelected : udashC.viewSections.schedules}" ng-click="udashC.viewSections.showSchedules()" class="btn btn-default">SCHEDULES</button>
         </div>
     </div>
-    <div class="row" ng-show="udashC.meetingSection">
+    <div class="row" ng-show="udashC.viewSections.meetings">
         <div class="col-md-10 col-md-push-1">
             <div class="row imported-schedules-title-bar">
                 <div class="col-md-12">
@@ -45,27 +45,25 @@
             </div>
             <div class="row">
                 <div class="col-md-12 imported-schedules-content">
-                    <!--{{udashC.meetingsList.groupA.data}}
-                    {{udashC.meetingsList.groupB.data}}-->
                     <table class="table">
                         <thead>
-                        <th>Name</th>
-                        <th>Group</th>
-                        <th>Description</th>
-                        <th>Duration</th>
-                        <th></th>
+                            <th>Name</th>
+                            <th>Group</th>
+                            <th>Description</th>
+                            <th>Duration</th>
+                            <th></th>
                         </thead>
                         <tbody >
-                        <tr ng-repeat="data in udashC.meetingsList.groupA.data | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
-                            <td>{{data.title}}</td>
-                            <td>{{data.group_name}}</td>
-                            <td>{{data.description}}</td>
-                            <td>{{(data.duration)/60 }}</td>
-                            <td><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteInPMeeting(data.group_id, data.id)"></span></td>
-                        </tr>
+                            <tr ng-repeat="meeting in udashC.meetings.toBePlanned | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
+                                <td>{{meeting.title}}</td>
+                                <td>{{meeting.group_name}}</td>
+                                <td>{{meeting.description}}</td>
+                                <td>{{(meeting.duration)/60 }}</td>
+                                <td><span class="fa fa-trash-o fa-lg" ng-click="udashC.deletePlannedMeeting(meeting.group_id, meeting.id)"></span></td>
+                            </tr>
                         </tbody>
                     </table>
-                    <p ng-show="udashC.meetingsList.groupA.data.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
+                    <p ng-show="udashC.meetings.toBePlanned.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
                 </div>
             </div>
             <div class="row imported-schedules-title-bar">
@@ -86,26 +84,26 @@
                 <div class="col-md-12 imported-schedules-content">
                     <table class="table">
                         <thead>
-                        <th>Name</th>
-                        <th>Group</th>
-                        <th>Description</th>
-                        <th>Date</th>
+                            <th>Name</th>
+                            <th>Group</th>
+                            <th>Description</th>
+                            <th>Date</th>
                         </thead>
-                        <tbody >
-                        <tr ng-repeat="data in udashC.meetingsList.groupB.data | filter: {name: filterPMeetings} | limitTo : udashC.limits.pmeetings">
-                            <td>{{data.title}}</td>
-                            <td>{{data.group_name}}</td>
-                            <td>{{data.description}}</td>
-                            <td>{{data.start_time}}</td>
-                        </tr>
+                        <tbody>
+                            <tr ng-repeat="meeting in udashC.meetings.planned | filter: {name: filterPMeetings} | limitTo : udashC.limits.pmeetings">
+                                <td>{{meeting.title}}</td>
+                                <td>{{meeting.group_name}}</td>
+                                <td>{{meeting.description}}</td>
+                                <td>{{meeting.start_time}}</td>
+                            </tr>
                         </tbody>
                     </table>
-                    <p ng-show="udashC.meetingsList.groupB.data.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
+                    <p ng-show="udashC.meetings.plannedlength === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row" ng-show="udashC.scheduleSection">
+    <div class="row" ng-show="udashC.viewSections.schedules">
         <div class="col-md-10 col-md-push-1">
             <div class="row imported-schedules-title-bar">
                 <div class="col-md-12">
@@ -119,35 +117,31 @@
                         <input class="search-field" type="search" ng-model="filterISchedules" placeholder="Search for..."/>
                     </div>
                     <button class="btn btn-default glob_button" ng-click="udashC.limits.change('ischedules', '')">See all</button>
-                    <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.showPopup()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Import Schedule</button>
+                    <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.popUp.show()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Import Schedule</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 imported-schedules-content">
                     <table class="table">
                         <thead>
-                        <th>Name</th>
-                        <th>Synced on</th>
-                        <th class="text-center">Enabled</th>
-                        <th></th>
+                            <th>Name</th>
+                            <th>Synced on</th>
+                            <th class="text-center">Enabled</th>
+                            <th></th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="calendar in udashC.schedulesList.groupB.data | filter: {name : filterISchedules} | limitTo : udashC.limits.ischedules">
-                            <td>{{calendar.name}}</td>
-                            <td>{{calendar.caldav.updated_at}}</td>
-                            <td class="text-center">
-                                <span ng-show="calendar.enabled === '1'" class="fa fa-circle"></span>
-                                <span ng-show="calendar.enabled !=='1'" class="fa fa-circle-o"></span>
-                                <!--<label class="circled-checkbox">
-                                    <input type="checkbox" ng-checked="calendar.enabled === '1'"/>
-                                    <span class="label-text"></span>
-                                </label>-->
-                            </td>
-                            <td class="text-right"><span class="fa fa-wrench fa-lg" ng-click="udashC.editSchedule.showPopup($index)"></span><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
-                        </tr>
+                            <tr ng-repeat="schedule in udashC.schedules.imported | filter: {name : filterISchedules} | limitTo : udashC.limits.ischedules">
+                                <td>{{schedule.name}}</td>
+                                <td>{{schedule.caldav.updated_at}}</td>
+                                <td class="text-center">
+                                    <span ng-show="schedule.enabled === '1'" class="fa fa-circle"></span>
+                                    <span ng-show="schedule.enabled !=='1'" class="fa fa-circle-o"></span>
+                                </td>
+                                <td class="text-right"><span class="fa fa-wrench fa-lg" ng-click="udashC.editSchedule.popUp.show($index)"></span><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(schedule.id)"></span></td>
+                            </tr>
                         </tbody>
                     </table>
-                    <p ng-show="udashC.schedulesList.groupB.data.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
+                    <p ng-show="udashC.schedules.imported.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
                 </div>
             </div>
             <div class="row imported-schedules-title-bar">
@@ -169,33 +163,28 @@
                 <div class="col-md-12 imported-schedules-content">
                     <table class="table">
                         <thead>
-                        <th>Name</th>
-                        <th>Last update</th>
-                        <th class="text-center">Enabled</th>
-                        <th></th>
+                            <th>Name</th>
+                            <th>Last update</th>
+                            <th class="text-center">Enabled</th>
+                            <th></th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="calendar in udashC.schedulesList.groupA.data | filter: {name : filterCSchedules}">
-                            <td>{{calendar.name}}</td>
-                            <td>{{calendar.updated_at}}</td>
-                            <td class="text-center">
-                                <span ng-show="calendar.enabled === '1'" class="fa fa-circle"></span>
-                                <span ng-show="calendar.enabled !=='1'" class="fa fa-circle-o"></span>
-
-                                <!--<label class="circled-checkbox">
-                                    <input type="checkbox" ng-checked="calendar.enabled === '1'" disabled/>
-                                    <span class="label-text"></span>
-                                </label>-->
-                            </td>
-                            <td class="text-right"><a href="/#/user/schedules/compose/{{calendar.id}}&{{calendar.name}}&{{calendar.enabled}}" class="wrench-link fa fa-wrench fa-lg" ></a><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(calendar.id)"></span></td>
-                        </tr>
+                            <tr ng-repeat="schedule in udashC.schedules.composed | filter: {name : filterCSchedules}">
+                                <td>{{schedule.name}}</td>
+                                <td>{{schedule.updated_at}}</td>
+                                <td class="text-center">
+                                    <span ng-show="schedule.enabled === '1'" class="fa fa-circle"></span>
+                                    <span ng-show="schedule.enabled !=='1'" class="fa fa-circle-o"></span>
+                                </td>
+                                <td class="text-right"><a href="/#/user/schedules/compose/{{schedule.id}}&{{schedule.name}}&{{schedule.enabled}}" class="wrench-link fa fa-wrench fa-lg" ></a><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(schedule.id)"></span></td>
+                            </tr>
                         </tbody>
                     </table>
-                    <p ng-show="udashC.schedulesList.groupA.data.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
+                    <p ng-show="udashC.schedules.composed.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
                 </div>
             </div>
         </div>
-
+        <!-- popup-->
         <div id="importSchedule" class="modal" role="dialog" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -211,32 +200,30 @@
                                 <input name="url" type="url" ng-model="udashC.importSchedule.url" placeholder="Insert CalDav url" required>
                             </div>
                             <div>
-
                                 <p>CalDav Username</p>
                                 <input type="text" name="username" ng-model="udashC.importSchedule.username" placeholder="Insert CalDav username" required>
                                 <p>CalDav Password</p>
                                 <input type="password" name="password" ng-model="udashC.importSchedule.password" required placeholder="Insert CalDav password">
                             </div>
-
                             <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.getCalendars()"><i class="fa fa-arrow-down"></i>&nbsp;&nbsp;Get schedules</button>
                             <img ng-show="udashC.importSchedule.showLoader" src="assets/img/loader.gif" width="24px" alt="">
                             <div ng-show="udashC.importSchedule.calendars.length > 0">
                                 <h4>Available schedules</h4>
                                 <table class="table">
                                     <thead>
-                                    <th></th>
-                                    <th></th>
+                                        <th></th>
+                                        <th></th>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="calendar in udashC.importSchedule.calendars">
-                                        <td>{{calendar}}</td>
-                                        <td>
-                                            <label class="circled-checkbox">
-                                                <input type="checkbox" ng-model="udashC.importSchedule.selectedCals[$index].selected"/>
-                                                <span class="label-text"></span>
-                                            </label>
-                                        </td>
-                                    </tr>
+                                        <tr ng-repeat="calendar in udashC.importSchedule.calendars">
+                                            <td>{{calendar.value}}</td>
+                                            <td>
+                                                <label class="circled-checkbox">
+                                                    <input type="checkbox" ng-model="udashC.importSchedule.calendars[$index].selected"/>
+                                                    <span class="label-text"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                     <tbody></tbody>
                                 </table>
@@ -286,7 +273,7 @@
                             </label>
                             <div class="errorContainer" ng-show="udashC.editSchedule.thereErrors || udashC.editSchedule.errors.length > 0">
                                 <p ng-repeat="error in udashC.editSchedule.errors">{{error}}</p>
-                                <p ng-show="udashC.editSchedule.invalidFields.nameReq" class="text-danger">Insert the user password</p>
+                                <p ng-show="udashC.editSchedule.invalidFields.nameReq" class="text-danger">Insert a name for the schedule</p>
                                 <p ng-show="udashC.editSchedule.invalidFields.passwordLength" class="text-danger">The password must contains at least 6 characters</p>
                                 <p ng-show="udashC.editSchedule.invalidFields.urlReq" class="text-danger">Insert the user email address</p>
                                 <p ng-show="udashC.editSchedule.invalidFields.urlVal" class="text-danger">The email address is not valid</p>
