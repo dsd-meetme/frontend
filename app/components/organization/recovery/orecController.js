@@ -20,6 +20,7 @@
             if (!form.$invalid) {
                 dataPublisher.publish('http://api.plunner.com/companies/password/email', {email: c.email})
                     .then(function () {
+                        c.errors.length = 0;
                         //clears the form fields
                         jQuery('input').val('');
                         c.success = true;

@@ -45,7 +45,7 @@
                 }
             }
         }
-    }
+    };
 
     var app = angular.module('Plunner');
     app.controller('opController', controller);
