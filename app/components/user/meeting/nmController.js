@@ -53,10 +53,10 @@
         c.confirmPopup = {
             message: '',
             show: function () {
-                jQuery.modal('show');
+                jQuery('#confirmPopup').modal('show');
             },
             hide: function () {
-                jQuery.modal('hide');
+                jQuery('#confirmPopup').modal('hide');
             }
         };
         c.submit = function () {
@@ -77,7 +77,7 @@
 
             for (var i = 0; i < this.events.length; i++) {
                 minEventDuration = (this.events[i]._end._d.getTime() - this.events[i]._start._d.getTime()) / 1000;
-                if (exp < this.duration) {
+                if (minEventDuration < this.duration) {
                     this.invalidFields.durationConflict = true;
                     break;
                 }
