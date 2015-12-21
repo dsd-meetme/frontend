@@ -69,7 +69,8 @@ label.circled-checkbox {
       width: 1em;
       margin-right: 7px; }
     label.circled-checkbox input[type=checkbox]:checked + .label-text {
-      color: black; }
+      color: #555;
+      font-weight: 500; }
     label.circled-checkbox input[type=checkbox]:checked + .label-text:before {
       color: black;
       content: "\f111"; }

@@ -12,25 +12,28 @@
 
 .signIn
   height: 100vh
-  background-color: $second-color
+  background-color: #f9f9f9
+//$second-color
 .signInContainer
   position: relative
   text-align: center
   width: 40%
   margin: 50px auto 0 auto
   border-radius: 2px
-  border: 1px solid $second_color
   background-color: white
-  padding: 30px 50px 50px 50px
-  border: 1px solid darken($second-color, 2%)
+  padding: 50px 40px 50px 40px
+  border: 1px solid #ddd
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16)
+
 
 
   h2
     font-family: $raleway-font
     font-weight: 600
+    color: #555555
 
 
-  input[type="email"], input[type="password"], input[type="text"]
+  /*input[type="email"], input[type="password"], input[type="text"]
     padding: 5px 0 5px 0
     text-align: center
     width: 100%
@@ -45,25 +48,97 @@
       outline: none
       border-bottom: 2px solid $glob_gray
 
-  input[type="password"]
+  /*input[type="password"]
     margin-bottom: 20px
+  i
+    position: absolute
+    left: 10px
+    top: 10px
+    color: #ccc
+
+  input[type="email"], input[type="password"]
+    padding: 6px 0 6px 0
+    padding-left: 40px
+    width: 100%
+    color: #555555
+    max-width: 400px
+    border: 1px solid #ddd
+    border-radius: 4px
+
+    &:focus
+      border: 1px solid #42A5F5
+      outline: none
+
+    &.invalid
+      border: 1px solid #E74C3C !important
 
   .form-fields
-    width: 60%
+    width: 70%
     margin-left: auto
     margin-right: auto
 
+    > div
+      margin-bottom: 25px
     button
       width: 100%
-      background-color: $second-color
+      background-color: #42A5F5
       color: white
       border: none
       border-radius: 2px
       margin-top: $medium-norm
+      padding: 10px 0 10px 0
+      font-size: 18px
+      border-radius: 4px
 
       &:hover
-        background-color: darken($second-color, 2%)
-        
+        background-color: darken(#42A5F5, 5%)
+
       &:focus
         outline: none
+
+  .label-text
+    color: #ccc
+
+
+  a
+    color: lighten(#42A5F5, 20%)
+
+    &:hover
+      color: #42A5F5
+      text-decoration: none
+
+  label.circled-checkbox input[type=checkbox] + .label-text:before
+    content: "\f096"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 16px
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    width: 1em
+    margin-right: 7px
+
+  label.circled-checkbox input[type=checkbox]:checked + .label-text:before
+    content: "\f14a"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 16px
+    color: #42A5F5
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    width: 1em
+    margin-right: 7px
+
+  .invalidMsg
+    color: #E74C3C
+    margin-top: 7px
+    text-align: left
+    transition: all 1s ease-in-out 1s
+    -webkit-transition: all 1s ease-in-out 1s
+
 

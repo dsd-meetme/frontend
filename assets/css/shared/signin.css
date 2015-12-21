@@ -11,7 +11,7 @@
 
 .signIn {
   height: 100vh;
-  background-color: #ffa500; }
+  background-color: #f9f9f9; }
 
 .signInContainer {
   position: relative;
@@ -19,40 +19,103 @@
   width: 40%;
   margin: 50px auto 0 auto;
   border-radius: 2px;
-  border: 1px solid #ffa500;
   background-color: white;
-  padding: 30px 50px 50px 50px;
-  border: 1px solid #f59e00; }
+  padding: 50px 40px 50px 40px;
+  border: 1px solid #ddd;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  /*input[type="email"], input[type="password"], input[type="text"]
+    padding: 5px 0 5px 0
+    text-align: center
+    width: 100%
+    max-width: 400px
+    margin-bottom: 30px
+    border-top: 0
+    border-left: 0
+    border-right: 0
+    border-bottom: 2px solid #ddd
+
+    &:focus
+      outline: none
+      border-bottom: 2px solid $glob_gray */
+  /*input[type="password"]
+    margin-bottom: 20px */ }
   .signInContainer h2 {
     font-family: "Raleway", Helvetica, Arial, sans-serif;
-    font-weight: 600; }
-  .signInContainer input[type="email"], .signInContainer input[type="password"], .signInContainer input[type="text"] {
-    padding: 5px 0 5px 0;
-    text-align: center;
+    font-weight: 600;
+    color: #555555; }
+  .signInContainer i {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #ccc; }
+  .signInContainer input[type="email"], .signInContainer input[type="password"] {
+    padding: 6px 0 6px 0;
+    padding-left: 40px;
     width: 100%;
+    color: #555555;
     max-width: 400px;
-    margin-bottom: 30px;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 2px solid #ddd; }
-    .signInContainer input[type="email"]:focus, .signInContainer input[type="password"]:focus, .signInContainer input[type="text"]:focus {
-      outline: none;
-      border-bottom: 2px solid #384047; }
-  .signInContainer input[type="password"] {
-    margin-bottom: 20px; }
+    border: 1px solid #ddd;
+    border-radius: 4px; }
+    .signInContainer input[type="email"]:focus, .signInContainer input[type="password"]:focus {
+      border: 1px solid #42A5F5;
+      outline: none; }
+    .signInContainer input[type="email"].invalid, .signInContainer input[type="password"].invalid {
+      border: 1px solid #E74C3C !important; }
   .signInContainer .form-fields {
-    width: 60%;
+    width: 70%;
     margin-left: auto;
     margin-right: auto; }
+    .signInContainer .form-fields > div {
+      margin-bottom: 25px; }
     .signInContainer .form-fields button {
       width: 100%;
-      background-color: #ffa500;
+      background-color: #42A5F5;
       color: white;
       border: none;
       border-radius: 2px;
-      margin-top: 30px; }
+      margin-top: 30px;
+      padding: 10px 0 10px 0;
+      font-size: 18px;
+      border-radius: 4px; }
       .signInContainer .form-fields button:hover {
-        background-color: #f59e00; }
+        background-color: #2a99f4; }
       .signInContainer .form-fields button:focus {
         outline: none; }
+  .signInContainer .label-text {
+    color: #ccc; }
+  .signInContainer a {
+    color: #a3d3fa; }
+    .signInContainer a:hover {
+      color: #42A5F5;
+      text-decoration: none; }
+  .signInContainer label.circled-checkbox input[type=checkbox] + .label-text:before {
+    content: "\f096";
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 16px;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    width: 1em;
+    margin-right: 7px; }
+  .signInContainer label.circled-checkbox input[type=checkbox]:checked + .label-text:before {
+    content: "\f14a";
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 16px;
+    color: #42A5F5;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    width: 1em;
+    margin-right: 7px; }
+  .signInContainer .invalidMsg {
+    color: #E74C3C;
+    margin-top: 7px;
+    text-align: left;
+    transition: all 1s ease-in-out 1s;
+    -webkit-transition: all 1s ease-in-out 1s; }

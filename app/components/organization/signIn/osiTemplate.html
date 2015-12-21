@@ -1,7 +1,7 @@
 <div class="navbar navbar-default">
     <div class="container-fluid">
         <!-- HEADER -->
-        <div class="navbar-header">
+        <div class="navbar-header">xw
             <a class="navbar-brand" href="#">PLUNNER</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
@@ -18,39 +18,41 @@
 <div class="container-fluid signIn">
     <div class="signInContainer">
         <form name="signInForm" ng-submit="osiC.login()" novalidate>
-            <h2>SIGN IN</h2>
-            <p>As an organization</p>
+            <img width="250px" src="assets/img/plunnerLogo.png" alt=""/>
+            <h2 style="font-size: 28px; font-weight: 400; margin-bottom: 40px">Organization Sign In</h2>
             <div class="form-fields">
-                <input name="email" type="email" required ng-model="osiC.email"
-                       placeholder="Email">
-                <br>
-                <input name="password" type="password" required ng-model="osiC.password"
-                       placeholder="Password"><br>
+                <div style="position:relative">
+                    <i class="fa fa-envelope-o fa-lg"></i>
+                    <input name="email" type="email" required ng-model="osiC.email"
+                           placeholder="Email" ng-class="{invalid : osiC.invalidFields.emailReq ||osiC.invalidFields.emailVal }">
+                    <p class="invalidMsg" ng-show="osiC.invalidFields.emailReq">You did not insert an email address</p>
+                    <p class="invalidMsg" ng-show="osiC.invalidFields.emailVal">You did not insert a valid email address</p>
+                </div>
+                <div style="position: relative"p>
+                    <i class="fa fa-lock fa-lg"></i>
+                    <input name="password" type="password" required ng-model="osiC.password"
+                           placeholder="Password" ng-class="{invalid : osiC.invalidFields.passwordReq}">
+                    <p class="invalidMsg" ng-show="osiC.invalidFields.passwordReq">You did not insert a password</p>
+                </div>
 
-                <div class="row">
-                    <div class="col-md-6">
+
+                <div class="row" style="margin-bottom: 0">
+                    <div class="col-md-6" style="text-align: left">
                         <label class="circled-checkbox">
                             <input type="checkbox" ng-model="osiC.rmbMe">
-                            <span class="label-text">Remember Me</span>
+                            <span class="label-text" style="font-weight: 500">Remember Me</span>
                         </label>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="/#/orgrecovery">Password?</a>
+                        <a href="/#/orgrecovery">Forgot credentials?</a>
                     </div>
                 </div>
                 <div style="margin-top: 10px" ng-show="osiC.invalidFields.emailReq" class="text-danger">
-                    <p>You did not insert an email address</p>
+
                 </div>
-                <div ng-show="osiC.invalidFields.emailVal" class="text-danger">
-                    <p>You did not insert a valid email address</p>
-                </div>
-                <div ng-show="osiC.invalidFields.passwordReq" class="text-danger">
-                    <p>You did not insert a password</p>
-                </div>
-                <p class="text-danger" ng-repeat="error in osiC.errors">{{error}}</p>
+                <p class="invalidMsg" style="text-align: center" ng-repeat="error in osiC.errors"><span style="margin-right: 7px;" class="fa fa-warning"></span>{{error}}</p>
                 <button type="submit" class="btn btn-default">SIGN IN</button>
-                <br/><br/>
-                <i>If you are a user it is <a href="/#/usersignin">here</a></i>
+                <!--<span>If you are a user it is <a href="/#/usersignin">here</a></span>-->
             </div>
 
 
