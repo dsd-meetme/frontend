@@ -1,0 +1,136 @@
+@import '../../global/colors.sass'
+@import '../../global/size.sass'
+@import '../../global/fonts.sass'
+
+.tile
+  height: 150px
+  padding: 10px
+  border: 1px solid #eee
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16)
+  margin-bottom: 20px
+
+  .tileIconLeft, .tileIconRight
+    height: 130px
+
+    span
+      display: inline-block
+      height: 100%
+      vertical-align: middle
+
+  .tileIconLeft
+    background-color: #3691F1
+    height: 150px
+    margin-top: -11px
+    img
+      width: 60px
+
+  .tileIconRight
+    img
+      width: 20px
+      cursor: pointer
+  .tileBody
+    padding-left: 20px
+    height: 130px
+
+    .tileTitle
+      font-size: 25px
+      font-family: $montserrat
+      text-transform: uppercase
+
+    .tileDescription
+      margin-top: 10px
+      margin-bottom: 10px
+      color: #555
+      padding-bottom: 10px
+      border-bottom: 1px solid #eee
+      height: 48px
+
+    .tileBottomGroup
+      margin-top: 10px
+      margin-bottom: 10px
+
+      ul
+        li
+          margin-right: 15px
+
+      span
+        color: #555
+
+      .tileSynched
+        font-family: $montserrat
+        color: #555
+
+
+.tile-small
+  height: 120px
+
+  .tileIconLeft, .tileIconRight, .tileBody
+    height: 120px
+    margin-top: -11px
+
+  .tileIconLeft
+    img
+      width: 40px
+
+  .tileBody
+    .tileTitle
+      margin-top: 30px
+      padding-bottom: 10px
+      border-bottom: 1px solid #eee
+    .tileBottomGroup
+
+
+      .tileActiveInfo
+        font-family: $montserrat
+        color: #2ECC71
+
+      .tileNonActiveInfo
+        font-family: $montserrat
+        color: #DDD
+
+
+.myInput
+  position: relative
+  margin-right: 40px !important
+
+  span
+    position: absolute
+    top: 13px
+    left: 12px
+    color: #555
+
+  input[type="search"]
+    width: 400px
+    padding: 10px 10px 10px 40px
+    border: 1px solid #ccc
+    border-radius: 4px
+
+    &:focus
+      outline: none
+      border: 1px solid #3691F1
+      box-shadow: 1px 1px 6px rgba(0,0,0,0.16)
+
+.fixedButton
+  border: 2px solid #555
+  padding: 9px 18px
+  color: #555
+  margin-right: 20px
+
+
+  &:hover
+    color: #3691F1
+    border: 2px solid #3691F1
+    background-color: white
+
+  &:active
+    background-color: white
+    box-shadow: none
+    -webkit-box-shadow: none
+    color: #3691F1
+    border: 2px solid #3691F1
+
+  &:focus
+    background-color: white
+    color: #3691F1
+    border: 2px solid #3691F1
+    outline: none

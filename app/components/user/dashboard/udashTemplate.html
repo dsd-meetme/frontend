@@ -45,7 +45,33 @@
             </div>
             <div class="row">
                 <div class="col-md-12 imported-schedules-content">
-                    <table class="table">
+                    <div class="tile" ng-repeat="meeting in udashC.meetings.toBePlanned | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
+                        <div class="row">
+                            <div class="col-md-2 text-center tileIconLeft">
+                                <span></span>
+                                <img src="assets/img/tile.png" width="60px" alt=""/>
+                            </div>
+                            <div class="col-md-9 tileBody">
+                                <h4 class="tileTitle">{{meeting.title}}</h4>
+                                <div class="tileDescription">
+                                    {{meeting.description}}
+                                </div>
+                                <div class="tileBottomGroup">
+                                    <ul class="list-inline list-unstyled">
+                                        <li><span class="tileSynched">DURATION: </span>&nbsp;&nbsp;{{meeting.duration/60}}</li>
+                                        <li><span class="tileSynched">GROUP: </span>{{meeting.group_name}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-1 text-center tileIconRight">
+                                <span></span>
+                                <img src="assets/img/arrow.png" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--<table class="table">
                         <thead>
                             <th>Name</th>
                             <th>Group</th>
@@ -54,7 +80,7 @@
                             <th></th>
                         </thead>
                         <tbody >
-                            <tr ng-repeat="meeting in udashC.meetings.toBePlanned | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
+                            <tr >
                                 <td>{{meeting.title}}</td>
                                 <td>{{meeting.group_name}}</td>
                                 <td>{{meeting.description}}</td>
@@ -62,7 +88,7 @@
                                 <td><span class="fa fa-trash-o fa-lg" ng-click="udashC.deletePlannedMeeting(meeting.group_id, meeting.id)"></span></td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table>-->
                     <p ng-show="udashC.meetings.toBePlanned.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
                 </div>
             </div>
@@ -103,26 +129,55 @@
             </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
     <div class="row" ng-show="udashC.viewSections.schedules">
         <div class="col-md-10 col-md-push-1">
-            <div class="row imported-schedules-title-bar">
+            <!--<div class="row imported-schedules-title-bar">
                 <div class="col-md-12">
                     <h2>IMPORTED SCHEDULES</h2>
                 </div>
-            </div>
+            </div>-->
             <div class="row imported-schedules-bar">
                 <div class="col-md-12">
-                    <div>
+                    <div class="myInput">
                         <span class="fa fa-search fa-lg"></span>
-                        <input class="search-field" type="search" ng-model="filterISchedules" placeholder="Search for..."/>
+                        <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
                     </div>
-                    <button class="btn btn-default glob_button" ng-click="udashC.limits.change('ischedules', '')">See all</button>
-                    <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.popUp.show()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Import Schedule</button>
+                    <button class="btn btn-default fixedButton" ng-click="udashC.importSchedule.popUp.show()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Import Schedule</button>
+                    <button class="btn btn-default fixedButton"><i class="fa fa-pencil fa-lg"></i>&nbsp;&nbsp;Compose a schedule</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 imported-schedules-content">
-                    <table class="table">
+                    <div class="clearfix" style="border-bottom: 1px solid #555; margin-bottom: 40px">
+                        <div style="float:right; padding: 5px 10px; font-family: 'Montserrat'; color:#555; border:1px solid #555; border-bottom:0">IMPORTED SCHEDULES</div>
+                    </div>
+                    <div class="tile tile-small" ng-repeat="schedule in udashC.schedules.imported | filter: {name : filterISchedules} | limitTo : udashC.limits.ischedules">
+                        <div class="row">
+                            <div class="col-md-2 text-center tileIconLeft">
+                                <span></span>
+                                <img src="assets/img/calendar.png" alt=""/>
+                            </div>
+                            <div class="col-md-9 tileBody">
+                                <h4 class="tileTitle">{{schedule.name}}</h4>
+                                <div class="tileBottomGroup">
+                                    <ul class="list-inline list-unstyled">
+                                        <li><span class="tileActiveInfo" ng-show="schedule.enabled === '1'" >ACTIVE</span>
+                                            <span class="tileNonActiveInfo" ng-show="schedule.enabled !=='1'" class="fa fa-circle-o">INACTIVE</span></li>
+                                        <li><span class="tileSynched">SYNCED ON:</span>&nbsp;&nbsp;{{schedule.caldav.updated_at}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-1 text-center tileIconRight">
+                                <span></span>
+                                <img src="assets/img/arrow.png" alt="" ng-click="udashC.editSchedule.popUp.show($index)"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<table class="table">
                         <thead>
                             <th>Name</th>
                             <th>Synced on</th>
@@ -140,16 +195,16 @@
                                 <td class="text-right"><span class="fa fa-wrench fa-lg" ng-click="udashC.editSchedule.popUp.show($index)"></span><span class="fa fa-trash-o fa-lg" ng-click="udashC.deleteSchedule(schedule.id)"></span></td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table>-->
                     <p ng-show="udashC.schedules.imported.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
                 </div>
             </div>
-            <div class="row imported-schedules-title-bar">
+            <!--<div class="row imported-schedules-title-bar">
                 <div class="col-md-12">
                     <h2>COMPOSED SCHEDULES</h2>
                 </div>
-            </div>
-            <div class="row imported-schedules-bar">
+            </div>-->
+            <!--<div class="row imported-schedules-bar">
                 <div class="col-md-12">
                     <div>
                         <span class="fa fa-search fa-lg"></span>
@@ -158,9 +213,36 @@
                     <button class="btn btn-default glob_button" ng-click="udashC.limits.change('cschedules', '')">See all</button>
                     <a class="btn btn-default glob_button" href="/#/user/schedules/compose/_"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Compose Schedule</a>
                 </div>
-            </div>
+            </div>-->
+            <br/>
             <div class="row">
                 <div class="col-md-12 imported-schedules-content">
+                    <div class="clearfix" style="border-bottom: 1px solid #555; margin-bottom: 40px">
+                        <div style="float:right; padding: 5px 10px; font-family: 'Montserrat'; color:#555; border:1px solid #555; border-bottom:0">COMPOSED SCHEDULES</div>
+                    </div>
+                    <div class="tile tile-small" ng-repeat="schedule in udashC.schedules.composed | filter: {name : filterISchedules}">
+                        <div class="row">
+                            <div class="col-md-2 text-center tileIconLeft" style="background-color: #EF4836">
+                                <span></span>
+                                <img src="assets/img/calendar.png" alt=""/>
+                            </div>
+                            <div class="col-md-9 tileBody">
+                                <h4 class="tileTitle">{{schedule.name}}</h4>
+                                <div class="tileBottomGroup">
+                                    <ul class="list-inline list-unstyled">
+                                        <li><span class="tileActiveInfo" ng-show="schedule.enabled === '1'" >ACTIVE</span>
+                                            <span class="tileNonActiveInfo" ng-show="schedule.enabled !=='1'" class="fa fa-circle-o">INACTIVE</span></li>
+                                        <li><span class="tileSynched">LAST UPDATE:</span>&nbsp;&nbsp;{{schedule.updated_at}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-1 text-center tileIconRight">
+                                <span></span>
+                                <img src="assets/img/arrow.png" alt="" ng-click="udashC.editSchedule.popUp.show($index)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
                     <table class="table">
                         <thead>
                             <th>Name</th>
@@ -180,6 +262,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    -->
                     <p ng-show="udashC.schedules.composed.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
                 </div>
             </div>
