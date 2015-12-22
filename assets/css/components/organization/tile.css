@@ -29,7 +29,7 @@
     .tile .tileIconLeft img {
       width: 60px; }
   .tile .tileIconRight img {
-    width: 20px;
+    width: 15px;
     cursor: pointer; }
   .tile .tileBody {
     padding-left: 20px;
@@ -98,8 +98,8 @@
   color: #555;
   margin-right: 20px; }
   .fixedButton:hover {
-    color: #3691F1;
-    border: 2px solid #3691F1;
+    color: #6f6f6f;
+    border: 2px solid #6f6f6f;
     background-color: white; }
   .fixedButton:active {
     background-color: white;
