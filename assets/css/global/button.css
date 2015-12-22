@@ -106,3 +106,16 @@ label.circled-radio {
   border-radius: 2px; }
   .yellow-btn p {
     color: #FF2800; }
+
+.pagination .underlinedPage {
+  color: white;
+  background-color: #00498f; }
+
+.pagination li {
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 2px 7px 2px 7px; }
+  .pagination li:hover {
+    background-color: #00498f;
+    color: white; }
