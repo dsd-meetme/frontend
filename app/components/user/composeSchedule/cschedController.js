@@ -42,7 +42,6 @@
         };
         var c = this;
         c.events = [];
-        c.eventsCopy = [];
         c.eventRemoveId = [2];
         c.errors = [];
         c.invalidFields = {
@@ -87,15 +86,9 @@
                                 end: splittedTimeEnd[0]+'T'+splittedTimeEnd[1],
                                 specificId: response[i].id
                             });
-                            c.eventsCopy.push({
-                                title: '',
-                                start: splittedTimeStart[0]+'T'+splittedTimeStart[1],
-                                end: splittedTimeEnd[0]+'T'+splittedTimeEnd[1],
-                                specificId: response[i].id
-                            });
+
 
                         }
-                        console.log(c.eventsCopy);
                         calendar =  jQuery('#composeScheduleCal').fullCalendar(c.calendarConfig);
                     })
             }
@@ -116,6 +109,7 @@
             var newEvents, modifiedEvents = [];
             var alsoEditEvents = false;
             var events = calendar.fullCalendar('clientEvents');
+            var processedEvents = [];
             this.invalidFields.nameReq = (c.name === '' || c.name === undefined);
             this.invalidFields.eventsReq = (events.length === 0);
             this.thereErrors = this.invalidFields.nameReq || this.invalidFields.eventsReq;
@@ -134,6 +128,7 @@
                     })
                 }*/
                 if (mode === 1) {
+                    processedEvents = backendEventAdapter(events, true);
                     orgResources.calendar().save({calendarId: ''}, jQuery.param({
                         name: this.name,
                         enabled: enabled
@@ -156,7 +151,6 @@
                         })
                 }
                 else {
-
                     newEvents = backendEventAdapter(checkNewEvents(events),true);
                     modifiedEvents = backendEventAdapter(changedEvents,false);
 

@@ -6,7 +6,7 @@
         var end = parseInt(splittedDelimiters[1]);
 
         if(input){
-            return input.slice(start,end);
+            return input.slice(start,end+1);
         }
 
 

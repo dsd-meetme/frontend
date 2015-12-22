@@ -66,6 +66,11 @@
                 method : 'PUT'
             }
         });
+        var plannerTimeslots = $resource('http://api.plunner.com/employees/planners/groups/:groupId/meetings/:meetingId/timeslots/:timeslotId', null, {
+            'update' : {
+                method : 'PUT'
+            }
+        });
         return {
             user : function(){
                 return userResource;
@@ -99,6 +104,9 @@
             },
             timers : function(){
                 return timers;
+            },
+            plannerTimeslots : function(){
+                return plannerTimeslots;
             }
         }
     };

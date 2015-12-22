@@ -140,7 +140,7 @@
                         <th class="text-center">Planner</th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="user in odashC.data.users | filter: searchedPlanner">
+                        <tr ng-repeat="user in odashC.data.users | filter: searchedPlanner | paginationFilter: odashC.pagination.user.filterString">
                             <td>{{user.name}}</td>
                             <td class="text-center" >
                                 <label class="circled-checkbox" ng-click="odashC.addGroup.selectPlanner(user.id)">
@@ -157,6 +157,9 @@
                         </tr>
                         </tbody>
                     </table>
+                    <ul class="list-unstyled list-inline pagination">
+                        <li ng-class="{underlinedPage : odashC.pagination.user.currentPage === ($index + 1)}" ng-click="odashC.pagination.user.changePage($index+1)" ng-repeat="x in odashC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                    </ul>
                     <div class="errorContainer" ng-show="odashC.addGroup.thereErrors || odashC.addGroup.errors.length > 0">
                         <p class="text-danger" class="text-danger" ng-repeat="error in odashC.addGroup.errors">{{error}}</p>
                         <p ng-show="odashC.addGroup.invalidFields.nameReq" class="text-danger">Insert group name</p>

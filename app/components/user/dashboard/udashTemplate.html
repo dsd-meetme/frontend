@@ -54,12 +54,15 @@
                             <th></th>
                         </thead>
                         <tbody >
+                            {{udashC.meetings.toBePlanned}}
                             <tr ng-repeat="meeting in udashC.meetings.toBePlanned | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
                                 <td>{{meeting.title}}</td>
                                 <td>{{meeting.group_name}}</td>
                                 <td>{{meeting.description}}</td>
                                 <td>{{(meeting.duration)/60 }}</td>
-                                <td><span class="fa fa-trash-o fa-lg" ng-click="udashC.deletePlannedMeeting(meeting.group_id, meeting.id)"></span></td>
+                                <td>
+                                    <a href="/#/user/newmeeting/{{meeting.group_id}}&{{meeting.id}}">sda</a>
+                                    <span class="fa fa-trash-o fa-lg" ng-click="udashC.deletePlannedMeeting(meeting.group_id, meeting.id)"></span></td>
                             </tr>
                         </tbody>
                     </table>
