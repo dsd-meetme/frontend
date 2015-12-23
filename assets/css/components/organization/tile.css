@@ -11,68 +11,65 @@
   font-weight: 600; }
 
 .tile {
-  height: 150px;
+  height: 141px;
   padding: 10px;
-  border: 1px solid #eee;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  margin-bottom: 20px; }
-  .tile .tileIconLeft, .tile .tileIconRight {
-    height: 130px; }
-    .tile .tileIconLeft span, .tile .tileIconRight span {
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle; }
-  .tile .tileIconLeft {
-    background-color: #3691F1;
-    height: 150px;
-    margin-top: -11px; }
-    .tile .tileIconLeft img {
-      width: 60px; }
-  .tile .tileIconRight img {
-    width: 15px;
+  font-family: 'Roboto';
+  border-bottom: 1px solid #eee; }
+  .tile .tileIconLeft img {
+    width: 60px;
+    margin-top: 24px; }
+  .tile .tileIconRight svg {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 40px;
     cursor: pointer; }
+    .tile .tileIconRight svg:hover g g {
+      fill: #aaaaaa; }
   .tile .tileBody {
-    padding-left: 20px;
+    padding-left: 30px;
     height: 130px; }
     .tile .tileBody .tileTitle {
-      font-size: 25px;
-      font-family: "Montserrat", Helvetica, Arial, sans-serif;
-      text-transform: uppercase; }
+      font-size: 20px;
+      font-weight: 400; }
     .tile .tileBody .tileDescription {
       margin-top: 10px;
-      margin-bottom: 10px;
       color: #555;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #eee;
-      height: 48px; }
+      height: 40px; }
     .tile .tileBody .tileBottomGroup {
-      margin-top: 10px;
       margin-bottom: 10px; }
       .tile .tileBody .tileBottomGroup ul li {
         margin-right: 15px; }
       .tile .tileBody .tileBottomGroup span {
-        color: #555; }
-      .tile .tileBody .tileBottomGroup .tileSynched {
-        font-family: "Montserrat", Helvetica, Arial, sans-serif;
-        color: #555; }
+        color: #555;
+        font-weight: 500; }
+      .tile .tileBody .tileBottomGroup i {
+        color: #555;
+        font-size: 16px; }
+      .tile .tileBody .tileBottomGroup button {
+        background-color: transparent;
+        border: none; }
+        .tile .tileBody .tileBottomGroup button:hover span, .tile .tileBody .tileBottomGroup button:hover i {
+          color: black; }
 
 .tile-small {
   height: 120px; }
   .tile-small .tileIconLeft, .tile-small .tileIconRight, .tile-small .tileBody {
     height: 120px;
     margin-top: -11px; }
-  .tile-small .tileIconLeft img {
-    width: 40px; }
+    .tile-small .tileIconLeft svg, .tile-small .tileIconRight svg, .tile-small .tileBody svg {
+      margin-top: 44px; }
   .tile-small .tileBody .tileTitle {
     margin-top: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee; }
-  .tile-small .tileBody .tileBottomGroup .tileActiveInfo {
-    font-family: "Montserrat", Helvetica, Arial, sans-serif;
-    color: #2ECC71; }
-  .tile-small .tileBody .tileBottomGroup .tileNonActiveInfo {
-    font-family: "Montserrat", Helvetica, Arial, sans-serif;
-    color: #DDD; }
+    padding-bottom: 10px; }
+  .tile-small .tileBody .tileBottomGroup {
+    margin-top: 10px; }
+    .tile-small .tileBody .tileBottomGroup .tileActiveInfo {
+      font-weight: 500;
+      color: #2ECC71; }
+    .tile-small .tileBody .tileBottomGroup .tileNonActiveInfo {
+      font-weight: 500;
+      color: #DDD; }
 
 .myInput {
   position: relative;

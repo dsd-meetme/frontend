@@ -3,50 +3,46 @@
 @import '../../global/fonts.sass'
 
 .tile
-  height: 150px
+
+  height: 141px
   padding: 10px
-  border: 1px solid #eee
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16)
-  margin-bottom: 20px
-
-  .tileIconLeft, .tileIconRight
-    height: 130px
-
-    span
-      display: inline-block
-      height: 100%
-      vertical-align: middle
+  font-family: 'Roboto'
+  border-bottom: 1px solid #eee
 
   .tileIconLeft
-    background-color: #3691F1
-    height: 150px
-    margin-top: -11px
+
     img
       width: 60px
+      margin-top: 24px
 
   .tileIconRight
-    img
-      width: 15px
+
+    svg
+      display: block
+      margin-left: auto
+      margin-right: 0
+      margin-top: 40px
       cursor: pointer
+
+      &:hover
+        g
+          g
+            fill: darken(#ddd, 20%)
+
   .tileBody
-    padding-left: 20px
+    padding-left: 30px
     height: 130px
 
     .tileTitle
-      font-size: 25px
-      font-family: $montserrat
-      text-transform: uppercase
+      font-size: 20px
+      font-weight: 400
 
     .tileDescription
       margin-top: 10px
-      margin-bottom: 10px
       color: #555
-      padding-bottom: 10px
-      border-bottom: 1px solid #eee
-      height: 48px
+      height: 40px
 
     .tileBottomGroup
-      margin-top: 10px
       margin-bottom: 10px
 
       ul
@@ -55,11 +51,20 @@
 
       span
         color: #555
+        font-weight: 500
 
-      .tileSynched
-        font-family: $montserrat
+      i
         color: #555
+        font-size: 16px
 
+      button
+        background-color: transparent
+        border: none
+
+
+        &:hover
+          span, i
+            color: black
 
 .tile-small
   height: 120px
@@ -68,24 +73,23 @@
     height: 120px
     margin-top: -11px
 
-  .tileIconLeft
-    img
-      width: 40px
+    svg
+      margin-top: 44px
 
   .tileBody
     .tileTitle
       margin-top: 30px
       padding-bottom: 10px
-      border-bottom: 1px solid #eee
-    .tileBottomGroup
 
+    .tileBottomGroup
+      margin-top: 10px
 
       .tileActiveInfo
-        font-family: $montserrat
+        font-weight: 500
         color: #2ECC71
 
       .tileNonActiveInfo
-        font-family: $montserrat
+        font-weight: 500
         color: #DDD
 
 
