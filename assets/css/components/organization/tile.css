@@ -83,29 +83,32 @@
     width: 400px;
     padding: 10px 10px 10px 40px;
     border: 1px solid #ccc;
-    border-radius: 4px; }
+    border-radius: 4px;
+    transition: all 110ms ease-in-out; }
     .myInput input[type="search"]:focus {
       outline: none;
-      border: 1px solid #3691F1;
       box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16); }
 
 .fixedButton {
-  border: 2px solid #555;
+  border-radius: 0;
+  border: 0;
   padding: 9px 18px;
-  color: #555;
-  margin-right: 20px; }
+  font-family: 'Roboto';
+  margin-right: 20px;
+  color: #42A5F5;
+  border: 2px solid #42A5F5; }
   .fixedButton:hover {
-    color: #6f6f6f;
-    border: 2px solid #6f6f6f;
-    background-color: white; }
+    background-color: white;
+    color: #0b72c6;
+    border: 2px solid #0c80df; }
   .fixedButton:active {
     background-color: white;
     box-shadow: none;
     -webkit-box-shadow: none;
-    color: #3691F1;
-    border: 2px solid #3691F1; }
+    color: #42A5F5;
+    border: 2px solid #42A5F5; }
   .fixedButton:focus {
     background-color: white;
-    color: #3691F1;
-    border: 2px solid #3691F1;
+    color: #42A5F5;
+    border: 2px solid #42A5F5;
     outline: none; }

@@ -18,24 +18,24 @@
 </div>
 <div class="container-fluid udash">
     <div class="top-odash-banner row">
-        <h2 class="text-center">Dashboard</h2>
-        <div class="view-switcher" role="group" aria-label="...">
-            <button type="button" ng-class="{switchSelected : udashC.viewSections.meetings}" ng-click="udashC.viewSections.showMeetings()" class="btn btn-default">MEETINGS</button>
-            <button style="padding-left: 17px" type="button" ng-class="{switchSelected : udashC.viewSections.schedules}" ng-click="udashC.viewSections.showSchedules()" class="btn btn-default">SCHEDULES</button>
-        </div>
+        <h1 class="text-center">Welcome to your dashboard!</h1>
     </div>
+    <div class="view-switcher row" role="group" aria-label="...">
+        <button type="button" ng-class="{switchSelected : udashC.viewSections.meetings}" ng-click="udashC.viewSections.showMeetings()" class="btn btn-default">MEETINGS</button>
+        <button style="padding-left: 17px" type="button" ng-class="{switchSelected : udashC.viewSections.schedules}" ng-click="udashC.viewSections.showSchedules()" class="btn btn-default">SCHEDULES</button>
+    </div>
+    <br/>
+    <br/>
+    <br/>
     <div class="row" ng-show="udashC.viewSections.meetings">
         <div class="col-md-8 col-md-push-2">
             <div class="row imported-schedules-bar">
                 <div class="col-md-12">
-                    <div>
+                    <div class="myInput">
                         <span class="fa fa-search fa-lg"></span>
-                        <input class="search-field" type="search" ng-model="filterTBPMeetings" placeholder="Search for..."/>
+                        <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
                     </div>
-                    <a href="/#/user/newmeeting">
-                        <button class="btn btn-default glob_button"><i class="fa fa-plus"></i>&nbsp;&nbsp;Plan a meeting</button>
-                    </a>
-                    <button style="float: left" class="btn btn-default glob_button" ng-click="udashC.limits.change('tpmeetings', '')">See all</button>
+                    <button class="btn btn-default fixedButton" ng-click="udashC.importSchedule.popUp.show()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Plan a meeting</button>
                 </div>
             </div>
             <div class="row">
@@ -96,44 +96,70 @@
                     <p ng-show="udashC.meetings.toBePlanned.length === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
                 </div>
             </div>
-            <div class="row imported-schedules-bar">
-                <div class="col-md-12">
-                    <div>
-                        <span class="fa fa-search fa-lg"></span>
-                        <input class="search-field" type="search" ng-model="filterPMeetings" placeholder="Search for..."/>
-                    </div>
-                    <button class="btn btn-default glob_button" ng-click="udashC.limits.change('pmeetings', '')">See all</button>
-                </div>
-            </div>
+            <br/>
+            <br/>
             <div class="row">
                 <div class="col-md-12 imported-schedules-content">
                     <div class="udash_content_type_title">
                         <h4 style="font-family: 'Roboto"><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;PLANNED MEETINGS</h4>
                     </div>
-                    <table class="table">
+                    <div class="tile" ng-repeat="meeting in udashC.meetings.planned | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
+                        <div class="row">
+                            <div class="col-md-1  tileIconLeft">
+                                <img src="assets/img/meeting_two.png" alt=""/>
+                            </div>
+                            <div class="col-md-10 tileBody">
+                                <h4 class="tileTitle">{{meeting.title}}</h4>
+                                <div class="tileDescription">
+                                    {{meeting.description}}
+                                </div>
+                                <div class="tileBottomGroup">
+                                    <ul class="list-inline list-unstyled">
+                                        <li><span>STARTS ON:</span>&nbsp;&nbsp;{{meeting.start_time}}</li>
+                                        <li><span class="tileSynched">DURATION:</span>&nbsp;&nbsp;{{meeting.duration/60}}mins</li>
+                                        <li><span class="tileSynched">GROUP:</span>&nbsp;&nbsp;{{meeting.group_name}}</li>
+                                        <li><button><i class="fa fa-trash-o"></i><span>&nbsp;&nbsp;DELETE</span></button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-1 text-right tileIconRight">
+                                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g transform="translate(-1202.000000, -14.000000)" fill="#dddddd">
+                                            <path d="M1228.02325,50.9383888 L1202.0559,84 L1208.31538,89.5463755 L1236.38284,53.4511569 L1238.33675,50.9383905 L1236.32694,48.4701061 L1208.25948,14 L1202.0559,19.0512964 L1228.02325,50.9383888 Z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--<table class="table">
                         <thead>
                             <th>Name</th>
                             <th>Group</th>
                             <th>Description</th>
-                            <th>Date</th>
+                            <th>Duration</th>
+                            <th></th>
                         </thead>
-                        <tbody>
-                            <tr ng-repeat="meeting in udashC.meetings.planned | filter: {name: filterPMeetings} | limitTo : udashC.limits.pmeetings">
+                        <tbody >
+                            <tr >
                                 <td>{{meeting.title}}</td>
                                 <td>{{meeting.group_name}}</td>
                                 <td>{{meeting.description}}</td>
-                                <td>{{meeting.start_time}}</td>
+                                <td>{{(meeting.duration)/60 }}</td>
+                                <td><span class="fa fa-trash-o fa-lg" ng-click="udashC.deletePlannedMeeting(meeting.group_id, meeting.id)"></span></td>
                             </tr>
                         </tbody>
-                    </table>
-                    <p ng-show="udashC.meetings.plannedlength === 0" class="text-center" style="font-size: 16px; font-style: italic">None</p>
+                    </table>-->
+                    <p ng-show="udashC.meetings.planned.length === 0" class="text-center" style="font-size: 16px; font-style: italic">Sorry no planned meeting for you yet</p>
                 </div>
             </div>
+
         </div>
     </div>
-    <br/>
-    <br/>
-    <br/>
     <div class="row" ng-show="udashC.viewSections.schedules">
         <div class="col-md-8 col-md-push-2">
             <div class="row imported-schedules-bar">
