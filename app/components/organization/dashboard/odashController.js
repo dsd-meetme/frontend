@@ -33,21 +33,88 @@
                 this.groups = true;
             }
         };
+        c.pagination = {
+            user: {
+                pages : 1,
+                currentPage : 1,
+                utilArray : null,
+                startIndex : 0,
+                endIndex: 9,
+                filterString: '0,9',
+                changePage : function(page){
+                    if(page > this.currentPage){
+                        this.currentPage = page;
+                        this.startIndex = this.endIndex+1;
+                        this.endIndex = this.startIndex + 9;
+                        this.filterString = this.startIndex+','+this.endIndex;
+                    }
+                    else if(page < this.currentPage){
+                        this.currentPage = page;
+                        this.endIndex = this.startIndex - 1;
+                        this.startIndex = this.endIndex - 9;
+                        this.filterString = this.startIndex+','+this.endIndex;
+
+                    }
+                    else{
+                        //
+                    }
+
+                }
+
+            },
+            groups: {
+                pages : 1,
+                currentPage : 1,
+                utilArray : null,
+                startIndex : 0,
+                endIndex: 9,
+                filterString: '0,9',
+                changePage : function(page){
+                    if(page > this.currentPage){
+                        this.currentPage = page;
+                        this.startIndex = this.endIndex+1;
+                        this.endIndex = this.startIndex + 9;
+                        this.filterString = this.startIndex+','+this.endIndex;
+                    }
+                    else if(page < this.currentPage){
+                        this.currentPage = page;
+                        this.endIndex = this.startIndex - 1;
+                        this.startIndex = this.endIndex - 9;
+                        this.filterString = this.startIndex+','+this.endIndex;
+
+                    }
+                    else{
+                        //
+                    }
+                }
+            }
+        };
         //Gets employees
         c.getUsers = function () {
+            var pages;
             //employees restful index
             orgResources.user().query({userId: ''}).$promise
                 .then(function (response) {
                     c.data.users = response;
+                    pages = Math.ceil(c.data.users.length/10);
+                    console.log('Pages');
+                    console.log(pages);
+                    c.pagination.user.pages = pages;
+                    c.pagination.user.utilArray = new Array(pages);
+                    console.log(c.pagination);
                     c.getGroups();
                 });
         };
         //Gets groups
         c.getGroups = function () {
+            var pages;
             //employees restful groups index
             orgResources.group().query({groupId: ''}).$promise
                 .then(function (response) {
                     c.data.groups = response;
+                    pages = Math.ceil(c.data.groups.length/10);
+                    c.pagination.groups.pages = pages;
+                    c.pagination.groups.utilArray = new Array(pages);
                 });
         };
         //Adds a group

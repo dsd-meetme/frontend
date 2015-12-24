@@ -42,19 +42,25 @@
                         //If not template retrieving requests or OPTIONS requests
                         if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS'){
                             //Gets the refreshed jwt
-                            var token;
+                            var token,exp;
                             if(response.config.url==='http://api.plunner.com/companies/auth/login' || response.config.url==='http://api.plunner.com/employees/auth/login' ){
+                                exp = jwt_decode(response.data.token).exp;
                                 token = 'Bearer '+response.data.token;
                             }
                             else{
                                 token = response.headers('Authorization');
+                                exp = jwt_decode(token).exp;
                             }
                             //console.log("Received token "+token);
                             //if a jwt already exists
+                            console.log("exp");
+                            console.log(exp);
                             if($cookies.get('auth_token')){
                                 $cookies.remove('auth_token');
                             }
-                            $cookies.put('auth_token',token);
+                            $cookies.put('auth_token',token, {
+                                expires : new Date(exp*1000)
+                            });
                         }
                         return response;
                     },

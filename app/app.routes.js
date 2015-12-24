@@ -59,7 +59,7 @@
                     controller : 'groupController',
                     controllerAs : 'groupC'
                 }).
-                when('/user/newmeeting', {
+                when('/user/newmeeting/:type', {
                     templateUrl: 'app/components/user/meeting/nmTemplate.html',
                     controller : 'nmController',
                     controllerAs : 'nmC'
