@@ -29,14 +29,16 @@ a.main_button {
 
 .main_button {
   padding: 9px 18px;
-  color: #42A5F5;
-  background-color: white;
-  border-radius: 0;
+  color: white;
+  background-color: #42A5F5;
+  border-radius: 4px;
   border: 2px solid #42A5F5;
-  outline: none; }
+  outline: none;
+  text-transform: uppercase; }
   .main_button:hover, .main_button:active, .main_button:focus {
-    color: #0c80df;
-    border: 2px solid #0c80df; }
+    color: white;
+    border: 2px solid #0c80df;
+    background-color: #0c80df; }
 
 .navbar_button {
   margin-top: 4px;
@@ -67,6 +69,53 @@ a.main_button {
     .search_input input[type="search"]:focus {
       outline: none;
       box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16); }
+
+.status_switcher {
+  cursor: pointer; }
+  .status_switcher input[type="checkbox"] {
+    display: none; }
+  .status_switcher span:last-child {
+    display: inline-block;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    margin-left: 5px;
+    text-transform: uppercase;
+    color: #555; }
+  .status_switcher input[type="checkbox"] + .status_switcher_text:before {
+    content: "\f204";
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 28px;
+    color: #555;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin-top: 10px;
+    transition: all 50ms ease-in-out; }
+  .status_switcher input[type="checkbox"]:checked + .status_switcher_text:before {
+    content: "\f205";
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 28px;
+    color: #42A5F5;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin-top: 10px; }
+
+.main_input {
+  color: #555;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  padding: 5px 0 5px 0;
+  width: 250px; }
+  .main_input:focus {
+    outline: none;
+    border-bottom: 2px solid #42A5F5; }
 
 .navbar {
   background-color: white;

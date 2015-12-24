@@ -395,10 +395,10 @@
                                    ng-model="udashC.editSchedule.password_confirmation"/><br/>
 
                             <p>Enabled</p>
-                            <label class="circled-checkbox">
-                                <input type="checkbox" ng-checked="udashC.editSchedule.data.enabled === '1'"
-                                       ng-model="udashC.editSchedule.data.enabled"/>
-                                <span class="label-text"></span>
+                            <label class="status_switcher">
+                                <input type="checkbox" ng-checked="udashC.editSchedule.data.enabled === '1'" ng-model="udashC.editSchedule.data.enabled"/>
+                                <span class="status_switcher_text"></span>
+                                <span>Enabled</span>
                             </label>
 
                             <div class="errorContainer"

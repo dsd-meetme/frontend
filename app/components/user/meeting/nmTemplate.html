@@ -24,24 +24,24 @@
 
 <div class="container-fluid nm">
 
-    <div class="top-odash-banner row">
-        <h2 class="text-center">NEW MEETING</h2>
+    <div class="section_heading row">
+        <h1 class="text-center font_light">New Meeting</h1>
     </div>
 
     <div class="row">
-        <div class="col-md-10 col-md-push-1">
+        <div class="col-md-8 col-md-push-2">
             <div class="row nm-content">
-                <div class="col-md-5">
-                    <h2>INFORMATION</h2>
+                <div class="col-md-6">
+                    <h4><i class="fa fa-info-circle"></i>&nbsp;&nbsp;INFORMATION</h4>
                     <form name="meetingInfoForm" novalidate>
                         <p>Title</p>
-                        <input type="text" name="title" ng-model="nmC.title" required placeholder="Insert a title"/>
+                        <input class="main_input" type="text" name="title" ng-model="nmC.title" required placeholder="Insert a title"/>
                         <p>Description</p>
                             <textarea name="description" ng-model="nmC.description" required placeholder="Insert a description">
 
                             </textarea>
                         <p>Duration(in mins)</p>
-                        <input type="number" ng-model="nmC.duration" name="duration" required placeholder="Insert a duration" />
+                        <input class="main_input" type="number" ng-model="nmC.duration" name="duration" required placeholder="Insert a duration" />
                         <p>Groups</p>
                         <div ng-repeat="group in nmC.groups">
                             <span style="margin-right: 10px">{{group.name}}</span>
@@ -64,8 +64,10 @@
                         <p ng-repeat="error in nmeC.errors">{{error}}</p>
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <h2>TIME WINDOW</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-push-2">
+                    <h4><i class="fa fa-calendar"></i>&nbsp;&nbsp;TIME WINDOW</h4>
                     <div id="meetingTimeslots">
 
                     </div>

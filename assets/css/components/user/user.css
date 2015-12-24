@@ -1,4 +1,4 @@
-.csched #composeScheduleCal .fc-prev-button, .csched #composeScheduleCal .fc-next-button, .csched #composeScheduleCal .fc-today-button {
+.fc .fc-prev-button, .fc .fc-next-button, .fc .fc-today-button {
   margin-right: 10px;
   border: 2px solid #555;
   color: #555;
@@ -8,55 +8,55 @@
   box-shadow: none;
   padding: 6px 12px;
   height: auto; }
-  .csched #composeScheduleCal .fc-prev-button:hover, .csched #composeScheduleCal .fc-next-button:hover, .csched #composeScheduleCal .fc-today-button:hover {
+  .fc .fc-prev-button:hover, .fc .fc-next-button:hover, .fc .fc-today-button:hover {
     border-color: black;
     background-color: white;
     color: black; }
-  .csched #composeScheduleCal .fc-prev-button:focus, .csched #composeScheduleCal .fc-next-button:focus, .csched #composeScheduleCal .fc-today-button:focus {
+  .fc .fc-prev-button:focus, .fc .fc-next-button:focus, .fc .fc-today-button:focus {
     outline: none !important; }
-  .csched #composeScheduleCal .fc-prev-button:active, .csched #composeScheduleCal .fc-next-button:active, .csched #composeScheduleCal .fc-today-button:active {
+  .fc .fc-prev-button:active, .fc .fc-next-button:active, .fc .fc-today-button:active {
     border-color: #384047;
     background-color: white;
     color: #384047;
     box-shadow: none; }
 
-.csched #composeScheduleCal .fc-deleteBtn-button {
+.fc .fc-deleteBtn-button {
   display: none;
-  padding: 6px 12px;
+  padding: 8px 16px;
   height: auto;
-  background-color: white;
+  background-color: #E74C3C;
+  border: 0;
   background-image: none;
-  border: 2px solid #ef8b80;
-  color: #ef8b80; }
-  .csched #composeScheduleCal .fc-deleteBtn-button:hover {
-    border: 2px solid #E74C3C;
-    color: #E74C3C; }
-  .csched #composeScheduleCal .fc-deleteBtn-button:focus {
+  box-shadow: none;
+  text-shadow: none;
+  color: white;
+  text-transform: uppercase; }
+  .fc .fc-deleteBtn-button:hover {
+    background-color: #d62c1a;
+    color: white; }
+  .fc .fc-deleteBtn-button:focus {
     outline: none !important; }
-  .csched #composeScheduleCal .fc-deleteBtn-button:active {
-    border: 2px solid #E74C3C;
+  .fc .fc-deleteBtn-button:active {
     color: #E74C3C; }
 
-.csched #composeScheduleCal .fc-today-button[disabled="disabled"]:hover {
+.fc .fc-today-button[disabled="disabled"]:hover {
   color: inherit;
   border-color: #555; }
+
+.fc .fc-left h2 {
+  font-weight: 400; }
 
 .csched .csched_actionbar {
   margin-bottom: 50px; }
   .csched .csched_actionbar button {
-    float: right; }
-  .csched .csched_actionbar input[type="text"] {
-    border: none;
-    border-bottom: 2px solid #ddd;
-    padding: 5px 0 5px 0;
-    width: 30%;
-    margin-left: 10px; }
-    .csched .csched_actionbar input[type="text"]:focus {
-      outline: none;
-      border-bottom: 2px solid #384047; }
-  .csched .csched_actionbar label {
-    color: black;
-    margin-left: 30px; }
+    float: right;
+    margin-top: -5px; }
+  .csched .csched_actionbar > div > div {
+    float: left; }
+    .csched .csched_actionbar > div > div:first-child {
+      margin-right: 30px; }
+    .csched .csched_actionbar > div > div:nth-child(2) {
+      padding-top: 2px; }
 
 .csched .fc-toolbar {
   margin-bottom: 30px; }
@@ -244,3 +244,57 @@
   margin-right: 15px; }
   .udash .wrench-link:hover {
     color: #384047; }
+
+.nm-content > div:first-child {
+  padding-right: 30px; }
+
+.nm-content h4 {
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  color: #555;
+  border-bottom: 1px solid #ccc; }
+
+.nm-content form p {
+  font-weight: 600;
+  margin-top: 15px; }
+
+.nm-content form textarea {
+  margin-bottom: 15px;
+  width: 60%;
+  height: 160px;
+  border: 1px solid #ddd;
+  resize: none;
+  font-size: 95%; }
+  .nm-content form textarea:focus {
+    border: 1px solid #5a6772;
+    outline: none; }
+
+.nm-content .fc-left h2 {
+  font-size: 25px; }
+
+.nm-content .fc-right button {
+  margin-right: 10px;
+  border: 2px solid #5a6772;
+  color: #5a6772;
+  font-weight: 600;
+  outline: none;
+  background-color: white;
+  background-image: none;
+  height: auto;
+  padding: 6px 12px; }
+  .nm-content .fc-right button:hover {
+    border-color: #384047;
+    background-color: white;
+    color: #384047; }
+
+.nm .spec-btn {
+  background-color: #FFA500;
+  color: white;
+  border: none;
+  width: 250px;
+  padding: 12px 24px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  outline: none; }
+  .nm .spec-btn:hover {
+    background-color: #db8e00; }

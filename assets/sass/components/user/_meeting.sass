@@ -1,31 +1,19 @@
-//
-// Project            : Plunner
-// Authors            : G.Pea and J.Barré
-// Template Target(s) : components/user/meeting/nmTemplate.html
-//
-@import "../../global/colors"
+@import  "../../global/colors"
 
 .nm-content
   >div
-    >h2
-      margin-top: 40px
-      margin-bottom: 40px
-      font-weight: 600
+   &:first-child
+     padding-right: 30px
+  h4
+    margin-bottom: 30px
+    padding-bottom: 10px
+    color: $washed_black
+    border-bottom: 1px solid $gray_light
 
   form
     p
       font-weight: 600
       margin-top: 15px
-    input[type="number"], input[type="text"]
-      border: none
-      border-bottom: 2px solid #ddd
-      padding: 5px 0 5px 0
-      margin-bottom: 15px
-      width: 60%
-
-      &:focus
-        outline: none
-        border-bottom: 2px solid $glob_gray
 
     textarea
       margin-bottom: 15px

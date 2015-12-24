@@ -18,3 +18,57 @@
     &:focus
       outline: none
       box-shadow: 1px 1px 6px rgba(0,0,0,0.16)
+
+
+
+.status_switcher
+  cursor: pointer
+
+  input[type="checkbox"]
+    display: none
+  span
+    &:last-child
+      display: inline-block
+      margin-bottom: 10px
+      vertical-align: middle
+      margin-left: 5px
+      text-transform: uppercase
+      color: $washed_black
+
+  input[type="checkbox"]+.status_switcher_text:before
+    content: "\f204"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 28px
+    color: $washed_black
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    margin-top: 10px
+    transition: all 50ms ease-in-out
+
+  input[type="checkbox"]:checked+.status_switcher_text:before
+    content: "\f205"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 28px
+    color: $main_blue
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    margin-top: 10px
+
+.main_input
+  color: $washed_black
+  border: none
+  border-bottom: 2px solid #ddd
+  padding: 5px 0 5px 0
+  width: 250px
+
+  &:focus
+    outline: none
+    border-bottom: 2px solid $main_blue
