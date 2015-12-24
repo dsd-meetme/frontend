@@ -1,23 +1,20 @@
-//
-// Project            : Plunner
-// Authors            : G.Pea and J.Barré
-// Template Target(s) : components/user/dashboard/udashTemplate.html
-//
-
-@import '../../global/colors.sass'
-@import '../../global/size.sass'
-@import '../../global/fonts.sass'
+@import "../../global/colors"
 
 .udash
   .udash_content_type_title
     margin-bottom: 10px
     padding-bottom: 7px
-    border-bottom: 1px solid #555
+    border-bottom: 1px solid $gray_light
 
     h4
-      color: #555
+      color: $washed_black
       font-size: 20px
 
+  .udash_empty_state_msg
+    margin-top: 30px
+    color: $washed_black
+    font-style: italic
+    font-size: 18px
 
   .top-dash-banner
     position: relative
@@ -25,12 +22,12 @@
     border-left: 0
     border-right: 0
     border-bottom: 1px solid black
-    margin: 0 0 $medium-norm 0
+    margin: 0 0 30px 0
     padding: 10px 0 10px 0
     height: 80px
 
   .meetg-sched-banner
-    height: $xlarge-norm - 1px
+    height: 70px - 1px
     background-image: url("../../../img/dashboard.jpg")
     opacity: 1
 
@@ -43,15 +40,15 @@
     opacity: 1
 
   .action-section
-    margin-bottom: $medium-norm
+    margin-bottom: 30px
 
   .dashboard-page
-    padding: $xlarge-norm 0
+    padding: 70px 0
 
 
   .add-btn
     position: absolute
-    top: - $large-norm
+    top: - 50px
     left: 90%
 
     .add
@@ -85,7 +82,7 @@
       margin-left: 40px
 
   .imported-section
-    margin-bottom: $xlarge-norm
+    margin-bottom: 70px
 
 
   label.schedule-checkbox
@@ -124,7 +121,6 @@
   .imported-schedules-title-bar
     margin-top: 30px
     h2
-      font-family: $raleway-font
       font-weight: 600
       color: $glob_gray
   .imported-schedules-bar
@@ -171,7 +167,6 @@
       padding-left: 30px
 
       h3
-        font-family: $raleway-font
         text-transform: uppercase
         font-weight: 600
         margin-top: 10px
@@ -197,7 +192,6 @@
         width: 80%
       h4
         margin-bottom: 0
-        font-family: $raleway-font
         text-transform: uppercase
         font-weight: 600
         margin-top: 20px

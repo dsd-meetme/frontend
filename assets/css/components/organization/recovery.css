@@ -1,15 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-.classic {
-  font-weight: 400; }
-
-.light {
-  font-weight: 300; }
-
-.bold {
-  font-weight: 600; }
-
 .recovery-container {
   height: 100vh;
   background-color: #ffa500; }
@@ -25,7 +13,6 @@
   .recoveryorg > p {
     margin-bottom: 30px; }
   .recoveryorg h2 {
-    font-family: "Raleway", Helvetica, Arial, sans-serif;
     font-weight: 600;
     text-transform: uppercase; }
   .recoveryorg input {

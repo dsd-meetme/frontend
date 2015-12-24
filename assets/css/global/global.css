@@ -1,0 +1,152 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+.font_light {
+  font-weight: 300 !important; }
+
+.font_normal {
+  font-weight: 400 !important; }
+
+.font_bold {
+  font-weight: 500 !important; }
+
+body {
+  font-family: "Roboto", "Helvetica", Arial, sans-serif; }
+
+body, html {
+  height: 100%; }
+
+.wrapper {
+  min-height: 100%; }
+
+.main_button {
+  padding: 9px 18px;
+  color: #42A5F5;
+  background-color: white;
+  border-radius: 0;
+  border: 2px solid #42A5F5;
+  outline: none; }
+  .main_button:hover, .main_button:active, .main_button:focus {
+    color: #0c80df;
+    border: 2px solid #0c80df; }
+
+.search_input {
+  position: relative;
+  float: left;
+  margin-right: 30px; }
+  .search_input i {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+    color: #ccc; }
+  .search_input input[type="search"] {
+    width: 400px;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px; }
+    .search_input input[type="search"]:focus {
+      outline: none;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16); }
+
+.section_heading {
+  height: 150px;
+  background: #6BAEF5;
+  opacity: .8; }
+  .section_heading h1 {
+    margin-top: 55px;
+    color: white; }
+
+.sub_section_switcher button {
+  width: 50%;
+  padding: 12px 24px;
+  float: left;
+  font-size: 20px;
+  background-color: white;
+  border: 2px solid #42A5F5;
+  border-radius: 0;
+  outline: none; }
+
+.sub_section_switcher .sub_section_switcher_selected {
+  color: white;
+  background-color: #42A5F5; }
+
+.sub_section_actionbar {
+  margin-bottom: 30px; }
+  .sub_section_actionbar button {
+    margin-right: 15px; }
+
+.tile {
+  height: 141px;
+  padding: 10px;
+  border-bottom: 1px solid #eee; }
+  .tile .tileIconLeft img {
+    width: 60px;
+    margin-top: 24px; }
+  .tile .tileIconRight svg {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 40px;
+    cursor: pointer; }
+    .tile .tileIconRight svg:hover g g {
+      fill: #999999; }
+  .tile .tileBody {
+    height: 130px;
+    padding-left: 30px; }
+    .tile .tileBody .tileTitle {
+      font-size: 20px;
+      font-weight: 400; }
+    .tile .tileBody .tileDescription {
+      height: 40px;
+      margin-top: 10px;
+      color: #555; }
+    .tile .tileBody .tileBottomGroup {
+      margin-bottom: 10px; }
+      .tile .tileBody .tileBottomGroup ul li {
+        margin-right: 15px; }
+      .tile .tileBody .tileBottomGroup span {
+        color: #555;
+        font-weight: 500; }
+      .tile .tileBody .tileBottomGroup i {
+        color: #555;
+        font-size: 16px; }
+      .tile .tileBody .tileBottomGroup button {
+        background-color: transparent;
+        border: none; }
+        .tile .tileBody .tileBottomGroup button:hover span, .tile .tileBody .tileBottomGroup button:hover i {
+          color: black; }
+
+.tile-small {
+  height: 120px; }
+  .tile-small .tileIconLeft, .tile-small .tileIconRight, .tile-small .tileBody {
+    height: 120px;
+    margin-top: -11px; }
+    .tile-small .tileIconLeft svg, .tile-small .tileIconRight svg, .tile-small .tileBody svg {
+      margin-top: 44px; }
+  .tile-small .tileBody .tileTitle {
+    margin-top: 30px;
+    padding-bottom: 10px; }
+  .tile-small .tileBody .tileBottomGroup {
+    margin-top: 10px; }
+    .tile-small .tileBody .tileBottomGroup .tileActiveInfo {
+      font-weight: 500;
+      color: #2ECC71; }
+    .tile-small .tileBody .tileBottomGroup .tileNonActiveInfo {
+      font-weight: 500;
+      color: #ccc; }
+
+.myInput {
+  position: relative;
+  margin-right: 40px !important; }
+  .myInput i {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+    color: #ccc; }
+  .myInput input[type="search"] {
+    width: 400px;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 110ms ease-in-out; }
+    .myInput input[type="search"]:focus {
+      outline: none;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16); }

@@ -1,19 +1,16 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-.classic {
-  font-weight: 400; }
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+.font_light {
+  font-weight: 300 !important; }
 
-.light {
-  font-weight: 300; }
+.font_normal {
+  font-weight: 400 !important; }
 
-.bold {
-  font-weight: 600; }
+.font_bold {
+  font-weight: 500 !important; }
 
 .error-page-fours h1:first-child {
   margin-top: 100px;
-  text-transform: uppercase;
-  font-family: "Raleway", Helvetica, Arial, sans-serif; }
+  text-transform: uppercase; }
 
 .error-page-fours h1:last-child {
   font-size: 30px; }

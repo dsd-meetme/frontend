@@ -1,22 +1,15 @@
-@import '../../global/colors.sass'
-@import '../../global/size.sass'
-@import '../../global/fonts.sass'
-
 .tile
 
   height: 141px
   padding: 10px
-  font-family: 'Roboto'
-  border-bottom: 1px solid #eee
+  border-bottom: 1px solid $gray_super_light
 
   .tileIconLeft
-
     img
       width: 60px
       margin-top: 24px
 
   .tileIconRight
-
     svg
       display: block
       margin-left: auto
@@ -27,20 +20,21 @@
       &:hover
         g
           g
-            fill: darken(#ddd, 20%)
+            fill: darken($gray_light, 20%)
 
   .tileBody
-    padding-left: 30px
     height: 130px
+    padding-left: 30px
 
     .tileTitle
       font-size: 20px
       font-weight: 400
 
     .tileDescription
-      margin-top: 10px
-      color: #555
       height: 40px
+      margin-top: 10px
+      color: $washed_black
+
 
     .tileBottomGroup
       margin-bottom: 10px
@@ -50,11 +44,11 @@
           margin-right: 15px
 
       span
-        color: #555
+        color: $washed_black
         font-weight: 500
 
       i
-        color: #555
+        color: $washed_black
         font-size: 16px
 
       button
@@ -90,7 +84,7 @@
 
       .tileNonActiveInfo
         font-weight: 500
-        color: #DDD
+        color: $gray_light
 
 
 .myInput
@@ -113,30 +107,3 @@
     &:focus
       outline: none
       box-shadow: 1px 1px 6px rgba(0,0,0,0.16)
-
-.fixedButton
-  border-radius: 0
-  border: 0
-  padding: 9px 18px
-  font-family: 'Roboto'
-  margin-right: 20px
-  color: #42A5F5
-  border: 2px solid #42A5F5
-
-  &:hover
-    background-color: white
-    color: darken(#42A5F5, 20%)
-    border: 2px solid darken(#42A5F5, 15%)
-
-  &:active
-    background-color: white
-    box-shadow: none
-    -webkit-box-shadow: none
-    color: #42A5F5
-    border: 2px solid #42A5F5
-
-  &:focus
-    background-color: white
-    color: #42A5F5
-    border: 2px solid #42A5F5
-    outline: none

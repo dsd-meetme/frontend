@@ -1,14 +1,12 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-.classic {
-  font-weight: 400; }
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+.font_light {
+  font-weight: 300 !important; }
 
-.light {
-  font-weight: 300; }
+.font_normal {
+  font-weight: 400 !important; }
 
-.bold {
-  font-weight: 600; }
+.font_bold {
+  font-weight: 500 !important; }
 
 .signIn {
   height: 100vh;
@@ -26,7 +24,6 @@
     .signIn .signInContainer h2 {
       margin-bottom: 40px;
       color: #555555;
-      font-family: "Raleway", Helvetica, Arial, sans-serif;
       font-size: 28px;
       font-weight: 400; }
     .signIn .signInContainer .signInInputs {
@@ -66,7 +63,6 @@
         color: white;
         border: none;
         border-radius: 2px;
-        margin-top: 30px;
         padding: 10px 0 10px 0;
         font-size: 18px;
         border-radius: 4px; }

@@ -1,18 +1,16 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-.classic {
-  font-weight: 400; }
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+.font_light {
+  font-weight: 300 !important; }
 
-.light {
-  font-weight: 300; }
+.font_normal {
+  font-weight: 400 !important; }
 
-.bold {
-  font-weight: 600; }
+.font_bold {
+  font-weight: 500 !important; }
 
 .navbar {
   margin-bottom: 0px;
-  height: 51px; }
+  height: 50px; }
 
 .navbar-default {
   margin-bottom: 0px;
@@ -29,9 +27,6 @@
 .navbar-default .navbar-brand {
   color: #000000;
   font-weight: 900; }
-
-.navbar-default .right-btn {
-  margin-left: 30px; }
 
 .top-odash-banner {
   position: relative;
@@ -64,7 +59,6 @@
   position: relative;
   border: 0;
   border-radius: 0;
-  margin: 0 0 30px 0;
   padding: 10px 0 10px 0;
   height: 30px; }
 
@@ -82,5 +76,4 @@
 .banner-title {
   font-size: 30px;
   position: absolute;
-  top: 7.5px;
   left: calc(50% - 90px); }

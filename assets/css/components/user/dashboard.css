@@ -1,22 +1,16 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-.classic {
-  font-weight: 400; }
-
-.light {
-  font-weight: 300; }
-
-.bold {
-  font-weight: 600; }
-
 .udash .udash_content_type_title {
   margin-bottom: 10px;
   padding-bottom: 7px;
-  border-bottom: 1px solid #555; }
+  border-bottom: 1px solid #ccc; }
   .udash .udash_content_type_title h4 {
     color: #555;
     font-size: 20px; }
+
+.udash .udash_empty_state_msg {
+  margin-top: 30px;
+  color: #555;
+  font-style: italic;
+  font-size: 18px; }
 
 .udash .top-dash-banner {
   position: relative;
@@ -29,7 +23,7 @@
   height: 80px; }
 
 .udash .meetg-sched-banner {
-  height: 79px;
+  height: 69px;
   background-image: url("../../../img/dashboard.jpg");
   opacity: 1; }
 
@@ -45,7 +39,7 @@
   margin-bottom: 30px; }
 
 .udash .dashboard-page {
-  padding: 80px 0; }
+  padding: 70px 0; }
 
 .udash .add-btn {
   position: absolute;
@@ -79,7 +73,7 @@
     margin-left: 40px; }
 
 .udash .imported-section {
-  margin-bottom: 80px; }
+  margin-bottom: 70px; }
 
 .udash label.schedule-checkbox input[type=checkbox] {
   display: none; }
@@ -112,7 +106,6 @@
 .udash .imported-schedules-title-bar {
   margin-top: 30px; }
   .udash .imported-schedules-title-bar h2 {
-    font-family: "Raleway", Helvetica, Arial, sans-serif;
     font-weight: 600;
     color: #384047; }
 
@@ -151,7 +144,6 @@
 .udash #importSchedule .modal-header, .udash #editSchedule .modal-header {
   padding-left: 30px; }
   .udash #importSchedule .modal-header h3, .udash #editSchedule .modal-header h3 {
-    font-family: "Raleway", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 600;
     margin-top: 10px;
@@ -175,7 +167,6 @@
     width: 80%; }
   .udash #importSchedule .modal-body h4, .udash #editSchedule .modal-body h4 {
     margin-bottom: 0;
-    font-family: "Raleway", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 600;
     margin-top: 20px; }
