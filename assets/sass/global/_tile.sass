@@ -43,21 +43,19 @@
         li
           margin-right: 15px
 
-      span
-        color: $washed_black
-        font-weight: 500
-
       i
         color: $washed_black
         font-size: 16px
 
       button
+        color: $washed_black
         background-color: transparent
         border: none
-
+        outline: none
 
         &:hover
-          span, i
+          color: black
+          i
             color: black
 
 .tile-small
@@ -87,23 +85,3 @@
         color: $gray_light
 
 
-.myInput
-  position: relative
-  margin-right: 40px !important
-
-  i
-    position: absolute
-    top: 13px
-    left: 12px
-    color: #ccc
-
-  input[type="search"]
-    width: 400px
-    padding: 10px 10px 10px 40px
-    border: 1px solid #ccc
-    border-radius: 4px
-    transition: all 110ms ease-in-out
-
-    &:focus
-      outline: none
-      box-shadow: 1px 1px 6px rgba(0,0,0,0.16)
