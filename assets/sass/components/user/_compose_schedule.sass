@@ -1,0 +1,80 @@
+.csched
+
+  #composeScheduleCal
+    .fc-prev-button, .fc-next-button, .fc-today-button
+      margin-right: 10px
+      border: 2px solid $washed_black
+      color: $washed_black
+      background-color: white
+      background-image: none
+      text-shadow: none
+      box-shadow: none
+      padding: 6px 12px
+      height: auto
+
+      &:hover
+        border-color: black
+        background-color: white
+        color: black
+
+      &:focus
+        outline: none !important
+
+      &:active
+        border-color: $glob_gray
+        background-color: white
+        color: $glob_gray
+        box-shadow: none
+
+    .fc-deleteBtn-button
+      display: none
+      padding: 6px 12px
+      height: auto
+      background-color: white
+      background-image: none
+      border: 2px solid lighten(#E74C3C, 15%)
+      color: lighten(#E74C3C, 15%)
+
+      &:hover
+        border: 2px solid #E74C3C
+        color: #E74C3C
+
+      &:focus
+        outline: none !important
+
+      &:active
+        border: 2px solid #E74C3C
+        color: #E74C3C
+
+    .fc-today-button[disabled="disabled"]
+      &:hover
+        color: inherit
+        border-color: #555
+
+
+
+  .csched_actionbar
+    margin-bottom: 50px
+
+
+    button
+      float: right
+
+
+    input[type="text"]
+      border: none
+      border-bottom: 2px solid #ddd
+      padding: 5px 0 5px 0
+      width: 30%
+      margin-left: 10px
+
+      &:focus
+        outline: none
+        border-bottom: 2px solid $glob_gray
+
+    label
+      color: black
+      margin-left: 30px
+
+  .fc-toolbar
+    margin-bottom: 30px

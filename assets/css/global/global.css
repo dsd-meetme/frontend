@@ -94,12 +94,10 @@ a.main_button {
       margin-right: 15px; }
 
 .section_heading {
-  height: 150px;
-  background: #6BAEF5;
-  opacity: .8; }
+  height: 150px; }
   .section_heading h1 {
     margin-top: 55px;
-    color: white; }
+    color: black; }
 
 .sub_section_switcher button {
   width: 50%;

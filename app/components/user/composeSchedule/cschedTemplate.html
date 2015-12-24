@@ -22,19 +22,19 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="top-odash-banner row">
-        <h2 class="text-center">COMPOSE SCHEDULE</h2>
+<div class="container-fluid csched">
+    <div class="section_heading row">
+        <h1 class="text-center font_light">Compose a schedule</h1>
     </div>
-    <div class="row namebar">
-        <div class="col-md-10 col-md-push-1">
+    <div class="row csched_actionbar">
+        <div class="col-md-8 col-md-push-2">
             <div>
                 <span class="bold">Name: </span><input type="text" placeholder="Insert a name for the schedule" ng-model="cschedC.name"/>
                 <label class="circled-checkbox">
                     <input type="checkbox" ng-checked="cschedC.enabled === '1'" ng-model="cschecC.selected"/>
                     <span class="label-text">Enabled</span>
                 </label>
-                <button style="float: right" class="btn btn-default glob_button" ng-click="cschedC.saveSchedule()">Save schedule</button>
+                <button class="main_button" ng-click="cschedC.saveSchedule()"><i class="fa fa-calendar-plus-o"></i>&nbsp;&nbsp;Save schedule</button>
             </div>
            <div class="errorContainer" ng-show="cschedC.thereErrors || cschedC.errors.length > 0">
                <p ng-repeat="error in cschedC.errors">{{error}}</p>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="row composeScheduleContent">
-        <div class="col-md-10 col-md-push-1">
+        <div class="col-md-8 col-md-push-2">
             <div id="composeScheduleCal"></div>
         </div>
     </div>
