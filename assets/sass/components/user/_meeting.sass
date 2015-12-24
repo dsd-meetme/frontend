@@ -1,6 +1,6 @@
 @import  "../../global/colors"
 
-.nm-content
+.nm
   >div
    &:first-child
      padding-right: 30px
@@ -15,6 +15,11 @@
       font-weight: 600
       margin-top: 15px
 
+    >div
+        p
+          &:first-child
+            margin-top: 0
+
     textarea
       margin-bottom: 15px
       width: 60%
@@ -27,36 +32,4 @@
         border: 1px solid $glob_gray_light
         outline: none
 
-  .fc-left
-    h2
-      font-size: 25px
-  .fc-right
-    button
-      margin-right: 10px
-      border: 2px solid $glob_gray_light
-      color: $glob_gray_light
-      font-weight: 600
-      outline: none
-      background-color: white
-      background-image: none
-      height: auto
-      padding: 6px 12px
 
-      &:hover
-        border-color: $glob_gray
-        background-color: white
-        color: $glob_gray
-
-.nm
-  .spec-btn
-    background-color: #FFA500
-    color: white
-    border: none
-    width: 250px
-    padding: 12px 24px
-    text-transform: uppercase
-    border-radius: 2px
-    outline: none
-
-    &:hover
-      background-color: darken(#FFA500, 7%)

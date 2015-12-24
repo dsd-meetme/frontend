@@ -245,56 +245,29 @@
   .udash .wrench-link:hover {
     color: #384047; }
 
-.nm-content > div:first-child {
+.nm > div:first-child {
   padding-right: 30px; }
 
-.nm-content h4 {
+.nm h4 {
   margin-bottom: 30px;
   padding-bottom: 10px;
   color: #555;
   border-bottom: 1px solid #ccc; }
 
-.nm-content form p {
+.nm form p {
   font-weight: 600;
   margin-top: 15px; }
 
-.nm-content form textarea {
+.nm form > div p:first-child {
+  margin-top: 0; }
+
+.nm form textarea {
   margin-bottom: 15px;
   width: 60%;
   height: 160px;
   border: 1px solid #ddd;
   resize: none;
   font-size: 95%; }
-  .nm-content form textarea:focus {
+  .nm form textarea:focus {
     border: 1px solid #5a6772;
     outline: none; }
-
-.nm-content .fc-left h2 {
-  font-size: 25px; }
-
-.nm-content .fc-right button {
-  margin-right: 10px;
-  border: 2px solid #5a6772;
-  color: #5a6772;
-  font-weight: 600;
-  outline: none;
-  background-color: white;
-  background-image: none;
-  height: auto;
-  padding: 6px 12px; }
-  .nm-content .fc-right button:hover {
-    border-color: #384047;
-    background-color: white;
-    color: #384047; }
-
-.nm .spec-btn {
-  background-color: #FFA500;
-  color: white;
-  border: none;
-  width: 250px;
-  padding: 12px 24px;
-  text-transform: uppercase;
-  border-radius: 2px;
-  outline: none; }
-  .nm .spec-btn:hover {
-    background-color: #db8e00; }
