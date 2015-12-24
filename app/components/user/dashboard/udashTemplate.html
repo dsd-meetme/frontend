@@ -21,8 +21,8 @@
         <h1 class="text-center">Welcome to your dashboard!</h1>
     </div>
     <div class="view-switcher row" role="group" aria-label="...">
-        <button type="button" ng-class="{switchSelected : udashC.viewSections.meetings}" ng-click="udashC.viewSections.showMeetings()" class="btn btn-default">MEETINGS</button>
-        <button style="padding-left: 17px" type="button" ng-class="{switchSelected : udashC.viewSections.schedules}" ng-click="udashC.viewSections.showSchedules()" class="btn btn-default">SCHEDULES</button>
+        <button type="button" ng-class="{switchSelected : udashC.viewSections.meetings}" ng-click="udashC.viewSections.showMeetings()">MEETINGS</button>
+        <button type="button" ng-class="{switchSelected : udashC.viewSections.schedules}" ng-click="udashC.viewSections.showSchedules()">SCHEDULES</button>
     </div>
     <br/>
     <br/>
@@ -32,7 +32,7 @@
             <div class="row imported-schedules-bar">
                 <div class="col-md-12">
                     <div class="myInput">
-                        <span class="fa fa-search fa-lg"></span>
+                        <i class="fa fa-search fa-lg"></i>
                         <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
                     </div>
                     <button class="btn btn-default fixedButton" ng-click="udashC.importSchedule.popUp.show()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Plan a meeting</button>
@@ -165,7 +165,7 @@
             <div class="row imported-schedules-bar">
                 <div class="col-md-12">
                     <div class="myInput">
-                        <span class="fa fa-search fa-lg"></span>
+                        <i class="fa fa-search fa-lg"></i>
                         <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
                     </div>
                     <button class="btn btn-default fixedButton" ng-click="udashC.importSchedule.popUp.show()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Import Schedule</button>

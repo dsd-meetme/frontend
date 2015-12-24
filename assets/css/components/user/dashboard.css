@@ -13,8 +13,9 @@
 .udash .udash_content_type_title {
   margin-bottom: 10px;
   padding-bottom: 7px;
-  border-bottom: 1px solid black; }
+  border-bottom: 1px solid #555; }
   .udash .udash_content_type_title h4 {
+    color: #555;
     font-size: 20px; }
 
 .udash .top-dash-banner {

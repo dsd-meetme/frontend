@@ -74,11 +74,11 @@
 .myInput {
   position: relative;
   margin-right: 40px !important; }
-  .myInput span {
+  .myInput i {
     position: absolute;
     top: 13px;
     left: 12px;
-    color: #555; }
+    color: #ccc; }
   .myInput input[type="search"] {
     width: 400px;
     padding: 10px 10px 10px 40px;

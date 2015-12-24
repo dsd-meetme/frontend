@@ -42,22 +42,23 @@
     margin-top: 52px;
     color: white;
     font-family: 'Roboto';
-    font-weight: 400; }
+    font-weight: 300; }
 
 .view-switcher button {
   width: 50%;
   padding: 12px 24px;
+  float: left;
   font-family: 'Roboto';
   font-size: 20px;
   font-weight: 400;
-  float: left;
+  background-color: white;
   border: 2px solid #42A5F5;
-  outline: none;
-  border-radius: 0; }
+  border-radius: 0;
+  outline: none; }
 
 .switchSelected {
   color: white !important;
-  background-color: #42A5F5; }
+  background-color: #42A5F5 !important; }
 
 .top-banner {
   position: relative;
