@@ -26,7 +26,15 @@
     <div class="section_heading row">
         <h1 class="text-center font_light">New Meeting</h1>
     </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <div class="row section_action_bar">
+                <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+                <button style="float:right" class="main_button" ng-click="nmC.submit()"><i class="fa fa-users"></i>&nbsp;&nbsp;Plan meeting</button>
+            </div>
 
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-8 col-md-push-2">
             <div class="row nm-content">
@@ -53,7 +61,7 @@
 
                         <div ng-repeat="group in nmC.groups">
                             <span style="margin-right: 10px">{{group.name}}</span>
-                            <label class="circled-radio">
+                            <label class="circled_radio">
                                 <input type="radio" name="group" ng-value="group.id" ng-model="nmC.selectedGroup">
                                 <span class="label-text"></span>
                             </label>
@@ -91,15 +99,6 @@
                     </div>
                 </div>
             </div>
-            <br/>
-            <hr/>
-            <div class="row text-center">
-                <br/>
-                <button class="btn btn-default spec-btn" ng-click="nmC.submit()">Plan meeting</button>
-            </div>
-            <br/>
-            <br/>
-            <br/>
         </div>
 
     </div>

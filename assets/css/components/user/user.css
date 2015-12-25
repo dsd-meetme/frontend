@@ -1,3 +1,14 @@
+.section_action_bar a {
+  display: inline-block;
+  margin-top: 4px;
+  color: #ccc;
+  font-size: 16px; }
+  .section_action_bar a:hover {
+    color: #42A5F5; }
+
+.section_action_bar button {
+  float: right; }
+
 .fc .fc-prev-button, .fc .fc-next-button, .fc .fc-today-button {
   margin-right: 10px;
   border: 2px solid #555;
@@ -46,6 +57,10 @@
 .fc .fc-left h2 {
   font-weight: 400; }
 
+.fc .fc-event {
+  border: 1px solid #42A5F5;
+  background-color: #42A5F5; }
+
 .csched .csched_actionbar {
   margin-bottom: 50px; }
   .csched .csched_actionbar button {
@@ -57,6 +72,8 @@
       margin-right: 30px; }
     .csched .csched_actionbar > div > div:nth-child(2) {
       padding-top: 2px; }
+  .csched .csched_actionbar input[type="text"] {
+    margin-left: 10px; }
 
 .csched .fc-toolbar {
   margin-bottom: 30px; }
@@ -255,7 +272,7 @@
   border-bottom: 1px solid #ccc; }
 
 .nm form p {
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 15px; }
 
 .nm form > div p:first-child {
@@ -263,11 +280,41 @@
 
 .nm form textarea {
   margin-bottom: 15px;
+  padding: 5px;
   width: 60%;
   height: 160px;
   border: 1px solid #ddd;
   resize: none;
   font-size: 95%; }
   .nm form textarea:focus {
-    border: 1px solid #5a6772;
+    border: 1px solid #42A5F5;
     outline: none; }
+
+.nm form input[type="radio"] {
+  display: none; }
+
+.nm form input[type="radio"] + span:before {
+  content: "\f1db";
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  font-size: 16px;
+  color: #555;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  margin-top: 10px;
+  transition: all 50ms ease-in-out; }
+
+.nm form input[type="radio"]:checked + span:before {
+  content: "\f111";
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  font-size: 16px;
+  color: #42A5F5;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased; }

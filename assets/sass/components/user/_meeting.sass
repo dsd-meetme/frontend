@@ -12,7 +12,7 @@
 
   form
     p
-      font-weight: 600
+      font-weight: 500
       margin-top: 15px
 
     >div
@@ -22,6 +22,7 @@
 
     textarea
       margin-bottom: 15px
+      padding: 5px
       width: 60%
       height: 160px
       border: 1px solid #ddd
@@ -29,7 +30,37 @@
       font-size: 95%
 
       &:focus
-        border: 1px solid $glob_gray_light
+        border: 1px solid $main_blue
         outline: none
+    
+    input[type="radio"]
+      display: none
+
+    input[type="radio"] + span:before
+      content: "\f1db"
+      font-family: "FontAwesome"
+      font-style: normal
+      font-weight: normal
+      font-variant: normal
+      font-size: 16px
+      color: $washed_black
+      text-transform: none
+      line-height: 1
+      -webkit-font-smoothing: antialiased
+      margin-top: 10px
+      transition: all 50ms ease-in-out
+
+    input[type="radio"]:checked +span:before
+      content: "\f111"
+      font-family: "FontAwesome"
+      font-style: normal
+      font-weight: normal
+      font-variant: normal
+      font-size: 16px
+      color: $main_blue
+      text-transform: none
+      line-height: 1
+      -webkit-font-smoothing: antialiased
+
 
 
