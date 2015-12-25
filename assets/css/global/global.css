@@ -107,6 +107,36 @@ a.main_button {
     -webkit-font-smoothing: antialiased;
     margin-top: 10px; }
 
+.remember_me_switcher {
+  font-weight: 400;
+  cursor: pointer; }
+  .remember_me_switcher input[type="checkbox"] {
+    display: none; }
+  .remember_me_switcher input[type="checkbox"] + .span:before {
+    content: "\f1db";
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 17px;
+    color: #555;
+    text-transform: none;
+    margin-right: 8px;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    transition: all 50ms ease-in-out; }
+  .remember_me_switcher input[type="checkbox"]:checked + .span:before {
+    content: "\f058" !important;
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: 17px;
+    color: #42A5F5;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased; }
+
 .main_input {
   color: #555;
   border: none;
@@ -227,3 +257,64 @@ a.main_button {
     .tile-small .tileBody .tileBottomGroup .tileNonActiveInfo {
       font-weight: 500;
       color: #ccc; }
+
+.usi h3 {
+  margin-top: 50px;
+  font-size: 18px; }
+  .usi h3 a {
+    color: #42A5F5; }
+    .usi h3 a:hover {
+      color: #128ef2; }
+
+.usi form {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 50px; }
+
+.usi .usi_input {
+  position: relative;
+  margin-bottom: 30px; }
+  .usi .usi_input i {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    color: #ccc; }
+  .usi .usi_input input {
+    width: 100%;
+    padding: 9px 18px;
+    padding-left: 40px;
+    color: #555;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    outline: none; }
+    .usi .usi_input input:focus {
+      border: 2px solid #42A5F5; }
+  .usi .usi_input:nth-child(5) i {
+    left: 15px; }
+
+.usi .usi_bottom_bar label {
+  float: left; }
+
+.usi .usi_bottom_bar a {
+  float: right;
+  color: #42A5F5; }
+  .usi .usi_bottom_bar a:hover {
+    color: #128ef2; }
+
+.usi .usi_title {
+  margin-top: 15px;
+  margin-bottom: 40px; }
+  .usi .usi_title h2 {
+    font-size: 28px; }
+
+.usi button {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  padding: 9px 18px;
+  color: white;
+  background-color: #42A5F5;
+  font-size: 18px;
+  font-weight: 300;
+  border: 0;
+  border-radius: 4px; }

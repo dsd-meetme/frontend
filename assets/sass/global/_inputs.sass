@@ -62,6 +62,41 @@
     -webkit-font-smoothing: antialiased
     margin-top: 10px
 
+.remember_me_switcher
+  font-weight: 400
+  cursor: pointer
+
+  input[type="checkbox"]
+    display: none
+
+
+  input[type="checkbox"] + .span:before
+    content: "\f1db"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 17px
+    color: $washed_black
+    text-transform: none
+    margin-right: 8px
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    transition: all 50ms ease-in-out
+
+  input[type="checkbox"]:checked + .span:before
+    content: "\f058" !important
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 17px
+    color: $main_blue
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+
+
 .main_input
   color: $washed_black
   border: none
@@ -72,3 +107,5 @@
   &:focus
     outline: none
     border-bottom: 2px solid $main_blue
+
+

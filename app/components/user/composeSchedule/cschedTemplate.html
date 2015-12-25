@@ -24,6 +24,18 @@
     <div class="section_heading row">
         <h1 class="text-center font_light">Compose a schedule</h1>
     </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <div class="row section_action_bar">
+                <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+                <button class="main_button" ng-click="cschedC.saveSchedule()"><i class="fa fa-calendar-plus-o"></i>&nbsp;&nbsp;Save
+                    schedule
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
     <div class="row csched_actionbar">
         <div class="col-md-8 col-md-push-2">
             <div>
@@ -37,15 +49,10 @@
                     <span class="font_normal">Enabled</span>
                 </label>
             </div>
-            <button class="main_button" ng-click="cschedC.saveSchedule()"><i class="fa fa-calendar-plus-o"></i>&nbsp;&nbsp;Save
-                schedule
-            </button>
         </div>
         <div class="errorContainer" ng-show="cschedC.thereErrors || cschedC.errors.length > 0">
             <p ng-repeat="error in cschedC.errors">{{error}}</p>
-
             <p ng-show="cschedC.invalidFields.nameReq">Insert a name</p>
-
             <p ng-show="cschedC.invalidFields.eventsReq">Insert at least one event</p>
         </div>
     </div>

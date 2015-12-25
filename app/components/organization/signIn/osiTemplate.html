@@ -15,8 +15,37 @@
         </div>
     </div>
 </div>
-<div class="container-fluid signIn">
-    <div class="signInContainer">
+<div class="container-fluid usi">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <form action="">
+                    <div class="usi_branding">
+                        <img width="180px" src="assets/img/plunner.png" alt=""/>
+                    </div>
+                    <div class="usi_title">
+                        <h2 class="font_light">Sign In as an Organization</h2>
+                    </div>
+                    <div class="usi_input">
+                        <i class="fa fa-envelope-o fa-lg"></i>
+                        <input type="email" placeholder="Email"/>
+                    </div>
+                    <div class="usi_input">
+                        <i class="fa fa-lock fa-lg"></i>
+                        <input type="password" placeholder="Password"/>
+                    </div>
+                    <div class="usi_bottom_bar clearfix">
+                        <label class="remember_me_switcher">
+                            <input type="checkbox" />
+                            <span class="span">Remember me</span>
+                        </label>
+                        <a href="">Forgot your credentials?</a>
+                    </div>
+                    <button>SIGN IN</button>
+                </form>
+                <h3 class="font_normal">Do you want to start using Plunner? <a href="">Register</a></h3>
+            </form>
+        </div>
+    </div>
         <form name="signInForm" ng-submit="osiC.login()" novalidate>
             <img width="250px" src="assets/img/plunnerLogo.png" alt=""/>
             <h2>Organization Sign In</h2>

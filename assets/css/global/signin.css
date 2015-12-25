@@ -1,0 +1,110 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+.font_light {
+  font-weight: 300 !important; }
+
+.font_normal {
+  font-weight: 400 !important; }
+
+.font_bold {
+  font-weight: 500 !important; }
+
+.signIn {
+  height: 100vh;
+  background-color: #f9f9f9; }
+  .signIn .signInContainer {
+    position: relative;
+    text-align: center;
+    width: 40%;
+    margin: 50px auto 0 auto;
+    border-radius: 2px;
+    background-color: white;
+    padding: 50px 40px 50px 40px;
+    border: 1px solid #ddd;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16); }
+    .signIn .signInContainer h2 {
+      margin-bottom: 40px;
+      color: #555555;
+      font-size: 28px;
+      font-weight: 400; }
+    .signIn .signInContainer .signInInputs {
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto; }
+      .signIn .signInContainer .signInInputs .row span {
+        font-weight: 500; }
+      .signIn .signInContainer .signInInputs .signInInputWrapper {
+        position: relative;
+        margin-bottom: 25px; }
+        .signIn .signInContainer .signInInputs .signInInputWrapper:first-child i {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          color: #ccc; }
+        .signIn .signInContainer .signInInputs .signInInputWrapper:nth-child(2) i {
+          position: absolute;
+          top: 10px;
+          left: 12px;
+          color: #ccc; }
+        .signIn .signInContainer .signInInputs .signInInputWrapper input[type="email"], .signIn .signInContainer .signInInputs .signInInputWrapper input[type="password"] {
+          padding: 6px 0 6px 40px;
+          width: 100%;
+          color: #555;
+          max-width: 400px;
+          border: 1px solid #ddd;
+          border-radius: 4px; }
+          .signIn .signInContainer .signInInputs .signInInputWrapper input[type="email"]:focus, .signIn .signInContainer .signInInputs .signInInputWrapper input[type="password"]:focus {
+            border: 1px solid #42A5F5;
+            outline: none; }
+          .signIn .signInContainer .signInInputs .signInInputWrapper input[type="email"].invalid, .signIn .signInContainer .signInInputs .signInInputWrapper input[type="password"].invalid {
+            border: 1px solid #E74C3C !important; }
+      .signIn .signInContainer .signInInputs .signInButton {
+        width: 100%;
+        background-color: #42A5F5;
+        color: white;
+        border: none;
+        border-radius: 2px;
+        padding: 10px 0 10px 0;
+        font-size: 18px;
+        border-radius: 4px; }
+        .signIn .signInContainer .signInInputs .signInButton:hover {
+          background-color: #2a99f4; }
+        .signIn .signInContainer .signInInputs .signInButton:focus {
+          outline: none; }
+      .signIn .signInContainer .signInInputs label.circled-checkbox input[type=checkbox] + .label-text:before {
+        content: "\f096";
+        font-family: "FontAwesome";
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        font-size: 16px;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        width: 1em;
+        margin-right: 7px;
+        margin-top: 2px; }
+      .signIn .signInContainer .signInInputs label.circled-checkbox input[type=checkbox]:checked + .label-text:before {
+        content: "\f14a";
+        font-family: "FontAwesome";
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        font-size: 16px;
+        color: #42A5F5;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        width: 1em;
+        margin-right: 7px;
+        margin-top: 2px; }
+      .signIn .signInContainer .signInInputs .label-text {
+        color: #ccc; }
+      .signIn .signInContainer .signInInputs .invalidMsg {
+        color: #E74C3C;
+        margin-top: 7px;
+        text-align: left; }
+  .signIn a {
+    color: #a3d3fa; }
+    .signIn a:hover {
+      color: #42A5F5;
+      text-decoration: none; }
