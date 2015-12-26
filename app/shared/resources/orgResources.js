@@ -76,6 +76,11 @@
                 method : 'PUT'
             }
         });
+        var managedMeetings = $resource('http://api.plunner.com/employees/planners/groups', null, {
+            'update' : {
+                method : 'PUT'
+            }
+        });
         return {
             user : function(){
                 return userResource;
@@ -115,6 +120,9 @@
             },
             employee : function(){
                 return employee;
+            },
+            managedMeetings : function(){
+                return managedMeetings;
             }
         }
     };

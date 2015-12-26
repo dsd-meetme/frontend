@@ -52,30 +52,10 @@
 #addGroup .circled-radio input[type="radio"]:checked + .label-text:before, #addUser .circled-radio input[type="radio"]:checked + .label-text:before {
   content: "\f111"; }
 
-#addGroup .modal-content, #addUser .modal-content {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px; }
-
-#addGroup .modal-header, #addUser .modal-header {
-  padding-left: 30px; }
-  #addGroup .modal-header h3, #addUser .modal-header h3 {
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-top: 10px; }
-
-#addGroup .modal-body, #addUser .modal-body {
-  padding: 30px; }
-  #addGroup .modal-body p, #addUser .modal-body p {
-    margin-bottom: 2px; }
-  #addGroup .modal-body input[type="text"], #addGroup .modal-body input[type="email"], #addGroup .modal-body input[type="password"], #addUser .modal-body input[type="text"], #addUser .modal-body input[type="email"], #addUser .modal-body input[type="password"] {
-    border: none;
-    border-bottom: 2px solid #ddd;
-    padding: 5px 0 5px 0;
-    margin-bottom: 15px;
-    width: 60%; }
-    #addGroup .modal-body input[type="text"]:focus, #addGroup .modal-body input[type="email"]:focus, #addGroup .modal-body input[type="password"]:focus, #addUser .modal-body input[type="text"]:focus, #addUser .modal-body input[type="email"]:focus, #addUser .modal-body input[type="password"]:focus {
-      outline: none;
-      border-bottom: 2px solid #384047; }
+#addGroup .modal-body > div, #addUser .modal-body > div {
+  margin-bottom: 25px; }
+  #addGroup .modal-body > div p, #addUser .modal-body > div p {
+    margin-bottom: 5px; }
 
 #confirmPopup .modal-content {
   border: 1px solid rgba(0, 0, 0, 0.1);

@@ -4,6 +4,11 @@
         var mode = 1;
         var changedEvents = [];
         var calendar;
+        var selectDay = function () {
+            var date = moment();
+            date.add(8-date.day(),'days').minute(0).hour(0);
+            return date;
+        };
         var checkNewEvents = function (events) {
             var newEvents = [];
 
@@ -39,18 +44,41 @@
             return adaptedEvents;
 
         };
+        var getUserInfo = function () {
+            orgResources.employee().get()
+                .$promise.then(function (response) {
+                    c.userInfo.name = response.name;
+                    c.userInfo.is_planner = response.is_planner
+                });
+        };
         var c = this;
         c.events = [];
+        c.userInfo = {
+            name: '',
+            is_planner: false
+
+
+        };
+
+        c.inputEnabled = false;
         c.dataCopy = {};
         c.processUrl = function () {
             if ($routeParams.type.length === 1 && $routeParams.type === '_') {
                 mode = 1;
+                this.inputEnabled = true
             }
             else {
-                mode = 0;
                 var urlParams = $routeParams.type.split('&');
                 this.groupId = urlParams[0];
                 this.meetingId = urlParams[1];
+                mode = urlParams[2];
+                console.log('mode');
+                console.log(mode);
+                if (mode === 'w') {
+                    console.log('centro');
+                    this.inputEnabled = true
+                }
+                console.log(c.inputEnabled)
             }
         };
         c.getInfo = function () {
@@ -60,12 +88,12 @@
                     c.data = response;
                     c.title = response.title;
                     c.description = response.description;
-                    c.duration = parseInt(response.duration)/60;
+                    c.duration = parseInt(response.duration) / 60;
                 })
         };
         c.getTimeslots = function () {
             var splittedTimeStart, splittedTimeEnd;
-            if (mode === 0) {
+            if (mode !== 1) {
                 c.getInfo();
                 orgResources.plannerTimeslots().query({
                     groupId: this.groupId,
@@ -84,7 +112,14 @@
                             });
 
                         }
-                        calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
+                        if (c.userInfo.is_planner && mode === 'w') {
+                            console.log('entro lì');
+                            calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
+                        }
+                        else {
+                            calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfigRead);
+                        }
+
                     })
             }
             else {
@@ -100,6 +135,16 @@
                 .then(function () {
                     alert('evviva');
                 })
+        };
+        c.calendarConfigRead = {
+            firstDay: 1,
+            allDaySlot: false,
+            header: {
+                right: 'deleteBtn, prev,next today'
+            },
+            defaultView: 'agendaWeek',
+            slotDuration: '00:15:00',
+            events: c.events,
         };
         c.calendarConfig = {
             customButtons: {
@@ -134,6 +179,19 @@
             editable: true,
             selectable: true,
             selectHelper: true,
+            businessHours: {
+                start: '00:00',
+                end: '23:59',
+                dow: [1, 2, 3, 4, 5]
+            },
+            selectConstraint: {
+                start: selectDay().toISOString(),
+                end: selectDay().add(7, 'days')
+            },
+            eventConstraint: {
+                start: selectDay().toISOString(),
+                end: selectDay().add(7, 'days')
+            },
             eventClick: function (calEvent, jsEvent, view) {
                 jQuery('.fc-deleteBtn-button').show();
                 c.eventRemoveId = {
@@ -262,7 +320,7 @@
                                 timeslotId: ''
                             },
                             jQuery.param(newEvents[i])).$promise.then(function (response) {
-                                if (i === newEvents.length-1 && !alsoEditEvents) {
+                                if (i === newEvents.length - 1 && !alsoEditEvents) {
                                     c.confirmPopup.message = "Schedule successfully saved";
                                     c.confirmPopup.show();
 
@@ -298,11 +356,15 @@
             }
         };
         c.getGroups = function () {
-            orgResources.groupsplanner().query({groupId: ''}).$promise
-                .then(function (response) {
-                    c.groups = response;
-                })
+            if (mode === 'w' || mode === 1) {
+                orgResources.groupsplanner().query({groupId: ''}).$promise
+                    .then(function (response) {
+                        c.groups = response;
+                    })
+            }
+
         };
+        getUserInfo();
         c.processUrl();
         c.getGroups();
         c.getTimeslots();

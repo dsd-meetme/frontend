@@ -52,13 +52,13 @@
                     </a>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" ng-if="udashC.userInfo.is_planner">
                 <div class="col-md-12">
                     <div class="udash_content_type_title">
-                        <h4><i class="fa fa-cogs"></i>&nbsp;&nbsp;MEETINGS TO BE PLANNED</h4>
+                        <h4><i class="fa fa-cogs"></i>&nbsp;&nbsp;MEETINGS MANAGED BY YOU</h4>
                     </div>
                     <div class="tile"
-                         ng-repeat="meeting in udashC.meetings.toBePlanned | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
+                         ng-repeat="meeting in udashC.meetings.managed | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
                         <div class="row">
                             <div class="col-md-1  tileIconLeft">
                                 <img src="assets/img/meeting_one.png" alt=""/>
@@ -86,7 +86,55 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right tileIconRight">
-                                <a href="/#/user/newmeeting/{{meeting.group_id}}&{{meeting.id}}">
+                                <a href="/#/user/newmeeting/{{meeting.group_id}}&{{meeting.id}}&w">
+                                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                    <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" ng-click="">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g transform="translate(-1202.000000, -14.000000)" fill="#dddddd">
+                                                <path d="M1228.02325,50.9383888 L1202.0559,84 L1208.31538,89.5463755 L1236.38284,53.4511569 L1238.33675,50.9383905 L1236.32694,48.4701061 L1208.25948,14 L1202.0559,19.0512964 L1228.02325,50.9383888 Z"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 ng-show="udashC.meetings.toBePlanned.length === 0" class="text-center udash_empty_state_msg font_normal">Sorry, no meetings to be planned for you yet!</h4>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="udash_content_type_title">
+                        <h4><i class="fa fa-cogs"></i>&nbsp;&nbsp;MEETINGS TO BE PLANNED</h4>
+                    </div>
+                    <div class="tile"
+                         ng-repeat="meeting in udashC.meetings.toBePlanned | filter: {title : filterTBPMeetings} | limitTo : udashC.limits.tpmeetings">
+                        <div class="row">
+                            <div class="col-md-1  tileIconLeft">
+                                <img src="assets/img/meeting_one.png" alt=""/>
+                            </div>
+                            <div class="col-md-10 tileBody">
+                                <h4 class="tileTitle">{{meeting.title}}</h4>
+                                <div class="tileDescription">
+                                    {{meeting.description}}
+                                </div>
+                                <div class="tileBottomGroup">
+                                    <ul class="list-inline list-unstyled">
+                                        <li>
+                                            <span class="tileSynched">DURATION:</span>
+                                            &nbsp;&nbsp;{{meeting.duration/60}}mins
+                                        </li>
+                                        <li><span class="tileSynched">GROUP:</span>
+                                            &nbsp;&nbsp;{{meeting.group_name}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-1 text-right tileIconRight">
+                                <a href="/#/user/newmeeting/{{meeting.group_id}}&{{meeting.id}}&r">
                                     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                                     <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
                                          xmlns="http://www.w3.org/2000/svg" ng-click="">
@@ -135,16 +183,11 @@
                                             <span class="tileSynched">GROUP:</span>
                                             &nbsp;&nbsp;{{meeting.group_name}}
                                         </li>
-                                        <li>
-                                            <button ng-click="udashC.deletePlannedMeeting(meeting.group_id, meeting.id)">
-                                                <i class="fa fa-trash-o"></i>&nbsp;&nbsp;DELETE
-                                            </button>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-md-1 text-right tileIconRight">
-                                <a href="#">
+                                <a href="/#/user/newmeeting/{{meeting.group_id}}&{{meeting.id}}&r">
                                     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                                     <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
                                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

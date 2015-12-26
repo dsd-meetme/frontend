@@ -1,0 +1,13 @@
+.odash #addGroup .modal-body > div, .odash #addUser .modal-body > div {
+  margin-bottom: 25px; }
+  .odash #addGroup .modal-body > div p, .odash #addUser .modal-body > div p {
+    margin-bottom: 5px; }
+
+.odash #addGroup .modal-body table, .odash #addUser .modal-body table {
+  margin-bottom: 0; }
+
+.odash #addGroup .secondary_button, .odash #addUser .secondary_button {
+  margin-right: 15px; }
+
+.odash #addGroup .error_tile, .odash #addUser .error_tile {
+  padding-left: 30px; }

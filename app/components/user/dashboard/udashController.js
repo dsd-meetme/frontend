@@ -98,7 +98,8 @@
 
         c.meetings = {
             planned : null,
-            toBePlanned : null
+            toBePlanned : null,
+            managed : null
         };
         c.schedules = {
             imported : null,
@@ -156,6 +157,9 @@
                     c.userInfo.name = response.name;
                     c.userInfo.email = response.email;
                     c.userInfo.is_planner = response.is_planner;
+                    if(c.userInfo.is_planner){
+                        c.getMeetingsManages();
+                    }
                 })
         };
         c.importSchedule = {
@@ -248,6 +252,13 @@
 
                 }
             }
+        };
+        c.getMeetingsManages = function(){
+            orgResources.managedMeetings().query()
+                .$promise.then(function(response){
+                    c.meetings.managed = processMeetings(response);
+                });
+
         };
         c.deleteSchedule = function (id) {
             orgResources.calendar().remove({calendarId: id})

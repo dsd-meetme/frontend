@@ -30,7 +30,7 @@
         <div class="col-md-8 col-md-push-2">
             <div class="row section_action_bar">
                 <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
-                <button class="main_button" ng-click="nmC.submit()"><i class="fa fa-users"></i>&nbsp;&nbsp;Plan meeting</button>
+                <button ng-if="nmC.inputEnabled" class="main_button" ng-click="nmC.submit()"><i class="fa fa-users"></i>&nbsp;&nbsp;Plan meeting</button>
                 <p class="error_msg pull-right near_button_error" ng-repeat="error in nmeC.errors">{{error}}</p>
             </div>
 
@@ -43,17 +43,17 @@
                 <form name="meetingInfoForm" novalidate>
                     <div class="col-md-6">
                         <p>Title</p>
-                        <input ng-class="{error_underline: nmC.invalidFields.nameReq }" class="main_input" type="text" name="title" ng-model="nmC.title" required
+                        <input ng-readonly="!nmC.inputEnabled" ng-class="{error_underline: nmC.invalidFields.nameReq }" class="main_input" type="text" name="title" ng-model="nmC.title" required
                                placeholder="Insert a title"/>
                         <p class="error_msg" ng-show="nmC.invalidFields.nameReq">Insert a title</p>
                         <p>Description</p>
-                        <textarea ng-class="{error_bordering: nmC.invalidFields.descriptionReq }" name="description" ng-model="nmC.description" required placeholder="Insert a description">
+                        <textarea ng-readonly="!nmC.inputEnabled" ng-class="{error_bordering: nmC.invalidFields.descriptionReq }" name="description" ng-model="nmC.description" required placeholder="Insert a description">
                         </textarea>
                         <p class="error_msg" ng-show="nmC.invalidFields.descriptionReq">Insert a description</p>
                     </div>
                     <div class="col-md-6">
                         <p>Duration(in mins)</p>
-                        <input ng-class="{error_underline:nmC.invalidFields.durationReq || nmC.invalidFields.durationVal || mC.invalidFields.durationLimit  }" class="main_input" type="number" ng-model="nmC.duration" name="duration" required
+                        <input ng-readonly="!nmC.inputEnabled" ng-class="{error_underline:nmC.invalidFields.durationReq || nmC.invalidFields.durationVal || mC.invalidFields.durationLimit  }" class="main_input" type="number" ng-model="nmC.duration" name="duration" required
                                placeholder="Insert a duration"/>
                         <p class="error_msg" ng-show="nmC.invalidFields.durationReq">Insert a duration</p>
                         <p class="error_msg" ng-show="nmC.invalidFields.durationVal">Insert a valid duration(a number)</p>
@@ -67,9 +67,10 @@
                                 <input type="radio" name="group" ng-value="group.id" ng-model="nmC.selectedGroup">
                                 <span class="label-text"></span>
                             </label>
-                            <p class="error_msg" ng-show="nmC.invalidFields.oneGroup">Select a group for the meeting</p>
+
                             <!--<input type="radio" name="group" ng-checked="nmC.selectedGroupAssign(group.id)" >-->
                         </div>
+                        <p class="error_msg" ng-show="nmC.invalidFields.oneGroup">Select a group for the meeting</p>
                     </div>
                 </form>
             </div>

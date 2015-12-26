@@ -255,7 +255,7 @@
 .nm form input[type="radio"] {
   display: none; }
 
-.nm form input[type="radio"] + span:before {
+.nm form input[type="radio"] + .label-text:before {
   content: "\f1db";
   font-family: "FontAwesome";
   font-style: normal;
@@ -269,7 +269,7 @@
   margin-top: 10px;
   transition: all 50ms ease-in-out; }
 
-.nm form input[type="radio"]:checked + span:before {
+.nm form input[type="radio"]:checked + .label-text:before {
   content: "\f111";
   font-family: "FontAwesome";
   font-style: normal;
