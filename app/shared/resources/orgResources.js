@@ -71,6 +71,11 @@
                 method : 'PUT'
             }
         });
+        var employee = $resource('http://api.plunner.com/employees/employee', null, {
+            'update' : {
+                method : 'PUT'
+            }
+        });
         return {
             user : function(){
                 return userResource;
@@ -107,6 +112,9 @@
             },
             plannerTimeslots : function(){
                 return plannerTimeslots;
+            },
+            employee : function(){
+                return employee;
             }
         }
     };

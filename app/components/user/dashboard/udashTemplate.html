@@ -38,6 +38,7 @@
     <br/>
     <br/>
     <div class="row" ng-show="udashC.viewSections.meetings">
+        {{udashC.userInfo}}
         <div class="col-md-8 col-md-push-2">
             <div class="row sub_section_actionbar">
                 <div class="col-md-12">
@@ -45,7 +46,7 @@
                         <i class="fa fa-search fa-lg"></i>
                         <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
                     </div>
-                    <a href="/#/user/newmeeting/_" class="main_button">
+                    <a ng-if="udashC.userInfo.is_planner" href="/#/user/newmeeting/_" class="main_button">
                         <i class="fa fa-plus"></i>
                         &nbsp;&nbsp;Plan a meeting
                     </a>

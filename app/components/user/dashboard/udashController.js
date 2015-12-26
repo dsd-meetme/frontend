@@ -90,6 +90,11 @@
                 this.schedules = true;
             }
         };
+        c.userInfo = {
+            name : '',
+            email : '',
+            is_planner : false
+        };
 
         c.meetings = {
             planned : null,
@@ -141,14 +146,17 @@
                     console.log('Gotten planned meetings');
                     console.log(response);
                     c.meetings.planned = response;
-                    /*for(var i=0; i< c.meetingsList.groupB.data.length; i++){
-                     a = new moment(c.meetingsList.groupB.data[i].start_time);
-                     b = parseInt(c.meetingsList.groupB.data[i].duration)/60;
-                     c.meetingsList.groupB.data[i].finalDate = a.add(b, 'm').format('dddd, MMMM Do YYYY, h:mm:ss a');
-                     console.log(c.meetingsList.groupB.data[i].finalDate)
-                     }*/
+
                 });
 
+        };
+        c.getUserInfo = function(){
+            orgResources.employee().get()
+                .$promise.then(function(response){
+                    c.userInfo.name = response.name;
+                    c.userInfo.email = response.email;
+                    c.userInfo.is_planner = response.is_planner;
+                })
         };
         c.importSchedule = {
             credentials: {
@@ -352,6 +360,7 @@
                     c.getMeetings();
                 })
         };
+        c.getUserInfo();
         c.getSchedules();
         c.getMeetings();
     };
