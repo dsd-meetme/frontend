@@ -2,107 +2,112 @@
     <div class="container-fluid">
         <!-- HEADER -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Plunner</a>
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/plunner.png" alt=""/>
+            </a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/#/organization">Dashboard</a></li>
-                <li><a href="/#/organization/profile">
-                    <span class="glyphicon glyphicon-user"></span> Organization Name</a></li>
-                <li><a href="#">How To</a></li>
-                <li><a href="#">Contact</a></li>
+                <li class="user_section">
+                    <a href="/#/user/profile">
+                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
+                        <span></span> Employee Name</a>
+                </li>
                 <li>
-                    <button type="button" class="btn btn-danger navbar-btn" logout redirect="/">SIGN OUT</button>
+                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
                 </li>
             </ul>
         </div>
     </div>
-
 </div>
 
-<div class="container-fluid">
-    <style>
-        .disabled {
-            border: none !important;
-            cursor: text;
-        }
-
-        textarea {
-            resize: none;
-            outline: none;
-        }
-    </style>
-    <div class="row top-odash-banner">
-        <h2 class="text-center">Group information</h2>
-
+<div class="container-fluid groupC">
+    <div class="section_heading row">
+        <h1 class="text-center font_light">Group Information</h1>
     </div>
     <div class="row editMode">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="text-center changeGroup">
-                <p class="text-danger" ng-repeat="error in groupC.errors.info">{{error}}</p>
-                <button class="btn btn-default glob_button" ng-show="groupC.editMode.flag" ng-disabled="!groupC.editMode.flag"
-                        ng-click="groupC.updateInfo()">Save changes
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row section_action_bar">
+                <a href="/#/organization"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+                <button class="main_button" ng-show="groupC.editMode.flag">Save changes</button>
+                <button class="secondary_button" ng-show="groupC.editMode.flag" ng-click="groupC.editMode.exit()">Abort</button>
+                <button ng-show="!groupC.editMode.flag" class="main_button" ng-click="groupC.editMode.enter()"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Edit group
                 </button>
-                <button class="btn btn-default glob_button" ng-show="groupC.editMode.flag" ng-click="groupC.delete()">Delete group</button>
+                <p class="error_msg pull-right near_button_error" ng-repeat="error in cschedC.errors">{{error}}</p>
+                <p class="error_msg pull-right near_button_error" ng-show="cschedC.invalidFields.eventsReq"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one event</p>
             </div>
-            <div class="editSwitcherContainer">
+           <!-- <div class="editSwitcherContainer">
                 <div><h5 ng-class="{highlighted : groupC.editMode.flag}">EDIT MODE</h5></div>
                 <div class="editSwitcher" ng-class="{switcherInEdit : groupC.editMode.flag}">
                     <div ng-click="groupC.editMode.exit()" ng-class="{editSwitcherSelected: !groupC.editMode.flag}">&nbsp;</div>
                     <div ng-click="groupC.editMode.enter()" ng-class="{editSwitcherSelected: groupC.editMode.flag}">&nbsp;</div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
     <div class="row">
-        <div class="col-md-5 col-md-offset-1">
-            <div class="row groupInfo">
-                <div class="col-md-11">
-                    <h3>INFORMATION</h3>
-                    <table class="table">
-                        <thead>
-                            <th></th>
-                            <th></th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Name</td>
-
-                                <td><input ng-model="groupC.data.groupCopy.name" ng-readonly="!groupC.editMode.flag"
-                                           ng-class="{disabled : !groupC.editMode.flag}"></td>
-                            </tr>
-                            <tr>
-                                <td>Description</td>
-                                <td><textarea ng-model="groupC.data.groupCopy.description" ng-readonly="!groupC.editMode.flag"
-                                              ng-class="{disabled : !groupC.editMode.flag}"></textarea></td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="errorContainer" ng-show="groupC.editMode.flag && (groupC.thereErrors.info || groupC.errors.info.length > 0)">
-                        <p ng-show="groupC.invalidFields.nameReq">Insert a name</p>
-                        <p ng-repeat="error in groupC.errors.info">{{error}}</p>
+        <div class="col-md-8 col-md-push-2">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row groupC_info">
+                        <div class="col-md-11">
+                            <h3><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Information</h3>
+                            <table class="table">
+                                <thead>
+                                <th></th>
+                                <th></th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Name</td>
+                                    <td><input ng-model="groupC.data.groupCopy.name" ng-readonly="!groupC.editMode.flag"
+                                               ng-class="{disabled : !groupC.editMode.flag}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td><textarea ng-model="groupC.data.groupCopy.description" ng-readonly="!groupC.editMode.flag"
+                                                  ng-class="{disabled : !groupC.editMode.flag}"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Planner</td>
+                                    <td>{{groupC.data.group.planner_name}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div>
+                                <button class="main_button" ng-click="groupC.changePlanner.init()" ng-show="groupC.editMode.flag">Change planner</button>
+                                <button class="secondary_button" ng-show="groupC.editMode.flag" ng-click="groupC.delete()">Delete group</button>
+                            </div>
+                            <div class="errorContainer" ng-show="groupC.editMode.flag && (groupC.thereErrors.info || groupC.errors.info.length > 0)">
+                                <p ng-show="groupC.invalidFields.nameReq">Insert a name</p>
+                                <p ng-repeat="error in groupC.errors.info">{{error}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <h3><i class="fa fa-users"></i>&nbsp;&nbsp;Members</h3>
+                    <p class="text-danger" ng-repeat="error in groupC.errors.planner">{{error}}</p>
+                    <br>
+                    <div ng-repeat=" member in groupC.data.members" class="clearfix groupC_members">
+                        <div>
+                            <p>{{member.name}}
+                            </p>
+                            <span class="fa fa-trash-o fa-lg pull-right" ng-show="groupC.editMode.flag" ng-click="groupC.deleteFromGroup(member.id)">
+                            </span>
+                        </div>
+                        <!--<div>
+                            <button class="btn btn-default btn-sm glob_button" ng-show="(member.id !== groupC.data.group.planner_id) && groupC.editMode.flag" ng-click="groupC.updatePlanner(member.id)">Make planner
+                            </button>
+                            <span class="fa fa-trash-o fa-lg" ng-show="groupC.editMode.flag" ng-click="groupC.deleteFromGroup(member.id)">
+                            </span>
+                        </div>-->
+                    </div>
+                    <button style="margin-top: 15px" ng-show="groupC.editMode.flag" class="main_button" ng-click="groupC.addToGroup.init()">Add user to group</button>
+                </div>
             </div>
         </div>
-        <div class="col-md-5 groupMembers">
-            <h3>MEMBERS</h3>
-            <p class="text-danger" ng-repeat="error in groupC.errors.planner">{{error}}</p>
-            <br>
-            <div ng-repeat=" member in groupC.data.members" class="clearfix">
-                <div>
-                    <p>{{member.name}}</p>
-                    <p class="plannerUnderline" ng-show="member.id === groupC.data.group.planner_id" class="text-primary">PLANNER</p>
-                </div>
-                <div>
-                    <button class="btn btn-default btn-sm glob_button" ng-show="(member.id !== groupC.data.group.planner_id) && groupC.editMode.flag" ng-click="groupC.updatePlanner(member.id)">Make planner
-                    </button>
-                    <span class="fa fa-trash-o fa-lg" ng-show="groupC.editMode.flag" ng-click="groupC.deleteFromGroup(member.id)">
-                    </span>
-                </div>
-            </div>
-        </div>
+
     </div>
     <div class="row changeBar">
         <div class="col-md-12">
@@ -110,6 +115,97 @@
         </div>
     </div>
 </div>
+</div>
+<div id="changePlanner" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Planner</h3>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p class="font_bold">Current group planner:</p>
+                    <p>{{groupC.data.group.planner_name}}</p>
+                </div>
+                <br/>
+                <div class="search_input">
+                    <i class="fa fa-search fa-lg"></i>
+                    <input type="search" ng-model="searchedPlanner" placeholder="Search for a user"/>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <th></th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in groupC.allUsers | filter: searchedPlanner | paginationFilter: groupC.pagination.user.filterString" >
+                            <td>{{user.name}}</td>
+                            <td>
+                                <label class="list_radio">
+                                    <input type="radio" ng-model="groupC.changePlanner.plannerId" ng-value="user.id"/>
+                                    <span class="text"></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul class="list-unstyled list-inline pagination">
+                    <li ng-class="{underlinedPage : groupC.pagination.user.currentPage === ($index + 1)}" ng-click="groupC.pagination.user.changePage($index+1)" ng-repeat="x in groupC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                </ul>
+            </div>
+            <p class="error_tile" class="error_msg" ng-repeat="error in odashC.addGroup.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
+            <p ng-show="odashC.addGroup.invalidFields.membersReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one member</p>
+            <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert one planner</p>
+            <div class="modal-footer">
+                <button type="button" class="secondary_button" data-dismiss="modal">Close</button>
+                <button type="button" class="main_button" ng-click="groupC.changePlanner.change()">Change</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="addToGroup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add users to group</h3>
+            </div>
+            <div class="modal-body">
+                <div class="search_input">
+                    <i class="fa fa-search fa-lg"></i>
+                    <input type="search" ng-model="searchedPlanner" placeholder="Search for a user"/>
+                </div>
+
+                <table class="table">
+                    <thead>
+                    <th></th>
+                    <th></th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in groupC.allUsers | filter: searchedPlanner | paginationFilter: groupC.pagination.user.filterString" >
+                        <td>{{user.name}}</td>
+                        <td>
+                            <label class="list_checkbox">
+                                <input type="checkbox" ng-model="groupC.addToGroup.members[user.id]"/>
+                                <span class="text"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <ul class="list-unstyled list-inline pagination">
+                    <li ng-class="{underlinedPage : groupC.pagination.user.currentPage === ($index + 1)}" ng-click="groupC.pagination.user.changePage($index+1)" ng-repeat="x in groupC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                </ul>
+            </div>
+            <p class="error_tile" class="error_msg" ng-repeat="error in odashC.addGroup.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
+            <p ng-show="odashC.addGroup.invalidFields.membersReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one member</p>
+            <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert one planner</p>
+            <div class="modal-footer">
+                <button type="button" class="secondary_button" data-dismiss="modal">Close</button>
+                <button type="button" class="main_button" ng-click="groupC.addToGroup.change()">Add users</button>
+            </div>
+        </div>
+    </div>
 </div>
 <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
     <div class="modal-dialog">
