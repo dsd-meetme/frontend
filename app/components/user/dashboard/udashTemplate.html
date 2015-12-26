@@ -228,8 +228,7 @@
                             </div>
                         </div>
                     </div>
-                    <p ng-show="udashC.schedules.imported.length === 0" class="text-center"
-                       style="font-size: 16px; font-style: italic">None</p>
+                    <h4 ng-show="udashC.schedules.imported.length === 0" class="text-center udash_empty_state_msg font_normal">Sorry, no imported schedules for you yet!</h4>
                 </div>
             </div>
             <br/>
@@ -256,7 +255,8 @@
                                                   class="fa fa-circle-o">INACTIVE</span></li>
                                         <li><span>LAST UPDATE:</span>&nbsp;&nbsp;{{schedule.updated_at}}</li>
                                         <li>
-                                            <button><i class="fa fa-trash-o"></i><span>&nbsp;&nbsp;DELETE</span>
+                                            <button ng-click="udashC.deleteSchedule(schedule.id)">
+                                                <i class="fa fa-trash-o"></i><span>&nbsp;&nbsp;DELETE</span>
                                             </button>
                                         </li>
                                     </ul>
@@ -265,7 +265,7 @@
                             <div class="col-md-1 text-right tileIconRight">
                                 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                                 <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
-                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                     xmlns="http://www.w3.org/2000/svg">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                         <g transform="translate(-1202.000000, -14.000000)" fill="#dddddd">
                                             <path d="M1228.02325,50.9383888 L1202.0559,84 L1208.31538,89.5463755 L1236.38284,53.4511569 L1238.33675,50.9383905 L1236.32694,48.4701061 L1208.25948,14 L1202.0559,19.0512964 L1228.02325,50.9383888 Z"></path>
@@ -275,8 +275,7 @@
                             </div>
                         </div>
                     </div>
-                    <p ng-show="udashC.schedules.composed.length === 0" class="text-center"
-                       style="font-size: 16px; font-style: italic">None</p>
+                    <h4 ng-show="udashC.schedules.composed.length === 0" class="text-center udash_empty_state_msg font_normal">Sorry, no composed schedules for you yet!</h4>
                 </div>
             </div>
         </div>
@@ -286,26 +285,33 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3>Import schedule</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
                     </div>
                     <form name="importScheduleForm" novalidate>
                         <div class="modal-body">
                             <div>
                                 <p>CalDav url</p>
-                                <input name="url" type="url" ng-model="udashC.importSchedule.url"
+                                <input class="main_input" ng-class="{error_underline: udashC.importSchedule.invalidFields.urlRequired || udashC.importSchedule.invalidFields.urlVal}" name="url" type="url" ng-model="udashC.importSchedule.url"
                                        placeholder="Insert CalDav url" required>
+                                <p class="error_msg" ng-show="udashC.importSchedule.invalidFields.urlRequired">Insert
+                                    a caldav url</p>
+                                <p class="error_msg" ng-show="udashC.importSchedule.invalidFields.urlVal">Insert a
+                                    valid url</p>
                             </div>
                             <div>
                                 <p>CalDav Username</p>
-                                <input type="text" name="username" ng-model="udashC.importSchedule.username"
+                                <input class="main_input" ng-class="{error_underline: udashC.importSchedule.invalidFields.usernameRequired}" type="text" name="username" ng-model="udashC.importSchedule.username"
                                        placeholder="Insert CalDav username" required>
-
-                                <p>CalDav Password</p>
-                                <input type="password" name="password" ng-model="udashC.importSchedule.password"
-                                       required placeholder="Insert CalDav password">
+                                <p class="error_msg" ng-show="udashC.importSchedule.invalidFields.usernameRequired">
+                                    Insert a username</p>
                             </div>
-                            <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.getCalendars()">
+                            <div>
+                                <p>CalDav Password</p>
+                                <input class="main_input" ng-class="{error_underline: udashC.importSchedule.invalidFields.passwordRequired }" type="password" name="password" ng-model="udashC.importSchedule.password"
+                                       required placeholder="Insert CalDav password">
+                                <p class="error_msg" ng-show="udashC.importSchedule.invalidFields.passwordRequired">
+                                    Insert a password</p>
+                            </div>
+                            <button class="main_button main_button_small" ng-click="udashC.importSchedule.getCalendars()">
                                 <i class="fa fa-arrow-down"></i>&nbsp;&nbsp;Get schedules
                             </button>
                             <img ng-show="udashC.importSchedule.showLoader" src="assets/img/loader.gif" width="24px"
@@ -322,10 +328,10 @@
                                     <tr ng-repeat="calendar in udashC.importSchedule.calendars">
                                         <td>{{calendar.value}}</td>
                                         <td>
-                                            <label class="circled-checkbox">
+                                            <label class="list_checkbox">
                                                 <input type="checkbox"
                                                        ng-model="udashC.importSchedule.calendars[$index].selected"/>
-                                                <span class="label-text"></span>
+                                                <span class="text"></span>
                                             </label>
                                         </td>
                                     </tr>
@@ -333,28 +339,12 @@
                                     <tbody></tbody>
                                 </table>
                             </div>
-                            <div class="errorContainer"
-                                 ng-show="udashC.importSchedule.thereErrors || udashC.importSchedule.errors.length > 0">
-                                <p class="text-danger" ng-repeat="error in udashC.importSchedule.errors">{{error}}</p>
-
-                                <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlRequired">Insert
-                                    a caldav url</p>
-
-                                <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.urlVal">Insert a
-                                    valid caldav url</p>
-
-                                <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.usernameRequired">
-                                    Insert a username</p>
-
-                                <p class="text-danger" ng-show="udashC.importSchedule.invalidFields.passwordRequired">
-                                    Insert a password</p>
-                            </div>
-
                         </div>
+                        <p class="error_tile font_light" ng-repeat="error in udashC.importSchedule.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
                         <div class="modal-footer">
-                            <button class="btn btn-default glob_button" data-dismiss="modal" aria-label="Close">Close
+                            <button class="secondary_button" data-dismiss="modal" aria-label="Close">Close
                             </button>
-                            <button class="btn btn-default glob_button" ng-click="udashC.importSchedule.submit()">
+                            <button class="main_button" ng-click="udashC.importSchedule.submit()">
                                 Import
                             </button>
                         </div>
@@ -367,70 +357,62 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3>Edit schedule</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
                     </div>
                     <form name="editScheduleForm" novalidate>
                         <div class="modal-body">
-                            <p>Name</p>
-                            <input required name="name" type="text" ng-model="udashC.editSchedule.data.name"/>
+                            <div>
+                                <p>Name</p>
+                                <input ng-class="{error_underline: udashC.editSchedule.invalidFields.nameReq }" class="main_input" required name="name" type="text" ng-model="udashC.editSchedule.data.name"/>
+                                <p class="error_msg" ng-show="udashC.editSchedule.invalidFields.nameReq">Insert a name for the schedule</p>
+                            </div>
+                            <div>
+                                <p>CalDav calendar name</p>
+                                <input ng-class="{error_underline: udashC.editSchedule.invalidFields.calnameReq }" class="main_input" required name="cal_name" type="text" ng-model="udashC.editSchedule.data.cal_name"/>
+                                <p ng-show="udashC.editSchedule.invalidFields.calnameReq" class="text-danger">Insert the
+                                    caldav name of the calendar</p>
+                            </div>
+                            <div>
+                                <p>CalDav url</p>
+                                <input ng-class="{error_underline: udashC.editSchedule.invalidFields.urlReq || udashC.editSchedule.invalidFields.urlVal  }" class="main_input" required name="url" type="url" ng-model="udashC.editSchedule.data.url"/>
+                                <p ng-show="udashC.editSchedule.invalidFields.urlReq" class="text-danger">Insert a
+                                    caldav url</p>
+                                <p ng-show="udashC.editSchedule.invalidFields.urlVal" class="text-danger">Insert a valid url</p>
+                            </div>
+                            <div>
+                                <p>CalDav username</p>
+                                <input ng-class="{error_underlined : udashC.editSchedule.data.username }" class="main_input" required name="username" type="text"
+                                       ng-model="udashC.editSchedule.data.username"/>
+                                <p ng-show="udashC.editSchedule.invalidFields.usernameReq" class="text-danger">Insert
+                                    a caldav user name</p>
 
-                            <p>CalDav calendar name</p>
-                            <input required name="cal_name" type="text"
-                                   ng-model="udashC.editSchedule.data.cal_name"/><br/>
-
-                            <p>CalDav url</p>
-                            <input required name="url" type="url" ng-model="udashC.editSchedule.data.url"/><br/>
-
-                            <p>CalDav username</p>
-                            <input required name="username" type="text"
-                                   ng-model="udashC.editSchedule.data.username"/><br/>
-
-                            <p>CalDav password</p>
-                            <input name="password" type="password" ng-minLength="6"
-                                   ng-model="udashC.editSchedule.data.password"/><br/>
-
-                            <p>Confirm password</p>
-                            <input name="password_confirmation" type="password"
-                                   ng-model="udashC.editSchedule.password_confirmation"/><br/>
-
-                            <p>Enabled</p>
-                            <label class="status_switcher">
-                                <input type="checkbox" ng-checked="udashC.editSchedule.data.enabled === '1'" ng-model="udashC.editSchedule.data.enabled"/>
-                                <span class="status_switcher_text"></span>
-                                <span>Enabled</span>
-                            </label>
-
-                            <div class="errorContainer"
-                                 ng-show="udashC.editSchedule.thereErrors || udashC.editSchedule.errors.length > 0">
-                                <p ng-repeat="error in udashC.editSchedule.errors">{{error}}</p>
-
-                                <p ng-show="udashC.editSchedule.invalidFields.nameReq" class="text-danger">Insert a name
-                                    for the schedule</p>
-
-                                <p ng-show="udashC.editSchedule.invalidFields.passwordLength" class="text-danger">The
+                            </div>
+                            <div>
+                                <p>CalDav password</p>
+                                <input ng-class="{error_underlined : udashC.editSchedule.invalidFields.passwordLength}" class="main_input" name="password" type="password" ng-minLength="6"
+                                       ng-model="udashC.editSchedule.data.password"/>
+                                <p ng-show="udashC.editSchedule.invalidFields.passwordLength" class="error_msg">The
                                     password must contains at least 6 characters</p>
-
-                                <p ng-show="udashC.editSchedule.invalidFields.urlReq" class="text-danger">Insert the
-                                    user email address</p>
-
-                                <p ng-show="udashC.editSchedule.invalidFields.urlVal" class="text-danger">The email
-                                    address is not valid</p>
-
+                            </div>
+                            <div>
+                                <p>Confirm password</p>
+                                <input ng-class="{error_underlined : udashC.editSchedule.invalidFields.passwordMatch }" class="main_input" name="password_confirmation" type="password"
+                                       ng-model="udashC.editSchedule.password_confirmation"/>
                                 <p ng-show="udashC.editSchedule.invalidFields.passwordMatch" class="text-danger">The two
                                     passwords do not match</p>
-
-                                <p ng-show="udashC.editSchedule.invalidFields.usernameReq" class="text-danger">Insert
-                                    the user name</p>
-
-                                <p ng-show="udashC.editSchedule.invalidFields.calnameReq" class="text-danger">Insert the
-                                    calendar name</p>
                             </div>
+                            <div>
+                                <label class="status_switcher">
+                                    <input type="checkbox" ng-checked="udashC.editSchedule.data.enabled === '1'" ng-model="udashC.editSchedule.data.enabled"/>
+                                    <span class="status_switcher_text"></span>
+                                    <span>Enabled</span>
+                                </label>
+                            </div>
+                            <p class="error_tile" ng-repeat="error in udashC.editSchedule.errors">{{error}}</p>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-default glob_button" data-dismiss="modal" aria-label="Close">Abort
+                            <button class="secondary_button" data-dismiss="modal" aria-label="Close">Abort
                             </button>
-                            <button class="btn btn-default glob_button" ng-click="udashC.editSchedule.submit()">Save
+                            <button class="main_button" ng-click="udashC.editSchedule.submit()">Save
                                 changes
                             </button>
                         </div>
@@ -442,8 +424,6 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
                         <h3 class="text-center">{{udashC.confirmPopup.message}}</h3>
@@ -452,7 +432,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <br/>
     <br/>

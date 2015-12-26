@@ -21,32 +21,38 @@
     <div class="container-fluid usi">
         <div class="row">
             <div class="col-md-4 col-md-push-4 text-center">
-                <form>
+                <form name="usiForm" ng-submit="usiC.login()" novalidate>
                     <div class="usi_branding">
-                        <img width="180px" src="assets/img/plunner.png" alt=""/>
+                        <img width="200px" src="assets/img/plunner.png" alt=""/>
                     </div>
                     <div class="usi_title">
                         <h2 class="font_light">Sign In as a  User</h2>
                     </div>
                     <div class="usi_input">
                         <i class="fa fa-industry fa-lg"></i>
-                        <input type="text" placeholder="Organization name"/>
+                        <input ng-class="{error_bordering : usiC.invalidFields.nameReq}" name="name" required ng-model="usiC.name" type="text" placeholder="Organization name"/>
+                        <p class="error_msg" ng-show="usiC.invalidFields.nameReq">You did not insert your organization name</p>
                     </div>
+
                     <div class="usi_input">
                         <i class="fa fa-envelope-o fa-lg"></i>
-                        <input type="email" placeholder="Email"/>
+                        <input ng-class="{error_bordering : usiC.invalidFields.emailReq || usiC.invalidFields.emailVal}" name="email" required ng-model="usiC.email" type="email" placeholder="Email"/>
+                        <p class="error_msg" ng-show="usiC.invalidFields.emailReq">You did not insert an email address</p>
+                        <p class="error_msg" ng-show="usiC.invalidFields.emailVal">You did not insert a valid email address</p>
                     </div>
                     <div class="usi_input">
                         <i class="fa fa-lock fa-lg"></i>
-                        <input type="password" placeholder="Password"/>
+                        <input ng-class="{error_bordering : usiC.invalidFields.passwordReq}" name="password" required ng-model="usiC.password" type="password" placeholder="Password"/>
+                        <p class="error_msg" ng-show="usiC.invalidFields.passwordReq">You did not insert a password</p>
                     </div>
                     <div class="usi_bottom_bar clearfix">
                         <label class="remember_me_switcher">
-                            <input type="checkbox" />
+                            <input type="checkbox" ng-model="usiC.rmbMe" />
                             <span class="span">Remember me</span>
                         </label>
-                        <a href="">Forgot your credentials?</a>
+                        <a href="/#/userecovery">Forgot your credentials?</a>
                     </div>
+                    <p class="error_msg" ng-repeat="error in usiC.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
                     <button>SIGN IN</button>
                 </form>
                 <h3 class="font_normal">Do you want to start using Plunner? <a href="">Register</a></h3>

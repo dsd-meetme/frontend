@@ -22,6 +22,30 @@ a {
   a:hover {
     text-decoration: none; }
 
+.error_msg {
+  margin-top: 10px !important;
+  margin-bottom: 0;
+  color: #E74C3C;
+  font-size: 14px; }
+
+.error_bordering {
+  border: 2px solid #E74C3C !important; }
+
+.error_underline {
+  border-bottom: 2px solid #E74C3C !important; }
+
+.error_inline {
+  margin-left: 15px; }
+
+.near_button_error {
+  margin-right: 20px; }
+
+.error_tile {
+  margin-bottom: 0;
+  padding: 10px;
+  color: white;
+  background-color: #E74C3C; }
+
 a.main_button {
   display: inline-block; }
   a.main_button:visited, a.main_button:focus, a.main_button:active {
@@ -39,6 +63,22 @@ a.main_button {
     color: white;
     border: 2px solid #0c80df;
     background-color: #0c80df; }
+
+.secondary_button {
+  padding: 9px 18px;
+  color: white;
+  background-color: #ccc;
+  border-radius: 4px;
+  border: 2px solid #ccc;
+  outline: none;
+  text-transform: uppercase; }
+  .secondary_button:hover, .secondary_button:active, .secondary_button:focus {
+    color: white;
+    border: 2px solid #a6a6a6;
+    background-color: #a6a6a6; }
+
+.main_button_small {
+  padding: 6px 12px; }
 
 .navbar_button {
   margin-top: 4px;
@@ -137,6 +177,35 @@ a.main_button {
     line-height: 1;
     -webkit-font-smoothing: antialiased; }
 
+.list_checkbox input[type="checkbox"] {
+  display: none; }
+
+.list_checkbox input[type="checkbox"] + .text:before {
+  content: "\f1db";
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  font-size: 16px;
+  color: #555;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  margin-top: 10px;
+  transition: all 50ms ease-in-out; }
+
+.list_checkbox input[type="checkbox"]:checked + .text:before {
+  content: "\f111";
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  font-size: 16px;
+  color: #42A5F5;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased; }
+
 .main_input {
   color: #555;
   border: none;
@@ -151,11 +220,10 @@ a.main_button {
   background-color: white;
   margin-bottom: 0; }
   .navbar .navbar-brand {
-    height: auto; }
-    .navbar .navbar-brand a {
-      padding: 22px; }
+    height: auto;
+    padding: 16px; }
     .navbar .navbar-brand img {
-      width: 100px; }
+      width: 150px; }
   .navbar .navbar-nav li {
     padding: 10px; }
     .navbar .navbar-nav li a {
@@ -318,3 +386,16 @@ a.main_button {
   font-weight: 300;
   border: 0;
   border-radius: 4px; }
+
+.modal .modal-content {
+  border-radius: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1); }
+
+.modal .modal-header {
+  border: 0; }
+  .modal .modal-header h3 {
+    margin-top: 10px;
+    padding-left: 15px; }
+
+.modal .modal-body {
+  padding: 10px 30px 30px 30px; }

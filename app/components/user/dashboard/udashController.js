@@ -248,7 +248,7 @@
                     c.confirmPopup.show();
                     $timeout(
                         function () {
-                            c.confirmPopup.hide();
+                            //c.confirmPopup.hide();
 
                         }, 2000
                     );

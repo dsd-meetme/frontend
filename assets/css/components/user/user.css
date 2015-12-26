@@ -1,6 +1,6 @@
 .section_action_bar a {
   display: inline-block;
-  margin-top: 4px;
+  margin-top: 11px;
   color: #ccc;
   font-size: 16px; }
   .section_action_bar a:hover {
@@ -74,6 +74,11 @@
       padding-top: 2px; }
   .csched .csched_actionbar input[type="text"] {
     margin-left: 10px; }
+  .csched .csched_actionbar .align_input {
+    padding-left: 53px; }
+
+.csched .non_input_errors {
+  margin-right: 20px; }
 
 .csched .fc-toolbar {
   margin-bottom: 30px; }
@@ -155,31 +160,6 @@
 .udash .imported-section {
   margin-bottom: 70px; }
 
-.udash label.schedule-checkbox input[type=checkbox] {
-  display: none; }
-  .udash label.schedule-checkbox input[type=checkbox] + .label-text:before {
-    content: url("../../../img/schedule.png"); }
-  .udash label.schedule-checkbox input[type=checkbox]:checked + .label-text:before {
-    content: url("../../../img/schedule-off.png"); }
-
-.udash .circled-checkbox {
-  cursor: default; }
-  .udash .circled-checkbox input[type="checkbox"] {
-    display: none; }
-
-.udash .circled-checkbox input[type="checkbox"] + .label-text:before {
-  content: "\f10c";
-  font-family: "FontAwesome";
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  width: 1em;
-  margin-right: 7px;
-  color: #5a6772; }
-
 .udash .circled-checkbox input[type="checkbox"]:checked + .label-text:before {
   content: "\f111"; }
 
@@ -196,16 +176,7 @@
     width: 400px;
     display: inline-block;
     float: left;
-    margin-right: 15px;
-    /*input
-          width: calc(100% - 34px)
-          margin-left: 10px
-          border-bottom: 2px solid #ddd
-          padding: 5px 0 5px 0
-
-          &:focus
-            outline: none
-            border-bottom: 2px solid $glob_gray */ }
+    margin-right: 15px; }
 
 .udash .imported-schedules-content tbody tr td {
   width: 25%; }
@@ -221,39 +192,30 @@
     .udash .imported-schedules-content tbody tr td:last-child span:hover {
       color: #384047; }
 
-.udash #importSchedule .modal-header, .udash #editSchedule .modal-header {
-  padding-left: 30px; }
-  .udash #importSchedule .modal-header h3, .udash #editSchedule .modal-header h3 {
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-top: 10px;
-    display: inline-block; }
+.udash #importSchedule .modal-body > div, .udash #editSchedule .modal-body > div {
+  margin-bottom: 25px; }
 
-.udash #importSchedule .modal-body, .udash #editSchedule .modal-body {
-  padding: 30px; }
-  .udash #importSchedule .modal-body > p, .udash #editSchedule .modal-body > p {
-    margin-bottom: 2px;
-    font-weight: 600; }
-  .udash #importSchedule .modal-body input[type="text"], .udash #importSchedule .modal-body input[type="email"], .udash #importSchedule .modal-body input[type="password"], .udash #importSchedule .modal-body input[type="url"], .udash #editSchedule .modal-body input[type="text"], .udash #editSchedule .modal-body input[type="email"], .udash #editSchedule .modal-body input[type="password"], .udash #editSchedule .modal-body input[type="url"] {
-    border: none;
-    border-bottom: 2px solid #ddd;
-    padding: 5px 0 5px 0;
-    margin-bottom: 15px;
-    width: 60%; }
-    .udash #importSchedule .modal-body input[type="text"]:focus, .udash #importSchedule .modal-body input[type="email"]:focus, .udash #importSchedule .modal-body input[type="password"]:focus, .udash #importSchedule .modal-body input[type="url"]:focus, .udash #editSchedule .modal-body input[type="text"]:focus, .udash #editSchedule .modal-body input[type="email"]:focus, .udash #editSchedule .modal-body input[type="password"]:focus, .udash #editSchedule .modal-body input[type="url"]:focus {
-      outline: none;
-      border-bottom: 2px solid #384047; }
-  .udash #importSchedule .modal-body input[type="url"], .udash #editSchedule .modal-body input[type="url"] {
-    width: 80%; }
-  .udash #importSchedule .modal-body h4, .udash #editSchedule .modal-body h4 {
-    margin-bottom: 0;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-top: 20px; }
-  .udash #importSchedule .modal-body table, .udash #editSchedule .modal-body table {
-    margin-bottom: 0; }
-  .udash #importSchedule .modal-body .errorContainer, .udash #editSchedule .modal-body .errorContainer {
-    margin-top: 15px; }
+.udash #importSchedule .modal-body > div > p, .udash #editSchedule .modal-body > div > p {
+  margin-bottom: 5px; }
+
+.udash #importSchedule .modal-body input[type="url"], .udash #editSchedule .modal-body input[type="url"] {
+  width: 80%; }
+
+.udash #importSchedule .modal-body h4, .udash #editSchedule .modal-body h4 {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 30px; }
+
+.udash #importSchedule .modal-body table, .udash #editSchedule .modal-body table {
+  margin-bottom: 0; }
+
+.udash #importSchedule .secondary_button, .udash #editSchedule .secondary_button {
+  margin-right: 15px; }
+
+.udash #importSchedule .error_tile, .udash #editSchedule .error_tile {
+  padding-left: 30px; }
 
 .udash .wrench-link {
   color: #5a6772;
@@ -266,6 +228,7 @@
   padding-right: 30px; }
 
 .nm h4 {
+  margin-top: 30px;
   margin-bottom: 30px;
   padding-bottom: 10px;
   color: #555;
@@ -279,7 +242,6 @@
   margin-top: 0; }
 
 .nm form textarea {
-  margin-bottom: 15px;
   padding: 5px;
   width: 60%;
   height: 160px;
