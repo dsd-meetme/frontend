@@ -29,6 +29,8 @@
             //restful show
             orgResources.user().get({userId:id}).$promise
                 .then(function(response){
+                    console.log('responso');
+                    console.log(response)
                     c.data = response;
                     c.dataCopy.name = c.data.name;
                     c.dataCopy.email = c.data.email;
@@ -86,6 +88,18 @@
                 }
 
             }
+        };
+        c.deleteFromGroup = function(id){
+            orgResources.userInGroup().remove({ groupId : id, userId : c.data.id})
+                .$promise.then(function(){
+                    c.confirmPopup.message = 'Changes successfully made';
+                    c.confirmPopup.show();
+                    $timeout(function () {
+                        c.confirmPopup.hide();
+                    }, 2000);
+                    c.getInfo();
+                    c.editMode.exit();
+                })
         };
         c.editMode = {
             flag : false,

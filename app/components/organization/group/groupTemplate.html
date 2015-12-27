@@ -29,20 +29,13 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="row section_action_bar">
                 <a href="/#/organization"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
-                <button class="main_button" ng-show="groupC.editMode.flag">Save changes</button>
+                <button class="main_button" ng-click="groupC.updateInfo()" ng-show="groupC.editMode.flag">Save changes</button>
                 <button class="secondary_button" ng-show="groupC.editMode.flag" ng-click="groupC.editMode.exit()">Abort</button>
                 <button ng-show="!groupC.editMode.flag" class="main_button" ng-click="groupC.editMode.enter()"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Edit group
                 </button>
                 <p class="error_msg pull-right near_button_error" ng-repeat="error in cschedC.errors">{{error}}</p>
                 <p class="error_msg pull-right near_button_error" ng-show="cschedC.invalidFields.eventsReq"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one event</p>
             </div>
-           <!-- <div class="editSwitcherContainer">
-                <div><h5 ng-class="{highlighted : groupC.editMode.flag}">EDIT MODE</h5></div>
-                <div class="editSwitcher" ng-class="{switcherInEdit : groupC.editMode.flag}">
-                    <div ng-click="groupC.editMode.exit()" ng-class="{editSwitcherSelected: !groupC.editMode.flag}">&nbsp;</div>
-                    <div ng-click="groupC.editMode.enter()" ng-class="{editSwitcherSelected: groupC.editMode.flag}">&nbsp;</div>
-                </div>
-            </div>-->
         </div>
     </div>
     <div class="row">
@@ -59,51 +52,45 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Name</td>
-                                    <td><input ng-model="groupC.data.groupCopy.name" ng-readonly="!groupC.editMode.flag"
-                                               ng-class="{disabled : !groupC.editMode.flag}"></td>
+                                    <td class="font_bold">Name</td>
+                                    <td>
+                                        <input ng-model="groupC.data.groupCopy.name" ng-readonly="!groupC.editMode.flag"
+                                               ng-class="{disabled : !groupC.editMode.flag, error_bordering : groupC.invalidFields.nameReq}">
+                                        <p class="error_msg" ng-show="groupC.invalidFields.nameReq">Insert a name</p>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Description</td>
+                                    <td class="font_bold">Description</td>
                                     <td><textarea ng-model="groupC.data.groupCopy.description" ng-readonly="!groupC.editMode.flag"
                                                   ng-class="{disabled : !groupC.editMode.flag}"></textarea></td>
                                 </tr>
                                 <tr>
-                                    <td>Planner</td>
+                                    <td class="font_bold">Planner</td>
                                     <td>{{groupC.data.group.planner_name}}</td>
                                 </tr>
                                 </tbody>
                             </table>
                             <div>
                                 <button class="main_button" ng-click="groupC.changePlanner.init()" ng-show="groupC.editMode.flag">Change planner</button>
-                                <button class="secondary_button" ng-show="groupC.editMode.flag" ng-click="groupC.delete()">Delete group</button>
+                                <button class="secondary_button" ng-show="groupC.editMode.flag" ng-click="groupC.delete()"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete group</button>
                             </div>
                             <div class="errorContainer" ng-show="groupC.editMode.flag && (groupC.thereErrors.info || groupC.errors.info.length > 0)">
-                                <p ng-show="groupC.invalidFields.nameReq">Insert a name</p>
                                 <p ng-repeat="error in groupC.errors.info">{{error}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6  groupC_members">
                     <h3><i class="fa fa-users"></i>&nbsp;&nbsp;Members</h3>
                     <p class="text-danger" ng-repeat="error in groupC.errors.planner">{{error}}</p>
                     <br>
-                    <div ng-repeat=" member in groupC.data.members" class="clearfix groupC_members">
-                        <div>
-                            <p>{{member.name}}
-                            </p>
-                            <span class="fa fa-trash-o fa-lg pull-right" ng-show="groupC.editMode.flag" ng-click="groupC.deleteFromGroup(member.id)">
-                            </span>
-                        </div>
-                        <!--<div>
-                            <button class="btn btn-default btn-sm glob_button" ng-show="(member.id !== groupC.data.group.planner_id) && groupC.editMode.flag" ng-click="groupC.updatePlanner(member.id)">Make planner
-                            </button>
-                            <span class="fa fa-trash-o fa-lg" ng-show="groupC.editMode.flag" ng-click="groupC.deleteFromGroup(member.id)">
-                            </span>
-                        </div>-->
+                    <div ng-repeat=" member in groupC.data.members" class="clearfix">
+                        <a href="/#/organization/users/{{member.id}}">{{member.name}}
+                        </a>
+                        <span class="fa fa-trash-o fa-lg pull-right" ng-show="groupC.editMode.flag" ng-click="groupC.deleteFromGroup(member.id)">
+                        </span>
                     </div>
-                    <button style="margin-top: 15px" ng-show="groupC.editMode.flag" class="main_button" ng-click="groupC.addToGroup.init()">Add user to group</button>
+                    <button style="margin-top: 15px" ng-show="groupC.editMode.flag" class="main_button" ng-click="groupC.addToGroup.init()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add user to group</button>
                 </div>
             </div>
         </div>

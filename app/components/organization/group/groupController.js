@@ -147,6 +147,7 @@
         c.updateInfo = function () {
             //Checks the validity status of input fields
             c.invalidFields.nameReq = (c.data.groupCopy.name === '');
+            console.log(c.data.groupCopy);
             c.thereErrors.info = c.invalidFields.nameReq;
 
             if (!c.thereErrors.info) {

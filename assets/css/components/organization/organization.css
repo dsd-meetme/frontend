@@ -21,8 +21,15 @@
 .groupC .groupC_info table thead th {
   border: none; }
 
+.groupC .groupC_info table tbody tr td:first-child {
+  padding-top: 14px; }
+
 .groupC .groupC_info table tbody tr:first-child td {
   border: none; }
+
+.groupC .groupC_info table tbody tr:last-child td:last-child {
+  padding-top: 14px;
+  padding-left: 14px; }
 
 .groupC .groupC_info input {
   width: 100%;
@@ -30,6 +37,8 @@
   border-radius: 4px;
   outline: none;
   padding: 6px; }
+  .groupC .groupC_info input:focus {
+    border: 1px solid #42A5F5; }
 
 .groupC .groupC_info textarea {
   width: 100%;
@@ -39,16 +48,19 @@
   border-radius: 4px;
   resize: none;
   outline: none; }
+  .groupC .groupC_info textarea:focus {
+    border: 1px solid #42A5F5; }
 
 .groupC .groupC_info .main_button {
   margin-right: 15px; }
 
 .groupC .groupC_members > div {
   border-bottom: 1px solid #ccc; }
-  .groupC .groupC_members > div p {
+  .groupC .groupC_members > div p, .groupC .groupC_members > div a {
     display: inline-block;
-    margin-top: 10px; }
-    .groupC .groupC_members > div p span {
+    margin-top: 10px;
+    margin-bottom: 15px; }
+    .groupC .groupC_members > div p span, .groupC .groupC_members > div a span {
       color: #42A5F5; }
   .groupC .groupC_members > div > span {
     margin-top: 15px;
@@ -56,6 +68,15 @@
     cursor: pointer; }
     .groupC .groupC_members > div > span:hover {
       color: #555; }
+
+.groupC .deleteLink {
+  padding-top: 3px;
+  color: #ccc;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer; }
+  .groupC .deleteLink:hover {
+    color: #555; }
 
 #addToGroup table, #changePlanner table {
   margin-bottom: 0; }
