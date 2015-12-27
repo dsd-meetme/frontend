@@ -97,8 +97,6 @@
                 .then(function (response) {
                     c.data.users = response;
                     pages = Math.ceil(c.data.users.length/10);
-                    console.log('Pages');
-                    console.log(pages);
                     c.pagination.user.pages = pages;
                     c.pagination.user.utilArray = new Array(pages);
                     console.log(c.pagination);

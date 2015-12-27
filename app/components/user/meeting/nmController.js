@@ -1,12 +1,12 @@
 (function () {
 
     var controller = function (orgResources, $timeout, mixedContentToArray, $scope, $location, $routeParams) {
-        var mode = 1;
+        var mode = 'c';
         var changedEvents = [];
         var calendar;
         var selectDay = function () {
             var date = moment();
-            date.add(8-date.day(),'days').minute(0).hour(0);
+            date.add(8 - date.day(), 'days').minute(0).hour(0);
             return date;
         };
         var checkNewEvents = function (events) {
@@ -59,30 +59,25 @@
 
 
         };
-
         c.inputEnabled = false;
         c.dataCopy = {};
         c.processUrl = function () {
+            var urlParams;
             if ($routeParams.type.length === 1 && $routeParams.type === '_') {
-                mode = 1;
                 this.inputEnabled = true
             }
             else {
-                var urlParams = $routeParams.type.split('&');
+                urlParams = $routeParams.type.split('&');
                 this.groupId = urlParams[0];
                 this.meetingId = urlParams[1];
                 mode = urlParams[2];
-                console.log('mode');
-                console.log(mode);
                 if (mode === 'w') {
-                    console.log('centro');
                     this.inputEnabled = true
                 }
-                console.log(c.inputEnabled)
             }
         };
         c.getInfo = function () {
-            if(mode === 'w'){
+            if (mode === 'w') {
                 orgResources.meetings().get({groupId: this.groupId, meetingsId: this.meetingId})
                     .$promise.then(function (response) {
                         console.log(response);
@@ -92,9 +87,9 @@
                         c.duration = parseInt(response.duration) / 60;
                     })
             }
-            else {
-                orgResources.meetingsEmp().get({meetingId : this.meetingId})
-                    .$promise.then(function(response){
+            else if (mode === 'r') {
+                orgResources.meetingsEmp().get({meetingId: this.meetingId})
+                    .$promise.then(function (response) {
                         c.data = response;
                         c.title = response.title;
                         c.description = response.description;
@@ -105,9 +100,9 @@
         };
         c.getTimeslots = function () {
             var splittedTimeStart, splittedTimeEnd;
-            if (mode !== 1) {
+            if (mode !== 'c') {
                 c.getInfo();
-                if(mode === 'w'){
+                if (mode === 'w') {
                     orgResources.plannerTimeslots().query({
                         groupId: this.groupId,
                         meetingId: this.meetingId,
@@ -125,34 +120,9 @@
                                 });
 
                             }
-                            if (c.userInfo.is_planner) {
-                                console.log('entro lì');
-                                calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
-                            }
-                            else {
-                                calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfigRead);
-                            }
-
+                            calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
                         })
                 }
-                else {
-                    orgResources.meetingsEmp().query({meetingId : this.meetingId})
-                        .$promise.then(function(response){
-                            for (var i = 0; i < response.timeslots.length; i++) {
-                                splittedTimeStart = response.timeslots[i].time_start.split(' ');
-                                splittedTimeEnd = response.timeslots[i].time_end.split(' ');
-                                c.events.push({
-                                    title: '',
-                                    start: splittedTimeStart[0] + 'T' + splittedTimeStart[1],
-                                    end: splittedTimeEnd[0] + 'T' + splittedTimeEnd[1],
-                                    specificId: response[i].id
-                                });
-
-                            }
-                            calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfigRead);
-                        })
-                }
-
             }
             else {
                 calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
@@ -167,16 +137,6 @@
                 .then(function () {
                     alert('evviva');
                 })
-        };
-        c.calendarConfigRead = {
-            firstDay: 1,
-            allDaySlot: false,
-            header: {
-                right: 'deleteBtn, prev,next today'
-            },
-            defaultView: 'agendaWeek',
-            slotDuration: '00:15:00',
-            events: c.events,
         };
         c.calendarConfig = {
             customButtons: {
@@ -211,14 +171,9 @@
             editable: true,
             selectable: true,
             selectHelper: true,
-            businessHours: {
-                start: '00:00',
-                end: '23:59',
-                dow: [1, 2, 3, 4, 5]
-            },
             selectConstraint: {
                 start: selectDay().toISOString(),
-                end: selectDay().add(7, 'days')
+                end: selectDay().add(30, 'days')
             },
             eventConstraint: {
                 start: selectDay().toISOString(),
@@ -388,7 +343,7 @@
             }
         };
         c.getGroups = function () {
-            if (mode === 'w' ) {
+            if (mode === 'w' || mode === 'c') {
                 orgResources.groupsplanner().query({groupId: ''}).$promise
                     .then(function (response) {
                         c.groups = response;
@@ -396,7 +351,7 @@
             }
 
         };
-        c.getTimeslotsUn = function(id){
+        c.getTimeslotsUn = function (id) {
             orgResources.meetingsEmp().query({meetingId: id})
         }
         getUserInfo();
