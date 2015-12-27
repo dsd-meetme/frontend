@@ -1,64 +1,102 @@
-<div>
-    <div class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- HEADER -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <img src="assets/img/plunner.png" alt=""/>
-                </a>
-            </div>
-            <div class="navbar-collapse collapse navbar-right">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="user_section">
-                        <a href="/#/user/profile">
-                            <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
-                            <span></span> Employee Name</a>
-                    </li>
-                    <li>
-                        <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
-                    </li>
-                </ul>
-            </div>
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/plunner.png" alt=""/>
+            </a>
         </div>
-    </div>
-    <div class="page-content">
-    <div>
-        <div>
-            Name : {{upC.data.name}}
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="user_section">
+                    <a href="/#/user/profile">
+                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
+                        <span></span> Employee Name</a>
+                </li>
+                <li>
+                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+                </li>
+            </ul>
         </div>
-        <div>
-            Email : {{upC.data.email}}
-        </div>
-        <div ng-hide="upC.changePassword.showValue">
-            Password : ......
-        </div>
-        <form ng-show="upC.changePassword.showValue" name="changePasswordForm" ng-submit="upC.changePassword.submit()">
-            <input type="password" name="password" required ng-minlength="6"/>
-            <div class="errorsGroup">
-                <p class="text-danger" ng-show="upC.changePassword.invalidFields.passwordRequired">Insert a password</p>
-                <p class="text-danger" ng-show="upC.changePassword.invalidFields.passwordLength">Insert a password of at least 6 characters</p>
-            </div>
-            <button class="btn btn-primary" type="submit">Save changes</button>
-            <button class="btn btn-default" ng-click="upC.changePassword.abort()">Abort</button>
-        </form>
-        <button class="btn btn-default" ng-click="upC.changePassword.show()">Change</button>
-
-
-
-
-    </div>
-    <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <h3 class="text-center">Changes successfully saved!</h3>
-                </div>
-                <br/>
-            </div>
-        </div>
-    </div>
     </div>
 </div>
+<div class="container-fluid upC">
+    <div class="section_heading row">
+        <h1 class="text-center font_light">Your profile</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <div class="row section_action_bar">
+                <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+                <button class="main_button" ng-click="upC.update.submit()" ng-show="upC.editMode.flag">Save changes</button>
+                <button class="secondary_button" ng-show="upC.editMode.flag" ng-click="upC.editMode.exit()">Abort</button>
+                <button ng-show="!upC.editMode.flag" class="main_button" ng-click="upC.editMode.enter()"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Edit profile
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <div class="row">
+                <div class="col-md-5">
+                    <form name="upC_profile_form">
+                        <table class="table">
+                            <thead>
+                            <th></th>
+                            <th></th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="font_bold">Name:</td>
+                                <td>
+                                    <p>{{upC.data.name}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font_bold">Email:</td>
+                                <td>
+                                    <p>{{upC.data.email}}</p>
+                                </td>
+                            </tr>
+                            <tr class="password_row">
+                                <td class="font_bold">Password:</td>
+                                <td>
+                                    <input placeholder="your password" name="password" ng-minlength="6" type="password" ng-model="upC.dataCopy.password" ng-readonly="!upC.editMode.flag"
+                                           ng-class="{disabled : !upC.editMode.flag, error_bordering: upC.update.invalidFields.passwordLength }">
+                                    <p class="error_msg" ng-show="upC.update.invalidFields.passwordLength">Insert a password at least 6 characters long</p>
+                                </td>
+                            </tr>
+                            <tr class="password_row" ng-show="upC.editMode.flag">
+                                <td class="font_bold">Confirm password</td>
+                                <td>
+                                    <input name="password_confirmation" type="password" ng-model="upC.dataCopy.password_confirmation"
+                                           ng-class="{error_bordering : upC.update.invalidFields.passwordMatch}" >
+                                    <p class="error_msg" ng-show="upC.update.invalidFields.passwordMatch">The passwords don't match</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center">Changes succesfully saved!</h3>
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>

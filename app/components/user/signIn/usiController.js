@@ -31,7 +31,7 @@
                     company: c.name,
                     email: c.email,
                     password: c.password,
-                    rmbMe: c.rmbMe
+                    remember: c.rmbMe
                 }).then(function (response) {
                     $location.path('/user')
                 }, function (response) {

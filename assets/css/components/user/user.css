@@ -280,3 +280,33 @@
   text-transform: none;
   line-height: 1;
   -webkit-font-smoothing: antialiased; }
+
+.upC .secondary_button {
+  margin-right: 15px; }
+
+.upC form .disabled {
+  border: 0 !important; }
+
+.upC table thead th {
+  border: none; }
+
+.upC table tbody tr td {
+  padding-top: 14px; }
+
+.upC table tbody tr:first-child td {
+  border: none; }
+
+.upC table tbody .password_row td {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+  .upC table tbody .password_row td:first-child {
+    padding-top: 25px; }
+
+.upC table input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  padding: 6px; }
+  .upC table input:focus {
+    border: 1px solid #42A5F5; }

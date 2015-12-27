@@ -82,45 +82,77 @@
             }
         };
         c.getInfo = function () {
-            orgResources.meetings().get({groupId: this.groupId, meetingsId: this.meetingId})
-                .$promise.then(function (response) {
-                    console.log(response);
-                    c.data = response;
-                    c.title = response.title;
-                    c.description = response.description;
-                    c.duration = parseInt(response.duration) / 60;
-                })
+            if(mode === 'w'){
+                orgResources.meetings().get({groupId: this.groupId, meetingsId: this.meetingId})
+                    .$promise.then(function (response) {
+                        console.log(response);
+                        c.data = response;
+                        c.title = response.title;
+                        c.description = response.description;
+                        c.duration = parseInt(response.duration) / 60;
+                    })
+            }
+            else {
+                orgResources.meetingsEmp().get({meetingId : this.meetingId})
+                    .$promise.then(function(response){
+                        c.data = response;
+                        c.title = response.title;
+                        c.description = response.description;
+                        c.duration = parseInt(response.duration) / 60;
+                    })
+            }
+
         };
         c.getTimeslots = function () {
             var splittedTimeStart, splittedTimeEnd;
             if (mode !== 1) {
                 c.getInfo();
-                orgResources.plannerTimeslots().query({
-                    groupId: this.groupId,
-                    meetingId: this.meetingId,
-                    timeslotId: ''
-                })
-                    .$promise.then(function (response) {
-                        for (var i = 0; i < response.length; i++) {
-                            splittedTimeStart = response[i].time_start.split(' ');
-                            splittedTimeEnd = response[i].time_end.split(' ');
-                            c.events.push({
-                                title: '',
-                                start: splittedTimeStart[0] + 'T' + splittedTimeStart[1],
-                                end: splittedTimeEnd[0] + 'T' + splittedTimeEnd[1],
-                                specificId: response[i].id
-                            });
-
-                        }
-                        if (c.userInfo.is_planner && mode === 'w') {
-                            console.log('entro lì');
-                            calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
-                        }
-                        else {
-                            calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfigRead);
-                        }
-
+                if(mode === 'w'){
+                    orgResources.plannerTimeslots().query({
+                        groupId: this.groupId,
+                        meetingId: this.meetingId,
+                        timeslotId: ''
                     })
+                        .$promise.then(function (response) {
+                            for (var i = 0; i < response.length; i++) {
+                                splittedTimeStart = response[i].time_start.split(' ');
+                                splittedTimeEnd = response[i].time_end.split(' ');
+                                c.events.push({
+                                    title: '',
+                                    start: splittedTimeStart[0] + 'T' + splittedTimeStart[1],
+                                    end: splittedTimeEnd[0] + 'T' + splittedTimeEnd[1],
+                                    specificId: response[i].id
+                                });
+
+                            }
+                            if (c.userInfo.is_planner) {
+                                console.log('entro lì');
+                                calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
+                            }
+                            else {
+                                calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfigRead);
+                            }
+
+                        })
+                }
+                else {
+                    orgResources.meetingsEmp().query({meetingId : this.meetingId})
+                        .$promise.then(function(response){
+                            for (var i = 0; i < response.timeslots.length; i++) {
+                                splittedTimeStart = response.timeslots[i].time_start.split(' ');
+                                splittedTimeEnd = response.timeslots[i].time_end.split(' ');
+                                c.events.push({
+                                    title: '',
+                                    start: splittedTimeStart[0] + 'T' + splittedTimeStart[1],
+                                    end: splittedTimeEnd[0] + 'T' + splittedTimeEnd[1],
+                                    specificId: response[i].id
+                                });
+
+                            }
+                            calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfigRead);
+                        })
+                }
+
             }
             else {
                 calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
@@ -356,7 +388,7 @@
             }
         };
         c.getGroups = function () {
-            if (mode === 'w' || mode === 1) {
+            if (mode === 'w' ) {
                 orgResources.groupsplanner().query({groupId: ''}).$promise
                     .then(function (response) {
                         c.groups = response;
@@ -364,6 +396,9 @@
             }
 
         };
+        c.getTimeslotsUn = function(id){
+            orgResources.meetingsEmp().query({meetingId: id})
+        }
         getUserInfo();
         c.processUrl();
         c.getGroups();

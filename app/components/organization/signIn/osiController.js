@@ -28,7 +28,7 @@
                 dataPublisher.publish('http://api.plunner.com/companies/auth/login', {
                     email: c.email,
                     password: c.password,
-                    rmbMe: c.rmbMe
+                    remember: c.rmbMe
                 }).then(function () {
                     $location.path('/organization');
                 }, function (response) {

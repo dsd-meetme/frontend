@@ -142,7 +142,7 @@
                     console.log(response);
                     c.meetings.toBePlanned = processMeetings(response);
                 });
-            orgResources.meetingsEmp().query()
+            orgResources.meetingsEmp().query({meetingId:''})
                 .$promise.then(function (response) {
                     console.log('Gotten planned meetings');
                     console.log(response);
