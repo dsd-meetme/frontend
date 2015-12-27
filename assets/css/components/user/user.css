@@ -61,6 +61,15 @@
   border: 1px solid #42A5F5;
   background-color: #42A5F5; }
 
+.fc .removeEvent {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  z-index: 999999;
+  opacity: .8; }
+  .fc .removeEvent:hover {
+    opacity: 1; }
+
 .csched .csched_actionbar {
   margin-bottom: 30px; }
   .csched .csched_actionbar button {
@@ -192,37 +201,30 @@
     .udash .imported-schedules-content tbody tr td:last-child span:hover {
       color: #384047; }
 
-.udash #importSchedule .modal-body > div, .udash #editSchedule .modal-body > div {
+#importSchedule .modal-body > div, #editSchedule .modal-body > div {
   margin-bottom: 25px; }
 
-.udash #importSchedule .modal-body > div > p, .udash #editSchedule .modal-body > div > p {
+#importSchedule .modal-body > div > p, #editSchedule .modal-body > div > p {
   margin-bottom: 5px; }
 
-.udash #importSchedule .modal-body input[type="url"], .udash #editSchedule .modal-body input[type="url"] {
+#importSchedule .modal-body input[type="url"], #editSchedule .modal-body input[type="url"] {
   width: 80%; }
 
-.udash #importSchedule .modal-body h4, .udash #editSchedule .modal-body h4 {
+#importSchedule .modal-body h4, #editSchedule .modal-body h4 {
   margin-bottom: 0;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 16px;
   margin-top: 30px; }
 
-.udash #importSchedule .modal-body table, .udash #editSchedule .modal-body table {
+#importSchedule .modal-body table, #editSchedule .modal-body table {
   margin-bottom: 0; }
 
-.udash #importSchedule .secondary_button, .udash #editSchedule .secondary_button {
+#importSchedule .secondary_button, #editSchedule .secondary_button {
   margin-right: 15px; }
 
-.udash #importSchedule .error_tile, .udash #editSchedule .error_tile {
+#importSchedule .error_tile, #editSchedule .error_tile {
   padding-left: 30px; }
-
-.udash .wrench-link {
-  color: #5a6772;
-  text-decoration: none;
-  margin-right: 15px; }
-  .udash .wrench-link:hover {
-    color: #384047; }
 
 .nm > div:first-child {
   padding-right: 30px; }

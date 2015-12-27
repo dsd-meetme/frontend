@@ -30,7 +30,7 @@
         <div class="col-md-8 col-md-push-2">
             <div class="row section_action_bar">
                 <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
-                <button ng-if="nmC.inputEnabled" class="main_button" ng-click="nmC.submit()"><i class="fa fa-users"></i>&nbsp;&nbsp;Plan meeting</button>
+                <button ng-if="nmC.inputEnabled" class="main_button" ng-click="nmC.submit()"><i class="fa fa-users"></i>&nbsp;&nbsp;{{nmC.buttonText}}</button>
                 <p class="error_msg pull-right near_button_error" ng-repeat="error in nmeC.errors">{{error}}</p>
             </div>
 
@@ -60,7 +60,6 @@
                         <p class="error_msg" ng-show="nmC.invalidFields.durationLimit">Insert a valid duration duration(max 300mins, min
                             15mins)</p>
                         <p>Groups</p>
-
                         <div ng-repeat="group in nmC.groups">
                             <span style="margin-right: 10px">{{group.name}}</span>
                             <label class="circled_radio">
@@ -70,6 +69,7 @@
 
                             <!--<input type="radio" name="group" ng-checked="nmC.selectedGroupAssign(group.id)" >-->
                         </div>
+                        <span>{{nmC.groupName}}</span>
                         <p class="error_msg" ng-show="nmC.invalidFields.oneGroup">Select a group for the meeting</p>
                     </div>
                 </form>

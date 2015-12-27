@@ -442,6 +442,9 @@ a.main_button {
 .modal .modal-body {
   padding: 10px 30px 30px 30px; }
 
+#confirmPopup h3 {
+  font-weight: 400; }
+
 .pagination {
   margin-bottom: 0; }
   .pagination li {

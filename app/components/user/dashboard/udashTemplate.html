@@ -1,7 +1,7 @@
 <div class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/#/user">
                 <img src="assets/img/plunner.png" alt=""/>
             </a>
         </div>
@@ -37,6 +37,7 @@
     <br/>
     <br/>
     <br/>
+
     <div class="row" ng-show="udashC.viewSections.meetings">
         <div class="col-md-8 col-md-push-2">
             <div class="row sub_section_actionbar">
@@ -64,6 +65,7 @@
                             </div>
                             <div class="col-md-10 tileBody">
                                 <h4 class="tileTitle">{{meeting.title}}</h4>
+
                                 <div class="tileDescription">
                                     {{meeting.description}}
                                 </div>
@@ -99,8 +101,13 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="list-unstyled list-inline pagination" ng-if="udashC.pagination.meetingsManaged.pages < 2">
-                        <li ng-class="{underlinedPage : udashC.pagination.meetingsPlanned.currentPage === ($index + 1)}" ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)" ng-repeat="i in udashC.pagination.meetingsManaged.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                    <ul class="list-unstyled list-inline pagination"
+                        ng-if="udashC.pagination.meetingsManaged.pages > 1">
+                        <li ng-class="{underlinedPage : udashC.pagination.meetingsPlanned.currentPage === ($index + 1)}"
+                            ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)"
+                            ng-repeat="i in udashC.pagination.meetingsManaged.utilArray track by $index | limitTo: 4">
+                            {{$index+1}}
+                        </li>
                     </ul>
                     <h4 ng-show="udashC.meetings.toBePlanned.length === 0"
                         class="text-center udash_empty_state_msg font_normal">Sorry, no meetings to be planned for you
@@ -154,8 +161,13 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="list-unstyled list-inline pagination" ng-if="udashC.pagination.meetingsToBePlanned.pages < 2">
-                        <li ng-class="{underlinedPage : udashC.pagination.meetingsToBePlanned.currentPage === ($index + 1)}" ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)" ng-repeat="i in udashC.pagination.meetingsToBePlanned.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                    <ul class="list-unstyled list-inline pagination"
+                        ng-if="udashC.pagination.meetingsToBePlanned.pages > 1">
+                        <li ng-class="{underlinedPage : udashC.pagination.meetingsToBePlanned.currentPage === ($index + 1)}"
+                            ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)"
+                            ng-repeat="i in udashC.pagination.meetingsToBePlanned.utilArray track by $index | limitTo: 4">
+                            {{$index+1}}
+                        </li>
                     </ul>
                     <h4 ng-show="udashC.meetings.toBePlanned.length === 0"
                         class="text-center udash_empty_state_msg font_normal">Sorry, no meetings to be planned for you
@@ -214,8 +226,13 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="list-unstyled list-inline pagination" ng-if="udashC.pagination.meetingsPlanned.pages < 2">
-                        <li ng-class="{underlinedPage : udashC.pagination.meetingsPlanned.currentPage === ($index + 1)}" ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)" ng-repeat="i in udashC.pagination.meetingsPlanned.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                    <ul class="list-unstyled list-inline pagination"
+                        ng-if="udashC.pagination.meetingsPlanned.pages > 1">
+                        <li ng-class="{underlinedPage : udashC.pagination.meetingsPlanned.currentPage === ($index + 1)}"
+                            ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)"
+                            ng-repeat="i in udashC.pagination.meetingsPlanned.utilArray track by $index | limitTo: 4">
+                            {{$index+1}}
+                        </li>
                     </ul>
                     <h4 ng-show="udashC.meetings.planned.length === 0"
                         class="text-center udash_empty_state_msg font_normal">Sorry, no meetings to be planned for you
@@ -294,8 +311,13 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="list-unstyled list-inline pagination" ng-if="udashC.pagination.schedulesImported.pages < 2">
-                        <li ng-class="{underlinedPage : udashC.pagination.schedulesImported.currentPage === ($index + 1)}" ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)" ng-repeat="i in udashC.pagination.schedulesImported.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                    <ul class="list-unstyled list-inline pagination"
+                        ng-if="udashC.pagination.schedulesImported.pages > 1">
+                        <li ng-class="{underlinedPage : udashC.pagination.schedulesImported.currentPage === ($index + 1)}"
+                            ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)"
+                            ng-repeat="i in udashC.pagination.schedulesImported.utilArray track by $index | limitTo: 4">
+                            {{$index+1}}
+                        </li>
                     </ul>
                     <h4 ng-show="udashC.schedules.imported.length === 0"
                         class="text-center udash_empty_state_msg font_normal">Sorry, no imported schedules for you
@@ -335,20 +357,27 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right tileIconRight">
-                                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-                                <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g transform="translate(-1202.000000, -14.000000)" fill="#dddddd">
-                                            <path d="M1228.02325,50.9383888 L1202.0559,84 L1208.31538,89.5463755 L1236.38284,53.4511569 L1238.33675,50.9383905 L1236.32694,48.4701061 L1208.25948,14 L1202.0559,19.0512964 L1228.02325,50.9383888 Z"></path>
+                                <a href="/#/user/schedules/compose/{{schedule.id}}&{{schedule.name}}&0">
+                                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                    <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g transform="translate(-1202.000000, -14.000000)" fill="#dddddd">
+                                                <path d="M1228.02325,50.9383888 L1202.0559,84 L1208.31538,89.5463755 L1236.38284,53.4511569 L1238.33675,50.9383905 L1236.32694,48.4701061 L1208.25948,14 L1202.0559,19.0512964 L1228.02325,50.9383888 Z"></path>
+                                            </g>
                                         </g>
-                                    </g>
-                                </svg>
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <ul class="list-unstyled list-inline pagination" ng-if="udashC.pagination.schedulesComposed.pages < 2">
-                        <li ng-class="{underlinedPage : udashC.pagination.schedulesComposed.currentPage === ($index + 1)}" ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)" ng-repeat="i in udashC.pagination.schedulesComposed.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                    <ul class="list-unstyled list-inline pagination"
+                        ng-if="udashC.pagination.schedulesComposed.pages > 1">
+                        <li ng-class="{underlinedPage : udashC.pagination.schedulesComposed.currentPage === ($index + 1)}"
+                            ng-click="udashC.pagination.changePage('meetingsManaged', $index+1)"
+                            ng-repeat="i in udashC.pagination.schedulesComposed.utilArray track by $index | limitTo: 4">
+                            {{$index+1}}
+                        </li>
                     </ul>
                     <h4 ng-show="udashC.schedules.composed.length === 0"
                         class="text-center udash_empty_state_msg font_normal">Sorry, no composed schedules for you
@@ -403,8 +432,8 @@
                     <button class="main_button main_button_small" ng-click="udashC.importSchedule.getCalendars()">
                         <i class="fa fa-arrow-down"></i>&nbsp;&nbsp;Get schedules
                     </button>
-                    <img ng-show="udashC.importSchedule.showLoader" src="assets/img/loader.gif" width="24px"
-                         alt="">
+                    <img ng-show="udashC.importSchedule.showLoader" src="assets/img/484.GIF" width="24px"
+                         alt="Loading">
 
                     <div ng-show="udashC.importSchedule.calendars.length > 0">
                         <h4>Available schedules</h4>
@@ -425,7 +454,6 @@
                                 </td>
                             </tr>
                             </tbody>
-                            <tbody></tbody>
                         </table>
                     </div>
                 </div>

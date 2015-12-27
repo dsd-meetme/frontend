@@ -1,6 +1,5 @@
 (function(){
     var filter = function(input, delimiters){
-        console.log(delimiters);
         var splittedDelimiters = delimiters.split(',');
         var start = parseInt(splittedDelimiters[0]);
         var end = parseInt(splittedDelimiters[1]);

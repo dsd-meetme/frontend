@@ -46,6 +46,7 @@
                     authorizationPopup.hide();
                     $location.path('/organization');
                 }, function (response) {
+                    authorizationPopup.hide();
                     if (response.status === 422) {
                         mixedContentToArray.process(response.data, c.errors, true);
                     }

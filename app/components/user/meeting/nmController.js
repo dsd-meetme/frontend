@@ -52,6 +52,7 @@
                 });
         };
         var c = this;
+        c.buttonText = 'Plan meeting';
         c.events = [];
         c.userInfo = {
             name: '',
@@ -73,6 +74,7 @@
                 mode = urlParams[2];
                 if (mode === 'w') {
                     this.inputEnabled = true
+                    this.buttonText = 'Save changes'
                 }
             }
         };
@@ -85,6 +87,7 @@
                         c.title = response.title;
                         c.description = response.description;
                         c.duration = parseInt(response.duration) / 60;
+                        c.groupName = response.group.name;
                     })
             }
             else if (mode === 'r') {
@@ -135,7 +138,12 @@
                 timeslotId: id
             }).$promise
                 .then(function () {
-                    alert('evviva');
+                    c.confirmPopup.message = 'Event succesfully deleted';
+                    c.confirmPopup.show();
+                    $timeout(function () {
+                        c.confirmPopup.hide();
+                    }, 2000)
+
                 })
         };
         c.calendarConfig = {
@@ -179,12 +187,14 @@
                 start: selectDay().toISOString(),
                 end: selectDay().add(7, 'days')
             },
-            eventClick: function (calEvent, jsEvent, view) {
-                jQuery('.fc-deleteBtn-button').show();
-                c.eventRemoveId = {
-                    one: calEvent._id,
-                    two: calEvent.specificId
-                };
+            eventRender: function (event, element) {
+                element.append("<span class='fa fa-close removeEvent'></span>");
+                element.find(".fa-close").click(function () {
+                    if (mode === 'w') {
+                        c.removeTimeslot(event.specificId);
+                    }
+                    calendar.fullCalendar('removeEvents', event._id);
+                });
             },
             select: function (start, end, jsEvent, view) {
                 calendar.fullCalendar('renderEvent',
@@ -241,10 +251,13 @@
             var events = calendar.fullCalendar('clientEvents');
             var minEventDuration;
             var processedEvents;
+            var index, index_one;
+            index = 0;
+            index_one = 0;
             this.invalidFields.nameReq = form.title.$error.required;
             this.invalidFields.descriptionReq = form.description.$error.required;
             this.invalidFields.durationReq = form.duration.$error.required;
-            this.invalidFields.oneGroup = !angular.isDefined(this.selectedGroup);
+            this.invalidFields.oneGroup = !angular.isDefined(this.selectedGroup) && mode !== 'w';
             this.invalidFields.durationVal = form.duration.$error.number;
             if (!this.invalidFields.durationReq) {
                 this.invalidFields.durationLimit = !(this.duration >= 15 && this.duration <= 300);
@@ -267,8 +280,9 @@
             this.thereErrors = form.$invalid || this.invalidFields.durationConflict || this.invalidFields.oneEventLeast
                 || this.invalidFields.oneGroup;
             if (!this.thereErrors) {
+                console.log("entro lsdasd");
                 processedEvents = backendEventAdapter(events, true);
-                if (mode === 1) {
+                if (mode === 'c') {
                     orgResources.meetings().save({groupId: this.selectedGroup, meetingsId: ''}, jQuery.param({
                         title: this.title,
                         description: this.description,
@@ -279,7 +293,7 @@
                                 orgResources.timers().save({groupId: c.selectedGroup, meetingsId: response.id},
                                     jQuery.param(processedEvents[i])
                                 ).$promise.then(function () {
-                                        if (i === processedEvents.length) {
+                                        if (index === processedEvents.length - 1) {
                                             c.confirmPopup.message = 'Meeting successfully planned';
                                             c.confirmPopup.show();
                                             $timeout(function () {
@@ -287,6 +301,7 @@
                                                 $location.path('/user');
                                             }, 2000)
                                         }
+                                        index++;
                                     }, function (response) {
                                         mixedContentToArray.process(response.data, c.errors, true);
                                     })
@@ -296,54 +311,74 @@
                         })
                 }
                 else {
+
+                    index = 0;
                     newEvents = backendEventAdapter(checkNewEvents(events), true);
                     modifiedEvents = backendEventAdapter(changedEvents, false);
 
-                    alsoEditEvents = modifiedEvents.length > 0;
-                    for (var i = 0; i < newEvents.length; i++) {
-                        orgResources.plannerTimeslots().save({
-                                groupId: this.groupId,
-                                meetingId: this.meetingId,
-                                timeslotId: ''
-                            },
-                            jQuery.param(newEvents[i])).$promise.then(function (response) {
-                                if (i === newEvents.length - 1 && !alsoEditEvents) {
-                                    c.confirmPopup.message = "Schedule successfully saved";
-                                    c.confirmPopup.show();
+                    alsoEditEvents = modifiedEvents[1].length > 0;
+                    console.log(newEvents);
+                    console.log(modifiedEvents);
+                    console.log(alsoEditEvents);
 
-                                    $timeout(function () {
-                                        c.confirmPopup.hide();
-                                        $location.path('/user');
-                                    }, 2000)
-                                }
+                    orgResources.meetings().update({groupId: this.groupId, meetingsId: this.meetingId}, jQuery.param({
+                        title: this.title,
+                        description: this.description,
+                        duration: (this.duration * 60)
+                    })).$promise.then(function (response) {
+                            for (var i = 0; i < newEvents.length; i++) {
+                                orgResources.plannerTimeslots().save({
+                                        groupId: c.groupId,
+                                        meetingId: c.meetingId,
+                                        timeslotId: ''
+                                    },
+                                    jQuery.param(newEvents[i])).$promise.then(function (response) {
+                                        if (index === newEvents.length - 1 && !alsoEditEvents) {
+                                            c.confirmPopup.message = "Schedule successfully saved";
+                                            c.confirmPopup.show();
 
-                            });
-                    }
-                    for (i = 0; i < modifiedEvents[1].length; i++) {
-                        orgResources.plannerTimeslots().update({
-                                groupId: this.groupId,
-                                meetingId: this.meetingId,
-                                timeslotId: modifiedEvents[0][i]
-                            },
-                            jQuery.param(modifiedEvents[1][i])).$promise.then(function (response) {
-                                if (i === modifiedEvents.length - 1) {
-                                    c.confirmPopup.message = "Schedule successfully saved";
-                                    c.confirmPopup.show();
+                                            $timeout(function () {
+                                                c.confirmPopup.hide();
+                                                $location.path('/user');
+                                            }, 2000)
+                                        }
+                                        index++;
 
-                                    $timeout(function () {
-                                        c.confirmPopup.hide();
-                                        $location.path('/user');
-                                    }, 2000)
-                                }
+                                    });
+                            }
+                            for (i = 0; i < modifiedEvents[1].length; i++) {
+                                orgResources.plannerTimeslots().update({
+                                        groupId: c.groupId,
+                                        meetingId: c.meetingId,
+                                        timeslotId: modifiedEvents[0][i]
+                                    },
+                                    jQuery.param(modifiedEvents[1][i])).$promise.then(function () {
+                                        if (index_one === modifiedEvents[1].length - 1) {
+                                            c.confirmPopup.message = "Schedule successfully saved";
+                                            c.confirmPopup.show();
+                                            $timeout(function () {
+                                                c.confirmPopup.hide();
+                                                $location.path('/user');
+                                            }, 2000)
+                                        }
 
-                            });
-                    }
+                                    });
+                            }
+                            if (newEvents.length === 0 && modifiedEvents[1].length === 0) {
+                                c.confirmPopup.message = "Schedule successfully saved";
+                                c.confirmPopup.show();
+                                $timeout(function () {
+                                    c.confirmPopup.hide();
+                                    $location.path('/user');
+                                }, 2000)
+                            }
+                        })
                 }
 
             }
         };
         c.getGroups = function () {
-            if (mode === 'w' || mode === 'c') {
+            if (mode === 'c') {
                 orgResources.groupsplanner().query({groupId: ''}).$promise
                     .then(function (response) {
                         c.groups = response;

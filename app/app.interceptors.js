@@ -51,10 +51,6 @@
                                 token = response.headers('Authorization');
                                 exp = jwt_decode(token).exp;
                             }
-                            //console.log("Received token "+token);
-                            //if a jwt already exists
-                            console.log("exp");
-                            console.log(exp);
                             if($cookies.get('auth_token')){
                                 $cookies.remove('auth_token');
                             }
