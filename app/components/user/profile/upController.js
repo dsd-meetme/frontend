@@ -22,6 +22,11 @@
                 this.flag = true;
             },
             exit: function () {
+                c.update.errors = [];
+                c.update.invalidFields.passwordMatch = false;
+                c.update.invalidFields.passwordLength = false;
+                c.dataCopy.password = '';
+                c.dataCopy.password_confirmation = '';
                 this.flag = false;
             }
         };

@@ -1,129 +1,103 @@
 <div class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- HEADER -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">PLUNNER</a>
-      </div>
-      <div class="navbar-collapse collapse navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/#/organization">Dashboard</a></li>
-          <li><a href="/#/organization/profile">
-            <!--<span class="glyphicon glyphicon-user"></span> -->
-            <img class="img-profile" src="assets/img/company-logo.jpg">
-            Organization Name</a></li>
-          <li><a href="#">How To</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">SIGN OUT</button></li>
-        </ul>
-      </div>
+    <div class="container-fluid">
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/plunner.png" alt=""/>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="user_section">
+                    <a href="/#/organization/profile">
+                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
+                        Employee Name
+                    </a>
+                </li>
+                <li>
+                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </div>
-<div class="container">
-  <div ng-show="opC.showCurrentState" class="top-banner">
+<div class="container-fluid upC">
+    <div class="section_heading row">
+        <h1 class="text-center font_light">Your profile</h1>
+    </div>
     <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4"><b>CURRENT STATE</b></div>
-      <div class="col-md-4"><a href="" class="banner-button">EDIT</a></div>
+        <div class="col-md-8 col-md-push-2">
+            <div class="row section_action_bar">
+                <a href="/#/organization"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+                <button class="main_button" ng-click="opC.update.submit()" ng-show="opC.editMode.flag">Save changes</button>
+                <button class="secondary_button" ng-show="opC.editMode.flag" ng-click="opC.editMode.exit()">Abort</button>
+                <button ng-show="!opC.editMode.flag" class="main_button" ng-click="opC.editMode.enter()"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Edit profile
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div ng-show="opC.showEditMode" class="top-banner2">
+    <br/>
+    <br/>
     <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4"><b>EDIT MODE</b></div>
-      <div class="col-md-4"></div>
-    </div>
-  </div>
-</div>
-
-<div class="page-content container">
-
-detected :
-        <img class="img-country" src="assets/img/italia.png">Milano - ITALY<br>09:00pm
-
-  <div class="row">
-    <div class="col-md-3"><img class="img-profile2" src="assets/img/company-logo.jpg" ng-click="opC.enterEditMode()"></div>
-    <div class="col-md-6"><h1><b>ORGANIZATION NAME</b></h1></div>
-    <div class="col-md-3"></div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-3">Registration Email: </div>
-    <div class="col-md-6">{{opC.data.email}}</div>
-    <div class="col-md-3"></div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-3">Password: </div>
-    <div class="col-md-6">XXXXXXX</div>
-    <div class="col-md-3">
-      <button class="btn btn-default" data-toggle="modal" data-target="#editProfile"><a href>
-        <span style="font-size:30px" class="glyphicon glyphicon-wrench"></span> Edit my Profile
-      </a></button>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6"></div>
-    <div class="col-md-3">
-      <button class="btn btn-danger" data-toggle="modal" data-target="#deleteOrganisation">Delete this account</button></div>
-
-  <h3>My profile</h3>
-  <div>
-    <br>
-    <div>Name: {{opC.data.name}}</div>
-    <br>
-    <div>Email: {{opC.data.email}}</div>
-    <br>
-    <div>Password: .......</div>
-    <br><br>
-    <button data-target="#editProfile" data-toggle="modal" class="btn btn-default">Change</button>
-
-  </div>
-</div>
-<div id="editProfile" class="modal" role="dialog" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 style="display:inline-block; margin:5px 0">Edit my profile</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <form name="editProfileForm" ng-submit="opC.editProfile.submit()" novalidate>
-        <div class="modal-body">
-            <p>Organization name</p>
-            <input name="name" type="text" class="form-control" ng-model="opC.dataCopy.name" placeholder="Insert a new name for your organization">
-            <hr>
-            <p>Password</p>
-            <input name="newPwd" type="password" class="form-control" ng-model="opC.editProfile.password" placeholder="Insert a new password">
-            <br>
-            <p>Confirm new Password</p>
-            <input name="newPwdCheck" type="password" class="form-control" placeholder="Confirm your new password" ng-model="opC.editProfile.password_confirmation">
-            <br>
-            <p ng-show="opC.editProfile.invalidFields.passwordMatch" class="text-danger">The two inserted password don't match</p>
-            <p ng-show="opC.editProfile.invalidFields.passwordLength" class="text-danger">Your password must contain at least 6 characters</p>
-            <p class="text-danger" ng-repeat="error in opC.errors">{{error}}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Abort</button>
-          <button type="submit" class="btn btn-primary">Save Changes</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-        <div class="modal-body">
-            <h3>Changes successfully made</h3>
-        </div>
-        <div class="modal-footer">
+        <div class="col-md-8 col-md-push-2">
+            <div class="row">
+                <div class="col-md-5">
+                    <form name="opC_profile_form">
+                        <table class="table">
+                            <thead>
+                            <th></th>
+                            <th></th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="font_bold">Name:</td>
+                                <td>
+                                    <p>{{opC.data.name}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font_bold">Email:</td>
+                                <td>
+                                    <p>{{opC.data.email}}</p>
+                                </td>
+                            </tr>
+                            <tr class="password_row">
+                                <td class="font_bold">Password:</td>
+                                <td>
+                                    <input placeholder="your password" name="password" ng-minlength="6" type="password" ng-model="opC.dataCopy.password" ng-readonly="!opC.editMode.flag"
+                                           ng-class="{disabled : !opC.editMode.flag, error_bordering: opC.update.invalidFields.passwordLength }">
+                                    <p class="error_msg" ng-show="opC.update.invalidFields.passwordLength">Insert a password at least 6 characters long</p>
+                                </td>
+                            </tr>
+                            <tr class="password_row" ng-show="opC.editMode.flag">
+                                <td class="font_bold">Confirm password</td>
+                                <td>
+                                    <input name="password_confirmation" type="password" ng-model="opC.dataCopy.password_confirmation"
+                                           ng-class="{error_bordering : opC.update.invalidFields.passwordMatch}" >
+                                    <p class="error_msg" ng-show="opC.update.invalidFields.passwordMatch">The passwords don't match</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-  </div>
 </div>
+<div id="authorizationPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-center">Changes succesfully saved!</h3>
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>

@@ -1,52 +1,82 @@
-(function () {
-    var controller = function ($scope, orgResources, mixedContentToArray) {
+(function() {
+
+    var controller = function ($scope,$timeout,orgResources,mixedContentToArray) {
 
         var c = this;
-        c.data = {};
-        c.dataCopy = {};
-        c.errors = [];
-        c.showCurrentState = true;
-        c.showEditMode = false;
-        c.getInfo = function () {
-            orgResources.company().query().$promise
-                .then(
-                function (response) {
-                    c.data = response;
-                    c.dataCopy.name = response.name;
+
+        c.data = {
+            name : '',
+            email : ''
+        };
+
+        c.getInfo = function(){
+            orgResources.orgInfo().get().$promise
+                .then(function(response){
+                    c.data.name = response.name;
+                    c.data.email = response.email;
                 });
         };
-        c.editProfile = {
-            name: c.dataCopy.name,
-            invalidFields: {
-                passwordLength: false,
-                passwordMatch: false
+        c.editMode = {
+            flag: false,
+            enter: function () {
+                this.flag = true;
             },
-            submit: function () {
-                var form = $scope.editProfileForm;
+            exit: function () {
+                c.update.errors = [];
+                c.update.invalidFields.passwordMatch = false;
+                c.update.invalidFields.passwordLength = false;
+                c.dataCopy.password = '';
+                c.dataCopy.password_confirmation = '';
+                this.flag = false;
+            }
+        };
+        c.dataCopy = {
+            password : '',
+            password_confirmation : ''
+        };
+        c.update = {
+            invalidFields : {
+                passwordLength : false,
+                passwordMatch : false
+            },
+            errors : [],
+            submit : function(){
+                var form = $scope.opC_profile_form;
                 this.invalidFields.passwordLength = form.password.$error.minlength;
-                this.invalidFields.passwordMatch = (this.password !== this.password_confirmation);
-                if (!form.$invalid && !this.invalidFields.passwordMatch) {
-                    orgResources.organization.update().$promise
-                        .then(
-                        function (response) {
-                            jQuery('#editProfile').modal('hide');
-                            jQuery('#confirmPopup').modal('show');
-                            $timeout(function () {
-                                jQuery('#confirmPopup').modal('hide');
-                            }, 2000);
-                            jQuery('#editProfile input').val('');
-                            c.editProfile.name = c.dataCopy.name;
-                        }, function (response) {
-                            if (response.status === 422) {
-                                mixedContentToArray.process(response.data, c.errors)
-                            }
-                        }
-                    )
+                this.invalidFields.passwordMatch = c.dataCopy.password !== c.dataCopy.password_confirmation;
+                if(!form.$invalid && !this.invalidFields.passwordMatch){
+                    if(c.dataCopy.password === ''){
+                        c.editMode.exit();
+                    }
+                    else{
+                        jQuery('#authorizationPopup').modal('show');
+                        orgResources.employee().update(jQuery.param({
+                            name : c.data.name,
+                            email : c.data.email,
+                            password : c.dataCopy.password,
+                            password_confirmation : c.dataCopy.password
+                        })).$promise
+                            .then(function(response){
+                                c.dataCopy.password = '';
+                                c.dataCopy.password_confirmation = '';
+                                //Update view
+                                c.getInfo();
+                                c.editMode.exit();
+                                jQuery('#authorizationPopup').modal('hide');
+                            },function(response){
+                                if(response.status === 422){
+                                    mixedContentToArray.process(response.data, c.update.errors, true);
+                                }
+                            })
+                    }
                 }
             }
-        }
+
+        };
+        c.getInfo();
     };
 
     var app = angular.module('Plunner');
     app.controller('opController', controller);
+
 }());
