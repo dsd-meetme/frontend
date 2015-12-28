@@ -1,79 +1,83 @@
-<div>
-  <div class="navbar navbar-default">
+<div class="navbar navbar-default">
     <div class="container-fluid">
-      <!-- HEADER -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">PLUNNER</a>
-      </div>
-      <div class="navbar-collapse collapse navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">How To</a></li>
-          <li><a href="#">Contact</a></li>
-          <li>
-            <button type="button" class="btn btn-primary navbar-btn" ng-click="rootC.signup()">
-              Register my Organization
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-fluid signIn">
-        <div class="signInContainer">
-          <form name="usiForm" ng-submit="usiC.login()" novalidate>
-              <h2>SIGN IN</h2>
-              <p>As a user</p>
-
-            <div class="form-fields">
-              <input name="name" type="text" required ng-model="usiC.name"
-              placeholder="Organization Name">
-              <br>
-              <input name="email" type="email" required ng-model="usiC.email"
-              placeholder="Email">
-              <br>
-              <input name="password" type="password" required ng-model="usiC.password"
-              placeholder="Password">
-              <br>
-              <div class="row">
-              <div class="col-md-6">
-                  <label class="circled-checkbox">
-                    <input type="checkbox" ng-model="usiC.rmbMe">
-                    <span class="label-text">Remember Me</span>
-                  </label>
-                </div>
-                <div class="col-md-6 text-right">
-                  <a href="/#/userecovery">Password?</a>
-                </div>
-              </div>
-
-              <div ng-show="usiC.invalidFields.nameReq" class="text-danger" style="margin-top: 10px">
-                <p>You did not insert your organization name</p>
-              </div>
-              <div ng-show="usiC.invalidFields.emailVal" class="text-danger">
-                <p>You did not insert a valid email address</p>
-              </div>
-              <div ng-show="usiC.invalidFields.emailReq" class="text-danger">
-                <p>You did not insert an email address</p>
-              </div>
-              <div ng-show="usiC.invalidFields.passwordReq" class="text-danger">
-                <p>You did not insert a password</p>
-              </div>
-              <p class="text-danger" ng-repeat="error in usiC.errors">{{error}}</p>
-
-              
-              <button type="submit" class="btn btn-default">SIGN IN</button>
-              <br/><br/>
-              <i>If you are an organization it is <a href="/#/orgsignin">here</a></i>
-            </div>
-            </form>
-            
-            
-            <div ng-show="usiC.loaderVisibility" class="centered-col">
-              <img class="image-loader" src="assets/img/loader.gif" alt="">
-            </div>
-            
-          
+        <!-- HEADER -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">PLUNNER</a>
         </div>
-  </div>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Contact</a></li>
+                <li>
+                    <button type="button" class="btn btn-primary navbar-btn" ng-click="rootC.signup()">
+                        Register my Organization
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid usi">
+    <div class="row">
+        <div class="col-md-4 col-md-push-4 text-center">
+            <form name="usiForm" ng-submit="usiC.login()" novalidate>
+                <div class="usi_branding">
+                    <img width="200px" src="assets/img/plunner.png" alt=""/>
+                </div>
+                <div class="usi_title">
+                    <h2 class="font_light">Sign In as a User</h2>
+                </div>
+                <div class="usi_input">
+                    <i class="fa fa-industry fa-lg"></i>
+                    <input ng-class="{error_bordering : usiC.invalidFields.nameReq}" name="name" required
+                           ng-model="usiC.name" type="text" placeholder="Organization name"/>
+
+                    <p class="error_msg" ng-show="usiC.invalidFields.nameReq">You did not insert your organization
+                        name</p>
+                </div>
+
+                <div class="usi_input">
+                    <i class="fa fa-envelope-o fa-lg"></i>
+                    <input ng-class="{error_bordering : usiC.invalidFields.emailReq || usiC.invalidFields.emailVal}"
+                           name="email" required ng-model="usiC.email" type="email" placeholder="Email"/>
+
+                    <p class="error_msg" ng-show="usiC.invalidFields.emailReq">You did not insert an email address</p>
+
+                    <p class="error_msg" ng-show="usiC.invalidFields.emailVal">You did not insert a valid email
+                        address</p>
+                </div>
+                <div class="usi_input">
+                    <i class="fa fa-lock fa-lg"></i>
+                    <input ng-class="{error_bordering : usiC.invalidFields.passwordReq}" name="password" required
+                           ng-model="usiC.password" type="password" placeholder="Password"/>
+
+                    <p class="error_msg" ng-show="usiC.invalidFields.passwordReq">You did not insert a password</p>
+                </div>
+                <div class="usi_bottom_bar clearfix">
+                    <label class="remember_me_switcher">
+                        <input type="checkbox" ng-model="usiC.rmbMe"/>
+                        <span class="span">Remember me</span>
+                    </label>
+                    <a href="/#/userecovery">Forgot your credentials?</a>
+                </div>
+                <p class="error_msg" ng-repeat="error in usiC.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}
+                </p>
+                <button>SIGN IN</button>
+            </form>
+            <h3 class="font_normal">Do you want to start using Plunner? <a href="">Register</a></h3>
+        </div>
+    </div>
+</div>
+<div id="authorizationPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets/img/484.GIF" alt=""/>
+                <h2>&nbsp;&nbsp;Authorizing</h2>
+            </div>
+            <br/>
+        </div>
+    </div>
 </div>

@@ -44,7 +44,8 @@
             }
         });
         var empGroups = $resource('http://api.plunner.com/employees/groups',null);
-        var meetingsEmp = $resource('http://api.plunner.com/employees/meetings', null);
+        var meetingsEmp = $resource('http://api.plunner.com/employees/meetings/:meetingId', null);
+
         var calendar = $resource('http://api.plunner.com/employees/calendars/:calendarId',null, {
             'update' : {
                 method : 'PUT'
@@ -67,6 +68,16 @@
             }
         });
         var plannerTimeslots = $resource('http://api.plunner.com/employees/planners/groups/:groupId/meetings/:meetingId/timeslots/:timeslotId', null, {
+            'update' : {
+                method : 'PUT'
+            }
+        });
+        var employee = $resource('http://api.plunner.com/employees/employee', null, {
+            'update' : {
+                method : 'PUT'
+            }
+        });
+        var managedMeetings = $resource('http://api.plunner.com/employees/planners/groups', null, {
             'update' : {
                 method : 'PUT'
             }
@@ -107,6 +118,12 @@
             },
             plannerTimeslots : function(){
                 return plannerTimeslots;
+            },
+            employee : function(){
+                return employee;
+            },
+            managedMeetings : function(){
+                return managedMeetings;
             }
         }
     };

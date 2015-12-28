@@ -2,103 +2,117 @@
     <div class="container-fluid">
         <!-- HEADER -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Plunner</a>
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/plunner.png" alt=""/>
+            </a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/#/organization">Dashboard</a></li>
-                <li><a href="/#/organization/profile">
-                    <span class="glyphicon glyphicon-user"></span> Organization Name</a></li>
-                <li><a href="#">How To</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">SIGN OUT</button></li>
+                <li class="user_section">
+                    <a href="/#/user/profile">
+                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
+                        <span></span> Employee Name</a>
+                </li>
+                <li>
+                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+                </li>
             </ul>
         </div>
     </div>
 </div>
-</div>
-<div class="container-fluid">
-    <style>
-        .disabled {
-            border: none;
-        }
-        input {
-            cursor: text;
-        }
-    </style>
-    <div class="row top-odash-banner">
-        <h2 class="text-center">User information</h2>
+<div class="container-fluid groupC">
+    <div class="section_heading row">
+        <h1 class="text-center font_light">User Information</h1>
     </div>
     <div class="row editMode">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="text-center changeGroup">
-                <button class="btn btn-default glob_button" ng-show="userC.editMode.flag" ng-disabled="!userC.editMode.flag"
-                        ng-click="userC.update.submit()">Save changes
+        <div class="col-md-8 col-md-push-2">
+            <div class="row section_action_bar">
+                <a href="/#/organization"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+                <button class="main_button" ng-click="userC.update.submit()" ng-show="userC.editMode.flag">Save changes</button>
+                <button class="secondary_button" ng-show="userC.editMode.flag" ng-click="userC.editMode.exit()">Abort</button>
+                <button ng-show="!userC.editMode.flag" class="main_button" ng-click="userC.editMode.enter()"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Edit user
                 </button>
-                <button class="btn btn-default glob_button" ng-show="userC.editMode.flag" ng-click="userC.delete()">Delete user</button>
             </div>
-            <div class="editSwitcherContainer">
-                <div><h5 ng-class="{highlighted : userC.editMode.flag}">EDIT MODE</h5></div>
-                <div class="editSwitcher" ng-class="{switcherInEdit : userC.editMode.flag}">
-                    <div ng-click="userC.editMode.exit()" ng-class="{editSwitcherSelected: !userC.editMode.flag}">&nbsp;</div>
-                    <div ng-click="userC.editMode.enter()" ng-class="{editSwitcherSelected: userC.editMode.flag}">&nbsp;</div>
-                </div>
-            </div>
+            <!-- <div class="editSwitcherContainer">
+                 <div><h5 ng-class="{highlighted : groupC.editMode.flag}">EDIT MODE</h5></div>
+                 <div class="editSwitcher" ng-class="{switcherInEdit : groupC.editMode.flag}">
+                     <div ng-click="groupC.editMode.exit()" ng-class="{editSwitcherSelected: !groupC.editMode.flag}">&nbsp;</div>
+                     <div ng-click="groupC.editMode.enter()" ng-class="{editSwitcherSelected: groupC.editMode.flag}">&nbsp;</div>
+                 </div>
+             </div>-->
         </div>
     </div>
     <div class="row">
-        <div class="col-md-5 col-md-offset-1">
-            <div class="row groupInfo">
-                <div class="col-md-11">
-                    <form name="editForm" novalidate>
-                        <h3>INFORMATION</h3>
-                        <table class="table">
-                            <thead>
-                            <th></th>
-                            <th></th>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Name:</td>
-                                <td><input required name="name" type="text" ng-model="userC.dataCopy.name" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
-                            </tr>
-                            <tr>
-                                <td>Email:</td>
-                                <td><input required name="email" type="email" ng-model="userC.dataCopy.email" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
-                            </tr>
-                            <tr>
-                                <td>Password:</td>
-                                <td><input placeholder="yourpassword" name="password" ng-minlength="6" type="password" ng-model="userC.dataCopy.password" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag}"></td>
-                            </tr>
-                            <tr ng-show="userC.editMode.flag">
-                                <td>Confirm password</td>
-                                <td><input name="password_confirmation" type="password" ng-model="userC.dataCopy.password_confirmation" ></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="errorContainer" ng-show="userC.editMode.flag && (userC.update.thereErrors || userC.update.errors.length > 0)">
-                            <p class="text-danger" ng-show="userC.update.invalidFields.emailReq">Insert a email</p>
-                            <p class="text-danger" ng-show="userC.update.invalidFields.emailVal">Insert a valid email</p>
-                            <p class="text-danger" ng-show="userC.update.invalidFields.nameReq">Insert a name</p>
-                            <p class="text-danger" ng-show="userC.update.invalidFields.passwordLen">The must must be at least 6 chrs long</p>
-                            <p class="text-danger" ng-show="userC.update.invalidFields.passwordMatch">The passwords don't match</p>
-                            <p class="text-danger" ng-repeat="error in userC.update.errors">{{error}}</p>
+        <div class="col-md-8 col-md-push-2">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row groupC_info">
+                        <div class="col-md-11">
+                            <form name="editForm" novalidate>
+                                <h3><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Information</h3>
+                                <table class="table">
+                                    <thead>
+                                        <th></th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="font_bold">Name:</td>
+                                            <td>
+                                                <input required name="name" type="text" ng-model="userC.dataCopy.name" ng-readonly="!userC.editMode.flag" ng-class="{disabled : !userC.editMode.flag, error_bordering : userC.update.invalidFields.nameReq }">
+                                                <p class="error_msg" ng-show="userC.update.invalidFields.nameReq">Insert a name</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font_bold">Email:</td>
+                                            <td>
+                                                <input required name="email" type="email" ng-model="userC.dataCopy.email" ng-readonly="!userC.editMode.flag"
+                                                       ng-class="{disabled : !userC.editMode.flag, error_bordering: userC.update.invalidFields.emailReq || userC.update.invalidFields.emailVal}">
+                                                <p class="error_msg" ng-show="userC.update.invalidFields.emailReq">Insert an email address</p>
+                                                <p class="error_msg" ng-show="userC.update.invalidFields.emailVal">Insert a valid email address </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font_bold">Password:</td>
+                                            <td>
+                                                <input placeholder="your password" name="password" ng-minlength="6" type="password" ng-model="userC.dataCopy.password" ng-readonly="!userC.editMode.flag"
+                                                       ng-class="{disabled : !userC.editMode.flag, error_bordering: userC.update.invalidFields.passwordLen }">
+                                                <p class="error_msg" ng-show="userC.update.invalidFields.passwordLen">Insert a password at least 6 characters long</p>
+                                            </td>
+                                        </tr>
+                                        <tr ng-show="userC.editMode.flag">
+                                            <td class="font_bold">Confirm password</td>
+                                            <td>
+                                                <input name="password_confirmation" type="password" ng-model="userC.dataCopy.password_confirmation"
+                                                       ng-class="{error_bordering : userC.update.invalidFields.passwordMatch}" >
+                                                <p class="error_msg" ng-show="userC.update.invalidFields.passwordMatch">The passwords don't match</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="errorContainer" ng-show="userC.editMode.flag && (userC.update.thereErrors || userC.update.errors.length > 0)">
+                                    <p class="error_msg" ng-repeat="error in userC.update.errors">{{error}}</p>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="col-md-6 groupInfo">
+                    <h3><i class="fa fa-users"></i>&nbsp;&nbsp;Joined groups</h3>
+                    <table class="table" style="margin-top: 26px">
+                        <tbody>
+                        <tr ng-repeat="group in userC.data.groups">
+                            <td><a href="/#/organization/groups/{{group.id}}">{{group.name}}</a>
+                                <span ng-show="userC.editMode.flag" class="deleteLink pull-right" ng-click="userC.deleteFromGroup(group.id)">Delete from group</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
         </div>
 
-        <div class="col-md-5 groupInfo">
-            <h3>JOINED GROUPS</h3>
-            <table class="table" style="margin-top: 26px">
-                <tbody>
-                    <tr ng-repeat="group in userC.data.groups">
-                        <td><a href="/#/organization/groups/{{group.id}}">{{group.name}}</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
     <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
         <div class="modal-dialog">

@@ -44,12 +44,10 @@
                 else {
                     importedSchedules.push(tmp);
                 }
-
-
             }
             return {
-                importedSchedules :importedSchedules,
-                composedSchedules : composedSchedules
+                importedSchedules: importedSchedules,
+                composedSchedules: composedSchedules
             };
         };
         /*
@@ -77,79 +75,155 @@
             return selectedSchedules;
         };
         var c = this;
-        //Flags for deciding what view show to the user
-        c.viewSections = {
-            meetings : true,
-            schedules : false,
-            showMeetings : function(){
-                this.schedules = false;
-                this.meetings = true;
-            },
-            showSchedules : function(){
-                this.meetings = false;
-                this.schedules = true;
-            }
-        };
-
-        c.meetings = {
-            planned : null,
-            toBePlanned : null
-        };
-        c.schedules = {
-            imported : null,
-            composed : null
-        };
-        c.itemShowLimits = {
-            pmeetings: 10,
-            tpmeetings: 10,
-            ischedules: 10,
-            cschedules: 10,
-            change: function (param, value) {
-                this[param] = value;
-            }
-        };
-
-        c.confirmPopup = {
-            message: '',
-            show : function(){
-                jQuery('#confirmPopup').modal('show');
-            },
-            hide : function(){
-                jQuery('#confirmPopup').modal('hide');
-            }
-        };
-        c.getSchedules = function () {
+        var getSchedules = function () {
+            var pages, processsedSchedules;
             orgResources.calendar().query({calendarId: ''})
                 .$promise.then(function (response) {
-                    console.log('Gotten schedules');
-                    console.log(response);
-                    var processedSchedules = processSchedules(response);
-                    console.log('Processed schedules');
+                    processedSchedules = processSchedules(response);
                     c.schedules.imported = processedSchedules.importedSchedules;
+                    pages = Math.ceil(c.schedules.imported.length / 10);
+                    c.pagination.schedulesImported.pages = pages;
+                    c.pagination.schedulesImported.utilArray = new Array(pages);
                     c.schedules.composed = processedSchedules.composedSchedules;
+                    pages = Math.ceil(c.schedules.composed.length / 10);
+                    c.pagination.schedulesComposed.pages = pages;
+                    c.pagination.schedulesComposed.utilArray = new Array(pages);
                 });
         };
-        c.getMeetings = function () {
+        var getMeetings = function () {
+            var pages;
             orgResources.empGroups().query()
                 .$promise.then(function (response) {
-                    console.log('Gotten to be planned meetings');
-                    console.log(response);
                     c.meetings.toBePlanned = processMeetings(response);
+                    pages = Math.ceil(c.meetings.toBePlanned.length / 10);
+                    c.pagination.meetingsToBePlanned.pages = pages;
+                    c.pagination.meetingsToBePlanned.utilArray = new Array(pages);
                 });
-            orgResources.meetingsEmp().query()
+            orgResources.meetingsEmp().query({meetingId: ''})
                 .$promise.then(function (response) {
                     console.log('Gotten planned meetings');
                     console.log(response);
                     c.meetings.planned = response;
-                    /*for(var i=0; i< c.meetingsList.groupB.data.length; i++){
-                     a = new moment(c.meetingsList.groupB.data[i].start_time);
-                     b = parseInt(c.meetingsList.groupB.data[i].duration)/60;
-                     c.meetingsList.groupB.data[i].finalDate = a.add(b, 'm').format('dddd, MMMM Do YYYY, h:mm:ss a');
-                     console.log(c.meetingsList.groupB.data[i].finalDate)
-                     }*/
+
+                });
+        };
+        var getManagedMeetings = function () {
+            var pages;
+            orgResources.managedMeetings().query()
+                .$promise.then(function (response) {
+                    c.meetings.managed = processMeetings(response);
+                    pages = Math.ceil(c.meetings.managed.length / 10);
+                    c.pagination.meetingsManaged.pages = pages;
+                    c.pagination.meetingsManaged.utilArray = new Array(pages)
                 });
 
         };
+        var getUserInfo = function () {
+            orgResources.employee().get()
+                .$promise.then(function (response) {
+                    c.userInfo.name = response.name;
+                    c.userInfo.email = response.email;
+                    c.userInfo.is_planner = response.is_planner;
+                    if (c.userInfo.is_planner) {
+                        getManagedMeetings();
+                    }
+                })
+        };
+        //Flags for deciding what view show to the user
+        c.viewSections = {
+            meetings: true,
+            schedules: false,
+            showMeetings: function () {
+                this.schedules = false;
+                this.meetings = true;
+            },
+            showSchedules: function () {
+                this.meetings = false;
+                this.schedules = true;
+            }
+        };
+        c.userInfo = {
+            name: '',
+            email: '',
+            is_planner: false
+        };
+        c.meetings = {
+            planned: null,
+            toBePlanned: null,
+            managed: null
+        };
+        c.schedules = {
+            imported: null,
+            composed: null
+        };
+        c.confirmPopup = {
+            message: '',
+            show: function () {
+                jQuery('#confirmPopup').modal('show');
+            },
+            hide: function () {
+                jQuery('#confirmPopup').modal('hide');
+            }
+        };
+        c.pagination = {
+            changePage : function(section, page){
+                var sectionRef = this[section];
+                if (page >sectionRef.currentPage) {
+                    sectionRef.currentPage = page;
+                    sectionRef.startIndex = sectionRef.endIndex + 1;
+                    sectionRef.endIndex = sectionRef.startIndex + 9;
+                    sectionRef.filterString = sectionRef.startIndex + ',' + this.sectionRef;
+                }
+                else if (page < sectionRef.currentPage) {
+                    sectionRef.currentPage = page;
+                    sectionRef.endIndex = sectionRef.startIndex - 1;
+                    sectionRef.startIndex = sectionRef.endIndex - 9;
+                    sectionRef.filterString = sectionRef.startIndex + ',' + sectionRef.endIndex;
+
+                }
+            },
+            meetingsPlanned : {
+                pages: 1,
+                currentPage: 1,
+                utilArray: null,
+                startIndex: 0,
+                endIndex: 9,
+                filterString: '0,9'
+            },
+            meetingsManaged : {
+                pages: 1,
+                currentPage: 1,
+                utilArray: null,
+                startIndex: 0,
+                endIndex: 9,
+                filterString: '0,9'
+            },
+            meetingsToBePlanned : {
+                pages: 1,
+                currentPage: 1,
+                utilArray: null,
+                startIndex: 0,
+                endIndex: 9,
+                filterString: '0,9'
+            },
+            schedulesImported : {
+                pages: 1,
+                currentPage: 1,
+                utilArray: null,
+                startIndex: 0,
+                endIndex: 9,
+                filterString: '0,9' 
+            },
+            schedulesComposed : {
+                pages: 1,
+                currentPage: 1,
+                utilArray: null,
+                startIndex: 0,
+                endIndex: 9,
+                filterString: '0,9'
+            }
+        };
+
         c.importSchedule = {
             credentials: {
                 url: '',
@@ -167,13 +241,13 @@
             thereErrors: false,
             showLoader: false,
             popUp: {
-                show : function(){
+                show: function () {
                     var popup = jQuery('#importSchedule');
                     //this.thereErrors = false;
                     popup.find('input').val('');
                     popup.modal('show');
                 },
-                hide : function(){
+                hide: function () {
                     jQuery('#importSchedule').modal('hide');
                 }
 
@@ -229,7 +303,7 @@
                             c.confirmPopup.show();
                             $timeout(function () {
                                 c.confirmPopup.hide();
-                                c.getSchedules();
+                                getSchedules;
                             }, 2000)
                         }, function (response) {
                             if (response.status === 422) {
@@ -241,6 +315,7 @@
                 }
             }
         };
+
         c.deleteSchedule = function (id) {
             orgResources.calendar().remove({calendarId: id})
                 .$promise.then(function () {
@@ -248,11 +323,11 @@
                     c.confirmPopup.show();
                     $timeout(
                         function () {
-                            c.confirmPopup.hide();
+                            //c.confirmPopup.hide();
 
                         }, 2000
                     );
-                    c.getSchedules();
+                    getSchedules;
                 })
         };
         c.editSchedule = {
@@ -272,8 +347,8 @@
                 enabled: 0,
                 calendar_name: ''
             },
-            popUp : {
-                show : function(index){
+            popUp: {
+                show: function (index) {
                     var popup = jQuery('#editSchedule');
                     c.editSchedule.data.id = c.schedules.imported[index].id;
                     c.editSchedule.data.name = c.schedules.imported[index].name;
@@ -283,7 +358,7 @@
                     c.editSchedule.data.cal_name = c.schedules.imported[index].caldav.calendar_name;
                     popup.modal('show');
                 },
-                hide : function(){
+                hide: function () {
                     jQuery('#editSchedule').modal('hide');
                 }
             },
@@ -331,7 +406,7 @@
                             c.confirmPopup.show();
                             $timeout(function () {
                                 c.confirmPopup.hide();
-                                c.getSchedules();
+                                getSchedules;
                             }, 2000)
                         }, function (response) {
                             if (response.status === 422) {
@@ -346,14 +421,16 @@
                 .then(function () {
                     c.confirmPopup.message = 'Meeting succesfully deleted';
                     c.confirmPopup.show();
-                    $timeout(function(){
+                    $timeout(function () {
                         c.confirmPopup.hide()
-                    },2000);
-                    c.getMeetings();
+                    }, 2000);
+                    getMeetings();
+                    getManagedMeetings()
                 })
         };
-        c.getSchedules();
-        c.getMeetings();
+        getUserInfo();
+        getSchedules();
+        getMeetings();
     };
 
     var app = angular.module('Plunner');

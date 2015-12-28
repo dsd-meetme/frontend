@@ -1,0 +1,89 @@
+.groupC
+
+  .secondary_button
+    margin-right: 15px
+
+  .disabled
+    border: 0 !important
+
+  .groupC_info
+    table
+      thead
+        th
+          border: none
+      tbody
+        tr
+          td:first-child
+            padding-top: 14px
+
+        tr:first-child
+          td
+            border: none
+
+        tr:last-child
+          td:last-child
+            padding-top: 14px
+            padding-left: 14px
+
+    input
+      width: 100%
+      border: 1px solid $gray_light
+      border-radius: 4px
+      outline: none
+      padding: 6px
+
+      &:focus
+        border: 1px solid $main_blue
+
+
+    textarea
+      width: 100%
+      height: 80px
+      padding: 6px
+      border: 1px solid $gray_light
+      border-radius: 4px
+      resize: none
+      outline: none
+
+      &:focus
+        border: 1px solid $main_blue
+
+    .main_button
+      margin-right: 15px
+
+  .groupC_members
+    >div
+      border-bottom: 1px solid $gray_light
+
+      p, a
+        display: inline-block
+        margin-top: 10px
+        margin-bottom: 15px
+
+        span
+          color: $main_blue
+
+      >span
+          margin-top: 15px
+          color: $gray_light
+          cursor: pointer
+
+          &:hover
+            color: $washed_black
+
+  .deleteLink
+    padding-top: 3px
+    color: $gray_light
+    text-transform: uppercase
+    font-size: 12px
+    cursor: pointer
+
+    &:hover
+      color: $washed_black
+
+#addToGroup, #changePlanner
+  table
+    margin-bottom: 0
+
+  .secondary_button
+    margin-right: 15px

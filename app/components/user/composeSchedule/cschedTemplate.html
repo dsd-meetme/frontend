@@ -1,60 +1,78 @@
-
 <div class="navbar navbar-default">
     <div class="container-fluid">
         <!-- HEADER -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Plunner</a>
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/plunner.png" alt=""/>
+            </a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/#/user/profile">
-                    <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
-                <li><a href="#">How To</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">SIGN OUT</button></li>
+                <li class="user_section">
+                    <a href="/#/user/profile">
+                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
+                        <span></span> Employee Name</a>
+                </li>
+                <li>
+                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+                </li>
             </ul>
         </div>
     </div>
 </div>
-
-<div class="container-fluid">
-    <div class="top-odash-banner row">
-        <h2 class="text-center">COMPOSE SCHEDULE</h2>
+<div class="container-fluid csched">
+    <div class="section_heading row">
+        <h1 class="text-center font_light">Compose a schedule</h1>
     </div>
-    <div class="row namebar">
-        <div class="col-md-10 col-md-push-1">
-            <div>
-                <span class="bold">Name: </span><input type="text" placeholder="Insert a name for the schedule" ng-model="cschedC.name"/>
-                <label class="circled-checkbox">
-                    <input type="checkbox" ng-checked="cschedC.enabled === '1'" ng-model="cschecC.selected"/>
-                    <span class="label-text">Enabled</span>
-                </label>
-                <button style="float: right" class="btn btn-default glob_button" ng-click="cschedC.saveSchedule()">Save schedule</button>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <div class="row section_action_bar">
+                <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+                <button class="main_button" ng-click="cschedC.saveSchedule()"><i class="fa fa-calendar-plus-o"></i>&nbsp;&nbsp;Save
+                    schedule
+                </button>
+                <p class="error_msg pull-right near_button_error" ng-repeat="error in cschedC.errors">{{error}}</p>
+                <p class="error_msg pull-right near_button_error" ng-show="cschedC.invalidFields.eventsReq"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one event</p>
             </div>
-           <div class="errorContainer" ng-show="cschedC.thereErrors || cschedC.errors.length > 0">
-               <p ng-repeat="error in cschedC.errors">{{error}}</p>
-               <p ng-show="cschedC.invalidFields.nameReq">Insert a name</p>
-               <p ng-show="cschedC.invalidFields.eventsReq">Insert at least one event</p>
-           </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    <div class="row csched_actionbar">
+        <div class="col-md-8 col-md-push-2">
+            <div>
+                <span class="bold">Name: </span>
+                <input ng-class="{error_underline: cschedC.invalidFields.nameReq}" class="main_input" type="text" placeholder="Insert a name for the schedule" ng-model="cschedC.name"/>
+                <p class="error_msg align_input" ng-show="cschedC.invalidFields.nameReq">Insert a name</p>
+            </div>
+            <div>
+                <label class="status_switcher">
+                    <input type="checkbox" ng-checked="cschedC.enabled === '1'" ng-model="cschecC.selected"/>
+                    <span class="status_switcher_text"></span>
+                    <span class="font_normal">Enabled</span>
+                </label>
 
+            </div>
+        </div>
+    </div>
     <div class="row composeScheduleContent">
-        <div class="col-md-10 col-md-push-1">
+        <div class="col-md-8 col-md-push-2">
             <div id="composeScheduleCal"></div>
         </div>
     </div>
-    <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <h3 class="text-center">{{cschedC.confirmPopup.message}}</h3>
-                </div>
-                <br/>
+</div>
+<div id="authorizationPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
             </div>
+            <div class="modal-body text-center">
+                <img src="assets/img/484.GIF" alt=""/>
+                <h2>&nbsp;&nbsp;{{nmC.confirmPopup.message}}</h2>
+            </div>
+            <!--<div class="modal-footer">
+          </div>-->
+            <br/>
         </div>
     </div>
 </div>

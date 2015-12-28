@@ -10,43 +10,68 @@
         };
 
         c.getInfo = function(){
-            orgResources.user().query({userId : ''}).$promise
+            orgResources.employee().get().$promise
                 .then(function(response){
                     c.data.name = response.name;
                     c.data.email = response.email;
                 });
         };
-        c.changePassword = {
-            showValue : false,
+        c.editMode = {
+            flag: false,
+            enter: function () {
+                this.flag = true;
+            },
+            exit: function () {
+                this.flag = false;
+            }
+        };
+        c.dataCopy = {
+            password : '',
+            password_confirmation : ''
+        };
+        c.update = {
             invalidFields : {
-                passwordRequired : false,
-                passwordLength : false
+                passwordLength : false,
+                passwordMatch : false
             },
             errors : [],
-            show : function(){
-                this.showValue = true;
-            },
             submit : function(){
-                var form = $scope.changePasswordForm;
-                this.invalidFields.passwordRequired = form.password.$error.required;
+                var form = $scope.upC_profile_form;
                 this.invalidFields.passwordLength = form.password.$error.minlength;
-                if(!form.$invalid){
-                    orgResources.user().update({userId : ''}, this.password).$promise
-                        .then(function(response){
-                            jQuery('#confirmPopup').modal('show');
-                            $timeout(function(){
-                                jQuery('#confirmPopup').modal('hide')
-                            },2000);
-                        },function(response){
-                            if(response.status === 422){
-                                mixedContentToArray.process(response.data, c.changePassword.errors, true);
-                            }
-                        })
+                this.invalidFields.passwordMatch = c.dataCopy.password !== c.dataCopy.password_confirmation;
+                if(!form.$invalid && !this.invalidFields.passwordMatch){
+                    if(c.dataCopy.password === ''){
+                        c.editMode.exit();
+                    }
+                    else{
+
+                        orgResources.employee().update(jQuery.param({
+                            name : c.data.name,
+                            email : c.data.email,
+                            password : c.dataCopy.password,
+                            password_confirmation : c.dataCopy.password
+                        })).$promise
+                            .then(function(response){
+                                jQuery('#confirmPopup').modal('show');
+                                $timeout(function(){
+                                    jQuery('#confirmPopup').modal('hide')
+                                },2000);
+                                c.dataCopy.password = '';
+                                c.dataCopy.password_confirmation = '';
+                                //Update view
+                                c.getInfo();
+                                c.editMode.exit();
+                            },function(response){
+                                if(response.status === 422){
+                                    mixedContentToArray.process(response.data, c.update.errors, true);
+                                }
+                            })
+                    }
                 }
             }
 
         };
-        //c.getInfo();
+        c.getInfo();
 
 
     };

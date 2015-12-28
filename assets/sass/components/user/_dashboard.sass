@@ -1,0 +1,156 @@
+@import "../../global/colors"
+
+.udash
+  .udash_content_type_title
+    margin-bottom: 10px
+    padding-bottom: 7px
+    border-bottom: 1px solid $gray_light
+
+    h4
+      color: $washed_black
+      font-size: 20px
+
+  .udash_empty_state_msg
+    margin-top: 30px
+    color: $washed_black
+    font-style: italic
+    font-size: 18px
+
+  .top-dash-banner
+    position: relative
+    border-top: 0
+    border-left: 0
+    border-right: 0
+    border-bottom: 1px solid black
+    margin: 0 0 30px 0
+    padding: 10px 0 10px 0
+    height: 80px
+
+  .meetg-sched-banner
+    height: 70px - 1px
+    background-image: url("../../../img/dashboard.jpg")
+    opacity: 1
+
+  .meetg-sched-btn
+    height: 30px
+    width: 200px
+    position: absolute
+    left: calc(50% - 90px)
+    bottom: -15px
+    opacity: 1
+
+  .action-section
+    margin-bottom: 30px
+
+  .dashboard-page
+    padding: 70px 0
+
+
+  .add-btn
+    position: absolute
+    top: - 50px
+    left: 90%
+
+    .add
+      background: url("../../../img/add.png")
+      background-repeat: no-repeat
+      background-size: 100%
+      border: 0
+      width: 80px
+      height: 80px
+
+    .import
+      background: url("../../../img/import.png")
+      background-repeat: no-repeat
+      background-size: 100%
+      border: 0
+      width: 60px
+      height: 60px
+
+    .compose
+      background: url("../../../img/compose.png")
+      background-repeat: no-repeat
+      background-size: 100%
+      border: 0
+      width: 50px
+      height: 90px
+
+    .label-text
+      font-size: 12px
+      position: absolute
+      top: 50%
+      margin-left: 40px
+
+  .imported-section
+    margin-bottom: 70px
+
+
+  .circled-checkbox input[type="checkbox"]:checked + .label-text:before
+    content: "\f111"
+
+  .imported-schedules-title-bar
+    margin-top: 30px
+    h2
+      font-weight: 600
+      color: $glob_gray
+  .imported-schedules-bar
+    margin-bottom: 30px
+    margin-top: 15px
+    div
+      div
+        width: 400px
+        display: inline-block
+        float: left
+        margin-right: 15px
+
+  .imported-schedules-content
+    tbody
+      tr
+        td
+          width: 25%
+        td:last-child
+          padding-right: 10px
+
+
+          span
+            color: $glob_gray_light
+            margin-right: 15px
+            cursor: pointer
+
+            &:last-child
+              margin-right: 0
+
+            &:hover
+              color: $glob_gray
+
+
+#importSchedule, #editSchedule
+
+  .modal-body
+    >div
+      margin-bottom: 25px
+
+    >div> p
+        margin-bottom: 5px
+
+    input[type="url"]
+      width: 80%
+    h4
+      margin-bottom: 0
+      text-transform: uppercase
+      font-weight: 600
+      font-size: 16px
+      margin-top: 30px
+
+    table
+      margin-bottom: 0
+
+
+  .secondary_button
+    margin-right: 15px
+
+  .error_tile
+    padding-left: 30px
+
+
+

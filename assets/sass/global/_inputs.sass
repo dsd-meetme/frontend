@@ -1,0 +1,169 @@
+.search_input
+  position: relative
+  float: left
+  margin-right: 30px
+
+  i
+    position: absolute
+    top: 13px
+    left: 12px
+    color: $gray_light
+
+  input[type="search"]
+    width: 400px
+    padding: 10px 10px 10px 40px
+    border: 1px solid $gray_light
+    border-radius: 4px
+
+    &:focus
+      outline: none
+      box-shadow: 1px 1px 6px rgba(0,0,0,0.16)
+
+
+
+.status_switcher
+  cursor: pointer
+
+  input[type="checkbox"]
+    display: none
+  span
+    &:last-child
+      display: inline-block
+      margin-bottom: 10px
+      vertical-align: middle
+      margin-left: 5px
+      text-transform: uppercase
+      color: $washed_black
+
+  input[type="checkbox"]+.status_switcher_text:before
+    content: "\f204"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 28px
+    color: $washed_black
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    margin-top: 10px
+    transition: all 50ms ease-in-out
+
+  input[type="checkbox"]:checked+.status_switcher_text:before
+    content: "\f205"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 28px
+    color: $main_blue
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    margin-top: 10px
+
+.remember_me_switcher
+  font-weight: 400
+  cursor: pointer
+
+  input[type="checkbox"]
+    display: none
+
+
+  input[type="checkbox"] + .span:before
+    content: "\f1db"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 17px
+    color: $washed_black
+    text-transform: none
+    margin-right: 8px
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    transition: all 50ms ease-in-out
+
+  input[type="checkbox"]:checked + .span:before
+    content: "\f058" !important
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 17px
+    color: $main_blue
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+
+.list_checkbox
+  input[type="checkbox"]
+    display: none
+  input[type="checkbox"]+.text:before
+    content: "\f1db"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 16px
+    color: $washed_black
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    margin-top: 10px
+    transition: all 50ms ease-in-out
+
+  input[type="checkbox"]:checked+.text:before
+    content: "\f111"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 16px
+    color: $main_blue
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+
+.list_radio
+  input[type="radio"]
+    display: none
+
+  input[type="radio"]+.text:before
+    content: "\f1db"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 16px
+    color: $washed_black
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    margin-top: 10px
+    transition: all 50ms ease-in-out
+
+  input[type="radio"]:checked+.text:before
+    content: "\f111"
+    font-family: "FontAwesome"
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    font-size: 16px
+    color: $main_blue
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+
+.main_input
+  color: $washed_black
+  border: none
+  border-bottom: 2px solid #ddd
+  padding: 5px 0 5px 0
+  width: 250px
+
+  &:focus
+    outline: none
+    border-bottom: 2px solid $main_blue
+
+

@@ -1,0 +1,114 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+.classic {
+  font-weight: 400; }
+
+.light {
+  font-weight: 300; }
+
+.bold {
+  font-weight: 600; }
+
+.tile {
+  height: 141px;
+  padding: 10px;
+  font-family: 'Roboto';
+  border-bottom: 1px solid #eee; }
+  .tile .tileIconLeft img {
+    width: 60px;
+    margin-top: 24px; }
+  .tile .tileIconRight svg {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 40px;
+    cursor: pointer; }
+    .tile .tileIconRight svg:hover g g {
+      fill: #aaaaaa; }
+  .tile .tileBody {
+    padding-left: 30px;
+    height: 130px; }
+    .tile .tileBody .tileTitle {
+      font-size: 20px;
+      font-weight: 400; }
+    .tile .tileBody .tileDescription {
+      margin-top: 10px;
+      color: #555;
+      height: 40px; }
+    .tile .tileBody .tileBottomGroup {
+      margin-bottom: 10px; }
+      .tile .tileBody .tileBottomGroup ul li {
+        margin-right: 15px; }
+      .tile .tileBody .tileBottomGroup span {
+        color: #555;
+        font-weight: 500; }
+      .tile .tileBody .tileBottomGroup i {
+        color: #555;
+        font-size: 16px; }
+      .tile .tileBody .tileBottomGroup button {
+        background-color: transparent;
+        border: none; }
+        .tile .tileBody .tileBottomGroup button:hover span, .tile .tileBody .tileBottomGroup button:hover i {
+          color: black; }
+
+.tile-small {
+  height: 120px; }
+  .tile-small .tileIconLeft, .tile-small .tileIconRight, .tile-small .tileBody {
+    height: 120px;
+    margin-top: -11px; }
+    .tile-small .tileIconLeft svg, .tile-small .tileIconRight svg, .tile-small .tileBody svg {
+      margin-top: 44px; }
+  .tile-small .tileBody .tileTitle {
+    margin-top: 30px;
+    padding-bottom: 10px; }
+  .tile-small .tileBody .tileBottomGroup {
+    margin-top: 10px; }
+    .tile-small .tileBody .tileBottomGroup .tileActiveInfo {
+      font-weight: 500;
+      color: #2ECC71; }
+    .tile-small .tileBody .tileBottomGroup .tileNonActiveInfo {
+      font-weight: 500;
+      color: #DDD; }
+
+.myInput {
+  position: relative;
+  margin-right: 40px !important; }
+  .myInput i {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+    color: #ccc; }
+  .myInput input[type="search"] {
+    width: 400px;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 110ms ease-in-out; }
+    .myInput input[type="search"]:focus {
+      outline: none;
+      box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16); }
+
+.fixedButton {
+  border-radius: 0;
+  border: 0;
+  padding: 9px 18px;
+  font-family: 'Roboto';
+  margin-right: 20px;
+  color: #42A5F5;
+  border: 2px solid #42A5F5; }
+  .fixedButton:hover {
+    background-color: white;
+    color: #0b72c6;
+    border: 2px solid #0c80df; }
+  .fixedButton:active {
+    background-color: white;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    color: #42A5F5;
+    border: 2px solid #42A5F5; }
+  .fixedButton:focus {
+    background-color: white;
+    color: #42A5F5;
+    border: 2px solid #42A5F5;
+    outline: none; }

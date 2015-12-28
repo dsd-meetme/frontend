@@ -1,42 +1,43 @@
-(function(){
+(function () {
     /**
      A controller to manage existing groups inside an organization
      @param orgResources A service that provides objects that incapsulate restful communication
      logic
      **/
-    var controller = function($routeParams,$location,$timeout, mixedContentToArray,orgResources){
+    var controller = function ($routeParams, $location, $timeout, mixedContentToArray, orgResources, arrayToUrlParams) {
 
         var c = this;
         //group id
         var id = $routeParams.id;
         c.data = {
-            group : {
-                name : '',
-                description: ''
+            group: {
+                name: '',
+                description: '',
+                id : ''
             },
-            members : [],
-            groupCopy : {
+            members: [],
+            groupCopy: {
                 name: '',
                 description: ''
             }
         };
         c.thereErrors = {
-            info : false,
-            planner : false
+            info: false,
+            planner: false
         };
         c.errors = {
-            planner : [],
-            info : []
+            planner: [],
+            info: []
         };
         c.invalidFields = {
-            nameReq : false
+            nameReq: false
         };
         c.editMode = {
-            flag : false,
-            enter : function(){
+            flag: false,
+            enter: function () {
                 this.flag = true;
             },
-            exit : function(){
+            exit: function () {
                 this.flag = false;
                 c.data.groupCopy.name = c.data.group.name;
                 c.data.groupCopy.description = c.data.group.description;
@@ -46,23 +47,54 @@
             }
         };
         c.confirmPopup = {
-            message : '',
-            show : function(){
+            message: '',
+            show: function () {
                 jQuery('#confirmPopup').modal('show');
             },
-            hide : function(){
+            hide: function () {
                 jQuery('#confirmPopup').modal('hide');
             }
         };
         c.inChange = false;
+        c.pagination = {
+            user: {
+                pages: 1,
+                currentPage: 1,
+                utilArray: null,
+                startIndex: 0,
+                endIndex: 9,
+                filterString: '0,9',
+                changePage: function (page) {
+                    if (page > this.currentPage) {
+                        this.currentPage = page;
+                        this.startIndex = this.endIndex + 1;
+                        this.endIndex = this.startIndex + 9;
+                        this.filterString = this.startIndex + ',' + this.endIndex;
+                    }
+                    else if (page < this.currentPage) {
+                        this.currentPage = page;
+                        this.endIndex = this.startIndex - 1;
+                        this.startIndex = this.endIndex - 9;
+                        this.filterString = this.startIndex + ',' + this.endIndex;
+
+                    }
+                    else {
+                        //
+                    }
+
+                }
+            }
+        }
         //Gets user info in the context of an organization
-        c.getInfo = function(){
+        c.getInfo = function () {
             //restful show
-            orgResources.group().get({groupId:id}).$promise
-                .then(function(response){
+            orgResources.group().get({groupId: id}).$promise
+                .then(function (response) {
                     c.data.group.name = response.name;
                     c.data.group.description = response.description;
+                    c.data.group.id = response.id;
                     c.data.group.planner_id = response.planner_id;
+                    c.data.group.planner_name = response.planner_name;
                     //A copy of the retrieved data
                     //This copy will be used
                     c.data.groupCopy.name = response.name;
@@ -71,91 +103,204 @@
                 });
         };
         //Delete an employee in the context of an org
-        c.delete = function(){
+        c.delete = function () {
             //restful delete
-            orgResources.group().remove({groupId:id}).$promise
-                .then(function(){
+            orgResources.group().remove({groupId: id}).$promise
+                .then(function () {
                     c.confirmPopup.message = "Group successfully deleted";
                     c.editMode.exit();
                     c.confirmPopup.show();
-                    $timeout(function(){
+                    $timeout(function () {
                         c.confirmPopup.hide();
                         $location.path('/organization')
-                    },2000);
+                    }, 2000);
 
                 });
         };
-        c.updatePlanner = function(plannerId){
-            if(plannerId !== c.data.group.planner_id){
-                orgResources.group().update({groupId:id},jQuery.param(
+        c.updatePlanner = function (plannerId) {
+            if (plannerId !== c.data.group.planner_id) {
+                orgResources.group().update({groupId: id}, jQuery.param(
                         {
-                            name : c.data.group.name,
-                            description : c.data.group.description,
-                            planner_id : plannerId
+                            name: c.data.group.name,
+                            description: c.data.group.description,
+                            planner_id: plannerId
                         })
                 ).$promise
-                    .then(function(){
+                    .then(function () {
                         c.confirmPopup.message = "Changes successfully made";
                         c.confirmPopup.show();
-                        setTimeout(function(){
+                        setTimeout(function () {
                             c.confirmPopup.hide();
-                        },2000);
+                        }, 2000);
 
                         //Update view
                         c.getInfo();
                         c.editMode.exit();
-                    },function(response){
-                        if(response.status === 422){
+                    }, function (response) {
+                        if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors.planner, true);
                         }
                     });
             }
         };
         //Update user info
-        c.updateInfo = function(){
+        c.updateInfo = function () {
             //Checks the validity status of input fields
             c.invalidFields.nameReq = (c.data.groupCopy.name === '');
+            console.log(c.data.groupCopy);
             c.thereErrors.info = c.invalidFields.nameReq;
 
-            if(!c.thereErrors.info){
-                orgResources.group().update({groupId:id},jQuery.param(
+            if (!c.thereErrors.info) {
+                orgResources.group().update({groupId: id}, jQuery.param(
                     {
-                        name : c.data.groupCopy.name,
-                        description : c.data.groupCopy.description,
-                        planner_id : c.data.group.planner_id
+                        name: c.data.groupCopy.name,
+                        description: c.data.groupCopy.description,
+                        planner_id: c.data.group.planner_id
                     })).$promise
-                    .then(function(){
+                    .then(function () {
                         c.inchange = false;
                         c.confirmPopup.message = "Changes successfully made!";
                         c.confirmPopup.show();
-                        setTimeout(function(){
+                        setTimeout(function () {
                             c.confirmPopup.hide();
-                        },2000);
+                        }, 2000);
                         c.getInfo();
                         c.editMode.exit();
-                    },function(response){
-                        if(response.status === 422){
+                    }, function (response) {
+                        if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors.info, true);
                         }
                     });
             }
         };
-        c.getUsers = function(){
-            orgResources.userInGroup().query({groupId:id, userId: ''}).$promise
+        c.changePlanner = {
+            init : function(){
+                orgResources.user().query({userId: ''})
+                    .$promise.then(function (response) {
+                        var modal = jQuery('#changePlanner');
+                        modal.find('input').val('');
+                        var pages;
+                        c.allUsers = response;
+                        pages = Math.ceil(c.allUsers.length/10);
+                        c.pagination.user.pages = pages;
+                        c.pagination.user.utilArray = new Array(pages);
+                        modal.modal('show');
+                    })
+            },
+            plannerId : null,
+            change : function(){
+                if (this.plannerId !== c.data.group.planner_id) {
+                    orgResources.group().update({groupId: id}, jQuery.param(
+                            {
+                                name: c.data.group.name,
+                                description: c.data.group.description,
+                                planner_id: this.plannerId
+                            })
+                    ).$promise
+                        .then(function () {
+                            c.confirmPopup.message = "Changes successfully made";
+                            jQuery('#changePlanner').modal('hide');
+                            c.confirmPopup.show();
+                            setTimeout(function () {
+                                c.confirmPopup.hide();
+                            }, 2000);
+
+                            //Update view
+                            c.getInfo();
+                            c.editMode.exit();
+                        }, function (response) {
+                            if (response.status === 422) {
+                                mixedContentToArray.process(response.data, c.errors.planner, true);
+                            }
+                        });
+                }
+            }
+
+        };
+        c.addToGroup = {
+            members : [],
+            validMembers : [],
+            init : function(){
+                var utilArray = [];
+                var secondUtilArray = [];
+                var bool;
+                for(var i=0; i< c.data.members.length; i++){
+                    secondUtilArray.push(c.data.members[i].id);
+                }
+                orgResources.user().query({userId: ''})
+                    .$promise.then(function (response) {
+                        var modal = jQuery('#addToGroup');
+                        modal.find('input').val('');
+                        var pages;
+                        console.log(secondUtilArray);
+                        for(var j =0; j<response.length; j++){
+                            if(secondUtilArray.indexOf(response[j].id) === -1){
+                                utilArray.push(response[j]);
+                            }
+                        }
+                        console.log(utilArray);
+                        c.allUsers = utilArray;
+                        pages = Math.ceil(c.allUsers.length/10);
+                        c.pagination.user.pages = pages;
+                        c.pagination.user.utilArray = new Array(pages);
+                        modal.modal('show');
+                    })
+            },
+            change : function(){
+                var validMembers = [];
+                angular.forEach(this.members, function (value, key) {
+                    if (value === true) {
+                        validMembers.push(key.toString());
+                    }
+                });
+                orgResources.userInGroup().save({
+                    groupId: c.data.group.id,
+                    userId: ''
+                }, arrayToUrlParams.process('id', validMembers)).$promise
+                    .then(function () {
+                        c.confirmPopup.message = "Users successfully added";
+                        jQuery('#addToGroup').modal('hide');
+                        c.confirmPopup.show();
+                        setTimeout(function () {
+                            c.confirmPopup.hide();
+                        }, 2000);
+
+                        //Update view
+                        c.getInfo();
+                        c.editMode.exit();
+                    }, function (response) {
+                        //Puts relevant errors in array
+                        if (response.status === 422) {
+
+                        }
+                    })
+            }
+        };
+        c.getAllUsers = function () {
+            orgResources.user().query({userId: ''})
+                .$promise.then(function (response) {
+                    console.log('sadasda')
+
+                    console.log(c.pagination.user);
+
+                })
+        };
+        c.getUsers = function () {
+            orgResources.userInGroup().query({groupId: id, userId: ''}).$promise
                 .then(
-                function(response){
+                function (response) {
                     c.data.members = response;
                 })
         };
-        c.deleteFromGroup = function(userId){
-            orgResources.userInGroup().remove({groupId:id, userId: userId}).$promise
+        c.deleteFromGroup = function (userId) {
+            orgResources.userInGroup().remove({groupId: id, userId: userId}).$promise
                 .then(
-                function(){
+                function () {
                     c.confirmPopup.message = "Changes successfully made";
                     c.confirmPopup.show();
-                    setTimeout(function(){
+                    setTimeout(function () {
                         c.confirmPopup.hide();
-                    },2000);
+                    }, 2000);
                     c.getUsers();
                     c.editMode.exit();
                 }
@@ -166,5 +311,5 @@
 
     };
     var app = angular.module('Plunner');
-    app.controller('groupController',controller);
+    app.controller('groupController', controller);
 }());

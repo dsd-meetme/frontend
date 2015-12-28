@@ -1,18 +1,21 @@
-
 <div class="navbar navbar-default">
     <div class="container-fluid">
         <!-- HEADER -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">PLUNNER</a>
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/plunner.png" alt=""/>
+            </a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/#/user">Dashboard</a></li>
-                <li><a href="/#/user/profile">
-                    <span class="glyphicon glyphicon-user"></span> Employee Name</a></li>
-                <li><a href="#">How To</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><button type="button" class="btn btn-danger navbar-btn" logout redirect="/">SIGN OUT</button></li>
+                <li class="user_section">
+                    <a href="/#/user/profile">
+                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
+                        <span></span> Employee Name</a>
+                </li>
+                <li>
+                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+                </li>
             </ul>
         </div>
     </div>
@@ -20,82 +23,86 @@
 
 <div class="container-fluid nm">
 
-    <div class="top-odash-banner row">
-        <h2 class="text-center">NEW MEETING</h2>
+    <div class="section_heading row">
+        <h1 class="text-center font_light">New Meeting</h1>
     </div>
-
     <div class="row">
-        <div class="col-md-10 col-md-push-1">
-            <div class="row nm-content">
-                <div class="col-md-5">
-                    <h2>INFORMATION</h2>
-                    <form name="meetingInfoForm" novalidate>
-                        <p>Title</p>
-                        <input type="text" name="title" ng-model="nmC.title" required placeholder="Insert a title"/>
-                        <p>Description</p>
-                            <textarea name="description" ng-model="nmC.description" required placeholder="Insert a description">
+        <div class="col-md-8 col-md-push-2">
+            <div class="row section_action_bar">
+                <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+                <button ng-if="nmC.inputEnabled" class="main_button" ng-click="nmC.submit()"><i class="fa fa-users"></i>&nbsp;&nbsp;{{nmC.buttonText}}</button>
+                <p class="error_msg pull-right near_button_error" ng-repeat="error in nmeC.errors">{{error}}</p>
+            </div>
 
-                            </textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <div class="row nm-content">
+                <h4><i class="fa fa-info-circle"></i>&nbsp;&nbsp;INFORMATION</h4>
+                <form name="meetingInfoForm" novalidate>
+                    <div class="col-md-6">
+                        <p>Title</p>
+                        <input ng-readonly="!nmC.inputEnabled" ng-class="{error_underline: nmC.invalidFields.nameReq }" class="main_input" type="text" name="title" ng-model="nmC.title" required
+                               placeholder="Insert a title"/>
+                        <p class="error_msg" ng-show="nmC.invalidFields.nameReq">Insert a title</p>
+                        <p>Description</p>
+                        <textarea ng-readonly="!nmC.inputEnabled" ng-class="{error_bordering: nmC.invalidFields.descriptionReq }" name="description" ng-model="nmC.description" required placeholder="Insert a description">
+                        </textarea>
+                        <p class="error_msg" ng-show="nmC.invalidFields.descriptionReq">Insert a description</p>
+                    </div>
+                    <div class="col-md-6">
                         <p>Duration(in mins)</p>
-                        <input type="number" ng-model="nmC.duration" name="duration" required placeholder="Insert a duration" />
+                        <input ng-readonly="!nmC.inputEnabled" ng-class="{error_underline:nmC.invalidFields.durationReq || nmC.invalidFields.durationVal || mC.invalidFields.durationLimit  }" class="main_input" type="number" ng-model="nmC.duration" name="duration" required
+                               placeholder="Insert a duration"/>
+                        <p class="error_msg" ng-show="nmC.invalidFields.durationReq">Insert a duration</p>
+                        <p class="error_msg" ng-show="nmC.invalidFields.durationVal">Insert a valid duration(a number)</p>
+                        <p class="error_msg" ng-show="nmC.invalidFields.durationLimit">Insert a valid duration duration(max 300mins, min
+                            15mins)</p>
                         <p>Groups</p>
                         <div ng-repeat="group in nmC.groups">
                             <span style="margin-right: 10px">{{group.name}}</span>
-                            <label class="circled-radio">
+                            <label class="circled_radio">
                                 <input type="radio" name="group" ng-value="group.id" ng-model="nmC.selectedGroup">
                                 <span class="label-text"></span>
                             </label>
+
                             <!--<input type="radio" name="group" ng-checked="nmC.selectedGroupAssign(group.id)" >-->
                         </div>
-                    </form>
-                    <div class="errorContainer" style="margin-top: 10px" ng-show="nmC.thereErrors || nmeC.errors.length > 0">
-                        <p ng-show="nmC.invalidFields.nameReq">Insert a title</p>
-                        <p ng-show="nmC.invalidFields.descriptionReq">Insert a description</p>
-                        <p ng-show="nmC.invalidFields.durationReq">Insert a duration</p>
-                        <p ng-show="nmC.invalidFields.durationVal">Insert a valid duration(a number)</p>
-                        <p ng-show="nmC.invalidFields.durationLimit">Insert a valid duration duration(max 300mins, min 15mins)</p>
-                        <p ng-show="nmC.invalidFields.oneEventLeast">Insert at least one time window for the meeting</p>
-                        <p ng-show="nmC.invalidFields.durationConflict">One time window is too short for the meeting</p>
-                        <p ng-show="nmC.invalidFields.oneGroup">Select the group for the meeting</p>
-                        <p ng-repeat="error in nmeC.errors">{{error}}</p>
+                        <span>{{nmC.groupName}}</span>
+                        <p class="error_msg" ng-show="nmC.invalidFields.oneGroup">Select a group for the meeting</p>
                     </div>
-                </div>
-                <div class="col-md-7">
-                    <h2>TIME WINDOW</h2>
+                </form>
+            </div>
+            <br/>
+            <div class="row">
+                <h4><i class="fa fa-calendar"></i>&nbsp;&nbsp;TIME WINDOW
+                    <span class="error_msg error_inline" ng-show="nmC.invalidFields.oneEventLeast"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one time window for the meeting</span>
+                    <span class="error_msg error_inline" ng-show="nmC.invalidFields.durationConflict">One time window is too short for the meeting</span>
+                </h4>
+                <div class="col-md-12">
                     <div id="meetingTimeslots">
-
                     </div>
-
-
                 </div>
-
             </div>
-            <br/>
-            <hr/>
-            <div class="row text-center">
-                <br/>
-                <button class="btn btn-default spec-btn" ng-click="nmC.submit()">Plan meeting</button>
-            </div>
-            <br/>
-            <br/>
-            <br/>
-
         </div>
 
     </div>
     <br/>
     <br/>
-    <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <h3 class="text-center">{{nmC.confirmPopup.message}}</h3>
-                </div>
-                <br/>
+</div>
+<div id="authorizationPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
             </div>
+            <div class="modal-body text-center">
+                <img src="assets/img/484.GIF" alt=""/>
+                <h2>&nbsp;&nbsp;{{nmC.confirmPopup.message}}</h2>
+            </div>
+            <!--<div class="modal-footer">
+          </div>-->
+            <br/>
         </div>
     </div>
 </div>

@@ -1,17 +1,16 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,800);
-.classic {
-  font-weight: 400; }
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+.font_light {
+  font-weight: 300 !important; }
 
-.light {
-  font-weight: 300; }
+.font_normal {
+  font-weight: 400 !important; }
 
-.bold {
-  font-weight: 600; }
+.font_bold {
+  font-weight: 500 !important; }
 
 .navbar {
   margin-bottom: 0px;
-  height: 51px; }
+  height: 50px; }
 
 .navbar-default {
   margin-bottom: 0px;
@@ -29,60 +28,38 @@
   color: #000000;
   font-weight: 900; }
 
-.navbar-default .right-btn {
-  margin-left: 30px; }
-
 .top-odash-banner {
   position: relative;
   height: 150px;
-  background: url("../../img/pattern.png");
-  border-bottom: 1px solid #eee; }
-  .top-odash-banner h2 {
-    margin-top: 40px;
-    color: #384047;
-    font-family: "Raleway", Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    text-transform: uppercase; }
-  .top-odash-banner .view-switcher {
-    position: absolute;
-    bottom: -20px;
-    left: calc(50% - 125px);
-    width: 250px; }
-    .top-odash-banner .view-switcher button {
-      width: 50%;
-      padding: 12px 24px;
-      color: #5a6772;
-      font-family: "Raleway", Helvetica, Arial, sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      float: left;
-      border: 2px solid #384047;
-      outline: none; }
-      .top-odash-banner .view-switcher button:first-child {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0; }
-      .top-odash-banner .view-switcher button:last-child {
-        border-left: none;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0; }
-      .top-odash-banner .view-switcher button:hover {
-        color: #384047;
-        background-color: white; }
-      .top-odash-banner .view-switcher button:focus {
-        outline: none; }
-  .top-odash-banner .switchSelected {
-    color: white !important;
-    background-color: #384047; }
-    .top-odash-banner .switchSelected:hover {
-      color: white !important;
-      background-color: #384047 !important; }
+  background: #6BAEF5;
+  opacity: .8; }
+  .top-odash-banner h1 {
+    margin-top: 52px;
+    color: white;
+    font-family: 'Roboto';
+    font-weight: 300; }
+
+.view-switcher button {
+  width: 50%;
+  padding: 12px 24px;
+  float: left;
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 400;
+  background-color: white;
+  border: 2px solid #42A5F5;
+  border-radius: 0;
+  outline: none; }
+
+.switchSelected {
+  color: white !important;
+  background-color: #42A5F5 !important; }
 
 .top-banner {
   position: relative;
   border: 0;
   border-radius: 0;
-  margin: 0 0 30px 0;
-  padding: 10 0 10 0;
+  padding: 10px 0 10px 0;
   height: 30px; }
 
 .top-banner2 {
@@ -90,7 +67,7 @@
   border: 0;
   border-radius: 0;
   margin: 0 0 0 0;
-  padding: 10 0 10 0;
+  padding: 10px 0 10px 0;
   height: 80px; }
 
 .banner-button {
@@ -99,5 +76,4 @@
 .banner-title {
   font-size: 30px;
   position: absolute;
-  top: 7.5px;
   left: calc(50% - 90px); }
