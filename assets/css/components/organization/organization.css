@@ -1,3 +1,11 @@
+@media (max-width: 1440px) and (min-width: 993px) {
+  .odash .tileIconLeft {
+    width: 11%; } }
+
+@media (max-width: 1440px) and (min-width: 993px) {
+  .odash .tileBody {
+    margin-right: 5.66666667%; } }
+
 .odash #addGroup .modal-body > div, .odash #addUser .modal-body > div {
   margin-bottom: 25px; }
   .odash #addGroup .modal-body > div p, .odash #addUser .modal-body > div p {
@@ -11,6 +19,19 @@
 
 .odash #addGroup .error_tile, .odash #addUser .error_tile {
   padding-left: 30px; }
+
+@media (max-width: 600px) {
+  .odash .media_adapt {
+    width: 100%;
+    left: 0;
+    width: 100%;
+    left: 0; }
+  .odash h1 {
+    font-size: 28px; }
+  .odash .sub_section_switcher button {
+    font-size: 16px; }
+  .odash .tile .tileBottomGroup {
+    display: none; } }
 
 .groupC .secondary_button {
   margin-right: 15px; }

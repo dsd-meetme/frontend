@@ -6,7 +6,16 @@
         var calendar;
         var selectDay = function () {
             var date = moment();
-            date.add(8 - date.day(), 'days').minute(0).hour(0);
+            var minutes = date.minutes();
+            var hour = data.hour();
+            var day = data.day();
+            if(day < 6){
+                date.add(7 - date.day(), 'days').minute(0).hour(0);
+            }
+            else{
+                date.add(8, 'days').minute(0).hour(0);
+            }
+
             return date;
         };
         var checkNewEvents = function (events) {
@@ -185,7 +194,7 @@
             },
             eventConstraint: {
                 start: selectDay().toISOString(),
-                end: selectDay().add(7, 'days')
+                end: selectDay().add(30, 'days')
             },
             eventRender: function (event, element) {
                 element.append("<span class='fa fa-close removeEvent'></span>");

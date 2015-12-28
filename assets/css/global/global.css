@@ -303,6 +303,14 @@ a.main_button {
   margin-bottom: 30px; }
   .sub_section_actionbar button {
     margin-right: 15px; }
+  @media (max-width: 768px) {
+    .sub_section_actionbar .search_input {
+      width: 50%; }
+      .sub_section_actionbar .search_input input[type="search"] {
+        width: 100%; } }
+  @media (max-width: 600px) {
+    .sub_section_actionbar {
+      font-size: 13px; } }
 
 .tile {
   height: 141px;
@@ -328,7 +336,8 @@ a.main_button {
     .tile .tileBody .tileDescription {
       height: 40px;
       margin-top: 10px;
-      color: #555; }
+      color: #555;
+      overflow: hidden; }
     .tile .tileBody .tileBottomGroup {
       margin-bottom: 10px; }
       .tile .tileBody .tileBottomGroup ul li {
@@ -364,6 +373,24 @@ a.main_button {
     .tile-small .tileBody .tileBottomGroup .tileNonActiveInfo {
       font-weight: 500;
       color: #ccc; }
+
+@media (max-width: 600px) {
+  .tile {
+    height: 100px;
+    font-size: 13px; }
+    .tile .tileIconLeft img {
+      width: 50px;
+      margin-top: 17px; }
+    .tile .tileBody {
+      height: 100px;
+      margin-top: -10px; }
+      .tile .tileBody .tileTitle {
+        margin-top: 20px;
+        font-size: 18px; }
+    .tile .tileIconRight svg {
+      width: 10px;
+      height: 20px;
+      margin-top: 34px; } }
 
 .usi h3 {
   margin-top: 50px;

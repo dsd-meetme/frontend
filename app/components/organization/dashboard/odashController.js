@@ -234,6 +234,8 @@
                 this.thereErrors = (form.$invalid || this.invalidFields.passwordMatch);
                 //Submits everything to the server if data is valid
                 if (!this.thereErrors) {
+                    jQuery('#addUser').modal('hide');
+                    jQuery('#authorizationPopup').modal('show');
                     //Updates the group name and planner
                     orgResources.user().save({userId: ''}, jQuery.param({
                         name: this.name,
@@ -246,12 +248,7 @@
                             //orgResources.employeeInGroup().save({groupId: response.id, employeeId: ''}).$promise
                             //.then(function(response){
                             c.getUsers();
-                            c.confirmPopup.message = "User successfully added";
-                            jQuery('#addUser').modal('hide');
-                            jQuery('#confirmPopup').modal('show');
-                            $timeout(function () {
-                                jQuery('#confirmPopup').modal('hide');
-                            }, 2000);
+                            jQuery('#authorizationPopup').modal('hide');
                         },
                         function (response) {
                             if (response.status === 422) {
