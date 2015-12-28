@@ -7,12 +7,12 @@
         var selectDay = function () {
             var date = moment();
             var minutes = date.minutes();
-            var hour = data.hour();
-            var day = data.day();
-            if(day < 6){
+            var hour = date.hour();
+            var day = date.day();
+            if (day < 6) {
                 date.add(7 - date.day(), 'days').minute(0).hour(0);
             }
-            else{
+            else {
                 date.add(8, 'days').minute(0).hour(0);
             }
 
@@ -99,22 +99,11 @@
                         c.groupName = response.group.name;
                     })
             }
-            else if (mode === 'r') {
-                orgResources.meetingsEmp().get({meetingId: this.meetingId})
-                    .$promise.then(function (response) {
-                        c.data = response;
-                        c.title = response.title;
-                        c.description = response.description;
-                        c.duration = parseInt(response.duration) / 60;
-                    })
-            }
 
         };
         c.getTimeslots = function () {
             var splittedTimeStart, splittedTimeEnd;
-            if (mode !== 'c') {
-                c.getInfo();
-                if (mode === 'w') {
+            if (mode === 'w') {
                     orgResources.plannerTimeslots().query({
                         groupId: this.groupId,
                         meetingId: this.meetingId,
@@ -134,24 +123,21 @@
                             }
                             calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
                         })
-                }
             }
             else {
                 calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
             }
         };
         c.removeTimeslot = function (id) {
+            c.confirmPopup.message = 'Deleting event';
+            c.confirmPopup.show();
             orgResources.plannerTimeslots().remove({
                 groupId: this.groupId,
                 meetingId: this.meetingId,
                 timeslotId: id
             }).$promise
                 .then(function () {
-                    c.confirmPopup.message = 'Event succesfully deleted';
-                    c.confirmPopup.show();
-                    $timeout(function () {
-                        c.confirmPopup.hide();
-                    }, 2000)
+                    c.confirmPopup.hide();
 
                 })
         };
@@ -247,10 +233,10 @@
         c.confirmPopup = {
             message: '',
             show: function () {
-                jQuery('#confirmPopup').modal('show');
+                jQuery('#authorizationPopup').modal('show');
             },
             hide: function () {
-                jQuery('#confirmPopup').modal('hide');
+                jQuery('#authorizationPopup').modal('hide');
             }
         };
         c.submit = function () {
@@ -289,9 +275,10 @@
             this.thereErrors = form.$invalid || this.invalidFields.durationConflict || this.invalidFields.oneEventLeast
                 || this.invalidFields.oneGroup;
             if (!this.thereErrors) {
-                console.log("entro lsdasd");
                 processedEvents = backendEventAdapter(events, true);
                 if (mode === 'c') {
+                    c.confirmPopup.message("Creating meeting");
+                    c.confirmPopup.show();
                     orgResources.meetings().save({groupId: this.selectedGroup, meetingsId: ''}, jQuery.param({
                         title: this.title,
                         description: this.description,
@@ -303,12 +290,8 @@
                                     jQuery.param(processedEvents[i])
                                 ).$promise.then(function () {
                                         if (index === processedEvents.length - 1) {
-                                            c.confirmPopup.message = 'Meeting successfully planned';
-                                            c.confirmPopup.show();
-                                            $timeout(function () {
-                                                c.confirmPopup.hide();
-                                                $location.path('/user');
-                                            }, 2000)
+                                            c.confirmPopup.hide();
+                                            $location.path('/user');
                                         }
                                         index++;
                                     }, function (response) {
@@ -320,7 +303,8 @@
                         })
                 }
                 else {
-
+                    c.confirmPopup.message("Saving changes");
+                    c.confirmPopup.show();
                     index = 0;
                     newEvents = backendEventAdapter(checkNewEvents(events), true);
                     modifiedEvents = backendEventAdapter(changedEvents, false);
@@ -343,13 +327,8 @@
                                     },
                                     jQuery.param(newEvents[i])).$promise.then(function (response) {
                                         if (index === newEvents.length - 1 && !alsoEditEvents) {
-                                            c.confirmPopup.message = "Schedule successfully saved";
-                                            c.confirmPopup.show();
-
-                                            $timeout(function () {
-                                                c.confirmPopup.hide();
-                                                $location.path('/user');
-                                            }, 2000)
+                                            c.confirmPopup.hide();
+                                            $location.path('/user');
                                         }
                                         index++;
 
@@ -363,23 +342,16 @@
                                     },
                                     jQuery.param(modifiedEvents[1][i])).$promise.then(function () {
                                         if (index_one === modifiedEvents[1].length - 1) {
-                                            c.confirmPopup.message = "Schedule successfully saved";
-                                            c.confirmPopup.show();
-                                            $timeout(function () {
-                                                c.confirmPopup.hide();
-                                                $location.path('/user');
-                                            }, 2000)
+                                            c.confirmPopup.hide();
+                                            $location.path('/user');
                                         }
 
                                     });
                             }
                             if (newEvents.length === 0 && modifiedEvents[1].length === 0) {
-                                c.confirmPopup.message = "Schedule successfully saved";
-                                c.confirmPopup.show();
-                                $timeout(function () {
-                                    c.confirmPopup.hide();
-                                    $location.path('/user');
-                                }, 2000)
+                                c.confirmPopup.hide();
+                                $location.path('/user');
+
                             }
                         })
                 }
@@ -397,10 +369,11 @@
         };
         c.getTimeslotsUn = function (id) {
             orgResources.meetingsEmp().query({meetingId: id})
-        }
+        };
         getUserInfo();
         c.processUrl();
         c.getGroups();
+        c.getInfo();
         c.getTimeslots();
 
     };

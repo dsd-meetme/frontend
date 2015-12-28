@@ -51,10 +51,10 @@
         c.confirmPopup = {
             message: '',
             show: function () {
-                jQuery('#confirmPopup').modal('show');
+                jQuery('#authorizationPopup').modal('show');
             },
             hide: function () {
-                jQuery('#confirmPopup').modal('hide');
+                jQuery('#authorizationPopup').modal('hide');
             }
         };
         c.thereErrors = false;
