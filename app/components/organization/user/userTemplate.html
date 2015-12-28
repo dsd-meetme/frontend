@@ -90,6 +90,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <button ng-show="userC.editMode.flag" ng-click="userC.delete()" class="secondary_button"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete user</button>
                                 <div class="errorContainer" ng-show="userC.editMode.flag && (userC.update.thereErrors || userC.update.errors.length > 0)">
                                     <p class="error_msg" ng-repeat="error in userC.update.errors">{{error}}</p>
                                 </div>

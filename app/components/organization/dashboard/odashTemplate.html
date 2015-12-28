@@ -11,7 +11,8 @@
                 <li class="user_section">
                     <a href="/#/user/profile">
                         <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
-                        <span></span> Employee Name</a>
+                        {{odashC.data.orgInfo.name}}
+                    </a>
                 </li>
                 <li>
                     <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
@@ -37,6 +38,7 @@
     <br/>
     <br/>
     <br/>
+
     <div class="row" ng-show="odashC.viewSections.users">
         <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div class="row sub_section_actionbar">
@@ -45,48 +47,57 @@
                         <i class="fa fa-search fa-lg"></i>
                         <input type="search" ng-model="searchUser" placeholder="Search for..."/>
                     </div>
-                    <button ng-click="odashC.addUser.showPopup()" class="main_button"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD USER</button>
+                    <button ng-click="odashC.addUser.popUp.show()" class="main_button"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD
+                        USER
+                    </button>
                 </div>
             </div>
             <div class="row odash-users">
                 <div class="col-md-12">
-                    <div class="tile"
-                         ng-repeat="user in odashC.data.users | filter:{ name: searchUser} | paginationFilter: odashC.pagination.user.filterString">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-2 col-xs-2  tileIconLeft">
-                                <img src="assets/img/user_tile.png" alt=""/>
-                            </div>
-                            <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
-                                <h4 class="tileTitle">{{user.name}}</h4>
-                                <div class="tileDescription">
-                                    {{user.email}}
+                    <div>
+                        <div class="tile"
+                             ng-repeat="user in odashC.data.users | filter:{ name: searchUser} | paginationFilter: odashC.pagination.user.filterString">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2 col-xs-2  tileIconLeft">
+                                    <img src="assets/img/user_tile.png" alt=""/>
                                 </div>
-                                <div class="tileBottomGroup">
-                                    <ul class="list-inline list-unstyled">
-                                        <li><span class="tileSynched">GROUP:</span>
-                                            <a href="/#/organization/groups/{{group.id}}" ng-repeat="group in user.groups">{{group.name}},
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
+                                    <h4 class="tileTitle">{{user.name}}</h4>
+
+                                    <div class="tileDescription">
+                                        {{user.email}}
+                                    </div>
+                                    <div class="tileBottomGroup">
+                                        <ul class="list-inline list-unstyled">
+                                            <li><span class="tileSynched">GROUP:</span>
+                                                <a href="/#/organization/groups/{{group.id}}"
+                                                   ng-repeat="group in user.groups">{{group.name}},
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-1 col-sm-1 col-xs-1 text-right tileIconRight">
-                                <a href="/#/organization/users/{{user.id}}">
-                                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-                                    <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
-                                         xmlns="http://www.w3.org/2000/svg" ng-click="">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g transform="translate(-1202.000000, -14.000000)" fill="#dddddd">
-                                                <path d="M1228.02325,50.9383888 L1202.0559,84 L1208.31538,89.5463755 L1236.38284,53.4511569 L1238.33675,50.9383905 L1236.32694,48.4701061 L1208.25948,14 L1202.0559,19.0512964 L1228.02325,50.9383888 Z"></path>
+                                <div class="col-md-1 col-sm-1 col-xs-1 text-right tileIconRight">
+                                    <a href="/#/organization/users/{{user.id}}">
+                                        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                        <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
+                                             xmlns="http://www.w3.org/2000/svg" ng-click="">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g transform="translate(-1202.000000, -14.000000)" fill="#dddddd">
+                                                    <path d="M1228.02325,50.9383888 L1202.0559,84 L1208.31538,89.5463755 L1236.38284,53.4511569 L1238.33675,50.9383905 L1236.32694,48.4701061 L1208.25948,14 L1202.0559,19.0512964 L1228.02325,50.9383888 Z"></path>
+                                                </g>
                                             </g>
-                                        </g>
-                                    </svg>
-                                </a>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <ul class="list-unstyled list-inline pagination">
-                        <li ng-class="{underlinedPage : odashC.pagination.user.currentPage === ($index + 1)}" ng-click="odashC.pagination.user.changePage($index+1)" ng-repeat="x in odashC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                        <li ng-class="{underlinedPage : odashC.pagination.user.currentPage === ($index + 1)}"
+                            ng-click="odashC.pagination.user.changePage($index+1)"
+                            ng-repeat="x in odashC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -101,7 +112,9 @@
                         <i class="fa fa-search fa-lg"></i>
                         <input type="search" ng-model="searchGroup" placeholder="Search for..."/>
                     </div>
-                    <button ng-click="odashC.addGroup.showPopup()" class="main_button"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD GROUP</button>
+                    <button ng-click="odashC.addGroup.popUp.show()" class="main_button"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD
+                        GROUP
+                    </button>
                 </div>
             </div>
             <div class="row odash-groups">
@@ -114,6 +127,7 @@
                             </div>
                             <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{group.name}}</h4>
+
                                 <div class="tileDescription">
                                     {{group.description}}
                                 </div>
@@ -140,8 +154,11 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="pagination list-unstyled list-inline" ng-if="odash.pagination.groups.pages > 1">
-                        <li ng-class="{underlinedPage : odashC.pagination.groups.currentPage === ($index + 1)}" ng-click="odashC.pagination.groups.changePage($index+1)" ng-repeat="x in odashC.pagination.groups.utilArray track by $index">{{$index+1}}</li>
+                    <ul class="pagination list-unstyled list-inline" ng-if="odashC.pagination.groups.pages > 1">
+                        <li ng-class="{underlinedPage : odashC.pagination.groups.currentPage === ($index + 1)}"
+                            ng-click="odashC.pagination.groups.changePage($index+1)"
+                            ng-repeat="x in odashC.pagination.groups.utilArray track by $index">{{$index+1}}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -156,12 +173,20 @@
                 <div class="modal-body">
                     <div>
                         <p>Name</p>
-                        <input ng-class="{error_underline : odashC.addGroup.invalidFields.nameReq}" class="main_input" type="text" placeholder="Insert a name" class="search-field" ng-model="odashC.addGroup.name">
+                        <input ng-class="{error_underline : odashC.addGroup.invalidFields.nameReq}" class="main_input"
+                               type="text" placeholder="Insert a name" class="search-field"
+                               ng-model="odashC.addGroup.name">
+
                         <p ng-show="odashC.addGroup.invalidFields.nameReq" class="error_msg">Insert a name</p>
                     </div>
                     <div>
                         <p>Description</p>
-                        <input class="main_input" type="text" placeholder="Insert a description" class="search-field" ng-model="odashC.addGroup.desc">
+                        <input class="main_input" type="text" placeholder="Insert a description" class="search-field"
+                               ng-model="odashC.addGroup.desc">
+                    </div>
+                    <div class="search_input">
+                        <i class="fa fa-search fa-lg"></i>
+                        <input type="search" ng-model="searchedUser" placeholder="Search for a user"/>
                     </div>
                     <table class="table">
                         <thead>
@@ -170,7 +195,7 @@
                         <th class="text-center">Planner</th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="user in odashC.data.users | filter: searchedPlanner | paginationFilter: odashC.pagination.user.filterString">
+                        <tr ng-repeat="user in odashC.data.users | filter: searchedUser | paginationFilter: odashC.pagination.user.filterString">
                             <td>{{user.name}}</td>
                             <td class="text-center">
                                 <label class="list_checkbox" ng-click="odashC.addGroup.selectPlanner(user.id)">
@@ -180,20 +205,30 @@
                             </td>
                             <td class="text-center">
                                 <label class="list_radio">
-                                    <input type="radio" name="plannerasd" ng-model="odashC.addGroup.planner" ng-value="user.id">
+                                    <input type="radio" name="plannerasd" ng-model="odashC.addGroup.planner"
+                                           ng-value="user.id">
                                     <span class="text"></span>
                                 </label>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <ul class="list-unstyled list-inline pagination" ng-if="odash.pagination.user.pages > 1">
-                        <li ng-class="{underlinedPage : odashC.pagination.user.currentPage === ($index + 1)}" ng-click="odashC.pagination.user.changePage($index+1)" ng-repeat="x in odashC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
+                    <ul class="list-unstyled list-inline pagination" ng-if="odashC.pagination.user.pages > 1">
+                        <li ng-class="{underlinedPage : odashC.pagination.user.currentPage === ($index + 1)}"
+                            ng-click="odashC.pagination.user.changePage($index+1)"
+                            ng-repeat="x in odashC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}
+                        </li>
                     </ul>
                 </div>
-                <p class="error_tile" class="error_msg" ng-repeat="error in odashC.addGroup.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
-                <p ng-show="odashC.addGroup.invalidFields.membersReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one member</p>
-                <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert one planner</p>
+                <p class="error_tile" class="error_msg" ng-repeat="error in odashC.addGroup.errors"><i
+                        class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
+
+                <p ng-show="odashC.addGroup.invalidFields.membersReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert
+                    at least one member</p>
+
+                <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert
+                    one planner</p>
+
                 <div class="modal-footer">
                     <button type="button" class="secondary_button" data-dismiss="modal">Close</button>
                     <button type="button" class="main_button" ng-click="odashC.addGroup.submit()">Create</button>
@@ -211,28 +246,52 @@
                     <div class="modal-body">
                         <div>
                             <p>Name</p>
-                            <input class="main_input" ng-class="{error_underline : odashC.addUser.invalidFields.nameReq}" name="name" type="text"  required ng-model="odashC.addUser.name" placeholder="Insert a name">
+                            <input class="main_input"
+                                   ng-class="{error_underline : odashC.addUser.invalidFields.nameReq}" name="name"
+                                   type="text" required ng-model="odashC.addUser.name" placeholder="Insert a name">
+
                             <p ng-show="odashC.addUser.invalidFields.nameReq" class="error_msg">Insert a user name</p>
                         </div>
                         <div>
                             <p>Email</p>
-                            <input class="main_input" ng-class="{error_underline : odashC.addUser.invalidFields.emailReq || odashC.addUser.invalidFields.emailVal} " name="email" type="email"  required ng-model="odashC.addUser.email" placeholder="Insert an email">
-                            <p ng-show="odashC.addUser.invalidFields.emailReq" class="error_msg">Insert an email address</p>
-                            <p ng-show="odashC.addUser.invalidFields.emailVal" class="error_msg">Insert a valid email address</p>
+                            <input class="main_input"
+                                   ng-class="{error_underline : odashC.addUser.invalidFields.emailReq || odashC.addUser.invalidFields.emailVal} "
+                                   name="email" type="email" required ng-model="odashC.addUser.email"
+                                   placeholder="Insert an email">
+
+                            <p ng-show="odashC.addUser.invalidFields.emailReq" class="error_msg">Insert an email
+                                address</p>
+
+                            <p ng-show="odashC.addUser.invalidFields.emailVal" class="error_msg">Insert a valid email
+                                address</p>
                         </div>
                         <div>
                             <p>Password</p>
-                            <input class="main_input" ng-class="{error_underline : odashC.addUser.invalidFields.passwordReq || odashC.addUser.invalidFields.passwordLength }" name="password" type="password"  required ng-model="odashC.addUser.password" placeholder="Insert a password" ng-minlength="6">
-                            <p ng-show="odashC.addUser.invalidFields.passwordReq" class="error_msg">Insert a password</p>
-                            <p ng-show="odashC.addUser.invalidFields.passwordLength" class="error_msg">The password must contains at least 6 characters</p>
+                            <input class="main_input"
+                                   ng-class="{error_underline : odashC.addUser.invalidFields.passwordReq || odashC.addUser.invalidFields.passwordLength }"
+                                   name="password" type="password" required ng-model="odashC.addUser.password"
+                                   placeholder="Insert a password" ng-minlength="6">
+
+                            <p ng-show="odashC.addUser.invalidFields.passwordReq" class="error_msg">Insert a
+                                password</p>
+
+                            <p ng-show="odashC.addUser.invalidFields.passwordLength" class="error_msg">The password must
+                                contains at least 6 characters</p>
                         </div>
                         <div>
                             <p>Confirm Password</p>
-                            <input class="main_input" ng-class="{error_underline : odashC.addUser.invalidFields.passwordMatch}" name="confirmation_password" type="password" ng-model="odashC.addUser.confirmation_password" placeholder="Confirm the password">
-                            <p ng-show="odashC.addUser.invalidFields.passwordMatch" class="error_msg">The two passwords do not match</p>
+                            <input class="main_input"
+                                   ng-class="{error_underline : odashC.addUser.invalidFields.passwordMatch}"
+                                   name="confirmation_password" type="password"
+                                   ng-model="odashC.addUser.confirmation_password" placeholder="Confirm the password">
+
+                            <p ng-show="odashC.addUser.invalidFields.passwordMatch" class="error_msg">The two passwords
+                                do not match</p>
                         </div>
                     </div>
-                    <p class="error_tile" ng-repeat="error in odashC.addUser.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
+                    <p class="error_tile" ng-repeat="error in odashC.addUser.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}
+                    </p>
+
                     <div class="modal-footer">
                         <button type="button" class="secondary_button" data-dismiss="modal">Close</button>
                         <button type="submit" class="main_button">Create</button>
@@ -250,22 +309,8 @@
             </div>
             <div class="modal-body text-center">
                 <img src="assets/img/484.GIF" alt=""/>
-                <h2>&nbsp;&nbsp;Saving changes</h2>
-            </div>
-            <!--<div class="modal-footer">
-          </div>-->
-            <br/>
-        </div>
-    </div>
-</div>
-<div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <h3 class="text-center">{{odashC.confirmPopup.message}}</h3>
+
+                <h2>&nbsp;&nbsp;{{odashC.confirmPopup.message}}</h2>
             </div>
             <br/>
         </div>

@@ -159,16 +159,16 @@
         c.confirmPopup = {
             message: '',
             show: function () {
-                jQuery('#confirmPopup').modal('show');
+                jQuery('#authorizationPopup').modal('show');
             },
             hide: function () {
-                jQuery('#confirmPopup').modal('hide');
+                jQuery('#authorizationPopup').modal('hide');
             }
         };
         c.pagination = {
-            changePage : function(section, page){
+            changePage: function (section, page) {
                 var sectionRef = this[section];
-                if (page >sectionRef.currentPage) {
+                if (page > sectionRef.currentPage) {
                     sectionRef.currentPage = page;
                     sectionRef.startIndex = sectionRef.endIndex + 1;
                     sectionRef.endIndex = sectionRef.startIndex + 9;
@@ -182,7 +182,7 @@
 
                 }
             },
-            meetingsPlanned : {
+            meetingsPlanned: {
                 pages: 1,
                 currentPage: 1,
                 utilArray: null,
@@ -190,7 +190,7 @@
                 endIndex: 9,
                 filterString: '0,9'
             },
-            meetingsManaged : {
+            meetingsManaged: {
                 pages: 1,
                 currentPage: 1,
                 utilArray: null,
@@ -198,7 +198,7 @@
                 endIndex: 9,
                 filterString: '0,9'
             },
-            meetingsToBePlanned : {
+            meetingsToBePlanned: {
                 pages: 1,
                 currentPage: 1,
                 utilArray: null,
@@ -206,15 +206,15 @@
                 endIndex: 9,
                 filterString: '0,9'
             },
-            schedulesImported : {
+            schedulesImported: {
                 pages: 1,
                 currentPage: 1,
                 utilArray: null,
                 startIndex: 0,
                 endIndex: 9,
-                filterString: '0,9' 
+                filterString: '0,9'
             },
-            schedulesComposed : {
+            schedulesComposed: {
                 pages: 1,
                 currentPage: 1,
                 utilArray: null,
@@ -288,6 +288,9 @@
                     this.errors.push('Select at least one schedule to import');
                 }
                 else {
+                    c.confirmPopup.message = 'Importing schedules';
+                    c.importSchedule.popUp.hide();
+                    c.confirmPopup.show();
                     var selectedCalendars = getSelectedSchedules(this.calendars);
                     for (var i = 0; i < selectedCalendars.length; i++) {
                         dataPublisher.publish('http://api.plunner.com/employees/calendars/caldav', {
@@ -298,13 +301,8 @@
                             calendar_name: selectedCalendars[i],
                             enabled: 1
                         }).then(function () {
-                            c.confirmPopup.message = 'Schedules successfully imported!';
-                            c.importSchedule.popUp.hide();
-                            c.confirmPopup.show();
-                            $timeout(function () {
-                                c.confirmPopup.hide();
-                                getSchedules;
-                            }, 2000)
+                            getSchedules();
+                            c.confirmPopup.hide();
                         }, function (response) {
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.importSchedule.errors, true);
@@ -315,19 +313,13 @@
                 }
             }
         };
-
         c.deleteSchedule = function (id) {
+            c.confirmPopup.message = 'Deleting schedule';
+            c.confirmPopup.show();
             orgResources.calendar().remove({calendarId: id})
                 .$promise.then(function () {
-                    c.confirmPopup.message = 'Schedule successfully deleted';
-                    c.confirmPopup.show();
-                    $timeout(
-                        function () {
-                            //c.confirmPopup.hide();
-
-                        }, 2000
-                    );
-                    getSchedules;
+                    getSchedules();
+                    c.confirmPopup.hide();
                 })
         };
         c.editSchedule = {
@@ -373,6 +365,7 @@
                 this.thereErrors = form.$invalid || this.invalidFields.passwordMatch;
 
                 if (!this.thereErrors) {
+                    c.confirmPopup.message = 'Saving changes!';
                     var configObj, enabled;
                     if (this.data.enabled === true) {
                         enabled = '1';
@@ -401,13 +394,11 @@
                     }
                     orgResources.calendar().update({calendarId: this.data.id}, jQuery.param(configObj))
                         .$promise.then(function () {
-                            c.confirmPopup.message = 'Changes successfully saved!';
                             c.editSchedule.popUp.hide();
                             c.confirmPopup.show();
-                            $timeout(function () {
-                                c.confirmPopup.hide();
-                                getSchedules;
-                            }, 2000)
+                            getSchedules();
+                            c.confirmPopup.hide();
+
                         }, function (response) {
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.editSchedule.errors, true);
@@ -417,15 +408,13 @@
             }
         };
         c.deletePlannedMeeting = function (groupId, meetingId) {
+            c.confirmPopup.message = 'Deleting meeting';
+            c.confirmPopup.show();
             orgResources.meetings().remove({groupId: groupId, meetingsId: meetingId}).$promise
                 .then(function () {
-                    c.confirmPopup.message = 'Meeting succesfully deleted';
-                    c.confirmPopup.show();
-                    $timeout(function () {
-                        c.confirmPopup.hide()
-                    }, 2000);
                     getMeetings();
-                    getManagedMeetings()
+                    getManagedMeetings();
+                    c.confirmPopup.hide();
                 })
         };
         getUserInfo();

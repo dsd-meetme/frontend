@@ -13,7 +13,7 @@
             group: {
                 name: '',
                 description: '',
-                id : ''
+                id: ''
             },
             members: [],
             groupCopy: {
@@ -49,10 +49,10 @@
         c.confirmPopup = {
             message: '',
             show: function () {
-                jQuery('#confirmPopup').modal('show');
+                jQuery('#authorizationPopup').modal('show');
             },
             hide: function () {
-                jQuery('#confirmPopup').modal('hide');
+                jQuery('#authorizationPopup').modal('hide');
             }
         };
         c.inChange = false;
@@ -84,7 +84,7 @@
 
                 }
             }
-        }
+        };
         //Gets user info in the context of an organization
         c.getInfo = function () {
             //restful show
@@ -105,19 +105,17 @@
         //Delete an employee in the context of an org
         c.delete = function () {
             //restful delete
+            c.confirmPopup.message = "Deleting user";
+            c.confirmPopup.show();
             orgResources.group().remove({groupId: id}).$promise
                 .then(function () {
-                    c.confirmPopup.message = "Group successfully deleted";
-                    c.editMode.exit();
-                    c.confirmPopup.show();
-                    $timeout(function () {
-                        c.confirmPopup.hide();
-                        $location.path('/organization')
-                    }, 2000);
-
+                    c.confirmPopup.hide();
+                    $location.path('/organization')
                 });
         };
         c.updatePlanner = function (plannerId) {
+            c.confirmPopup.message = "Updating planner";
+            c.confirmPopup.show();
             if (plannerId !== c.data.group.planner_id) {
                 orgResources.group().update({groupId: id}, jQuery.param(
                         {
@@ -127,15 +125,10 @@
                         })
                 ).$promise
                     .then(function () {
-                        c.confirmPopup.message = "Changes successfully made";
-                        c.confirmPopup.show();
-                        setTimeout(function () {
-                            c.confirmPopup.hide();
-                        }, 2000);
-
                         //Update view
                         c.getInfo();
                         c.editMode.exit();
+                        c.confirmPopup.hide();
                     }, function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors.planner, true);
@@ -147,10 +140,11 @@
         c.updateInfo = function () {
             //Checks the validity status of input fields
             c.invalidFields.nameReq = (c.data.groupCopy.name === '');
-            console.log(c.data.groupCopy);
             c.thereErrors.info = c.invalidFields.nameReq;
 
             if (!c.thereErrors.info) {
+                c.confirmPopup.message = "Saving changes";
+                c.confirmPopup.show();
                 orgResources.group().update({groupId: id}, jQuery.param(
                     {
                         name: c.data.groupCopy.name,
@@ -158,14 +152,9 @@
                         planner_id: c.data.group.planner_id
                     })).$promise
                     .then(function () {
-                        c.inchange = false;
-                        c.confirmPopup.message = "Changes successfully made!";
-                        c.confirmPopup.show();
-                        setTimeout(function () {
-                            c.confirmPopup.hide();
-                        }, 2000);
                         c.getInfo();
                         c.editMode.exit();
+                        c.confirmPopup.hide();
                     }, function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors.info, true);
@@ -174,22 +163,25 @@
             }
         };
         c.changePlanner = {
-            init : function(){
+            init: function () {
                 orgResources.user().query({userId: ''})
                     .$promise.then(function (response) {
                         var modal = jQuery('#changePlanner');
                         modal.find('input').val('');
                         var pages;
                         c.allUsers = response;
-                        pages = Math.ceil(c.allUsers.length/10);
+                        pages = Math.ceil(c.allUsers.length / 10);
                         c.pagination.user.pages = pages;
                         c.pagination.user.utilArray = new Array(pages);
                         modal.modal('show');
                     })
             },
-            plannerId : null,
-            change : function(){
+            plannerId: null,
+            change: function () {
                 if (this.plannerId !== c.data.group.planner_id) {
+                    c.confirmPopup.message = "Saving changes";
+                    c.confirmPopup.show();
+                    jQuery('#changePlanner').modal('hide');
                     orgResources.group().update({groupId: id}, jQuery.param(
                             {
                                 name: c.data.group.name,
@@ -198,16 +190,10 @@
                             })
                     ).$promise
                         .then(function () {
-                            c.confirmPopup.message = "Changes successfully made";
-                            jQuery('#changePlanner').modal('hide');
-                            c.confirmPopup.show();
-                            setTimeout(function () {
-                                c.confirmPopup.hide();
-                            }, 2000);
-
                             //Update view
                             c.getInfo();
                             c.editMode.exit();
+                            c.confirmPopup.hide();
                         }, function (response) {
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.errors.planner, true);
@@ -218,13 +204,13 @@
 
         };
         c.addToGroup = {
-            members : [],
-            validMembers : [],
-            init : function(){
+            members: [],
+            validMembers: [],
+            init: function () {
                 var utilArray = [];
                 var secondUtilArray = [];
                 var bool;
-                for(var i=0; i< c.data.members.length; i++){
+                for (var i = 0; i < c.data.members.length; i++) {
                     secondUtilArray.push(c.data.members[i].id);
                 }
                 orgResources.user().query({userId: ''})
@@ -233,20 +219,22 @@
                         modal.find('input').val('');
                         var pages;
                         console.log(secondUtilArray);
-                        for(var j =0; j<response.length; j++){
-                            if(secondUtilArray.indexOf(response[j].id) === -1){
+                        for (var j = 0; j < response.length; j++) {
+                            if (secondUtilArray.indexOf(response[j].id) === -1) {
                                 utilArray.push(response[j]);
                             }
                         }
-                        console.log(utilArray);
                         c.allUsers = utilArray;
-                        pages = Math.ceil(c.allUsers.length/10);
+                        pages = Math.ceil(c.allUsers.length / 10);
                         c.pagination.user.pages = pages;
                         c.pagination.user.utilArray = new Array(pages);
                         modal.modal('show');
                     })
             },
-            change : function(){
+            change: function () {
+                c.confirmPopup.message = "Adding user to group";
+                jQuery('#addToGroup').modal('hide');
+                c.confirmPopup.show();
                 var validMembers = [];
                 angular.forEach(this.members, function (value, key) {
                     if (value === true) {
@@ -258,16 +246,10 @@
                     userId: ''
                 }, arrayToUrlParams.process('id', validMembers)).$promise
                     .then(function () {
-                        c.confirmPopup.message = "Users successfully added";
-                        jQuery('#addToGroup').modal('hide');
-                        c.confirmPopup.show();
-                        setTimeout(function () {
-                            c.confirmPopup.hide();
-                        }, 2000);
-
                         //Update view
                         c.getInfo();
                         c.editMode.exit();
+                        c.confirmPopup.hide();
                     }, function (response) {
                         //Puts relevant errors in array
                         if (response.status === 422) {
@@ -275,15 +257,6 @@
                         }
                     })
             }
-        };
-        c.getAllUsers = function () {
-            orgResources.user().query({userId: ''})
-                .$promise.then(function (response) {
-                    console.log('sadasda')
-
-                    console.log(c.pagination.user);
-
-                })
         };
         c.getUsers = function () {
             orgResources.userInGroup().query({groupId: id, userId: ''}).$promise
@@ -293,11 +266,12 @@
                 })
         };
         c.deleteFromGroup = function (userId) {
+            c.confirmPopup.message = "Removing user";
+            c.confirmPopup.show();
             orgResources.userInGroup().remove({groupId: id, userId: userId}).$promise
                 .then(
                 function () {
-                    c.confirmPopup.message = "Changes successfully made";
-                    c.confirmPopup.show();
+
                     setTimeout(function () {
                         c.confirmPopup.hide();
                     }, 2000);

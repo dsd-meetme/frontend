@@ -7,6 +7,11 @@
                 method : 'PUT'
             }
         });
+        var orgInfo = $resource('http://api.plunner.com/companies/company',null, {
+            'update' : {
+                method : 'PUT'
+            }
+        });
         var groupResource = $resource('http://api.plunner.com/companies/groups/:groupId',null, {
             'update' : {
                 method : 'PUT'
@@ -124,6 +129,9 @@
             },
             managedMeetings : function(){
                 return managedMeetings;
+            },
+            orgInfo : function(){
+              return orgInfo;
             }
         }
     };

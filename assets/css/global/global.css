@@ -56,6 +56,16 @@ a {
   width: 50px;
   margin-top: -12px; }
 
+.footer {
+  margin-top: 50px; }
+  .footer > .row > div {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: 1px solid #ddd; }
+    .footer > .row > div img {
+      opacity: .2;
+      width: 40px; }
+
 a.main_button {
   display: inline-block; }
   a.main_button:visited, a.main_button:focus, a.main_button:active {
