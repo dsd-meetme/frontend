@@ -16,16 +16,6 @@
     font-style: italic
     font-size: 18px
 
-  .top-dash-banner
-    position: relative
-    border-top: 0
-    border-left: 0
-    border-right: 0
-    border-bottom: 1px solid black
-    margin: 0 0 30px 0
-    padding: 10px 0 10px 0
-    height: 80px
-
   .meetg-sched-banner
     height: 70px - 1px
     background-image: url("../../../img/dashboard.jpg")
@@ -44,7 +34,6 @@
 
   .dashboard-page
     padding: 70px 0
-
 
   .add-btn
     position: absolute
@@ -84,7 +73,6 @@
   .imported-section
     margin-bottom: 70px
 
-
   .circled-checkbox input[type="checkbox"]:checked + .label-text:before
     content: "\f111"
 
@@ -111,7 +99,6 @@
         td:last-child
           padding-right: 10px
 
-
           span
             color: $glob_gray_light
             margin-right: 15px
@@ -123,15 +110,55 @@
             &:hover
               color: $glob_gray
 
+  @media(max-width: 1200px)
+    .scheduleSection
+      .search_input
+        display: block
+        float: none
+        margin-top: 30px
+
+  @media(max-width: 670px)
+    .tile
+      .tileBottomGroup
+        display: none
+
+    .tile-small
+      .tileBottomGroup
+        display: block
+
+        li:last-child
+          display: none
+
+  @media(max-width: 500px)
+    .udash_empty_state_msg
+      font-size: 18px
+    .udash_content_type_title
+      h4
+        font-size: 18px
+    .tile-small
+      .tileBottomGroup
+
+        li:nth-last-child(2)
+          display: none
+
+  @media(max-width: 420px)
+      .sub_section_actionbar
+        a, button
+          width: 100%
+          text-align: center
+          padding: 8px 16px
+
+        button
+          margin-bottom: 20px
 
 #importSchedule, #editSchedule
 
   .modal-body
-    >div
+    > div
       margin-bottom: 25px
 
-    >div> p
-        margin-bottom: 5px
+    > div > p
+      margin-bottom: 5px
 
     input[type="url"]
       width: 80%
@@ -144,7 +171,6 @@
 
     table
       margin-bottom: 0
-
 
   .secondary_button
     margin-right: 15px

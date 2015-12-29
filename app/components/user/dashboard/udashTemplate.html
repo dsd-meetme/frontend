@@ -25,7 +25,7 @@
         <h1 class="text-center font_light">Welcome to your dashboard!</h1>
     </div>
     <div class="sub_section_switcher row">
-        <div class="col-md-8 col-md-push-2">
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <button type="button" ng-class="{sub_section_switcher_selected : udashC.viewSections.meetings}"
                     ng-click="udashC.viewSections.showMeetings()">MEETINGS
             </button>
@@ -39,17 +39,18 @@
     <br/>
 
     <div class="row" ng-show="udashC.viewSections.meetings">
-        <div class="col-md-8 col-md-push-2">
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div class="row sub_section_actionbar">
                 <div class="col-md-12">
+                    <a ng-if="udashC.userInfo.is_planner" href="/#/user/newmeeting/_" class="main_button">
+                        <i class="fa fa-plus"></i>
+                        &nbsp;&nbsp;Plan meeting
+                    </a>
                     <div class="search_input">
                         <i class="fa fa-search fa-lg"></i>
                         <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
                     </div>
-                    <a ng-if="udashC.userInfo.is_planner" href="/#/user/newmeeting/_" class="main_button">
-                        <i class="fa fa-plus"></i>
-                        &nbsp;&nbsp;Plan a meeting
-                    </a>
+
                 </div>
             </div>
             <div class="row" ng-if="udashC.userInfo.is_planner">
@@ -60,10 +61,10 @@
                     <div class="tile"
                          ng-repeat="meeting in udashC.meetings.managed | filter: {title : filterTBPMeetings} | paginationFilter: udashC.pagination.meetingsManaged.filterString">
                         <div class="row">
-                            <div class="col-md-1  tileIconLeft">
+                            <div class="col-md-2 col-sm-2 col-xs-2  tileIconLeft">
                                 <img src="assets/img/meeting_one.png" alt=""/>
                             </div>
-                            <div class="col-md-10 tileBody">
+                            <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{meeting.title}}</h4>
 
                                 <div class="tileDescription">
@@ -86,7 +87,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-1 text-right tileIconRight">
+                            <div class="col-md-1 col-sm-1 col-xs-1 text-right tileIconRight">
                                 <a href="/#/user/newmeeting/{{meeting.group_id}}&{{meeting.id}}&w">
                                     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                                     <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
@@ -125,10 +126,10 @@
                     <div class="tile"
                          ng-repeat="meeting in udashC.meetings.toBePlanned | filter: {title : filterTBPMeetings} | paginationFilter: udashC.pagination.meetingsPlanned.filterString">
                         <div class="row">
-                            <div class="col-md-1  tileIconLeft">
+                            <div class="col-md-2 col-sm-2 col-xs-2  tileIconLeft">
                                 <img src="assets/img/meeting_one.png" alt=""/>
                             </div>
-                            <div class="col-md-10 tileBody">
+                            <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{meeting.title}}</h4>
 
                                 <div class="tileDescription">
@@ -146,7 +147,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-1 text-right tileIconRight">
+                            <div class="col-md-1 col-sm-1 col-xs-1 text-right tileIconRight">
                             </div>
                         </div>
                     </div>
@@ -174,10 +175,10 @@
                     <div class="tile"
                          ng-repeat="meeting in udashC.meetings.planned | filter: {title : filterTBPMeetings} | paginationFilter: udashC.pagination.meetingsToBePlanned.filterString">
                         <div class="row">
-                            <div class="col-md-1  tileIconLeft">
+                            <div class="col-md-2 col-sm-2 col-xs-2  tileIconLeft">
                                 <img src="assets/img/meeting_two.png" alt=""/>
                             </div>
-                            <div class="col-md-10 tileBody">
+                            <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{meeting.title}}</h4>
 
                                 <div class="tileDescription">
@@ -217,22 +218,23 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-show="udashC.viewSections.schedules">
-        <div class="col-md-8 col-md-push-2">
+    <div class="row scheduleSection" ng-show="udashC.viewSections.schedules">
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div class="row sub_section_actionbar">
                 <div class="col-md-12">
-                    <div class="search_input">
-                        <i class="fa fa-search fa-lg"></i>
-                        <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
-                    </div>
                     <button class="main_button" ng-click="udashC.importSchedule.popUp.show()">
                         <i class="fa fa-plus"></i>
                         &nbsp;&nbsp;Import Schedule
                     </button>
                     <a href="/#/user/schedules/compose/_" class="main_button">
                         <i class="fa fa-pencil fa-lg"></i>&nbsp;&nbsp;
-                        Compose a schedule
+                        Compose schedule
                     </a>
+                    <div class="search_input">
+                        <i class="fa fa-search fa-lg"></i>
+                        <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
+                    </div>
+
                 </div>
             </div>
             <div class="row">
@@ -243,10 +245,10 @@
                     <div class="tile tile-small"
                          ng-repeat="schedule in udashC.schedules.imported | filter: {name : filterISchedules} | paginationFilter: udashC.pagination.schedulesImported.filterString">
                         <div class="row">
-                            <div class="col-md-1 text-right tileIconLeft">
+                            <div class="col-md-2 col-sm-2 col-xs-2 tileIconLeft">
                                 <img src="assets/img/schedule_one.png" alt=""/>
                             </div>
-                            <div class="col-md-10 tileBody">
+                            <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{schedule.name}}</h4>
 
                                 <div class="tileBottomGroup">
@@ -273,7 +275,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-1 text-center tileIconRight">
+                            <div class="col-md-1 col-sm-1 col-xs-1 text-right tileIconRight">
                                 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                                 <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
                                      xmlns="http://www.w3.org/2000/svg"
@@ -311,10 +313,10 @@
                     <div class="tile tile-small"
                          ng-repeat="schedule in udashC.schedules.composed | filter: {name : filterISchedules} | paginationFilter: udashC.pagination.schedulesComposed.filterString">
                         <div class="row">
-                            <div class="col-md-1 tileIconLeft">
+                            <div class="col-md-2 col-sm-2 col-xs-2 tileIconLeft">
                                 <img src="assets/img/schedule_two.png" alt=""/>
                             </div>
-                            <div class="col-md-10 tileBody">
+                            <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{schedule.name}}</h4>
 
                                 <div class="tileBottomGroup">
@@ -332,7 +334,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-1 text-right tileIconRight">
+                            <div class="col-md-1 col-sm-1 col-xs-1 text-right tileIconRight">
                                 <a href="/#/user/schedules/compose/{{schedule.id}}&{{schedule.name}}&0">
                                     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                                     <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"

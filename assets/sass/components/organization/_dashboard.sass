@@ -2,15 +2,6 @@
 
 
 .odash
-  .tileIconLeft
-
-    @media (max-width: 1440px) and (min-width: 993px)
-      width: 11%
-
-  .tileBody
-    @media (max-width: 1440px) and (min-width: 993px)
-      margin-right: 5.66666667%
-
 
   #addGroup, #addUser
     .modal-body
@@ -29,3 +20,9 @@
 
     .error_tile
       padding-left: 30px
+
+
+  @media(max-width: 600px)
+    .tile
+      .tileBottomGroup
+        display: none

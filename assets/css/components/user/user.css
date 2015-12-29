@@ -107,16 +107,6 @@
   font-style: italic;
   font-size: 18px; }
 
-.udash .top-dash-banner {
-  position: relative;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  border-bottom: 1px solid black;
-  margin: 0 0 30px 0;
-  padding: 10px 0 10px 0;
-  height: 80px; }
-
 .udash .meetg-sched-banner {
   height: 69px;
   background-image: url("../../../img/dashboard.jpg");
@@ -201,6 +191,36 @@
       margin-right: 0; }
     .udash .imported-schedules-content tbody tr td:last-child span:hover {
       color: #384047; }
+
+@media (max-width: 1200px) {
+  .udash .scheduleSection .search_input {
+    display: block;
+    float: none;
+    margin-top: 30px; } }
+
+@media (max-width: 670px) {
+  .udash .tile .tileBottomGroup {
+    display: none; }
+  .udash .tile-small .tileBottomGroup {
+    display: block; }
+    .udash .tile-small .tileBottomGroup li:last-child {
+      display: none; } }
+
+@media (max-width: 500px) {
+  .udash .udash_empty_state_msg {
+    font-size: 18px; }
+  .udash .udash_content_type_title h4 {
+    font-size: 18px; }
+  .udash .tile-small .tileBottomGroup li:nth-last-child(2) {
+    display: none; } }
+
+@media (max-width: 420px) {
+  .udash .sub_section_actionbar a, .udash .sub_section_actionbar button {
+    width: 100%;
+    text-align: center;
+    padding: 8px 16px; }
+  .udash .sub_section_actionbar button {
+    margin-bottom: 20px; } }
 
 #importSchedule .modal-body > div, #editSchedule .modal-body > div {
   margin-bottom: 25px; }
