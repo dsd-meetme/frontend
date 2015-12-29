@@ -15,6 +15,7 @@
             c.invalidFields.emailVal = form.email.$error.email;
             console.log(c.invalidFields);
             if (!form.$invalid) {
+                jQuery('#authorizationPopup').modal('show');
                 dataPublisher.publish('http://api.plunner.com/employees/password/email', {
                     company: c.name,
                     email: c.email
@@ -23,9 +24,11 @@
                         c.errors.length = 0;
                         c.success = true;
                         jQuery('input').val('');
+                        jQuery('#authorizationPopup').modal('hide');
                     }, function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors, true);
+                            jQuery('#authorizationPopup').modal('hide');
                         }
                     })
             }

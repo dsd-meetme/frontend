@@ -1,50 +1,71 @@
 <div class="navbar navbar-default">
     <div class="container-fluid">
-        <!-- HEADER -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">PLUNNER</a>
+            <a class="navbar-brand" href="/#/user">
+                <img src="assets/img/plunner.png" alt=""/>
+            </a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">How To</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="/#/">Home</a></li>
+                <li class="user_section">
+                    <a href="/#/user/profile">
+                        <img class="user_icon" src="assets/img/user_icon.png" alt="Your profile"/>
+                        {{udashC.userInfo.name}}
+                    </a>
+                </li>
+                <li>
+                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+                </li>
             </ul>
         </div>
     </div>
 </div>
 
-<div class="container-fluid recovery-container">
+<div class="container-fluid signUp">
     <div class="row">
-        <div class="col-md-10 col-md-push-1">
-            <form name="recoveryForm" class="recoveryorg text-center" ng-submit="urecC.recover()" novalidate>
-                <h2>Password recovery</h2>
-
-                <p>For users</p>
-                <input class="text-form" type="text" name="name" ng-model="urecC.name"
-                       placeholder="Insert the Name of your Company" required>
-                <br>
-                <input class="text-form" type="email" name="email" ng-model="urecC.email"
-                       placeholder="Insert your Email" required>
-                <br/>
-
-                <div>
-                    <p ng-show="urecC.invalidFields.nameReq" class="text-danger">Company Name Missing</p>
-
-                    <p ng-show="urecC.invalidFields.emailReq" class="text-danger">Email Address Missing</p>
-
-                    <p ng-show="urecC.invalidFields.emailVal" class="text-danger">Email address format not
-                        recognized</p>
-
-                    <p class="text-danger" ng-repeat="error in urecC.errors">{{error}}</p>
-
-                    <p ng-show="urecC.success" class="text-success">Success! We just sent you a link that you can use to
-                        reset your password</p>
+        <div class="col-md-4 col-md-push-4">
+            <form name="recoveryForm" ng-submit="urecC.recover()" novalidate>
+                <div class="usi_branding  text-center">
+                    <img width="200px" src="assets/img/plunner.png" alt=""/>
                 </div>
-                <button class="btn btn-default">Recover Password</button>
+                <div class="usi_title">
+                    <h2 class="font_light  text-center">Password recovery for Users</h2>
+                </div>
 
+                <p class="font_bold">Name</p>
+                <div>
+                    <input class="main_input" ng-class="{error_underline : urecC.invalidFields.nameReq}" ng-model="urecC.name"
+                           placeholder="Insert Organization name" required>
+                    <p class="error_msg" ng-show="urecC.invalidFields.nameReq">You did not insert a name</p>
+                </div>
+                <p class="font_bold">Email</p>
+                <div>
+                    <input ng-class="{error_underline : urecC.invalidFields.emailReq || urecC.invalidFields.emailVal }"
+                           type="email" name="email" class="main_input" ng-model="urecC.email"
+                           placeholder="Insert your email" required/>
+                    <p class="error_msg" ng-show="urecC.invalidFields.emailReq">You did not insert an email address</p>
+                    <p class="error_msg" ng-show="urecC.invalidFields.emailVal">You did not insert a valid email address</p>
+                </div>
+                <p class="error_tile" ng-repeat="error in urecC.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}
+                </p>
+                <p ng-show="urecC.success" class="successDisclaimer"><i class="fa fa-check"></i>&nbsp;&nbsp;Success! We just sent you a link that you can use to
+                    reset your password</p>
+                <button>RECOVER</button>
             </form>
         </div>
     </div>
 
+</div>
+<div id="authorizationPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets/img/484.GIF" alt=""/>
+                <h2>&nbsp;&nbsp;Recovering your password</h2>
+            </div>
+            <br/>
+        </div>
+    </div>
 </div>

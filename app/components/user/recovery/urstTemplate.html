@@ -1,43 +1,80 @@
-<div>
-  <div class="navbar navbar-default">
+<div class="navbar navbar-default">
     <div class="container-fluid">
-      <!-- HEADER -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Plunner</a>
-      </div>
-      <div class="navbar-collapse collapse navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">How To</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="/#/" class="btn btn-default navbar-btn">Home</a></li>
-        </ul>
-      </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/#/user">
+                <img src="assets/img/plunner.png" alt=""/>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="user_section">
+                    <a href="/#/user/profile">
+                        <img class="user_icon" src="assets/img/user_icon.png" alt="Your profile"/>
+                    </a>
+                </li>
+                <li>
+                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
+</div>
+<div class="container-fluid signUp">
+    <div class="row">
+        <div class="col-md-4 col-md-push-4">
+            <form name="resetForm" ng-submit="urecC.recover()" novalidate>
+                <div class="usi_branding  text-center">
+                    <img width="200px" src="assets/img/plunner.png" alt=""/>
+                </div>
+                <div class="usi_title">
+                    <h2 class="font_light  text-center">Password reset for Users</h2>
+                </div>
 
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <form name="resetForm" ng-submit="urstC.reset()" novalidate>
-        <h3>Employee password reset</h3>
-        <p>Insert the name of your company</p>
-        <input class="form-control" type="text" name="company" ng-model="urstC.company" required>
-        <br/>
-        <p>Insert your email</p>
-        <input class="form-control" name="email" type="email" ng-model="urstC.email" required>
-        <br/>
-        <p>Insert your new password</p>
-        <input class="form-control" name="password" type="password" ng-model="urstC.password" ng-minlength="6" required>
-        <br/>
-        <p class="text-danger" ng-show="urstC.invalidFields.passwordReq">Insert a password</p>
-        <p class="text-danger" ng-show="urstC.invalidFields.company">Insert your company's name</p>
-        <p class="text-danger" ng-show="urstC.invalidFields.emailReq">Insert your email</p>
-        <p class="text-danger" ng-show="urstC.invalidFields.pwdLength">The pwd must contain at least 6 chars</p>
-        <p class="text-danger" ng-show="urstC.invalidFields.emailVal">Insert a valid mail</p>
-        <p class="text-danger" ng-repeat="error in urstC.errors">{{error}}</p>
-        <p class="text-success" ng-show="urstC.success">You have successfully resetted your password!</p>
-        <br>
-        <button class="btn btn-primary">CHANGE YOUR PASSWORD</button>
-      </form>
+                <p class="font_bold">Name of the Organization</p>
+                <div>
+                    <input class="main_input" ng-class="{error_underline : urstC.invalidFields.company}" type="text"
+                           name="company" ng-model="urstC.company" required placeholder="Insert your organization's name">
+                    <p class="error_msg" ng-show="urstC.invalidFields.company">You did not insert a name</p>
+                </div>
+                <p class="font_bold">Email</p>
+                <div>
+                    <input ng-class="{error_underline : urecC.invalidFields.emailReq || urecC.invalidFields.emailVal }"
+                           type="email" name="email" class="main_input" ng-model="urecC.email"
+                           placeholder="Insert your email" required/>
+
+                    <p class="error_msg" ng-show="urstC.invalidFields.emailReq">You did not insert an email address</p>
+
+                    <p class="error_msg" ng-show="urstC.invalidFields.emailVal">You did not insert a valid email
+                        address</p>
+                </div>
+                <p class="font_bold">New password</p>
+                <div>
+                    <input ng-class="{error_underline : urecC.invalidFields.passwordReq || urecC.invalidFields.pwdLength }"
+                           type="email" name="email" class="main_input" ng-model="urecC.email"
+                           placeholder="Insert your new password" required/>
+
+                    <p class="error_msg" ng-show="urstC.invalidFields.passwordReq">You did not insert a password</p>
+
+                    <p class="error_msg" ng-show="urstC.invalidFields.pwdLength">Insert a password at least 6 characters long</p>
+                </div>
+                <p class="error_tile" ng-repeat="error in urstC.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}
+                </p>
+                <p ng-show="urstC.success" class="successDisclaimer"><i class="fa fa-check"></i>&nbsp;&nbsp;Success! You have resetted your password!</p>
+                <button>RESET PASSWORD</button>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
+<div id="authorizationPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets/img/484.GIF" alt=""/>
+                <h2>&nbsp;&nbsp;Resetting your password</h2>
+            </div>
+            <br/>
+        </div>
+    </div>
 </div>

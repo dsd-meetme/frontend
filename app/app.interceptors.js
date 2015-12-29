@@ -40,7 +40,7 @@
                     },
                     response : function(response) {
                         //If not template retrieving requests or OPTIONS requests
-                        if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS'){
+                        if(response.config.url.search('app/')===-1 && response.config.method !== 'OPTIONS' && response.config.url.search('email') === -1){
                             //Gets the refreshed jwt
                             var token,exp;
                             if(response.config.url==='http://api.plunner.com/companies/auth/login' || response.config.url==='http://api.plunner.com/employees/auth/login' ){

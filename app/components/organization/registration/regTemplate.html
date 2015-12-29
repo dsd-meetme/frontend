@@ -2,67 +2,85 @@
     <div class="container-fluid">
         <!-- HEADER -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Plunner</a>
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/plunner.png" alt=""/>
+            </a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">How To</a></li>
-                <li><a href="#">Contact</a></li>
+                <li class="user_section">
+                    <a href="/#/user/profile">
+                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
+                    </a>
+                </li>
+                <li>
+                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+                </li>
             </ul>
         </div>
     </div>
 </div>
-<div class="container-fluid reg-container">
-    <form name="regForm" ng-submit="regC.process()" novalidate>
-        <div class="form-register text-center">
-            <h2 >Registration</h2>
-            <br>
-            <p>Name</p>
-            <input name="name" type="text" placeholder="Organization Name" required
-                   ng-model="regC.name">
-            <br>
-            <p>Email</p>
-            <input name="email" type="email" placeholder="Contact Email" required
-                   ng-model="regC.email">
+<div class="container-fluid signUp">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form name="regForm" ng-submit="regC.process()" novalidate>
+                <div class="text-center">
+                    <img width="180px" src="assets/img/plunner.png" alt=""/>
+                </div>
+                <div>
+                    <h2 class="font_light text-center">Sign Up</h2>
+                </div>
+                <p class="font_bold">Name</p>
+                <div>
+                    <input class="main_input" ng-class="{error_underline : regC.invalidFields.nameReq}" name="name" type="text" placeholder="Organization Name" required
+                           ng-model="regC.name">
+                    <p class="error_msg" ng-show="regC.invalidFields.nameReq">You did not insert a name</p>
+                </div>
+                <p class="font_bold">Email</p>
+                <div>
+                    <input class="main_input" name="email" required ng-model="regC.email"
+                           ng-class="{error_underline : regC.invalidFields.emailReq ||regC.invalidFields.emailVal }"
+                           type="email" placeholder="Email"/>
 
+                    <p class="error_msg" ng-show="regC.invalidFields.emailReq">You did not insert an email address</p>
 
+                    <p class="error_msg" ng-show="regC.invalidFields.emailVal">You did not insert a valid email
+                        address</p>
+                </div>
+                <p class="font_bold">Password</p>
+                <div>
+                    <input class="main_input" name="password" required ng-model="regC.password" type="password" placeholder="Password"
+                           ng-class="{error_underline : regC.invalidFields.passwordReq || regC.invalidFields.passwordLength}"/>
+                    <p class="error_msg" ng-show="regC.invalidFields.passwordReq">You did not insert a password</p>
+                    <p class="error_msg" ng-show="regC.invalidFields.passwordLength" class="text-danger">
+                        The password must be of at least 6 characters
+                    </p>
+                </div>
+                <p class="font_bold">Confirm password</p>
+                <div>
+                    <input ng-class="{error_underline : regC.invalidFields.passwordMatch}" class="main_input" name="passwordC" type="password" placeholder="Confirm Password" required
+                           ng-model="regC.passwordC">
+                    <p class="error_msg" ng-show="regC.invalidFields.passwordMatch" class="text-danger">
+                        The password must be of at least 6 characters
+                    </p>
+                </div>
+                <p class="error_tile" ng-repeat="error in regC.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
+                <button>SIGN UP</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="authorizationPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body text-center">
+                <img src="assets/img/484.GIF" alt=""/>
 
-            <br>
-            <p>Password</p>
-            <input name="password" ng-minlength="6" type="Password" placeholder="Password" required
-                   ng-model="regC.password">
-
-
-            <br>
-            <p>Confirm password</p>
-            <input name="passwordC" type="password" placeholder="Confirm Password" required
-                   ng-model="regC.passwordC">
-            <br>
-            <div>
-                <p class="text-danger" ng-repeat="error in regC.errors">{{error}}</p>
-                <p ng-show="regC.invalidFields.nameReq" class="text-danger">
-                    You did not insert an organization name
-                </p>
-                <p ng-show="regC.invalidFields.emailReq" class="text-danger">
-                    You did not insert an email address
-                </p>
-                <p ng-show="regC.invalidFields.emailVal" class="text-danger">
-                    You did not insert a valid email address
-                </p>
-                <p ng-show="regC.invalidFields.passwordReq" class="text-danger">
-                    You did not insert a password
-                </p>
-                <p ng-show="regC.invalidFields.passwordLength" class="text-danger">
-                    The password must be of at least 6 characters
-                </p>
-                <p ng-show="regC.invalidFields.passwordMatch" class="text-danger">
-                    The two passwords don't match
-                </p>
+                <h2>&nbsp;&nbsp;Registering</h2>
             </div>
             <br/>
-            <button type="submit" class="btn btn-default">Register!</button>
-            </br><br>
-            <i>Already registered? <a href="/#/orgsignin">Sign in here!</a></i>
         </div>
-    </form>
+    </div>
 </div>

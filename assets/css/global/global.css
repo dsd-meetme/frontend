@@ -428,7 +428,7 @@ a.main_button {
       color: #128ef2; }
 
 .usi form {
-  width: 70%;
+  width: 300px;
   margin: 0 auto;
   margin-top: 50px; }
 
@@ -452,6 +452,9 @@ a.main_button {
       border: 1px solid #42A5F5; }
   .usi .usi_input:nth-child(5) i {
     left: 15px; }
+
+.usi .error_tile {
+  margin-top: 15px; }
 
 .usi .usi_bottom_bar label {
   float: left; }

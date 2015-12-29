@@ -17,6 +17,7 @@
             c.invalidFields.company = form.company.$error.required;
             c.invalidFields.passwordReq = form.password.$error.required;
             if (!form.$invalid) {
+                jQuery('#authorizationPopup').modal('show');
                 dataPublisher.publish('http://api.plunner.com/employee/password/reset', {
                     company: c.company,
                     email: c.email,
@@ -28,10 +29,12 @@
                         c.errors.length = 0;
                         c.success = true;
                         jQuery('input').val('');
+                        jQuery('#authorizationPopup').modal('hide');
                     },
                     function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors, true);
+                            jQuery('#authorizationPopup').modal('hide');
                         }
                     }
                 )
@@ -40,5 +43,5 @@
     }
 
     var app = angular.module('Plunner');
-    app.controller('urestController', controller);
+    app.controller('urstController', controller);
 }())

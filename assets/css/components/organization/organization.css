@@ -1,3 +1,28 @@
+.signUp form {
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 50px; }
+  .signUp form > div {
+    margin-bottom: 20px; }
+
+.signUp input {
+  width: 100%; }
+
+.signUp button {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  padding: 9px 18px;
+  color: white;
+  background-color: #42A5F5;
+  font-size: 18px;
+  font-weight: 300;
+  border: 0;
+  border-radius: 4px;
+  outline: none; }
+  .signUp button:hover {
+    background-color: #0c80df; }
+
 @media (max-width: 1440px) and (min-width: 993px) {
   .odash .tileIconLeft {
     width: 11%; } }
@@ -102,3 +127,9 @@
 
 #addToGroup .secondary_button, #changePlanner .secondary_button {
   margin-right: 15px; }
+
+.successDisclaimer {
+  margin-bottom: 0;
+  padding: 10px;
+  color: white;
+  background-color: #2ECC71; }

@@ -4,7 +4,7 @@
      reset of the previous one
      @param dataPublisher A service used to perform an http post request
      **/
-    var controller = function ($scope, $routeParams, $location,$timeout, mixedContentToArray) {
+    var controller = function ($scope, $routeParams, $location, $timeout, mixedContentToArray) {
         var c = this;
         c.errors = [];
         c.invalidFields = {
@@ -22,6 +22,7 @@
             c.invalidFields.passwordReq = form.password.$error.required;
             //Submits
             if (!form.$invalid) {
+                jQuery("#authorizationPopup").modal('show');
                 dataPublisher.publish('http://api.plunner.com/companies/password/reset', {
                     email: c.email,
                     password: c.password,
@@ -29,15 +30,13 @@
                     token: $routeParams.token
                 }).then(
                     function () {
-                        jQuery('#confirmPopup').modal('show');
-                        $timeout(function () {
-                            jQuery('#confirmPopup').modal('hide');
-                            $location.path('/presentation');
-                        }, 2000);
+                        jQuery("#authorizationPopup").modal('hide');
+                        $location.path('/presentation');
                     },
                     function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors, true);
+                            jQuery("#authorizationPopup").modal('hide');
                         }
                     }
                 )

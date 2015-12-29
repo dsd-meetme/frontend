@@ -18,15 +18,18 @@
             c.invalidFields.emailVal = form.email.$error.email;
             //Submits
             if (!form.$invalid) {
+                jQuery("#authorizationPopup").modal('show');
                 dataPublisher.publish('http://api.plunner.com/companies/password/email', {email: c.email})
                     .then(function () {
                         c.errors.length = 0;
                         //clears the form fields
                         jQuery('input').val('');
                         c.success = true;
+                        jQuery("#authorizationPopup").modal('hide');
                     }, function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors, true);
+                            jQuery("#authorizationPopup").modal('hide');
                         }
                     });
             }

@@ -29,6 +29,7 @@
             c.invalidFields.passwordMatch = (form.password.$modelValue !== form.passwordC.$modelValue);
 
             if (!form.$invalid && !c.invalidFields.passwordMatch) {
+                jQuery("#authorizationPopup").modal('show');
                 dataPublisher.publish('http://api.plunner.com/companies/auth/register', {
                     name: c.name,
                     email: c.email,
@@ -37,10 +38,12 @@
                 })
                     .then(
                     function () {
+                        jQuery("#authorizationPopup").modal('hide');
                         $location.path('/organization');
                     },
                     function (response) {
                         if (response.status === 422) {
+                            jQuery("#authorizationPopup").modal('hide');
                             mixedContentToArray.process(response.data, c.errors, true);
                         }
                     }
