@@ -26,9 +26,9 @@
         <h1 class="text-center font_light">Group Information</h1>
     </div>
     <div class="row editMode">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="row section_action_bar">
-                <a href="/#/organization"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
+            <div class="section_action_bar clearfix">
+                <a href="/#/organization" ng-class="{link_top : groupC.editMode.flag}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
                 <button class="main_button" ng-click="groupC.updateInfo()" ng-show="groupC.editMode.flag">Save changes</button>
                 <button class="secondary_button" ng-show="groupC.editMode.flag" ng-click="groupC.editMode.exit()">Abort</button>
                 <button ng-show="!groupC.editMode.flag" class="main_button" ng-click="groupC.editMode.enter()"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Edit group
@@ -39,12 +39,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 col-md-push-2">
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div class="row">
                 <div class="col-md-6">
                     <div class="row groupC_info">
                         <div class="col-md-11">
                             <h3><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Information</h3>
+                            <p class="error_tile" ng-repeat="error in groupC.errors.info">{{error}}</p>
                             <table class="table">
                                 <thead>
                                 <th></th>
@@ -74,15 +75,14 @@
                                 <button class="main_button" ng-click="groupC.changePlanner.init()" ng-show="groupC.editMode.flag">Change planner</button>
                                 <button class="secondary_button" ng-show="groupC.editMode.flag" ng-click="groupC.delete()"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete group</button>
                             </div>
-                            <div class="errorContainer" ng-show="groupC.editMode.flag && (groupC.thereErrors.info || groupC.errors.info.length > 0)">
-                                <p ng-repeat="error in groupC.errors.info">{{error}}</p>
-                            </div>
                         </div>
                     </div>
+                    <br/>
                 </div>
+
                 <div class="col-md-6  groupC_members">
                     <h3><i class="fa fa-users"></i>&nbsp;&nbsp;Members</h3>
-                    <p class="text-danger" ng-repeat="error in groupC.errors.planner">{{error}}</p>
+                    <p class="error_tile" ng-repeat="error in groupC.errors.planner">{{error}}</p>
                     <br>
                     <div ng-repeat=" member in groupC.data.members" class="clearfix">
                         <a href="/#/organization/users/{{member.id}}">{{member.name}}
@@ -95,11 +95,6 @@
             </div>
         </div>
 
-    </div>
-    <div class="row changeBar">
-        <div class="col-md-12">
-
-        </div>
     </div>
 </div>
 </div>
@@ -137,7 +132,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <ul class="list-unstyled list-inline pagination">
+                <ul class="list-unstyled list-inline pagination" ng-if="groupC.pagination.user.pages > 1">
                     <li ng-class="{underlinedPage : groupC.pagination.user.currentPage === ($index + 1)}" ng-click="groupC.pagination.user.changePage($index+1)" ng-repeat="x in groupC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
                 </ul>
             </div>
@@ -180,13 +175,11 @@
                     </tr>
                     </tbody>
                 </table>
-                <ul class="list-unstyled list-inline pagination">
+                <ul class="list-unstyled list-inline pagination" ng-if="groupC.pagination.user.pages > 1">
                     <li ng-class="{underlinedPage : groupC.pagination.user.currentPage === ($index + 1)}" ng-click="groupC.pagination.user.changePage($index+1)" ng-repeat="x in groupC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
                 </ul>
             </div>
-            <p class="error_tile" class="error_msg" ng-repeat="error in odashC.addGroup.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
-            <p ng-show="odashC.addGroup.invalidFields.membersReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one member</p>
-            <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert one planner</p>
+            <p class="error_tile" ng-repeat="error in groupC.addToGroup.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
             <div class="modal-footer">
                 <button type="button" class="secondary_button" data-dismiss="modal">Close</button>
                 <button type="button" class="main_button" ng-click="groupC.addToGroup.change()">Add users</button>

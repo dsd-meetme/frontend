@@ -20,18 +20,8 @@
 .odash #addGroup .error_tile, .odash #addUser .error_tile {
   padding-left: 30px; }
 
-@media (max-width: 600px) {
-  .odash .media_adapt {
-    width: 100%;
-    left: 0;
-    width: 100%;
-    left: 0; }
-  .odash h1 {
-    font-size: 28px; }
-  .odash .sub_section_switcher button {
-    font-size: 16px; }
-  .odash .tile .tileBottomGroup {
-    display: none; } }
+.groupC h3 {
+  color: #555; }
 
 .groupC .secondary_button {
   margin-right: 15px; }
@@ -97,6 +87,15 @@
   cursor: pointer; }
   .groupC .deleteLink:hover {
     color: #555; }
+
+@media (max-width: 450px) {
+  .groupC .section_action_bar .link_top {
+    display: block;
+    margin-bottom: 20px; }
+  .groupC .section_action_bar button:nth-child(2) {
+    width: 48.9%; }
+  .groupC .section_action_bar button:nth-child(3) {
+    width: 47%; } }
 
 #addToGroup table, #changePlanner table {
   margin-bottom: 0; }

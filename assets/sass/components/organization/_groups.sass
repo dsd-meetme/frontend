@@ -1,5 +1,6 @@
 .groupC
-
+  h3
+    color: $washed_black
   .secondary_button
     margin-right: 15px
 
@@ -79,6 +80,22 @@
 
     &:hover
       color: $washed_black
+
+
+  @media (max-width: 450px)
+    .section_action_bar
+      .link_top
+        display: block
+        margin-bottom: 20px
+
+      button
+        &:nth-child(2)
+          width: 48.9%
+
+        &:nth-child(3)
+          width: 47%
+
+
 
 #addToGroup, #changePlanner
   table

@@ -1,13 +1,14 @@
-.section_action_bar a {
-  display: inline-block;
-  margin-top: 11px;
-  color: #ccc;
-  font-size: 16px; }
-  .section_action_bar a:hover {
-    color: #42A5F5; }
-
-.section_action_bar button {
-  float: right; }
+.section_action_bar {
+  margin-bottom: 15px; }
+  .section_action_bar a {
+    display: inline-block;
+    margin-top: 11px;
+    color: #ccc;
+    font-size: 16px; }
+    .section_action_bar a:hover {
+      color: #42A5F5; }
+  .section_action_bar button {
+    float: right; }
 
 .fc .fc-prev-button, .fc .fc-next-button, .fc .fc-today-button {
   margin-right: 10px;

@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/global/global.css">
-    <link rel="stylesheet" href="assets/css/components/organization/group-user.css"/>
     <link rel="stylesheet" href="assets/css/components/organization/profile.css">
     <link rel="stylesheet" href="assets/css/components/organization/recovery.css">
     <link rel="stylesheet" href="assets/css/components/organization/registration.css">
@@ -19,11 +18,17 @@
 
     <link rel="stylesheet" href="assets/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/fullcalendar.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
-<div ng-view class="wrapper">
+<div class="wrapper">
+    <div ng-view></div>
     <!-- TEMPLATE INJECTED -->
+    <br/>
+    <br/>
+    <br/>
 </div>
+
 <!-- FOOTER -->
 
 <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
@@ -64,5 +69,6 @@
 <script type="text/javascript" src="app/components/user/composeSchedule/cschedController.js"></script>
 <script type="text/javascript" src="app/shared/utils/logoutDirective.js"></script>
 <script type="text/javascript" src="app/components/user/profile/upController.js"></script>
+<script type="text/javascript" src="app/shared/utils/profileDirective.js"></script>
 </body>
 </html>

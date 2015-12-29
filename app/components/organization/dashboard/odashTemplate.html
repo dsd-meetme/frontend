@@ -93,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="list-unstyled list-inline pagination">
+                    <ul class="list-unstyled list-inline pagination" ng-if="odashC.pagination.user.pages > 1">
                         <li ng-class="{underlinedPage : odashC.pagination.user.currentPage === ($index + 1)}"
                             ng-click="odashC.pagination.user.changePage($index+1)"
                             ng-repeat="x in odashC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}

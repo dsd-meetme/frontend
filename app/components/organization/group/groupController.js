@@ -105,7 +105,7 @@
         //Delete an employee in the context of an org
         c.delete = function () {
             //restful delete
-            c.confirmPopup.message = "Deleting user";
+            c.confirmPopup.message = "Deleting group";
             c.confirmPopup.show();
             orgResources.group().remove({groupId: id}).$promise
                 .then(function () {
@@ -132,6 +132,7 @@
                     }, function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors.planner, true);
+                            c.confirmPopup.hide();
                         }
                     });
             }
@@ -158,6 +159,7 @@
                     }, function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors.info, true);
+                            c.confirmPopup.hide();
                         }
                     });
             }
@@ -176,7 +178,6 @@
                         modal.modal('show');
                     })
             },
-            plannerId: null,
             change: function () {
                 if (this.plannerId !== c.data.group.planner_id) {
                     c.confirmPopup.message = "Saving changes";
@@ -197,6 +198,7 @@
                         }, function (response) {
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.errors.planner, true);
+                                c.confirmPopup.hide();
                             }
                         });
                 }
@@ -204,6 +206,7 @@
 
         };
         c.addToGroup = {
+            errors : [],
             members: [],
             validMembers: [],
             init: function () {
@@ -232,36 +235,43 @@
                     })
             },
             change: function () {
-                c.confirmPopup.message = "Adding user to group";
-                jQuery('#addToGroup').modal('hide');
-                c.confirmPopup.show();
+
                 var validMembers = [];
                 angular.forEach(this.members, function (value, key) {
                     if (value === true) {
                         validMembers.push(key.toString());
                     }
                 });
-                orgResources.userInGroup().save({
-                    groupId: c.data.group.id,
-                    userId: ''
-                }, arrayToUrlParams.process('id', validMembers)).$promise
-                    .then(function () {
-                        //Update view
-                        c.getInfo();
-                        c.editMode.exit();
-                        c.confirmPopup.hide();
-                    }, function (response) {
-                        //Puts relevant errors in array
-                        if (response.status === 422) {
+                if(validMembers.length === 0){
+                    this.errors.push("Select at least one user");
+                }
+                else{
+                    c.confirmPopup.message = "Adding user to group";
+                    jQuery('#addToGroup').modal('hide');
+                    c.confirmPopup.show();
+                    orgResources.userInGroup().save({
+                        groupId: c.data.group.id,
+                        userId: ''
+                    }, arrayToUrlParams.process('id', validMembers)).$promise
+                        .then(function () {
+                            //Update view
+                            c.getInfo();
+                            c.editMode.exit();
+                            c.confirmPopup.hide();
+                        }, function (response) {
+                            //Puts relevant errors in array
+                            if (response.status === 422) {
+                                mixedContentToArray.process(response.data, c.errors.planner, true);
+                                c.confirmPopup.hide();
+                            }
+                        })
+                }
 
-                        }
-                    })
             }
         };
         c.getUsers = function () {
             orgResources.userInGroup().query({groupId: id, userId: ''}).$promise
-                .then(
-                function (response) {
+                .then(function (response) {
                     c.data.members = response;
                 })
         };
@@ -271,12 +281,9 @@
             orgResources.userInGroup().remove({groupId: id, userId: userId}).$promise
                 .then(
                 function () {
-
-                    setTimeout(function () {
-                        c.confirmPopup.hide();
-                    }, 2000);
                     c.getUsers();
                     c.editMode.exit();
+                    c.confirmPopup.hide();
                 }
             )
         };

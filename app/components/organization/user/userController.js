@@ -18,10 +18,10 @@
         c.confirmPopup = {
             message : '',
             show : function(){
-                jQuery('#confirmPopup').modal('show');
+                jQuery('#authorizationPopup').modal('show');
             },
             hide : function(){
-                jQuery('#confirmPopup').modal('hide');
+                jQuery('#authorizationPopup').modal('hide');
             }
         };
         //Get user info in the context of an org
@@ -39,14 +39,12 @@
         //Delete an user in the context of an org
         c.delete = function(){
             //restful delete
+            c.confirmPopup.message = 'Deleting user';
+            c.confirmPopup.show();
             orgResources.user().remove({userId:id}).$promise
                 .then(function(response){
-                    c.confirmPopup.message = 'Deletion successfully made';
-                    c.confirmPopup.show();
-                    $timeout(function(){
                         c.confirmPopup.hide();
                         $location.path('/organization');
-                    },2000);
 
                 });
         };
@@ -61,6 +59,7 @@
             },
             errors: [],
             submit: function () {
+                var toSend = {};
                 var form = $scope.editForm;
                 //Checks the validity status of input fields
                 this.invalidFields.emailVal = form.email.$error.email;
@@ -71,20 +70,26 @@
                 this.thereErrors = (form.$invalid || this.invalidFields.passwordMatch);
 
                 if (!this.thereErrors) {
-                    orgResources.user().update({userId: id}, jQuery.param(c.dataCopy)).$promise
+                    c.confirmPopup.message = 'Saving changes';
+                    c.confirmPopup.show();
+                    toSend.name = c.dataCopy.name;
+                    toSend.email = c.dataCopy.email;
+                    console.log(c.dataCopy);
+                    if(c.dataCopy.password){
+                        toSend.password = c.dataCopy.password;
+                        toSend.password_confirmation = c.dataCopy.password_confirmation;
+                    }
+                    orgResources.user().update({userId: id}, jQuery.param(toSend)).$promise
                         .then(function (response) {
-                            c.confirmPopup.message = 'Changes successfully made';
-                            c.confirmPopup.show();
-                            $timeout(function () {
-                                c.confirmPopup.hide();
-                            }, 2000);
                             c.getInfo();
                             c.editMode.exit();
+                            c.confirmPopup.hide();
                         }, function (response) {
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.update.errors, true);
+                                c.confirmPopup.hide();
                             }
-                        });
+                        })
                 }
 
             }
@@ -112,6 +117,7 @@
                 c.dataCopy.email = c.data.email;
                 c.dataCopy.password = '';
                 c.dataCopy.password_confirmation = '';
+                c.update.errors = [];
                 emptyInvalidFields(c.update.invalidFields);
             }
         };

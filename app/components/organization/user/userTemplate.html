@@ -25,9 +25,9 @@
         <h1 class="text-center font_light">User Information</h1>
     </div>
     <div class="row editMode">
-        <div class="col-md-8 col-md-push-2">
-            <div class="row section_action_bar">
-                <a href="/#/organization"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+        <div class="col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
+            <div class=" section_action_bar clearfix">
+                <a href="/#/organization" ng-class="{link_top: userC.editMode.flag }"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
                 <button class="main_button" ng-click="userC.update.submit()" ng-show="userC.editMode.flag">Save changes</button>
                 <button class="secondary_button" ng-show="userC.editMode.flag" ng-click="userC.editMode.exit()">Abort</button>
                 <button ng-show="!userC.editMode.flag" class="main_button" ng-click="userC.editMode.enter()"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Edit user
@@ -43,13 +43,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 col-md-push-2">
+        <div class="col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div class="row">
                 <div class="col-md-6">
                     <div class="row groupC_info">
                         <div class="col-md-11">
                             <form name="editForm" novalidate>
                                 <h3><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Information</h3>
+                                <p class="error_tile" ng-repeat="error in userC.update.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
                                 <table class="table">
                                     <thead>
                                         <th></th>
@@ -91,10 +92,9 @@
                                     </tbody>
                                 </table>
                                 <button ng-show="userC.editMode.flag" ng-click="userC.delete()" class="secondary_button"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete user</button>
-                                <div class="errorContainer" ng-show="userC.editMode.flag && (userC.update.thereErrors || userC.update.errors.length > 0)">
-                                    <p class="error_msg" ng-repeat="error in userC.update.errors">{{error}}</p>
-                                </div>
+
                             </form>
+                            <br/>
                         </div>
                     </div>
                 </div>
@@ -115,17 +115,20 @@
         </div>
 
     </div>
-    <div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <h3 class="text-center">{{userC.confirmPopup.message}}</h3>
-                </div>
-                <br/>
+
+</div>
+
+<div id="authorizationPopup" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
             </div>
+            <div class="modal-body text-center">
+                <img src="assets/img/484.GIF" alt=""/>
+
+                <h2>&nbsp;&nbsp;{{userC.confirmPopup.message}}</h2>
+            </div>
+            <br/>
         </div>
     </div>
 </div>

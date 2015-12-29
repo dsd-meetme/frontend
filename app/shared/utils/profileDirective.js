@@ -1,28 +1,34 @@
 (function () {
     var directive = function () {
         return {
-            restrict: 'A',
+            restrict: 'E',
+            template : '<li class="user_section" profile target="org"><a href="/#/organization/profile"><img class="user_icon" src="assets/img/user_icon.png" alt=""/>{{name}} </a> </li>',
             controller: ['$injector', '$scope', function ($injector, $scope) {
-                this.getName = function (type) {
-                    $injector.get('orgResources').orgInfo().get()
-                        .$promise.then(function(){
-
-                        })
-                    $scope.$apply();
+                this.getName = function (type, name) {
+                    var restManager = $injector.get('orgResources');
+                    if(type==="org"){
+                        restManager.orgInfo().get()
+                            .$promise.then(function(response){
+                                name = response.name;
+                            });
+                    }
+                    else if(type==="user"){
+                        restManager.employee().get()
+                            .$promise.then(function(){
+                                name = response.name;
+                            });
+                    }
                 }
             }],
             scope : {
-              name : ''
+              name : '@'
             },
             link: function (scope, element, attrs, controllers) {
-                element.on('click', function (e) {
-                    e.preventDefault();
-                    controllers.logout(attrs.redirect);
-                })
+                controllers.getName(attrs.target, scope.name);
             }
         }
 
     };
     var app = angular.module('Plunner');
-    app.directive('logout', directive);
+    app.directive('profile', directive);
 }());
