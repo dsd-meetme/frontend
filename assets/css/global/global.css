@@ -116,14 +116,13 @@ a.main_button {
 .navbar_button {
   margin-top: 4px;
   padding: 6px 12px;
-  color: #0c80df;
-  background-color: transparent;
+  color: white;
+  background-color: #3556a3;
   border-radius: 4px;
-  border: 2px solid #0c80df;
+  border: 0;
   outline: none; }
   .navbar_button:hover, .navbar_button:active, .navbar_button:focus {
-    color: #085796;
-    border: 2px solid #085796; }
+    background-color: #223869; }
 
 .search_input {
   max-width: 100%;

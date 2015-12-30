@@ -4,7 +4,6 @@
 
         var calendar;
         var mode = 1;
-        var chosenView = 'agendaWeek';
         var changedEvents = [];
         var checkNewEvents = function (events) {
             var newEvents = [];
@@ -78,7 +77,7 @@
         c.getTimeslots = function () {
             var splittedTimeStart, splittedTimeEnd;
             if (mode === 0) {
-                orgResources.timeslot().query({calendarId: this.id, timeslotId: ''})
+                orgResources.timeslot().query({calendarId: c.id, timeslotId: ''})
                     .$promise.then(function (response) {
                         console.log('Timeslots');
                         console.log(response);
@@ -111,7 +110,7 @@
         };
 
         c.removeTimeslot = function (id) {
-            orgResources.timeslot().remove({calendarId: this.id, timeslotId: id}).$promise
+            orgResources.timeslot().remove({calendarId: c.id, timeslotId: id}).$promise
                 .then(function () {
                     c.confirmPopup.message = 'Deleting event';
                     c.confirmPopup.show();
@@ -158,7 +157,7 @@
                     })).$promise.then(function (response) {
                             for (var i = 0; i < processedEvents.length; i++) {
                                 orgResources.timeslot().save({calendarId: response.id, timeslotId: ''},
-                                    jQuery.param(processedEvents[i])).$promise.then(function (response) {
+                                    jQuery.param(processedEvents[i])).$promise.then(function () {
                                         if (index === processedEvents.length - 1) {
                                             c.confirmPopup.hide();
                                             $location.path('/user');
@@ -178,7 +177,7 @@
                     modifiedEvents = backendEventAdapter(changedEvents, false);
                     alsoEditEvents = modifiedEvents[1].length > 0;
 
-                    orgResources.calendar().update({calendarId: this.id}, jQuery.param({
+                    orgResources.calendar().update({calendarId: c.id}, jQuery.param({
                         name: this.name,
                         enabled: enabled
                     })).$promise.then(function () {
@@ -186,7 +185,7 @@
 
                             for (var i = 0; i < newEvents.length; i++) {
                                 orgResources.timeslot().save({calendarId: c.id, timeslotId: ''},
-                                    jQuery.param(newEvents[i])).$promise.then(function (response) {
+                                    jQuery.param(newEvents[i])).$promise.then(function () {
                                         if (index === newEvents.length - 1 && !alsoEditEvents) {
                                             c.confirmPopup.hide();
                                             $location.path('/user');
@@ -196,7 +195,7 @@
                             }
                             for (i = 0; i < modifiedEvents[1].length; i++) {
                                 orgResources.timeslot().update({calendarId: c.id, timeslotId: modifiedEvents[0][i]},
-                                    jQuery.param(modifiedEvents[1][i])).$promise.then(function (response) {
+                                    jQuery.param(modifiedEvents[1][i])).$promise.then(function () {
                                         if (index_one === modifiedEvents[1].length - 1) {
                                             c.confirmPopup.hide();
                                             $location.path('/user');
@@ -228,7 +227,7 @@
             editable: true,
             selectable: true,
             selectHelper: true,
-            select: function (start, end, jsEvent, view) {
+            select: function (start, end) {
                 calendar.fullCalendar('renderEvent',
                     {
                         start: start,
@@ -239,14 +238,14 @@
                 );
                 calendar.fullCalendar('unselect');
             },
-            eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
+            eventResize: function (event) {
                 //changedEvents[event._id] = event;
                 console.log(event.new !== true);
                 if (event.new !== true) {
                     changedEvents[event._id] = event;
                 }
             },
-            eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
+            eventDrop: function (event) {
                 if (event.new !== true) {
                     changedEvents[event._id] = event;
                 }
