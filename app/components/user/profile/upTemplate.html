@@ -25,9 +25,9 @@
         <h1 class="text-center font_light">Your profile</h1>
     </div>
     <div class="row">
-        <div class="col-md-8 col-md-push-2">
-            <div class="row section_action_bar">
-                <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
+            <div class=" section_action_bar" ng-class="{span : upC.editMode.flag}">
+                <a href="/#/user" class="link_top"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
                 <button class="main_button" ng-click="upC.update.submit()" ng-show="upC.editMode.flag">Save changes</button>
                 <button class="secondary_button" ng-show="upC.editMode.flag" ng-click="upC.editMode.exit()">Abort</button>
                 <button ng-show="!upC.editMode.flag" class="main_button" ng-click="upC.editMode.enter()"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Edit profile
@@ -38,7 +38,8 @@
     <br/>
     <br/>
     <div class="row">
-        <div class="col-md-8 col-md-push-2">
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
+            <p class="error_tile" ng-repeat="error in upC.update.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
             <div class="row">
                 <div class="col-md-5">
                     <form name="upC_profile_form">
@@ -51,7 +52,9 @@
                             <tr>
                                 <td class="font_bold">Name:</td>
                                 <td>
-                                    <p>{{upC.data.name}}</p>
+                                    <input placeholder="Name" name="name" type="text" ng-model="upC.dataCopy.name" ng-readonly="!upC.editMode.flag"
+                                           ng-class="{disabled : !upC.editMode.flag, error_bordering: upC.update.invalidFields.nameReq }" required>
+                                    <p class="error_msg" ng-show="upC.update.invalidFields.nameReq">Insert a name</p>
                                 </td>
                             </tr>
                             <tr>
@@ -84,19 +87,16 @@
         </div>
     </div>
 </div>
-<div id="confirmPopup" class="modal" role="dialog" tabindex="-1">
+<div id="authorizationPopup" class="modal" role="dialog" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
             </div>
-            <div class="modal-body">
-                <h3 class="text-center">Changes succesfully saved!</h3>
+            <div class="modal-body text-center">
+                <img src="assets/img/484.GIF" alt=""/>
+                <h2>&nbsp;&nbsp;Saving changes</h2>
             </div>
             <br/>
         </div>
     </div>
 </div>
-<br/>
-<br/>

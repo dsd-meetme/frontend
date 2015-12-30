@@ -438,3 +438,28 @@
   padding: 6px; }
   .upC table input:focus {
     border: 1px solid #42A5F5; }
+
+@media (max-width: 600px) {
+  .upC .span .link_top {
+    display: block;
+    float: none;
+    margin-bottom: 20px; }
+  .upC .span button {
+    width: 50%; }
+    .upC .span button:nth-child(3) {
+      width: calc(50% - 15px); } }
+
+.upC .section_action_bar .secondary_button {
+  margin-right: 15px; }
+
+@media (max-width: 450px) {
+  .upC .section_action_bar .link_top {
+    display: block;
+    float: none;
+    margin-bottom: 20px; }
+  .upC .section_action_bar button {
+    width: 100%; }
+    .upC .section_action_bar button:nth-child(3) {
+      width: 100%;
+      margin-right: 0;
+      margin-top: 20px; } }
