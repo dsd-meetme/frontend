@@ -58,6 +58,7 @@
                 jQuery('#authorizationPopup').modal('hide');
             }
         };
+        c.enabled = '0';
         c.thereErrors = false;
         c.processUrl = function () {
             if ($routeParams.type.length === 1 && $routeParams.type === '_') {
@@ -140,8 +141,8 @@
             index = 0;
             index_one = 0;
             if (!this.thereErrors) {
-
-                if (this.selected === true) {
+                console.log(this.enabled);
+                if (this.enabled === true) {
                     enabled = '1'
                 }
                 else {
@@ -172,12 +173,6 @@
                     c.confirmPopup.message = 'Saving schedule';
                     c.confirmPopup.show();
                     index = 0;
-                    if (c.selected === 'true') {
-                        enabled = '1'
-                    }
-                    else {
-                        enabled = '0'
-                    }
                     processedEvents = backendEventAdapter(events, true);
                     newEvents = backendEventAdapter(checkNewEvents(events), true);
                     modifiedEvents = backendEventAdapter(changedEvents, false);

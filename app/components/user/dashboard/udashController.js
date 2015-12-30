@@ -337,7 +337,8 @@
                 username: '',
                 url: '',
                 enabled: 0,
-                calendar_name: ''
+                calendar_name: '',
+                password: '',
             },
             popUp: {
                 show: function (index) {
