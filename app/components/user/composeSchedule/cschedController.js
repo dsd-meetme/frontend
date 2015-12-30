@@ -4,6 +4,7 @@
 
         var calendar;
         var mode = 1;
+        var chosenView = 'agendaWeek';
         var changedEvents = [];
         var checkNewEvents = function (events) {
             var newEvents = [];
@@ -61,6 +62,7 @@
         c.processUrl = function () {
             if ($routeParams.type.length === 1 && $routeParams.type === '_') {
                 mode = 1;
+                this.showDelete = false;
             }
             else {
                 mode = 0;
@@ -68,6 +70,8 @@
                 this.id = urlParams[0];
                 this.name = urlParams[1];
                 this.enabled = urlParams[2];
+                this.showDelete = true;
+
             }
         };
         c.getTimeslots = function () {
@@ -89,10 +93,17 @@
 
 
                         }
+                        if(window.innerWidth <= 768){
+                            c.calendarConfig.defaultView = 'agendaDay';
+                        }
                         calendar = jQuery('#composeScheduleCal').fullCalendar(c.calendarConfig);
                     })
             }
             else {
+                if(window.innerWidth <= 768){
+                    c.calendarConfig.defaultView = 'agendaDay';
+                }
+                console.log(c.calendarConfig);
                 calendar = jQuery('#composeScheduleCal').fullCalendar(c.calendarConfig);
             }
 
@@ -101,14 +112,22 @@
         c.removeTimeslot = function (id) {
             orgResources.timeslot().remove({calendarId: this.id, timeslotId: id}).$promise
                 .then(function () {
-                    c.confirmPopup.message = 'Event succesfully deleted!';
+                    c.confirmPopup.message = 'Deleting event';
                     c.confirmPopup.show();
                     $timeout(function () {
                         c.confirmPopup.hide();
                     }, 2000)
                 })
         };
-
+        c.deleteSchedule = function () {
+            c.confirmPopup.message = 'Deleting schedule';
+            c.confirmPopup.show();
+            orgResources.calendar().remove({calendarId: c.id})
+                .$promise.then(function () {
+                    c.confirmPopup.hide();
+                    $location.path('/user')
+                })
+        };
         c.saveSchedule = function () {
             var newEvents, modifiedEvents = [];
             var alsoEditEvents = false;
@@ -117,7 +136,7 @@
             this.invalidFields.nameReq = (c.name === '' || c.name === undefined);
             this.invalidFields.eventsReq = (events.length === 0);
             this.thereErrors = this.invalidFields.nameReq || this.invalidFields.eventsReq;
-            var enabled, index,index_one;
+            var enabled, index, index_one;
             index = 0;
             index_one = 0;
             if (!this.thereErrors) {
@@ -129,6 +148,8 @@
                     enabled = '0'
                 }
                 if (mode === 1) {
+                    c.confirmPopup.message = 'Creting schedule';
+                    c.confirmPopup.show();
                     processedEvents = backendEventAdapter(events, true);
                     orgResources.calendar().save({calendarId: ''}, jQuery.param({
                         name: this.name,
@@ -138,13 +159,8 @@
                                 orgResources.timeslot().save({calendarId: response.id, timeslotId: ''},
                                     jQuery.param(processedEvents[i])).$promise.then(function (response) {
                                         if (index === processedEvents.length - 1) {
-                                            c.confirmPopup.message = "Schedule successfully created";
-                                            c.confirmPopup.show();
-
-                                            $timeout(function () {
-                                                c.confirmPopup.hide();
-                                                $location.path('/user');
-                                            }, 2000)
+                                            c.confirmPopup.hide();
+                                            $location.path('/user');
                                         }
                                         index++;
 
@@ -153,6 +169,8 @@
                         })
                 }
                 else {
+                    c.confirmPopup.message = 'Saving schedule';
+                    c.confirmPopup.show();
                     index = 0;
                     if (c.selected === 'true') {
                         enabled = '1'
@@ -175,13 +193,8 @@
                                 orgResources.timeslot().save({calendarId: c.id, timeslotId: ''},
                                     jQuery.param(newEvents[i])).$promise.then(function (response) {
                                         if (index === newEvents.length - 1 && !alsoEditEvents) {
-                                            c.confirmPopup.message = "Schedule successfully saved";
-                                            c.confirmPopup.show();
-
-                                            $timeout(function () {
-                                                c.confirmPopup.hide();
-                                                $location.path('/user');
-                                            }, 2000)
+                                            c.confirmPopup.hide();
+                                            $location.path('/user');
                                         }
 
                                     });
@@ -189,27 +202,18 @@
                             for (i = 0; i < modifiedEvents[1].length; i++) {
                                 orgResources.timeslot().update({calendarId: c.id, timeslotId: modifiedEvents[0][i]},
                                     jQuery.param(modifiedEvents[1][i])).$promise.then(function (response) {
-                                        if (index_one === modifiedEvents[1].length - 1 ) {
-                                            c.confirmPopup.message = "Schedule successfully saved";
-                                            c.confirmPopup.show();
+                                        if (index_one === modifiedEvents[1].length - 1) {
+                                            c.confirmPopup.hide();
+                                            $location.path('/user');
 
-                                            $timeout(function () {
-                                                c.confirmPopup.hide();
-                                                $location.path('/user');
-                                            }, 2000)
                                         }
                                         index_one++;
 
                                     });
                             }
-                            if(newEvents.length === 0 && modifiedEvents[1].length === 0 ){
-                                c.confirmPopup.message = "Schedule successfully saved";
-                                c.confirmPopup.show();
-
-                                $timeout(function () {
-                                    c.confirmPopup.hide();
-                                    $location.path('/user');
-                                }, 2000)
+                            if (newEvents.length === 0 && modifiedEvents[1].length === 0) {
+                                c.confirmPopup.hide();
+                                $location.path('/user');
                             }
                         });
                 }

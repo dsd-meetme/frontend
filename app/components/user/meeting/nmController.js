@@ -101,6 +101,15 @@
             }
 
         };
+        c.deleteMeeting = function(){
+            c.confirmPopup.message ="Deleting meeting";
+            c.confirmPopup.show();
+            orgResources.meetings().remove({groupId: c.groupId, meetingsId: c.meetingId}).$promise
+                .then(function () {
+                    c.confirmPopup.hide();
+                    $location.path('/user');
+                })
+        };
         c.getTimeslots = function () {
             var splittedTimeStart, splittedTimeEnd;
             if (mode === 'w') {
@@ -121,10 +130,16 @@
                                 });
 
                             }
+                            if(window.innerWidth <= 768){
+                                c.calendarConfig.defaultView = 'agendaDay';
+                            }
                             calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
                         })
             }
             else {
+                if(window.innerWidth <= 768){
+                    c.calendarConfig.defaultView = 'agendaDay';
+                }
                 calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
             }
         };
@@ -303,7 +318,7 @@
                         })
                 }
                 else {
-                    c.confirmPopup.message("Saving changes");
+                    c.confirmPopup.message = "Saving changes";
                     c.confirmPopup.show();
                     index = 0;
                     newEvents = backendEventAdapter(checkNewEvents(events), true);

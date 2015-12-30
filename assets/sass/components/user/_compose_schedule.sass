@@ -22,10 +22,90 @@
     .align_input
       padding-left: 53px
 
+    @media(max-width: 500px)
+      >div>div:first-child
+        width: 100%
+        padding-left: 10px
+        padding-right: 10px
+        float: none
+
+        input
+          width: calc(100% - 55px)
+
+      >div>div:last-child
+        width: 100%
+        float: none
+        padding-left: 10px
+        margin-top: 15px
+
+        .status_switcher_text:before
+          font-size: 35px
+
+
   .non_input_errors
     margin-right: 20px
+
+
+  .composeScheduleContent
+    .error_tile
+      margin-bottom: 20px
+
 
 
 
   .fc-toolbar
     margin-bottom: 30px
+
+  .span
+    @media(max-width: 700px)
+      .link_top
+        display: block
+        float: none
+        margin-bottom: 20px
+
+      button
+        width: 50%
+
+        &:nth-child(3)
+          width: calc(50% - 15px)
+  .section_action_bar
+    .secondary_button
+      margin-right: 15px
+
+    @media(max-width: 450px)
+      .link_top
+        display: block
+        float: none
+        margin-bottom: 20px
+
+      button
+        width: 100%
+
+        &:nth-child(3)
+          width: 100%
+          margin-right: 0
+          margin-top: 20px
+
+  @media(max-width: 450px)
+    .fc-left
+      float: none
+      width: 100%
+      margin-bottom: 20px
+
+      h2
+        float: none
+
+    .fc-right
+      float: none
+      width: 100%
+
+      >div
+        float: left
+
+      >button
+        float: right
+
+
+
+
+

@@ -41,6 +41,12 @@
   .odash .tile .tileBottomGroup {
     display: none; } }
 
+@media (max-width: 420px) {
+  .odash .sub_section_actionbar a, .odash .sub_section_actionbar button {
+    width: 100%;
+    text-align: center;
+    padding: 8px 16px; } }
+
 .groupC h3 {
   color: #555; }
 

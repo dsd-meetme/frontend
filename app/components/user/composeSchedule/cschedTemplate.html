@@ -25,21 +25,22 @@
         <h1 class="text-center font_light">Compose a schedule</h1>
     </div>
     <div class="row">
-        <div class="col-md-8 col-md-push-2">
-            <div class="row section_action_bar">
-                <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
-                <button class="main_button" ng-click="cschedC.saveSchedule()"><i class="fa fa-calendar-plus-o"></i>&nbsp;&nbsp;Save
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
+            <div class=" section_action_bar clearfix" ng-class="{span : cschedC.showDelete}">
+                <a href="/#/user" class="link_top"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+
+                <button  class="main_button" ng-click="cschedC.saveSchedule()"><i class="fa fa-calendar-plus-o"></i>&nbsp;&nbsp;Save
                     schedule
                 </button>
-                <p class="error_msg pull-right near_button_error" ng-repeat="error in cschedC.errors">{{error}}</p>
-                <p class="error_msg pull-right near_button_error" ng-show="cschedC.invalidFields.eventsReq"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one event</p>
+                <button class="secondary_button" ng-show="cschedC.showDelete" ng-click="cschedC.deleteSchedule()"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete schedule</button>
+
             </div>
         </div>
     </div>
     <br/>
     <br/>
     <div class="row csched_actionbar">
-        <div class="col-md-8 col-md-push-2">
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div>
                 <span class="bold">Name: </span>
                 <input ng-class="{error_underline: cschedC.invalidFields.nameReq}" class="main_input" type="text" placeholder="Insert a name for the schedule" ng-model="cschedC.name"/>
@@ -51,12 +52,13 @@
                     <span class="status_switcher_text"></span>
                     <span class="font_normal">Enabled</span>
                 </label>
-
             </div>
         </div>
     </div>
     <div class="row composeScheduleContent">
-        <div class="col-md-8 col-md-push-2">
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
+            <p class="error_tile" ng-repeat="error in cschedC.errors">{{error}}</p>
+            <p class="error_tile" ng-show="cschedC.invalidFields.eventsReq"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one event</p>
             <div id="composeScheduleCal"></div>
         </div>
     </div>
@@ -68,7 +70,7 @@
             </div>
             <div class="modal-body text-center">
                 <img src="assets/img/484.GIF" alt=""/>
-                <h2>&nbsp;&nbsp;{{nmC.confirmPopup.message}}</h2>
+                <h2>&nbsp;&nbsp;{{cschedC.confirmPopup.message}}</h2>
             </div>
             <!--<div class="modal-footer">
           </div>-->

@@ -27,39 +27,59 @@
         <h1 class="text-center font_light">New Meeting</h1>
     </div>
     <div class="row">
-        <div class="col-md-8 col-md-push-2">
-            <div class="row section_action_bar">
-                <a href="/#/user"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
-                <button ng-if="nmC.inputEnabled" class="main_button" ng-click="nmC.submit()"><i class="fa fa-users"></i>&nbsp;&nbsp;{{nmC.buttonText}}</button>
-                <p class="error_msg pull-right near_button_error" ng-repeat="error in nmeC.errors">{{error}}</p>
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
+            <div class=" section_action_bar" ng-class="{span : nmC.inputEnabled}">
+                <a href="/#/user" class="link_top"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
+                <button ng-if="nmC.inputEnabled" class="main_button" ng-click="nmC.submit()">{{nmC.buttonText}}</button>
+                <button ng-if="nmC.inputEnabled" class="secondary_button" ng-click="cschedC.deleteSchedule()"><i
+                        class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete Meeting
+                </button>
+
             </div>
 
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 col-md-push-2">
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div class="row nm-content">
-                <h4><i class="fa fa-info-circle"></i>&nbsp;&nbsp;INFORMATION</h4>
                 <form name="meetingInfoForm" novalidate>
+                    <h4><i class="fa fa-info-circle"></i>&nbsp;&nbsp;INFORMATION</h4>
                     <div class="col-md-6">
+
+
                         <p>Title</p>
-                        <input ng-readonly="!nmC.inputEnabled" ng-class="{error_underline: nmC.invalidFields.nameReq }" class="main_input" type="text" name="title" ng-model="nmC.title" required
+                        <input ng-readonly="!nmC.inputEnabled" ng-class="{error_underline: nmC.invalidFields.nameReq }"
+                               class="main_input" type="text" name="title" ng-model="nmC.title" required
                                placeholder="Insert a title"/>
+
                         <p class="error_msg" ng-show="nmC.invalidFields.nameReq">Insert a title</p>
+
                         <p>Description</p>
-                        <textarea ng-readonly="!nmC.inputEnabled" ng-class="{error_bordering: nmC.invalidFields.descriptionReq }" name="description" ng-model="nmC.description" required placeholder="Insert a description">
+                        <textarea ng-readonly="!nmC.inputEnabled"
+                                  ng-class="{error_bordering: nmC.invalidFields.descriptionReq }" name="description"
+                                  ng-model="nmC.description" required placeholder="Insert a description">
                         </textarea>
+
                         <p class="error_msg" ng-show="nmC.invalidFields.descriptionReq">Insert a description</p>
                     </div>
                     <div class="col-md-6">
                         <p>Duration(in mins)</p>
-                        <input ng-readonly="!nmC.inputEnabled" ng-class="{error_underline:nmC.invalidFields.durationReq || nmC.invalidFields.durationVal || mC.invalidFields.durationLimit  }" class="main_input" type="number" ng-model="nmC.duration" name="duration" required
+                        <input ng-readonly="!nmC.inputEnabled"
+                               ng-class="{error_underline:nmC.invalidFields.durationReq || nmC.invalidFields.durationVal || mC.invalidFields.durationLimit  }"
+                               class="main_input" type="number" ng-model="nmC.duration" name="duration" required
                                placeholder="Insert a duration"/>
+
                         <p class="error_msg" ng-show="nmC.invalidFields.durationReq">Insert a duration</p>
-                        <p class="error_msg" ng-show="nmC.invalidFields.durationVal">Insert a valid duration(a number)</p>
-                        <p class="error_msg" ng-show="nmC.invalidFields.durationLimit">Insert a valid duration duration(max 300mins, min
+
+                        <p class="error_msg" ng-show="nmC.invalidFields.durationVal">Insert a valid duration(a
+                            number)</p>
+
+                        <p class="error_msg" ng-show="nmC.invalidFields.durationLimit">Insert a valid duration
+                            duration(max 300mins, min
                             15mins)</p>
+
                         <p>Groups</p>
+
                         <div ng-repeat="group in nmC.groups">
                             <span style="margin-right: 10px">{{group.name}}</span>
                             <label class="circled_radio">
@@ -70,23 +90,30 @@
                             <!--<input type="radio" name="group" ng-checked="nmC.selectedGroupAssign(group.id)" >-->
                         </div>
                         <span>{{nmC.groupName}}</span>
+
                         <p class="error_msg" ng-show="nmC.invalidFields.oneGroup">Select a group for the meeting</p>
                     </div>
                 </form>
             </div>
             <br/>
-            <div class="row">
-                <h4><i class="fa fa-calendar"></i>&nbsp;&nbsp;TIME WINDOW
-                    <span class="error_msg error_inline" ng-show="nmC.invalidFields.oneEventLeast"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one time window for the meeting</span>
-                    <span class="error_msg error_inline" ng-show="nmC.invalidFields.durationConflict">One time window is too short for the meeting</span>
-                </h4>
-                <div class="col-md-12">
-                    <div id="meetingTimeslots">
-                    </div>
-                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
+            <h4><i class="fa fa-calendar"></i>&nbsp;&nbsp;TIME WINDOW
+            </h4>
+
+            <p class="error_tile" ng-show="nmC.invalidFields.oneEventLeast"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert
+                at least one time window for the meeting</p>
+
+            <p class="error_tile" ng-show="nmC.invalidFields.durationConflict">One time window is too short for the
+                meeting</p>
+
+            <p class="error_tile" ng-repeat="error in nmeC.errors">{{error}}</p>
+
+            <div id="meetingTimeslots">
             </div>
         </div>
-
     </div>
     <br/>
     <br/>
@@ -98,6 +125,7 @@
             </div>
             <div class="modal-body text-center">
                 <img src="assets/img/484.GIF" alt=""/>
+
                 <h2>&nbsp;&nbsp;{{nmC.confirmPopup.message}}</h2>
             </div>
             <!--<div class="modal-footer">
