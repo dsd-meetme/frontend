@@ -1,14 +1,33 @@
 (function () {
-    /**
-     A controller to manage existing groups inside an organization
-     @param orgResources A service that provides objects that incapsulate restful communication
-     logic
-     **/
+    
     var controller = function ($routeParams, $location, $timeout, mixedContentToArray, orgResources, arrayToUrlParams) {
 
         var c = this;
         //group id
         var id = $routeParams.id;
+        var getUsers = function () {
+            orgResources.userInGroup().query({groupId: id, userId: ''}).$promise
+                .then(function (response) {
+                    c.data.members = response;
+                })
+        };
+
+        //Gets user info in the context of an organization
+        var getGroupInfo = function () {
+            //restful show
+            orgResources.group().get({groupId: id}).$promise
+                .then(function (response) {
+                    c.data.group.name = response.name;
+                    c.data.group.description = response.description;
+                    c.data.group.id = response.id;
+                    c.data.group.planner_id = response.planner_id;
+                    c.data.group.planner_name = response.planner_name;
+                    //A copy of the retrieved data
+                    //This copy will be used
+                    c.data.groupCopy.name = response.name;
+                    c.data.groupCopy.description = response.description;
+                });
+        };
         c.data = {
             group: {
                 name: '',
@@ -20,10 +39,6 @@
                 name: '',
                 description: ''
             }
-        };
-        c.thereErrors = {
-            info: false,
-            planner: false
         };
         c.errors = {
             planner: [],
@@ -39,10 +54,10 @@
             },
             exit: function () {
                 this.flag = false;
+                c.errors.info = [];
+                c.errors.planner = [];
                 c.data.groupCopy.name = c.data.group.name;
                 c.data.groupCopy.description = c.data.group.description;
-                c.thereErrors.info = false;
-                c.thereErrors.planner = false;
                 c.invalidFields.nameReq = false;
             }
         };
@@ -78,30 +93,11 @@
                         this.filterString = this.startIndex + ',' + this.endIndex;
 
                     }
-                    else {
-                        //
-                    }
 
                 }
             }
         };
-        //Gets user info in the context of an organization
-        c.getInfo = function () {
-            //restful show
-            orgResources.group().get({groupId: id}).$promise
-                .then(function (response) {
-                    c.data.group.name = response.name;
-                    c.data.group.description = response.description;
-                    c.data.group.id = response.id;
-                    c.data.group.planner_id = response.planner_id;
-                    c.data.group.planner_name = response.planner_name;
-                    //A copy of the retrieved data
-                    //This copy will be used
-                    c.data.groupCopy.name = response.name;
-                    c.data.groupCopy.description = response.description;
-                    c.getUsers();
-                });
-        };
+
         //Delete an employee in the context of an org
         c.delete = function () {
             //restful delete
@@ -126,7 +122,7 @@
                 ).$promise
                     .then(function () {
                         //Update view
-                        c.getInfo();
+                        getGroupInfo();
                         c.editMode.exit();
                         c.confirmPopup.hide();
                     }, function (response) {
@@ -141,9 +137,8 @@
         c.updateInfo = function () {
             //Checks the validity status of input fields
             c.invalidFields.nameReq = (c.data.groupCopy.name === '');
-            c.thereErrors.info = c.invalidFields.nameReq;
 
-            if (!c.thereErrors.info) {
+            if (!c.invalidFields.nameReq) {
                 c.confirmPopup.message = "Saving changes";
                 c.confirmPopup.show();
                 orgResources.group().update({groupId: id}, jQuery.param(
@@ -153,7 +148,7 @@
                         planner_id: c.data.group.planner_id
                     })).$promise
                     .then(function () {
-                        c.getInfo();
+                        getGroupInfo();
                         c.editMode.exit();
                         c.confirmPopup.hide();
                     }, function (response) {
@@ -165,6 +160,7 @@
             }
         };
         c.changePlanner = {
+            errors : [],
             init: function () {
                 orgResources.user().query({userId: ''})
                     .$promise.then(function (response) {
@@ -176,10 +172,14 @@
                         c.pagination.user.pages = pages;
                         c.pagination.user.utilArray = new Array(pages);
                         modal.modal('show');
+                        c.editMode.exit();
                     })
             },
             change: function () {
-                if (this.plannerId !== c.data.group.planner_id) {
+                if(!this.planner_id){
+                    this.errors.push('Select a user to be planner');
+                }
+                else if (this.plannerId !== c.data.group.planner_id) {
                     c.confirmPopup.message = "Saving changes";
                     c.confirmPopup.show();
                     jQuery('#changePlanner').modal('hide');
@@ -192,7 +192,7 @@
                     ).$promise
                         .then(function () {
                             //Update view
-                            c.getInfo();
+                            getGroupInfo();
                             c.editMode.exit();
                             c.confirmPopup.hide();
                         }, function (response) {
@@ -212,7 +212,6 @@
             init: function () {
                 var utilArray = [];
                 var secondUtilArray = [];
-                var bool;
                 for (var i = 0; i < c.data.members.length; i++) {
                     secondUtilArray.push(c.data.members[i].id);
                 }
@@ -221,7 +220,6 @@
                         var modal = jQuery('#addToGroup');
                         modal.find('input').val('');
                         var pages;
-                        console.log(secondUtilArray);
                         for (var j = 0; j < response.length; j++) {
                             if (secondUtilArray.indexOf(response[j].id) === -1) {
                                 utilArray.push(response[j]);
@@ -232,6 +230,7 @@
                         c.pagination.user.pages = pages;
                         c.pagination.user.utilArray = new Array(pages);
                         modal.modal('show');
+                        c.editMode.exit();
                     })
             },
             change: function () {
@@ -255,7 +254,7 @@
                     }, arrayToUrlParams.process('id', validMembers)).$promise
                         .then(function () {
                             //Update view
-                            c.getInfo();
+                            getGroupInfo();
                             c.editMode.exit();
                             c.confirmPopup.hide();
                         }, function (response) {
@@ -268,12 +267,6 @@
                 }
 
             }
-        };
-        c.getUsers = function () {
-            orgResources.userInGroup().query({groupId: id, userId: ''}).$promise
-                .then(function (response) {
-                    c.data.members = response;
-                })
         };
         c.deleteFromGroup = function (userId) {
             c.confirmPopup.message = "Removing user";
@@ -288,7 +281,8 @@
             )
         };
 
-        c.getInfo();
+        getGroupInfo();
+        getUsers();
 
     };
     var app = angular.module('Plunner');

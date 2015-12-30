@@ -553,3 +553,58 @@ a.main_button {
     color: #42A5F5; }
     .pagination .underlinedPage:hover {
       color: white; }
+
+.upC .secondary_button, .opC .secondary_button {
+  margin-right: 15px; }
+
+.upC form .disabled, .opC form .disabled {
+  border: 0 !important; }
+
+.upC table thead th, .opC table thead th {
+  border: none; }
+
+.upC table tbody tr td, .opC table tbody tr td {
+  padding-top: 14px; }
+
+.upC table tbody tr:first-child td, .opC table tbody tr:first-child td {
+  border: none; }
+
+.upC table tbody .password_row td, .opC table tbody .password_row td {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+  .upC table tbody .password_row td:first-child, .opC table tbody .password_row td:first-child {
+    padding-top: 25px; }
+
+.upC table input, .opC table input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  padding: 6px; }
+  .upC table input:focus, .opC table input:focus {
+    border: 1px solid #42A5F5; }
+
+@media (max-width: 600px) {
+  .upC .span .link_top, .opC .span .link_top {
+    display: block;
+    float: none;
+    margin-bottom: 20px; }
+  .upC .span button, .opC .span button {
+    width: 50%; }
+    .upC .span button:nth-child(3), .opC .span button:nth-child(3) {
+      width: calc(50% - 15px); } }
+
+.upC .section_action_bar .secondary_button, .opC .section_action_bar .secondary_button {
+  margin-right: 15px; }
+
+@media (max-width: 450px) {
+  .upC .section_action_bar .link_top, .opC .section_action_bar .link_top {
+    display: block;
+    float: none;
+    margin-bottom: 20px; }
+  .upC .section_action_bar button, .opC .section_action_bar button {
+    width: 100%; }
+    .upC .section_action_bar button:nth-child(3), .opC .section_action_bar button:nth-child(3) {
+      width: 100%;
+      margin-right: 0;
+      margin-top: 20px; } }

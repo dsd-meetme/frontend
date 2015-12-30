@@ -1,23 +1,21 @@
-<div class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- HEADER -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <img src="assets/img/plunner.png" alt=""/>
-            </a>
-        </div>
-        <div class="navbar-collapse collapse navbar-right">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="user_section">
-                    <a href="/#/user/profile">
-                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
-                        <span></span> Employee Name</a>
-                </li>
-                <li>
-                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
-                </li>
-            </ul>
-        </div>
+<div class="container-fluid navigation">
+    <div class="navigation-left">
+        <a href="/#/user">
+            <img src="assets/img/plunner.png" alt=""/>
+        </a>
+    </div>
+    <div class="navigation-right">
+        <ul class="list-inline list-unstyled">
+            <li class="user_section">
+                <a href="/#/user/profile" profile type="user">
+                    <img class="user_icon" src="assets/img/user_icon.png" alt="Your profile"/>
+                    {{profileName}}
+                </a>
+            </li>
+            <li>
+                <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+            </li>
+        </ul>
     </div>
 </div>
 <div class="container-fluid upC">

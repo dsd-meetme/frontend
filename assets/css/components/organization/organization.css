@@ -47,37 +47,37 @@
     text-align: center;
     padding: 8px 16px; } }
 
-.groupC h3 {
+.groupC h3, .userC h3 {
   color: #555; }
 
-.groupC .secondary_button {
+.groupC .secondary_button, .userC .secondary_button {
   margin-right: 15px; }
 
-.groupC .disabled {
+.groupC .disabled, .userC .disabled {
   border: 0 !important; }
 
-.groupC .groupC_info table thead th {
+.groupC .groupC_info table thead th, .userC .groupC_info table thead th {
   border: none; }
 
-.groupC .groupC_info table tbody tr td:first-child {
+.groupC .groupC_info table tbody tr td:first-child, .userC .groupC_info table tbody tr td:first-child {
   padding-top: 14px; }
 
-.groupC .groupC_info table tbody tr:first-child td {
+.groupC .groupC_info table tbody tr:first-child td, .userC .groupC_info table tbody tr:first-child td {
   border: none; }
 
-.groupC .groupC_info table tbody tr:last-child td:last-child {
+.groupC .groupC_info table tbody tr:last-child td:last-child, .userC .groupC_info table tbody tr:last-child td:last-child {
   padding-top: 14px; }
 
-.groupC .groupC_info input {
+.groupC .groupC_info input, .userC .groupC_info input {
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
   padding: 6px; }
-  .groupC .groupC_info input:focus {
+  .groupC .groupC_info input:focus, .userC .groupC_info input:focus {
     border: 1px solid #42A5F5; }
 
-.groupC .groupC_info textarea {
+.groupC .groupC_info textarea, .userC .groupC_info textarea {
   width: 100%;
   height: 80px;
   padding: 6px;
@@ -85,43 +85,49 @@
   border-radius: 4px;
   resize: none;
   outline: none; }
-  .groupC .groupC_info textarea:focus {
+  .groupC .groupC_info textarea:focus, .userC .groupC_info textarea:focus {
     border: 1px solid #42A5F5; }
 
-.groupC .groupC_info .main_button {
+.groupC .groupC_info .main_button, .userC .groupC_info .main_button {
   margin-right: 15px; }
 
-.groupC .groupC_members > div {
+.groupC .groupC_members > div, .userC .groupC_members > div {
   border-bottom: 1px solid #ccc; }
-  .groupC .groupC_members > div p, .groupC .groupC_members > div a {
+  .groupC .groupC_members > div p, .groupC .groupC_members > div a, .userC .groupC_members > div p, .userC .groupC_members > div a {
     display: inline-block;
     margin-top: 10px;
     margin-bottom: 15px; }
-    .groupC .groupC_members > div p span, .groupC .groupC_members > div a span {
+    .groupC .groupC_members > div p span, .groupC .groupC_members > div a span, .userC .groupC_members > div p span, .userC .groupC_members > div a span {
       color: #42A5F5; }
-  .groupC .groupC_members > div > span {
+  .groupC .groupC_members > div > span, .userC .groupC_members > div > span {
     margin-top: 15px;
     color: #ccc;
     cursor: pointer; }
-    .groupC .groupC_members > div > span:hover {
+    .groupC .groupC_members > div > span:hover, .userC .groupC_members > div > span:hover {
       color: #555; }
 
-.groupC .deleteLink {
+.groupC .groupC_members button, .userC .groupC_members button {
+  margin-top: 15px; }
+
+.groupC .deleteLink, .userC .deleteLink {
   padding-top: 3px;
   color: #ccc;
   text-transform: uppercase;
   font-size: 12px;
   cursor: pointer; }
-  .groupC .deleteLink:hover {
+  .groupC .deleteLink:hover, .userC .deleteLink:hover {
     color: #555; }
 
+.groupC .userC_group_info table, .userC .userC_group_info table {
+  margin-top: 36px; }
+
 @media (max-width: 450px) {
-  .groupC .section_action_bar .link_top {
+  .groupC .section_action_bar .link_top, .userC .section_action_bar .link_top {
     display: block;
     margin-bottom: 20px; }
-  .groupC .section_action_bar button:nth-child(2) {
+  .groupC .section_action_bar button:nth-child(2), .userC .section_action_bar button:nth-child(2) {
     width: 48.9%; }
-  .groupC .section_action_bar button:nth-child(3) {
+  .groupC .section_action_bar button:nth-child(3), .userC .section_action_bar button:nth-child(3) {
     width: 47%; } }
 
 #addToGroup table, #changePlanner table {
@@ -129,6 +135,9 @@
 
 #addToGroup .secondary_button, #changePlanner .secondary_button {
   margin-right: 15px; }
+
+#addToGroup .error_tile, #changePlanner .error_tile {
+  padding-left: 30px; }
 
 .successDisclaimer {
   margin-bottom: 0;

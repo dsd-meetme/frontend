@@ -1,18 +1,10 @@
-<div class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- HEADER -->
-        <div class="navbar-header">xw
-            <a class="navbar-brand" href="#">PLUNNER</a>
-        </div>
-        <div class="navbar-collapse collapse navbar-right">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">How To</a></li>
-                <li><a href="#">Contact</a></li>
-                <li>
-                    <a class="btn btn-primary navbar-btn" href="/#/signup">Register my Organization</a>
-                </li>
-            </ul>
-        </div>
+<div class="container-fluid navigation">
+    <div class="navigation-left">
+        <a href="/#/organization">
+            <img src="assets/img/plunner.png" alt=""/>
+        </a>
+    </div>
+    <div class="navigation-right">
     </div>
 </div>
 <div class="container-fluid usi">
@@ -31,9 +23,9 @@
                            ng-class="{error_bordering : osiC.invalidFields.emailReq ||osiC.invalidFields.emailVal }"
                            type="email" placeholder="Email"/>
 
-                    <p class="error_msg" ng-show="osiC.invalidFields.emailReq">You did not insert an email address</p>
+                    <p class="error_msg" ng-show="osiC.invalidFields.emailReq">Insert an email address</p>
 
-                    <p class="error_msg" ng-show="osiC.invalidFields.emailVal">You did not insert a valid email
+                    <p class="error_msg" ng-show="osiC.invalidFields.emailVal">Insert a valid email
                         address</p>
                 </div>
                 <div class="usi_input">
@@ -41,7 +33,7 @@
                     <input name="password" required ng-model="osiC.password" type="password" placeholder="Password"
                            ng-class="{error_bordering : osiC.invalidFields.passwordReq}"/>
 
-                    <p class="error_msg" ng-show="osiC.invalidFields.passwordReq">You did not insert a password</p>
+                    <p class="error_msg" ng-show="osiC.invalidFields.passwordReq">Insert a password</p>
                 </div>
                 <div class="usi_bottom_bar clearfix">
                     <label class="remember_me_switcher">
@@ -63,14 +55,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-
             </div>
             <div class="modal-body text-center">
                 <img src="assets/img/484.GIF" alt=""/>
                 <h2>&nbsp;&nbsp;Authorizing</h2>
             </div>
-            <!--<div class="modal-footer">
-          </div>-->
             <br/>
         </div>
     </div>

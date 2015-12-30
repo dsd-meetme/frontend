@@ -1,24 +1,21 @@
-<div class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- HEADER -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <img src="assets/img/plunner.png" alt=""/>
-            </a>
-        </div>
-        <div class="navbar-collapse collapse navbar-right">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="user_section">
-                    <a href="/#/user/profile">
-                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
-                        {{odashC.data.orgInfo.name}}
-                    </a>
-                </li>
-                <li>
-                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
-                </li>
-            </ul>
-        </div>
+<div class="container-fluid navigation">
+    <div class="navigation-left">
+        <a href="/#/organization">
+            <img src="assets/img/plunner.png" alt="Plunner"/>
+        </a>
+    </div>
+    <div class="navigation-right">
+        <ul class="list-inline list-unstyled">
+            <li class="user_section">
+                <a href="/#/organization/profile" profile type="org">
+                    <img class="user_icon" src="assets/img/user_icon.png" alt="Your profile"/>
+                    {{profileName}}
+                </a>
+            </li>
+            <li>
+                <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+            </li>
+        </ul>
     </div>
 </div>
 <div class="container-fluid odash">
@@ -38,7 +35,6 @@
     <br/>
     <br/>
     <br/>
-
     <div class="row" ng-show="odashC.viewSections.users">
         <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div class="row sub_section_actionbar">
@@ -48,7 +44,7 @@
                     </button>
                     <div class="search_input">
                         <i class="fa fa-search fa-lg"></i>
-                        <input type="search" ng-model="searchUser" placeholder="Search for..."/>
+                        <input type="search" ng-model="searchUser" placeholder="Search for user"/>
                     </div>
 
                 </div>
@@ -64,7 +60,6 @@
                                 </div>
                                 <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                     <h4 class="tileTitle">{{user.name}}</h4>
-
                                     <div class="tileDescription">
                                         {{user.email}}
                                     </div>
@@ -114,7 +109,7 @@
                     </button>
                     <div class="search_input">
                         <i class="fa fa-search fa-lg"></i>
-                        <input type="search" ng-model="searchGroup" placeholder="Search for..."/>
+                        <input type="search" ng-model="searchGroup" placeholder="Search for group"/>
                     </div>
 
                 </div>
@@ -125,7 +120,7 @@
                          ng-repeat="group in odashC.data.groups | filter:{name : searchGroup } | paginationFilter: odashC.pagination.groups.filterString">
                         <div class="row">
                             <div class="col-md-2 col-sm-2 col-xs-2 tileIconLeft">
-                                <img src="assets/img/groups.png" alt=""/>
+                                <img src="assets/img/groups.png" alt="Group"/>
                             </div>
                             <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{group.name}}</h4>
@@ -222,15 +217,12 @@
                         </li>
                     </ul>
                 </div>
-                <p class="error_tile" class="error_msg" ng-repeat="error in odashC.addGroup.errors"><i
+                <p class="error_tile" ng-repeat="error in odashC.addGroup.errors"><i
                         class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
-
                 <p ng-show="odashC.addGroup.invalidFields.membersReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert
                     at least one member</p>
-
                 <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert
                     one planner</p>
-
                 <div class="modal-footer">
                     <button type="button" class="secondary_button" data-dismiss="modal">Close</button>
                     <button type="button" class="main_button" ng-click="odashC.addGroup.submit()">Create</button>
@@ -252,7 +244,7 @@
                                    ng-class="{error_underline : odashC.addUser.invalidFields.nameReq}" name="name"
                                    type="text" required ng-model="odashC.addUser.name" placeholder="Insert a name">
 
-                            <p ng-show="odashC.addUser.invalidFields.nameReq" class="error_msg">Insert a user name</p>
+                            <p ng-show="odashC.addUser.invalidFields.nameReq" class="error_msg">Insert a name</p>
                         </div>
                         <div>
                             <p>Email</p>
@@ -260,10 +252,8 @@
                                    ng-class="{error_underline : odashC.addUser.invalidFields.emailReq || odashC.addUser.invalidFields.emailVal} "
                                    name="email" type="email" required ng-model="odashC.addUser.email"
                                    placeholder="Insert an email">
-
                             <p ng-show="odashC.addUser.invalidFields.emailReq" class="error_msg">Insert an email
                                 address</p>
-
                             <p ng-show="odashC.addUser.invalidFields.emailVal" class="error_msg">Insert a valid email
                                 address</p>
                         </div>
@@ -278,7 +268,7 @@
                                 password</p>
 
                             <p ng-show="odashC.addUser.invalidFields.passwordLength" class="error_msg">The password must
-                                contains at least 6 characters</p>
+                                be at least 6 characters long</p>
                         </div>
                         <div>
                             <p>Confirm Password</p>
@@ -287,13 +277,12 @@
                                    name="confirmation_password" type="password"
                                    ng-model="odashC.addUser.confirmation_password" placeholder="Confirm the password">
 
-                            <p ng-show="odashC.addUser.invalidFields.passwordMatch" class="error_msg">The two passwords
+                            <p ng-show="odashC.addUser.invalidFields.passwordMatch" class="error_msg">The passwords
                                 do not match</p>
                         </div>
                     </div>
                     <p class="error_tile" ng-repeat="error in odashC.addUser.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}
                     </p>
-
                     <div class="modal-footer">
                         <button type="button" class="secondary_button" data-dismiss="modal">Close</button>
                         <button type="submit" class="main_button">Create</button>
@@ -310,8 +299,7 @@
             <div class="modal-header">
             </div>
             <div class="modal-body text-center">
-                <img src="assets/img/484.GIF" alt=""/>
-
+                <img src="assets/img/484.GIF" alt="Loading"/>
                 <h2>&nbsp;&nbsp;{{odashC.confirmPopup.message}}</h2>
             </div>
             <br/>

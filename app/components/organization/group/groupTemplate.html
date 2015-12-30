@@ -1,23 +1,21 @@
-<div class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- HEADER -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <img src="assets/img/plunner.png" alt=""/>
-            </a>
-        </div>
-        <div class="navbar-collapse collapse navbar-right">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="user_section">
-                    <a href="/#/user/profile">
-                        <img class="user_icon" src="assets/img/user_icon.png" alt=""/>
-                        <span></span> Employee Name</a>
-                </li>
-                <li>
-                    <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
-                </li>
-            </ul>
-        </div>
+<div class="container-fluid navigation">
+    <div class="navigation-left">
+        <a href="/#/organization">
+            <img src="assets/img/plunner.png" alt="Plunner"/>
+        </a>
+    </div>
+    <div class="navigation-right">
+        <ul class="list-inline list-unstyled">
+            <li class="user_section">
+                <a href="/#/organization/profile" profile type="org">
+                    <img class="user_icon" src="assets/img/user_icon.png" alt="Your profile"/>
+                    {{profileName}}
+                </a>
+            </li>
+            <li>
+                <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -90,7 +88,7 @@
                         <span class="fa fa-trash-o fa-lg pull-right" ng-show="groupC.editMode.flag" ng-click="groupC.deleteFromGroup(member.id)">
                         </span>
                     </div>
-                    <button style="margin-top: 15px" ng-show="groupC.editMode.flag" class="main_button" ng-click="groupC.addToGroup.init()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add user to group</button>
+                    <button ng-show="groupC.editMode.flag" class="main_button" ng-click="groupC.addToGroup.init()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add user to group</button>
                 </div>
             </div>
         </div>
@@ -136,9 +134,7 @@
                     <li ng-class="{underlinedPage : groupC.pagination.user.currentPage === ($index + 1)}" ng-click="groupC.pagination.user.changePage($index+1)" ng-repeat="x in groupC.pagination.user.utilArray track by $index | limitTo: 4">{{$index+1}}</li>
                 </ul>
             </div>
-            <p class="error_tile" class="error_msg" ng-repeat="error in odashC.addGroup.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
-            <p ng-show="odashC.addGroup.invalidFields.membersReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert at least one member</p>
-            <p ng-show="odashC.addGroup.invalidFields.plannerReq" class="error_tile"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert one planner</p>
+            <p class="error_tile" class="error_msg" ng-repeat="error in groupC.changePlanner.errors"><i class="fa fa-warning"></i>&nbsp;&nbsp;{{error}}</p>
             <div class="modal-footer">
                 <button type="button" class="secondary_button" data-dismiss="modal">Close</button>
                 <button type="button" class="main_button" ng-click="groupC.changePlanner.change()">Change</button>

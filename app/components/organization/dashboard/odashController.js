@@ -1,15 +1,38 @@
 (function () {
-    /**
-     An controller to manage the actions that can be accomplished by a plunner organization
-     @author Giorgio Pea
-     @param logoutService A service used to manage the logout of a plunner's organization
-     @param orgResources A service that provides objects that incapsulate restful communication
-     logic
-     @param arrayToUrlParams A service that encodes an array in a url like form
-     **/
+
     var controller = function ($scope, logoutService, orgResources, arrayToUrlParams, $cookies, $timeout, mixedContentToArray) {
 
         var c = this;
+
+        var getUsers = function () {
+            var pages;
+            //employees restful index
+            orgResources.user().query({userId: ''}).$promise
+                .then(function (response) {
+                    c.data.users = response;
+                    pages = Math.ceil(c.data.users.length / 10);
+                    c.pagination.user.pages = pages;
+                    c.pagination.user.utilArray = new Array(pages);
+                });
+        };
+        //Gets groups
+        var getGroups = function () {
+            var pages;
+            //employees restful groups index
+            orgResources.group().query({groupId: ''}).$promise
+                .then(function (response) {
+                    c.data.groups = response;
+                    pages = Math.ceil(c.data.groups.length / 10);
+                    c.pagination.groups.pages = pages;
+                    c.pagination.groups.utilArray = new Array(pages);
+                });
+        };
+        var getOrganizationInfo = function () {
+            orgResources.orgInfo().get()
+                .$promise.then(function (response) {
+                    c.data.orgInfo = response;
+                });
+        };
         c.confirmPopup = {
             message: '',
             show: function () {
@@ -83,35 +106,7 @@
             }
         };
         //Gets employees
-        var getUsers = function () {
-            var pages;
-            //employees restful index
-            orgResources.user().query({userId: ''}).$promise
-                .then(function (response) {
-                    c.data.users = response;
-                    pages = Math.ceil(c.data.users.length / 10);
-                    c.pagination.user.pages = pages;
-                    c.pagination.user.utilArray = new Array(pages);
-                });
-        };
-        //Gets groups
-        var getGroups = function () {
-            var pages;
-            //employees restful groups index
-            orgResources.group().query({groupId: ''}).$promise
-                .then(function (response) {
-                    c.data.groups = response;
-                    pages = Math.ceil(c.data.groups.length / 10);
-                    c.pagination.groups.pages = pages;
-                    c.pagination.groups.utilArray = new Array(pages);
-                });
-        };
-        var getOrganizationInfo = function () {
-            orgResources.orgInfo().get()
-                .$promise.then(function (response) {
-                    c.data.orgInfo = response;
-                });
-        };
+
         //Adds a group
         c.addGroup = {
             planner: null,
@@ -174,6 +169,7 @@
                                     //Puts relevant errors in array
                                     if (response.status === 422) {
                                         mixedContentToArray.process(response.data, c.addGroup.errors, true);
+                                        c.confirmPopup.hide();
                                     }
                                 })
                         },
@@ -181,6 +177,7 @@
                             //Puts relevant errors in array 
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.addGroup.errors, true);
+                                c.confirmPopup.hide();
                             }
                         });
                 }
@@ -214,7 +211,6 @@
             },
             submit: function () {
                 var form = $scope.addUserForm;
-                console.log(form);
                 //Checks the validity of input fields
                 this.invalidFields.nameReq = form.name.$error.required;
                 this.invalidFields.emailReq = form.email.$error.required;
@@ -225,7 +221,6 @@
 
                 //Submits everything to the server if data is valid
                 if (!form.$invalid && !this.invalidFields.passwordMatch) {
-                    console.log(form);
                     c.confirmPopup.message = "Adding user";
                     this.popUp.hide();
                     c.confirmPopup.show();
@@ -244,6 +239,7 @@
                         function (response) {
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.addUser.errors, true);
+                                c.confirmPopup.hide();
                             }
                         });
                 }

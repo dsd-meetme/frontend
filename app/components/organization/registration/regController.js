@@ -43,8 +43,8 @@
                     },
                     function (response) {
                         if (response.status === 422) {
-                            jQuery("#authorizationPopup").modal('hide');
                             mixedContentToArray.process(response.data, c.errors, true);
+                            jQuery("#authorizationPopup").modal('hide');
                         }
                     }
                 );
