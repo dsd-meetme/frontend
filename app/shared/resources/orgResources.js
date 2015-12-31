@@ -2,6 +2,11 @@
     //A service that returns resource objects that encapsulate the restful communication logic relative
     //to groups, employees and others
     var service = function($resource){
+        var orgUser = $resource('http://api.plunner.com/companies/employees/:userId',null,{
+            'update' : {
+                method : 'PUT'
+            }
+        });
         var userResource = $resource('http://api.plunner.com/companies/employees/:userId',null,{
             'update' : {
                 method : 'PUT'
@@ -12,9 +17,27 @@
                 method : 'PUT'
             }
         });
+        var orgGroup = $resource('http://api.plunner.com/companies/groups/:groupId',null, {
+            'update' : {
+                method : 'PUT'
+            }
+        });
         var groupResource = $resource('http://api.plunner.com/companies/groups/:groupId',null, {
             'update' : {
                 method : 'PUT'
+            }
+        });
+        var orgUserInGroup = $resource('http://api.plunner.com/companies/groups/:groupId/employees/:userId',null, {
+            'update' : {
+                method : 'PUT'
+            },
+            'save' : {
+                method : 'POST',
+                isArray : true
+            },
+            'remove' : {
+                method : 'DELETE',
+                isArray : true
             }
         });
         var userWithinGroup = $resource('http://api.plunner.com/companies/groups/:groupId/employees/:userId',null, {
@@ -31,15 +54,6 @@
             }
         });
         var planner = $resource('http://api.plunner.com/companies/groups/:groupId/planners/:plannerId',null, {
-            'update' : {
-                method : 'PUT'
-            },
-            'remove' : {
-                method : 'DELETE',
-                isArray : true
-            }
-        });
-        var company = $resource('http://api.plunner.com/companies/example', null, {
             'update' : {
                 method : 'PUT'
             },
@@ -94,9 +108,7 @@
             group : function(){
                 return groupResource;
             },
-            userInGroup : function(){
-                return userWithinGroup;
-            },
+            orgUserInGroup : orgUserInGroup,
             planner : function(){
                 return planner;
             },
@@ -130,9 +142,10 @@
             managedMeetings : function(){
                 return managedMeetings;
             },
-            orgInfo : function(){
-              return orgInfo;
-            }
+            orgInfo : orgInfo,
+            orgUser : orgUser,
+            orgGroup : orgGroup
+
         }
     };
     var app = angular.module('Plunner');

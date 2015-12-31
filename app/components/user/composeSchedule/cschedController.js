@@ -1,6 +1,6 @@
 (function () {
 
-    var controller = function (orgResources, mixedContentToArray, findObjectByProperty, $routeParams, $scope, $timeout, $location) {
+    var controller = function (userResources, mixedContentToArray, findObjectByProperty, $routeParams, $scope, $timeout, $location) {
 
         var calendar;
         var mode = 1;
@@ -77,7 +77,7 @@
         c.getTimeslots = function () {
             var splittedTimeStart, splittedTimeEnd;
             if (mode === 0) {
-                orgResources.timeslot().query({calendarId: c.id, timeslotId: ''})
+                userResources.userScheduleTimeslots.query({calendarId: c.id, timeslotId: ''})
                     .$promise.then(function (response) {
                         console.log('Timeslots');
                         console.log(response);
@@ -103,14 +103,13 @@
                 if(window.innerWidth <= 768){
                     c.calendarConfig.defaultView = 'agendaDay';
                 }
-                console.log(c.calendarConfig);
                 calendar = jQuery('#composeScheduleCal').fullCalendar(c.calendarConfig);
             }
 
         };
 
         c.removeTimeslot = function (id) {
-            orgResources.timeslot().remove({calendarId: c.id, timeslotId: id}).$promise
+            userResources.userScheduleTimeslots.remove({calendarId: c.id, timeslotId: id}).$promise
                 .then(function () {
                     c.confirmPopup.message = 'Deleting event';
                     c.confirmPopup.show();
@@ -122,7 +121,8 @@
         c.deleteSchedule = function () {
             c.confirmPopup.message = 'Deleting schedule';
             c.confirmPopup.show();
-            orgResources.calendar().remove({calendarId: c.id})
+            console.log(c.id);
+            userResources.userSchedule.remove({calendarId: c.id})
                 .$promise.then(function () {
                     c.confirmPopup.hide();
                     $location.path('/user')
@@ -151,12 +151,12 @@
                     c.confirmPopup.message = 'Creting schedule';
                     c.confirmPopup.show();
                     processedEvents = backendEventAdapter(events, true);
-                    orgResources.calendar().save({calendarId: ''}, jQuery.param({
+                    userResources.userSchedule.save({calendarId: ''}, jQuery.param({
                         name: this.name,
                         enabled: enabled
                     })).$promise.then(function (response) {
                             for (var i = 0; i < processedEvents.length; i++) {
-                                orgResources.timeslot().save({calendarId: response.id, timeslotId: ''},
+                                userResources.userScheduleTimeslots.save({calendarId: response.id, timeslotId: ''},
                                     jQuery.param(processedEvents[i])).$promise.then(function () {
                                         if (index === processedEvents.length - 1) {
                                             c.confirmPopup.hide();
@@ -177,14 +177,14 @@
                     modifiedEvents = backendEventAdapter(changedEvents, false);
                     alsoEditEvents = modifiedEvents[1].length > 0;
 
-                    orgResources.calendar().update({calendarId: c.id}, jQuery.param({
+                    userResources.userSchedule.update({calendarId: c.id}, jQuery.param({
                         name: this.name,
                         enabled: enabled
                     })).$promise.then(function () {
 
 
                             for (var i = 0; i < newEvents.length; i++) {
-                                orgResources.timeslot().save({calendarId: c.id, timeslotId: ''},
+                                userResources.userScheduleTimeslots.save({calendarId: c.id, timeslotId: ''},
                                     jQuery.param(newEvents[i])).$promise.then(function () {
                                         if (index === newEvents.length - 1 && !alsoEditEvents) {
                                             c.confirmPopup.hide();
@@ -194,7 +194,7 @@
                                     });
                             }
                             for (i = 0; i < modifiedEvents[1].length; i++) {
-                                orgResources.timeslot().update({calendarId: c.id, timeslotId: modifiedEvents[0][i]},
+                                userResources.userScheduleTimeslots.update({calendarId: c.id, timeslotId: modifiedEvents[0][i]},
                                     jQuery.param(modifiedEvents[1][i])).$promise.then(function () {
                                         if (index_one === modifiedEvents[1].length - 1) {
                                             c.confirmPopup.hide();

@@ -6,13 +6,13 @@
             controller : ['$injector', '$scope', function ($injector, $scope) {
                 this.retrieve = function (type) {
                     if(type==='org'){
-                        $injector.get('orgResources').orgInfo().get()
+                        $injector.get('orgResources').orgInfo.get()
                             .$promise.then(function(response){
                                 $scope.profileName =  response.name
                             });
                     }
                     else if(type==='user'){
-                        $injector.get('orgResources').employee().get()
+                        $injector.get('userResources').userInfo.get()
                             .$promise.then(function(response){
                                 $scope.profileName =  response.name
                             });

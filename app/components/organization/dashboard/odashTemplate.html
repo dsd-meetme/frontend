@@ -178,8 +178,9 @@
                     </div>
                     <div>
                         <p>Description</p>
-                        <input class="main_input" type="text" placeholder="Insert a description" class="search-field"
+                        <input ng-class="{error_underline : odashC.addGroup.invalidFields.descriptionReq}" class="main_input" type="text" placeholder="Insert a description" class="search-field"
                                ng-model="odashC.addGroup.desc">
+                        <p ng-show="odashC.addGroup.invalidFields.descriptionReq" class="error_msg">Insert a description</p>
                     </div>
                     <div class="search_input">
                         <i class="fa fa-search fa-lg"></i>

@@ -7,9 +7,9 @@
     <div class="navigation-right">
         <ul class="list-inline list-unstyled">
             <li class="user_section">
-                <a href="/#/user/profile">
+                <a href="/#/user/profile" profile type="user">
                     <img class="user_icon" src="assets/img/user_icon.png" alt="Your profile"/>
-                    {{udashC.userInfo.name}}
+                    {{profileName}}
                 </a>
             </li>
             <li>
@@ -108,8 +108,8 @@
                             {{$index+1}}
                         </li>
                     </ul>
-                    <h4 ng-show="udashC.meetings.toBePlanned.length === 0"
-                        class="text-center udash_empty_state_msg font_normal">Sorry, no meetings to be planned for you
+                    <h4 ng-show="udashC.meetings.managed.length === 0"
+                        class="text-center udash_empty_state_msg font_normal">Sorry, no meetings to be managed for you
                         yet!</h4>
                 </div>
             </div>

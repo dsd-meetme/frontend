@@ -10,7 +10,7 @@
         };
 
         c.getInfo = function(){
-            orgResources.orgInfo().get().$promise
+            orgResources.orgInfo.get().$promise
                 .then(function(response){
                     c.data.name = response.name;
                     c.data.email = response.email;
@@ -58,7 +58,7 @@
                 this.invalidFields.passwordMatch = c.dataCopy.password !== c.dataCopy.password_confirmation;
                 this.invalidFields.nameReq = form.name.$error.required;
                 if(!form.$invalid && !this.invalidFields.passwordMatch){
-                    if(c.dataCopy.password === '' && (c.dataCopy.name !== c.data.name)){
+                    if(c.dataCopy.password === '' && (c.dataCopy.name === c.data.name)){
                         c.editMode.exit();
                     }
                     else{
@@ -71,7 +71,7 @@
                             toSend.password = c.dataCopy.password;
                             toSend.password_confirmation = c.dataCopy.password;
                         }
-                        orgResources.employee().update(jQuery.param(toSend)).$promise
+                        orgResources.orgInfo.update(jQuery.param(toSend)).$promise
                             .then(function(){
                                 c.dataCopy.password = '';
                                 c.dataCopy.password_confirmation = '';

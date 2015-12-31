@@ -6,7 +6,7 @@
         //group id
         var id = $routeParams.id;
         var getUsers = function () {
-            orgResources.userInGroup().query({groupId: id, userId: ''}).$promise
+            orgResources.orgUserInGroup.query({groupId: id, userId: ''}).$promise
                 .then(function (response) {
                     c.data.members = response;
                 })
@@ -15,7 +15,7 @@
         //Gets user info in the context of an organization
         var getGroupInfo = function () {
             //restful show
-            orgResources.group().get({groupId: id}).$promise
+            orgResources.orgGroup.get({groupId: id}).$promise
                 .then(function (response) {
                     c.data.group.name = response.name;
                     c.data.group.description = response.description;
@@ -103,7 +103,7 @@
             //restful delete
             c.confirmPopup.message = "Deleting group";
             c.confirmPopup.show();
-            orgResources.group().remove({groupId: id}).$promise
+            orgResources.orgGroup.remove({groupId: id}).$promise
                 .then(function () {
                     c.confirmPopup.hide();
                     $location.path('/organization')
@@ -113,7 +113,7 @@
             c.confirmPopup.message = "Updating planner";
             c.confirmPopup.show();
             if (plannerId !== c.data.group.planner_id) {
-                orgResources.group().update({groupId: id}, jQuery.param(
+                orgResources.orgGroup.update({groupId: id}, jQuery.param(
                         {
                             name: c.data.group.name,
                             description: c.data.group.description,
@@ -141,7 +141,7 @@
             if (!c.invalidFields.nameReq) {
                 c.confirmPopup.message = "Saving changes";
                 c.confirmPopup.show();
-                orgResources.group().update({groupId: id}, jQuery.param(
+                orgResources.orgGroup.update({groupId: id}, jQuery.param(
                     {
                         name: c.data.groupCopy.name,
                         description: c.data.groupCopy.description,
@@ -162,7 +162,7 @@
         c.changePlanner = {
             errors : [],
             init: function () {
-                orgResources.user().query({userId: ''})
+                orgResources.orgUser.query({userId: ''})
                     .$promise.then(function (response) {
                         var modal = jQuery('#changePlanner');
                         modal.find('input').val('');
@@ -183,7 +183,7 @@
                     c.confirmPopup.message = "Saving changes";
                     c.confirmPopup.show();
                     jQuery('#changePlanner').modal('hide');
-                    orgResources.group().update({groupId: id}, jQuery.param(
+                    orgResources.orgGroup.update({groupId: id}, jQuery.param(
                             {
                                 name: c.data.group.name,
                                 description: c.data.group.description,
@@ -215,7 +215,7 @@
                 for (var i = 0; i < c.data.members.length; i++) {
                     secondUtilArray.push(c.data.members[i].id);
                 }
-                orgResources.user().query({userId: ''})
+                orgResources.orgUser.query({userId: ''})
                     .$promise.then(function (response) {
                         var modal = jQuery('#addToGroup');
                         modal.find('input').val('');
@@ -248,7 +248,7 @@
                     c.confirmPopup.message = "Adding user to group";
                     jQuery('#addToGroup').modal('hide');
                     c.confirmPopup.show();
-                    orgResources.userInGroup().save({
+                    orgResources.orgUserInGroup.save({
                         groupId: c.data.group.id,
                         userId: ''
                     }, arrayToUrlParams.process('id', validMembers)).$promise
@@ -271,7 +271,7 @@
         c.deleteFromGroup = function (userId) {
             c.confirmPopup.message = "Removing user";
             c.confirmPopup.show();
-            orgResources.userInGroup().remove({groupId: id, userId: userId}).$promise
+            orgResources.orgUserInGroup.remove({groupId: id, userId: userId}).$promise
                 .then(
                 function () {
                     c.getUsers();

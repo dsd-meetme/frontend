@@ -4,7 +4,7 @@
      @author Giorgio Pea
      @param logoutService A service used to manage the logout of a plunner's organization
      **/
-    var controller = function ($scope, dataPublisher, mixedContentToArray, orgResources, $timeout) {
+    var controller = function ($scope, dataPublisher, mixedContentToArray, userResources, plannerResources,orgResources, $timeout) {
 
         /*
          Gets the meetings relative to a given group.
@@ -77,7 +77,7 @@
         var c = this;
         var getSchedules = function () {
             var pages, processsedSchedules;
-            orgResources.calendar().query({calendarId: ''})
+            userResources.userSchedule.query({calendarId: ''})
                 .$promise.then(function (response) {
                     processedSchedules = processSchedules(response);
                     c.schedules.imported = processedSchedules.importedSchedules;
@@ -92,17 +92,15 @@
         };
         var getMeetings = function () {
             var pages;
-            orgResources.empGroups().query()
+            userResources.userGroups.query()
                 .$promise.then(function (response) {
                     c.meetings.toBePlanned = processMeetings(response);
                     pages = Math.ceil(c.meetings.toBePlanned.length / 10);
                     c.pagination.meetingsToBePlanned.pages = pages;
                     c.pagination.meetingsToBePlanned.utilArray = new Array(pages);
                 });
-            orgResources.meetingsEmp().query({meetingId: ''})
+            userResources.userPlannedMeetings.query({meetingId: ''})
                 .$promise.then(function (response) {
-                    console.log('Gotten planned meetings');
-                    console.log(response);
                     c.meetings.planned = response;
 
                 });
@@ -119,10 +117,10 @@
 
         };
         var getUserInfo = function () {
-            orgResources.employee().get()
+            console.log(userResources);
+            console.log(plannerResources);
+            userResources.userInfo.get()
                 .$promise.then(function (response) {
-                    c.userInfo.name = response.name;
-                    c.userInfo.email = response.email;
                     c.userInfo.is_planner = response.is_planner;
                     if (c.userInfo.is_planner) {
                         getManagedMeetings();
@@ -143,8 +141,6 @@
             }
         };
         c.userInfo = {
-            name: '',
-            email: '',
             is_planner: false
         };
         c.meetings = {
@@ -316,7 +312,7 @@
         c.deleteSchedule = function (id) {
             c.confirmPopup.message = 'Deleting schedule';
             c.confirmPopup.show();
-            orgResources.calendar().remove({calendarId: id})
+            userResources.userSchedule.remove({calendarId: id})
                 .$promise.then(function () {
                     getSchedules();
                     c.confirmPopup.hide();
@@ -393,7 +389,7 @@
                             calendar_name: this.data.cal_name
                         }
                     }
-                    orgResources.calendar().update({calendarId: this.data.id}, jQuery.param(configObj))
+                    userResources.userSchedule.update({calendarId: this.data.id}, jQuery.param(configObj))
                         .$promise.then(function () {
                             c.editSchedule.popUp.hide();
                             c.confirmPopup.show();
@@ -411,7 +407,7 @@
         c.deletePlannedMeeting = function (groupId, meetingId) {
             c.confirmPopup.message = 'Deleting meeting';
             c.confirmPopup.show();
-            orgResources.meetings().remove({groupId: groupId, meetingsId: meetingId}).$promise
+            plannerResources.plannerMeetings.remove({groupId: groupId, meetingId: meetingId}).$promise
                 .then(function () {
                     getMeetings();
                     getManagedMeetings();

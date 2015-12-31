@@ -1,6 +1,6 @@
 (function () {
 
-    var controller = function ($scope, $timeout, orgResources, mixedContentToArray) {
+    var controller = function ($scope, $timeout, userResources, mixedContentToArray) {
 
         var c = this;
 
@@ -20,7 +20,7 @@
         };
 
         c.getInfo = function () {
-            orgResources.employee().get().$promise
+            userResources.userInfo.get().$promise
                 .then(function (response) {
                     c.data.name = response.name;
                     c.data.email = response.email;
@@ -60,7 +60,7 @@
                 this.invalidFields.passwordMatch = c.dataCopy.password !== c.dataCopy.password_confirmation;
                 this.invalidFields.nameReq = form.name.$error.required;
                 if (!form.$invalid && !this.invalidFields.passwordMatch) {
-                    if((c.dataCopy.name !== c.data.name) && c.dataCopy.password === ''){
+                    if((c.dataCopy.name === c.data.name) && c.dataCopy.password === ''){
                         c.editMode.exit();
                     }
                     else {
@@ -73,8 +73,9 @@
                             toSend.password_confirmation = c.dataCopy.password;
                         }
                         c.confirmPopup.show();
-                        orgResources.employee().update(jQuery.param(toSend)).$promise
-                            .then(function (response) {
+                        console.log(toSend);
+                        userResources.userInfo.update(jQuery.param(toSend)).$promise
+                            .then(function () {
                                 c.dataCopy.password = '';
                                 c.dataCopy.password_confirmation = '';
                                 //Update view

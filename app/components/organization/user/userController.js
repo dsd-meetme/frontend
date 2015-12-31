@@ -27,7 +27,7 @@
         //Get user info in the context of an org
         c.getInfo = function(){
             //restful show
-            orgResources.user().get({userId:id}).$promise
+            orgResources.orgUser.get({userId:id}).$promise
                 .then(function(response){
                     console.log('responso');
                     console.log(response)
@@ -41,7 +41,7 @@
             //restful delete
             c.confirmPopup.message = 'Deleting user';
             c.confirmPopup.show();
-            orgResources.user().remove({userId:id}).$promise
+            orgResources.orgUser.remove({userId:id}).$promise
                 .then(function(response){
                         c.confirmPopup.hide();
                         $location.path('/organization');
@@ -79,8 +79,8 @@
                         toSend.password = c.dataCopy.password;
                         toSend.password_confirmation = c.dataCopy.password_confirmation;
                     }
-                    orgResources.user().update({userId: id}, jQuery.param(toSend)).$promise
-                        .then(function (response) {
+                    orgResources.orgUser.update({userId: id}, jQuery.param(toSend)).$promise
+                        .then(function () {
                             c.getInfo();
                             c.editMode.exit();
                             c.confirmPopup.hide();
@@ -95,7 +95,7 @@
             }
         };
         c.deleteFromGroup = function(id){
-            orgResources.userInGroup().remove({ groupId : id, userId : c.data.id})
+            orgResources.orgUserInGroup.remove({ groupId : id, userId : c.data.id})
                 .$promise.then(function(){
                     c.confirmPopup.message = 'Changes successfully made';
                     c.confirmPopup.show();

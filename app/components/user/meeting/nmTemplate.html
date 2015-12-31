@@ -29,7 +29,7 @@
             <div class=" section_action_bar" ng-class="{span : nmC.inputEnabled}">
                 <a href="/#/user" class="link_top"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back to dashboard</a>
                 <button ng-if="nmC.inputEnabled" class="main_button" ng-click="nmC.submit()">{{nmC.buttonText}}</button>
-                <button ng-if="nmC.inputEnabled" class="secondary_button" ng-click="cschedC.deleteSchedule()"><i
+                <button ng-if="nmC.inputEnabled" class="secondary_button" ng-click="nmC.deleteMeeting()"><i
                         class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete Meeting
                 </button>
 

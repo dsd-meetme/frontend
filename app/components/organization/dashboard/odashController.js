@@ -7,7 +7,7 @@
         var getUsers = function () {
             var pages;
             //employees restful index
-            orgResources.user().query({userId: ''}).$promise
+            orgResources.orgUser.query({userId: ''}).$promise
                 .then(function (response) {
                     c.data.users = response;
                     pages = Math.ceil(c.data.users.length / 10);
@@ -19,18 +19,12 @@
         var getGroups = function () {
             var pages;
             //employees restful groups index
-            orgResources.group().query({groupId: ''}).$promise
+            orgResources.orgGroup.query({groupId: ''}).$promise
                 .then(function (response) {
                     c.data.groups = response;
                     pages = Math.ceil(c.data.groups.length / 10);
                     c.pagination.groups.pages = pages;
                     c.pagination.groups.utilArray = new Array(pages);
-                });
-        };
-        var getOrganizationInfo = function () {
-            orgResources.orgInfo().get()
-                .$promise.then(function (response) {
-                    c.data.orgInfo = response;
                 });
         };
         c.confirmPopup = {
@@ -143,22 +137,23 @@
                 this.invalidFields.nameReq = (this.name === '');
                 this.invalidFields.membersReq = (this.members.length === 0);
                 this.invalidFields.plannerReq = (this.planner == null || angular.isUndefined(this.planner));
+                this.invalidFields.descriptionReq = this.desc === '';
 
-                validationStatus = this.invalidFields.nameReq || this.invalidFields.membersReq || this.invalidFields.plannerReq;
+                validationStatus = this.invalidFields.descriptionReq || this.invalidFields.nameReq || this.invalidFields.membersReq || this.invalidFields.plannerReq;
                 //Submits everything to the server if data is valid
                 if (!validationStatus) {
                     c.confirmPopup.message = "Adding group";
                     c.addGroup.popUp.hide();
                     c.confirmPopup.show();
                     //Updates the group name and planner
-                    orgResources.group().save({groupId: ''}, jQuery.param({
-                        name: this.name,
-                        planner_id: this.planner,
-                        description: this.desc
+                    orgResources.orgGroup.save({groupId: ''}, jQuery.param({
+                        name: c.addGroup.name,
+                        planner_id: c.addGroup.planner,
+                        description: c.addGroup.desc
                     })).$promise
                         .then(function (response) {
                             //Updates the group members
-                            orgResources.userInGroup().save({
+                            orgResources.orgUserInGroup.save({
                                 groupId: response.id,
                                 userId: ''
                             }, arrayToUrlParams.process('id', validMembers)).$promise
@@ -226,7 +221,7 @@
                     c.confirmPopup.show();
 
                     //Updates the group name and planner
-                    orgResources.user().save({userId: ''}, jQuery.param({
+                    orgResources.orgUser.save({userId: ''}, jQuery.param({
                         name: this.name,
                         email: this.email,
                         password: this.password,
@@ -245,8 +240,6 @@
                 }
             }
         };
-        //Gets the users
-        getOrganizationInfo();
         getUsers();
         getGroups();
     };
