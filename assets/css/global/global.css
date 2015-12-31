@@ -79,6 +79,12 @@ a {
   .sub_section_switcher button {
     font-size: 16px !important; } }
 
+@media (max-width: 400px) {
+  h1 {
+    font-size: 26px; }
+  h2 {
+    font-size: 20px; } }
+
 .loader {
   opacity: .3;
   display: block;
