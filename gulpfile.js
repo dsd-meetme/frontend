@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var sync = require('browser-sync');
 var concat = require('gulp-concat');
+var connect = require('gulp-connect');
 
 
 gulp.task('styles', function() {
@@ -23,6 +24,10 @@ gulp.task('concat',function(){
       .pipe(concat('controllers.js'))
       .pipe(gulp.dest('app/'));
 })
+
+gulp.task('serve', function(){
+    connect.server();
+});
 
 gulp.task('broswer-sync',function(){
   sync.init(["assets/css/**/*.css",
