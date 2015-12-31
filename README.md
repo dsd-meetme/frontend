@@ -1,6 +1,7 @@
 # frontend
 
-Build status: [![Build Status](https://travis-ci.org/dsd-meetme/frontend.svg?branch=master)](https://travis-ci.org/dsd-meetme/frontend) 
+Build status: [![Build Status](https://travis-ci.org/dsd-meetme/frontend.svg?branch=master)](https://travis-ci.org/dsd-meetme/frontend)
+Code quality: [![Code Climate](https://codeclimate.com/github/dsd-meetme/frontend/badges/gpa.svg)](https://codeclimate.com/github/dsd-meetme/frontend)
 
 This application uses angularJS
 
