@@ -17,4 +17,4 @@ This application uses angularJS
 1. This must be installed on the root of the virtual host
  
 #How to test locally
-You can run a local web server that bootstraps the application on port 8080 by typing on your terminal 'gulp serve'
+You can run a local web server that bootstraps the application on port 8080 by typing on your terminal `gulp serve`
