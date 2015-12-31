@@ -10,7 +10,11 @@ This application uses angularJS
 
 # How to install
 1. Clone the repository on your local machine
-2. If nodeJS is not installed in your local machine install it following the instructions on [nodejs.org](https://nodejs.org/)
-3. Open your terminal and go to the folder where you have cloned the repository
-4. Install all the dependencies by typing on your terminal `npm install`
-5. You can run a local web server that bootstraps the application on port 8080 by typing on your terminal 'gulp serve'
+1. Install all dependencies via [nodejs.org](https://nodejs.org/) `npm install`
+
+# How to configure
+1. Configure urls in **TODO**
+1. This must be installed on the root of the virtual host
+ 
+#How to test locally
+You can run a local web server that bootstraps the application on port 8080 by typing on your terminal 'gulp serve'
