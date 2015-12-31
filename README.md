@@ -22,3 +22,9 @@ or symply via npm
  
 #How to test locally
 You can run a local web server that bootstraps the application on port 8080 by typing on your terminal `gulp serve`
+
+#Notes
+* In real environment you should use apache2
+ 
+#Credits
+**TODO with external libraries used**
