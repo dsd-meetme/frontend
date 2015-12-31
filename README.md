@@ -10,7 +10,11 @@ This application uses angularJS
 
 # How to install
 1. Clone the repository on your local machine
-1. Install all dependencies via [nodejs.org](https://nodejs.org/) `npm install`
+1. Install all dependencies via [npm](http://npmjs.org/) `npm install` ([nodejs.org](http://nodejs.org) required)
+
+or symply via npm 
+
+
 
 # How to configure
 1. Configure urls in **TODO**
