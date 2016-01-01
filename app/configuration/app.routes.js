@@ -45,9 +45,7 @@
                     controllerAs: 'orecC'
                 }).
                 when('/',{
-                    templateUrl: 'app/components/presentation/presTemplate.html',
-                    controller: 'presController',
-                    controllerAs: 'presC'
+                    templateUrl: 'app/components/presentation/presTemplate.html'
                 }).
                 when('/organization/users/:id',{
                     templateUrl: 'app/components/organization/user/userTemplate.html',

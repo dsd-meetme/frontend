@@ -220,7 +220,7 @@
         <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div class="row sub_section_actionbar">
                 <div class="col-md-12">
-                    <button class="main_button" ng-click="udashC.importSchedule.popUp.show()">
+                    <button class="main_button" ng-click="udashC.importSchedule.popUp.show(true)">
                         <i class="fa fa-plus"></i>
                         &nbsp;&nbsp;Import Schedule
                     </button>
@@ -470,23 +470,23 @@
                                class="main_input" required name="cal_name" type="text"
                                ng-model="udashC.editSchedule.data.cal_name"/>
 
-                        <p ng-show="udashC.editSchedule.invalidFields.calnameReq" class="text-danger">Insert the
+                        <p ng-show="udashC.editSchedule.invalidFields.calnameReq" class="error_msg">Insert the
                             caldav name of the calendar</p>
                     </div>
                     <div>
                         <p>CalDav url</p>
-                        <input ng-class="{error_underline: udashC.editSchedule.invalidFields.urlReq || udashC.editSchedule.invalidFields.urlVal  }"
+                        <input ng-class="{error_underline: udashC.editSchedule.invalidFields.urlReq || udashC.editSchedule.invalidFields.urlVal}"
                                class="main_input" required name="url" type="url"
                                ng-model="udashC.editSchedule.data.url"/>
 
-                        <p ng-show="udashC.editSchedule.invalidFields.urlReq" class="text-danger">Insert a
+                        <p ng-show="udashC.editSchedule.invalidFields.urlReq" class="error_msg">Insert a
                             caldav url</p>
 
-                        <p ng-show="udashC.editSchedule.invalidFields.urlVal" class="text-danger">Insert a valid url</p>
+                        <p ng-show="udashC.editSchedule.invalidFields.urlVal" class="error_msg">Insert a valid url</p>
                     </div>
                     <div>
                         <p>CalDav username</p>
-                        <input ng-class="{error_underlined : udashC.editSchedule.data.username }" class="main_input"
+                        <input ng-class="{error_underline : udashC.editSchedule.invalidFields.usernameReq }" class="main_input"
                                required name="username" type="text"
                                ng-model="udashC.editSchedule.data.username"/>
 
@@ -496,7 +496,7 @@
                     </div>
                     <div>
                         <p>CalDav password</p>
-                        <input ng-class="{error_underlined : udashC.editSchedule.invalidFields.passwordLength}"
+                        <input ng-class="{error_underline : udashC.editSchedule.invalidFields.passwordLength}"
                                class="main_input" name="password" type="password" ng-minLength="6"
                                ng-model="udashC.editSchedule.data.password" placeholder="Your password"/>
 
@@ -505,11 +505,10 @@
                     </div>
                     <div>
                         <p>Confirm password</p>
-                        <input ng-class="{error_underlined : udashC.editSchedule.invalidFields.passwordMatch }"
+                        <input ng-class="{error_underline : udashC.editSchedule.invalidFields.passwordMatch}"
                                class="main_input" name="password_confirmation" type="password"
                                ng-model="udashC.editSchedule.password_confirmation" placeholder="Confirm password"/>
-
-                        <p ng-show="udashC.editSchedule.invalidFields.passwordMatch" class="text-danger">The two
+                        <p ng-show="udashC.editSchedule.invalidFields.passwordMatch" class="error_msg">The two
                             passwords do not match</p>
                     </div>
                     <div>

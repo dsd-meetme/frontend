@@ -1,6 +1,7 @@
 (function () {
-    var controller = function ($scope, $routeParams, $cookies, dataPublisher, mixedContentToArray) {
-        c = this;
+    var controller = function ($scope, $routeParams, dataPublisher, mixedContentToArray, configService) {
+        var apiDomain = configService.apiDomain;
+        var c = this;
         c.success = false;
         c.invalidFields = {
             emailReq: false,
@@ -9,6 +10,14 @@
             companyReq: false
         };
         c.errors = [];
+        c.confirmPopup = {
+            show: function () {
+                jQuery("#authorizationPopup").modal('show');
+            },
+            hide: function () {
+                jQuery("#authorizationPopup").modal('hide');
+            }
+        };
         c.reset = function () {
             var form = $scope.resetForm;
             c.invalidFields.emailReq = form.email.$error.required;
@@ -17,8 +26,8 @@
             c.invalidFields.company = form.company.$error.required;
             c.invalidFields.passwordReq = form.password.$error.required;
             if (!form.$invalid) {
-                jQuery('#authorizationPopup').modal('show');
-                dataPublisher.publish('http://api.plunner.com/employee/password/reset', {
+                c.confirmPopup.show();
+                dataPublisher.publish(apiDomain + '/employee/password/reset', {
                     company: c.company,
                     email: c.email,
                     password: c.password,
@@ -29,19 +38,19 @@
                         c.errors.length = 0;
                         c.success = true;
                         jQuery('input').val('');
-                        jQuery('#authorizationPopup').modal('hide');
+                        c.confirmPopup.hide();
                     },
                     function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors, true);
-                            jQuery('#authorizationPopup').modal('hide');
+                            c.confirmPopup.hide();
                         }
                     }
                 )
             }
         }
-    }
+    };
 
     var app = angular.module('Plunner');
-    app.controller('urstController', controller);
-}())
+    app.controller('urstController', ['$scope', '$routeParams', 'dataPublisher', 'mixedContentToArray', 'configService ', controller]);
+}());

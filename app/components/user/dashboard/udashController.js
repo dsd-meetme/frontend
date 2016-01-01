@@ -1,10 +1,6 @@
 (function () {
-    /**
-     An controller to manage the actions that can be accomplished by a plunner organization
-     @author Giorgio Pea
-     @param logoutService A service used to manage the logout of a plunner's organization
-     **/
-    var controller = function ($scope, dataPublisher, mixedContentToArray, userResources, plannerResources,orgResources, $timeout) {
+
+    var controller = function ($scope, dataPublisher, mixedContentToArray, userResources, plannerResources, configService) {
 
         /*
          Gets the meetings relative to a given group.
@@ -13,11 +9,10 @@
          and contains also the name of the group the meeting refers to
 
          */
+        var apiDomain = configService.apiDomain;
         var processMeetings = function (groups) {
             var meetingsContainer = [];
             var tmp;
-            console.log('Groups');
-            console.log(groups);
             for (var i = 0; i < groups.length; i++) {
                 for (var j = 0; j < groups[i].meetings.length; j++) {
                     tmp = groups[i].meetings[j];
@@ -237,10 +232,13 @@
             thereErrors: false,
             showLoader: false,
             popUp: {
-                show: function () {
+                show: function (resetInputs) {
                     var popup = jQuery('#importSchedule');
                     //this.thereErrors = false;
-                    popup.find('input').val('');
+                    if (resetInputs) {
+                        c.importSchedule.errors = [];
+                        popup.find('input').val('');
+                    }
                     popup.modal('show');
                 },
                 hide: function () {
@@ -256,11 +254,12 @@
                 this.invalidFields.passwordRequired = form.password.$error.required;
                 this.thereErrors = form.$invalid;
                 if (!this.thereErrors) {
+                    this.errors = [];
                     this.credentials.url = this.url;
                     this.credentials.username = this.username;
                     this.credentials.password = this.password;
                     this.showLoader = true;
-                    dataPublisher.publish("http://api.plunner.com/employees/calendars/calendars", {
+                    dataPublisher.publish(apiDomain + '/employees/calendars/calendars', {
                         url: this.url,
                         username: this.username,
                         password: this.password
@@ -289,7 +288,7 @@
                     c.confirmPopup.show();
                     var selectedCalendars = getSelectedSchedules(this.calendars);
                     for (var i = 0; i < selectedCalendars.length; i++) {
-                        dataPublisher.publish('http://api.plunner.com/employees/calendars/caldav', {
+                        dataPublisher.publish(apiDomain + '/employees/calendars/caldav', {
                             name: selectedCalendars[i],
                             url: this.credentials.url,
                             username: this.credentials.username,
@@ -302,6 +301,8 @@
                         }, function (response) {
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.importSchedule.errors, true);
+                                c.confirmPopup.hide();
+                                c.importSchedule.popUp.show();
                             }
                         })
                     }
@@ -334,17 +335,22 @@
                 url: '',
                 enabled: 0,
                 calendar_name: '',
-                password: '',
+                password: ''
             },
+            currentIndex: -1,
             popUp: {
-                show: function (index) {
+                show: function (index, showErrors) {
                     var popup = jQuery('#editSchedule');
+                    if (!showErrors) {
+                        c.editSchedule.errors = [];
+                    }
                     c.editSchedule.data.id = c.schedules.imported[index].id;
                     c.editSchedule.data.name = c.schedules.imported[index].name;
                     c.editSchedule.data.username = c.schedules.imported[index].caldav.username;
                     c.editSchedule.data.url = c.schedules.imported[index].caldav.url;
                     c.editSchedule.data.enabled = c.schedules.imported[index].enabled;
                     c.editSchedule.data.cal_name = c.schedules.imported[index].caldav.calendar_name;
+                    c.editSchedule.currentIndex = index;
                     popup.modal('show');
                 },
                 hide: function () {
@@ -357,13 +363,19 @@
                 this.invalidFields.urlReq = form.url.$error.required;
                 this.invalidFields.urlVal = form.url.$error.url;
                 this.invalidFields.usernameReq = form.username.$error.required;
+                this.invalidFields.calnameReq = form.cal_name.$error.required;
                 this.invalidFields.passwordLength = form.password.$error.minlength;
-                this.invalidFields.passwordMatch = (this.data.password !== this.confirmation_password);
+                if(this.data.password !== '' && !angular.isUndefined(this.password_confirmation)){
+                    this.invalidFields.passwordMatch = (this.data.password !== this.password_confirmation);
+                }
                 this.thereErrors = form.$invalid || this.invalidFields.passwordMatch;
 
                 if (!this.thereErrors) {
                     c.confirmPopup.message = 'Saving changes!';
+                    c.editSchedule.popUp.hide();
+                    c.confirmPopup.show();
                     var configObj, enabled;
+                    console.log(this.data.enabled);
                     if (this.data.enabled === true) {
                         enabled = '1';
                     }
@@ -391,14 +403,14 @@
                     }
                     userResources.userSchedule.update({calendarId: this.data.id}, jQuery.param(configObj))
                         .$promise.then(function () {
-                            c.editSchedule.popUp.hide();
-                            c.confirmPopup.show();
                             getSchedules();
                             c.confirmPopup.hide();
 
                         }, function (response) {
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.editSchedule.errors, true);
+                                c.confirmPopup.hide();
+                                c.editSchedule.popUp.show(c.editSchedule.currentIndex, true);
                             }
                         })
                 }
@@ -420,5 +432,5 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('udashController', controller);
+    app.controller('udashController', ['$scope', 'dataPublisher', 'mixedContentToArray', 'userResources', 'plannerResources', 'configService', controller]);
 }());

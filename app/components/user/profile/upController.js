@@ -1,6 +1,6 @@
 (function () {
 
-    var controller = function ($scope, $timeout, userResources, mixedContentToArray) {
+    var controller = function ($scope, userResources, mixedContentToArray) {
 
         var c = this;
 
@@ -60,20 +60,19 @@
                 this.invalidFields.passwordMatch = c.dataCopy.password !== c.dataCopy.password_confirmation;
                 this.invalidFields.nameReq = form.name.$error.required;
                 if (!form.$invalid && !this.invalidFields.passwordMatch) {
-                    if((c.dataCopy.name === c.data.name) && c.dataCopy.password === ''){
+                    if ((c.dataCopy.name === c.data.name) && c.dataCopy.password === '') {
                         c.editMode.exit();
                     }
                     else {
                         toSend = {
-                            name : c.dataCopy.name,
-                            email : c.data.name,
+                            name: c.dataCopy.name,
+                            email: c.data.name
                         };
-                        if(c.dataCopy.password !== ''){
+                        if (c.dataCopy.password !== '') {
                             toSend.password = c.dataCopy.password;
                             toSend.password_confirmation = c.dataCopy.password;
                         }
                         c.confirmPopup.show();
-                        console.log(toSend);
                         userResources.userInfo.update(jQuery.param(toSend)).$promise
                             .then(function () {
                                 c.dataCopy.password = '';
@@ -100,6 +99,6 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('upController', controller);
+    app.controller('upController', ['$scope', 'userResources', 'mixedContentToArray', controller]);
 
 }());

@@ -1,6 +1,6 @@
 (function () {
 
-    var controller = function (orgResources, userResources, plannerResources, $timeout, mixedContentToArray, $scope, $location, $routeParams) {
+    var controller = function (userResources, plannerResources, mixedContentToArray, $scope, $location, $routeParams) {
         var mode = 'c';
         var changedEvents = [];
         var calendar;
@@ -287,13 +287,19 @@
                                         }
                                         index++;
                                     }, function (response) {
-                                        mixedContentToArray.process(response.data, c.errors, true);
-                                        c.confirmPopup.hide();
+                                        if (response.status === 422) {
+                                            mixedContentToArray.process(response.data, c.errors, true);
+                                            c.confirmPopup.hide();
+                                        }
+
                                     })
                             }
                         }, function (response) {
-                            mixedContentToArray.process(response.data, c.errors, true);
-                            c.confirmPopup.hide();
+                            if (response.status === 422) {
+                                mixedContentToArray.process(response.data, c.errors, true);
+                                c.confirmPopup.hide();
+                            }
+
                         })
                 }
                 else {
@@ -383,5 +389,5 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('nmController', controller);
+    app.controller('nmController', ['userResources', 'plannerResources', 'mixedContentToArray', '$scope', '$location', '$routeParams', controller]);
 }());

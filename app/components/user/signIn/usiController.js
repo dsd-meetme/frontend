@@ -1,18 +1,13 @@
 (function () {
-    /**
-     A controller for managing the login of Users and Administrators in the context
-     of a plunner organization
-     @author Giorgio Pea
-     @param loginService A service that is used to manage the login of a plunner's organization
-     @param dataPublisher A service that is used to perform a http post request
-     **/
-    var controller = function ($rootScope, $scope, $location, dataPublisher, mixedContentToArray) {
+
+    var controller = function ($scope, $location, dataPublisher, mixedContentToArray, configService) {
+        var apiDomain = configService.apiDomain;
         var c = this;
         var authorizationPopup = {
-            show : function(){
+            show: function () {
                 jQuery('#authorizationPopup').modal('show')
             },
-            hide : function(){
+            hide: function () {
                 jQuery('#authorizationPopup').modal('hide')
             }
         };
@@ -34,14 +29,14 @@
             c.invalidFields.emailVal = form.email.$error.email;
             c.invalidFields.nameReq = form.name.$error.required;
             if (!form.$invalid) {
-                if(c.rmbMe === 'true'){
+                if (c.rmbMe === 'true') {
                     remember = '1'
                 }
-                else{
+                else {
                     remember = '0'
                 }
                 authorizationPopup.show();
-                dataPublisher.publish('http://api.plunner.com/employees/auth/login', {
+                dataPublisher.publish(apiDomain + '/employees/auth/login', {
                     company: c.name,
                     email: c.email,
                     password: c.password,
@@ -50,9 +45,9 @@
                     authorizationPopup.hide();
                     $location.path('/user')
                 }, function (response) {
-                    authorizationPopup.hide();
                     if (response.status === 422) {
                         mixedContentToArray.process(response.data, c.errors, true);
+                        authorizationPopup.hide();
                     }
                 });
             }
@@ -60,5 +55,5 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('usiController', controller);
+    app.controller('usiController', ['$scope', '$location', 'dataPublisher', 'mixedContentToArray', 'configService', controller]);
 }());

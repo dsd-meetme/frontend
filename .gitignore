@@ -116,7 +116,9 @@ coverage.xml
 node_modules/
 npm-debug.log
 public/css
-assets/css
+assets/css/global.css
+assets/css/organization.css
+assets/css/user.css
 
 ### laravel ide helper ###
 .phpstorm.meta.php
