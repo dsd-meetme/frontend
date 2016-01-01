@@ -32,8 +32,8 @@ compiled and put together as soon as you make a changes
 * In real environment you should use apache2
  
 #Credits
-[AngularJS](https://angularjs.org/)
-[Bootstrap](http://getbootstrap.com/)
-[FullCalendar](http://fullcalendar.io/)
-[jwt-decode](https://www.npmjs.com/package/jwt-decode)
+* [AngularJS](https://angularjs.org/)
+* [Bootstrap](http://getbootstrap.com/)
+* [FullCalendar](http://fullcalendar.io/)
+* [jwt-decode](https://www.npmjs.com/package/jwt-decode)
 
