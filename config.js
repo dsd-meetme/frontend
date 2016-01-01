@@ -1,6 +1,7 @@
 (function(){
 
     var service = function(){
+        //INSERT HERE THE URL OF YOUR APIS
         var apiDomain = 'http://api.plunner.com';
 
         return {

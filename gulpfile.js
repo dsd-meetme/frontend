@@ -3,7 +3,6 @@ var sass = require('gulp-sass');
 var sync = require('browser-sync');
 var concat = require('gulp-concat');
 var connect = require('gulp-connect');
-var uglify = require('gulp-uglify');
 
 
 gulp.task('sass_compile_org', function () {
@@ -60,12 +59,8 @@ gulp.task('concat_configuration', function () {
 });
 gulp.task('concat', ['concat_configuration', 'concat_services_directives', 'concat_controllers_organization', 'concat_controllers_user']);
 
-gulp.task('minifyJS', ['concat'], function () {
-    return gulp.src('app/*.js')
-        .pipe(uglify())
-        .pipe(gulp.dest('app/temp'));
-});
-gulp.task('production', ['sass_compile','concat', 'minifyJS']);
+
+gulp.task('production', ['sass_compile','concat']);
 
 
 gulp.task('dev', ['watch', 'broswer-sync', 'sass_compile', 'concat']);

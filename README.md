@@ -10,21 +10,30 @@ This application uses angularJS
 
 # How to install
 1. Clone the repository on your local machine
-1. Install all dependencies via [npm](http://npmjs.org/) `npm install` ([nodejs.org](http://nodejs.org) required)
+2. Install all dependencies via [npm](http://npmjs.org/) `npm install` ([nodejs.org](http://nodejs.org) required)
+3. Bootstrap the application via `gulp production`
 
 or symply via npm 
 
 **TODO**
 
+and bootstrap the application via `gulp production`
+
 # How to configure
-1. Configure urls in **TODO**
-1. This must be installed on the root of the virtual host
+1. Configure Plunner's frontend with your api domain in the `config.js` file
+1. Plunner's frontend must be installed on the root of the virtual host
  
 #How to test locally
-You can run a local web server that bootstraps the application on port 8080 by typing on your terminal `gulp serve`
+You can run a local web server that bootstraps the application on port 3000 by typing on your terminal `gulp dev`;
+this procedure will also fire a listener of changes so that all the sass files and the single js modules are
+compiled and put together as soon as you make a changes
 
 #Notes
 * In real environment you should use apache2
  
 #Credits
-**TODO with external libraries used**
+[AngularJS](https://angularjs.org/)
+[Bootstrap](http://getbootstrap.com/)
+[FullCalendar](http://fullcalendar.io/)
+[jwt-decode](https://www.npmjs.com/package/jwt-decode)
+
