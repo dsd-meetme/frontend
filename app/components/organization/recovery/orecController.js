@@ -1,15 +1,22 @@
 (function () {
-    /**
-     A controller that  manages the registration of an organization
-     @param dataPublisher A service used to perform an http post request
-     **/
-    var controller = function ($scope, dataPublisher, mixedContentToArray) {
+
+    var controller = function ($scope, dataPublisher, mixedContentToArray, configService) {
+
+        var apiDomain = configService.apiDomain;
         var c = this;
         c.errors = [];
         c.success = false;
         c.invalidFields = {
             emailReq: false,
             emailVal: false
+        };
+        c.confirmPopup = {
+            show: function () {
+                jQuery("#authorizationPopup").modal('show');
+            },
+            hide: function () {
+                jQuery("#authorizationPopup").modal('hide');
+            }
         };
         c.recover = function () {
             var form = $scope.recoveryForm;
@@ -18,23 +25,23 @@
             c.invalidFields.emailVal = form.email.$error.email;
             //Submits
             if (!form.$invalid) {
-                jQuery("#authorizationPopup").modal('show');
-                dataPublisher.publish('http://api.plunner.com/companies/password/email', {email: c.email})
+                c.confirmPopup.show();
+                dataPublisher.publish(apiDomain + '/companies/password/email', {email: c.email})
                     .then(function () {
-                        c.errors.length = 0;
+                        c.errors = [];
                         //clears the form fields
                         jQuery('input').val('');
                         c.success = true;
-                        jQuery("#authorizationPopup").modal('hide');
+                        c.confirmPopup.hide();
                     }, function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors, true);
-                            jQuery("#authorizationPopup").modal('hide');
+                            c.confirmPopup.hide();
                         }
                     });
             }
         }
     };
     var app = angular.module('Plunner');
-    app.controller('orecController', controller);
+    app.controller('orecController', ['$scope', 'dataPublisher', 'mixedContentToArray', 'configService', controller]);
 }());

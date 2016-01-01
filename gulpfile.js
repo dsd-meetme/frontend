@@ -23,7 +23,7 @@ gulp.task('concat',function(){
   return gulp.src('app/components/*/*/*.js')
       .pipe(concat('controllers.js'))
       .pipe(gulp.dest('app/'));
-})
+});
 
 gulp.task('serve', function(){
     connect.server();

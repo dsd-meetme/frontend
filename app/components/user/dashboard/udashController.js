@@ -107,7 +107,7 @@
         };
         var getManagedMeetings = function () {
             var pages;
-            orgResources.managedMeetings().query()
+            plannerResources.plannerManagedMeetings.query()
                 .$promise.then(function (response) {
                     c.meetings.managed = processMeetings(response);
                     pages = Math.ceil(c.meetings.managed.length / 10);

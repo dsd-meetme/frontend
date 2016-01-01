@@ -1,28 +1,28 @@
-(function() {
+(function () {
 
-    var controller = function ($scope,$timeout,orgResources,mixedContentToArray) {
+    var controller = function ($scope, orgResources, mixedContentToArray) {
 
         var c = this;
 
         c.data = {
-            name : '',
-            email : ''
+            name: '',
+            email: ''
         };
 
-        c.getInfo = function(){
+        var getInfo = function () {
             orgResources.orgInfo.get().$promise
-                .then(function(response){
+                .then(function (response) {
                     c.data.name = response.name;
                     c.data.email = response.email;
                     c.dataCopy.name = response.name;
                 });
         };
         c.confirmPopup = {
-            message : '',
-            show : function(){
+            message: '',
+            show: function () {
                 jQuery('#authorizationPopup').modal('show');
             },
-            hide : function(){
+            hide: function () {
                 jQuery('#authorizationPopup').modal('hide');
             }
         };
@@ -42,45 +42,45 @@
             }
         };
         c.dataCopy = {
-            password : '',
-            password_confirmation : ''
+            password: '',
+            password_confirmation: ''
         };
         c.update = {
-            invalidFields : {
-                passwordLength : false,
-                passwordMatch : false
+            invalidFields: {
+                passwordLength: false,
+                passwordMatch: false
             },
-            errors : [],
-            submit : function(){
+            errors: [],
+            submit: function () {
                 var toSend;
                 var form = $scope.opC_profile_form;
                 this.invalidFields.passwordLength = form.password.$error.minlength;
                 this.invalidFields.passwordMatch = c.dataCopy.password !== c.dataCopy.password_confirmation;
                 this.invalidFields.nameReq = form.name.$error.required;
-                if(!form.$invalid && !this.invalidFields.passwordMatch){
-                    if(c.dataCopy.password === '' && (c.dataCopy.name === c.data.name)){
+                if (!form.$invalid && !this.invalidFields.passwordMatch) {
+                    if (c.dataCopy.password === '' && (c.dataCopy.name === c.data.name)) {
                         c.editMode.exit();
                     }
-                    else{
+                    else {
                         c.confirmPopup.show();
                         toSend = {
-                            name : c.dataCopy.name,
-                            email : c.data.email
+                            name: c.dataCopy.name,
+                            email: c.data.email
                         };
-                        if(c.dataCopy.password !== ''){
+                        if (c.dataCopy.password !== '') {
                             toSend.password = c.dataCopy.password;
                             toSend.password_confirmation = c.dataCopy.password;
                         }
                         orgResources.orgInfo.update(jQuery.param(toSend)).$promise
-                            .then(function(){
+                            .then(function () {
                                 c.dataCopy.password = '';
                                 c.dataCopy.password_confirmation = '';
                                 //Update view
-                                c.getInfo();
+                                getInfo();
                                 c.editMode.exit();
                                 c.confirmPopup.hide();
-                            },function(response){
-                                if(response.status === 422){
+                            }, function (response) {
+                                if (response.status === 422) {
                                     mixedContentToArray.process(response.data, c.update.errors, true);
                                     c.confirmPopup.hide();
                                 }
@@ -90,10 +90,10 @@
             }
 
         };
-        c.getInfo();
+        getInfo();
     };
 
     var app = angular.module('Plunner');
-    app.controller('opController', controller);
+    app.controller('opController', ['$scope', 'orgResources', 'mixedContentToArray', controller]);
 
 }());

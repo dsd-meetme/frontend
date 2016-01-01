@@ -1,6 +1,6 @@
 (function () {
 
-    var controller = function ($scope, logoutService, orgResources, arrayToUrlParams, $cookies, $timeout, mixedContentToArray) {
+    var controller = function ($scope, orgResources, arrayToUrlParams, mixedContentToArray) {
 
         var c = this;
 
@@ -105,7 +105,6 @@
         c.addGroup = {
             planner: null,
             members: [],
-            thereErrors: false,
             name: '',
             desc: '',
             errors: [],
@@ -115,9 +114,12 @@
                 membersReq: false
             },
             popUp: {
-                show: function () {
+                show: function (resetInputs) {
                     var popup = jQuery('#addGroup');
-                    popup.find('input').val('').removeAttr('checked');
+                    if (resetInputs) {
+                        c.addGroup.errors = [];
+                        popup.find('input').val('').removeAttr('checked');
+                    }
                     popup.modal('show');
                 },
                 hide: function () {
@@ -165,6 +167,7 @@
                                     if (response.status === 422) {
                                         mixedContentToArray.process(response.data, c.addGroup.errors, true);
                                         c.confirmPopup.hide();
+                                        c.addGroup.popUp.show();
                                     }
                                 })
                         },
@@ -173,6 +176,7 @@
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.addGroup.errors, true);
                                 c.confirmPopup.hide();
+                                c.addGroup.popUp.show();
                             }
                         });
                 }
@@ -194,9 +198,12 @@
                 emailVal: false
             },
             popUp: {
-                show: function () {
+                show: function (resetInputs) {
                     var popup = jQuery('#addUser');
-                    popup.find('input').val('').removeAttr('checked');
+                    if (resetInputs) {
+                        c.addUser.errors = [];
+                        popup.find('input').val('').removeAttr('checked');
+                    }
                     popup.modal('show');
                 },
                 hide: function () {
@@ -235,6 +242,7 @@
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.addUser.errors, true);
                                 c.confirmPopup.hide();
+                                c.addUser.popUp.show();
                             }
                         });
                 }
@@ -245,5 +253,5 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('odashController', controller);
+    app.controller('odashController', ['$scope', 'orgResources', 'arrayToUrlParams', 'mixedContentToArray', controller]);
 }());

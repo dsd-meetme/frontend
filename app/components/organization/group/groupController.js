@@ -1,6 +1,6 @@
 (function () {
-    
-    var controller = function ($routeParams, $location, $timeout, mixedContentToArray, orgResources, arrayToUrlParams) {
+
+    var controller = function ($routeParams, $location, mixedContentToArray, orgResources, arrayToUrlParams) {
 
         var c = this;
         //group id
@@ -160,29 +160,47 @@
             }
         };
         c.changePlanner = {
-            errors : [],
-            init: function () {
-                orgResources.orgUser.query({userId: ''})
-                    .$promise.then(function (response) {
-                        var modal = jQuery('#changePlanner');
-                        modal.find('input').val('');
-                        var pages;
-                        c.allUsers = response;
-                        pages = Math.ceil(c.allUsers.length / 10);
-                        c.pagination.user.pages = pages;
-                        c.pagination.user.utilArray = new Array(pages);
-                        modal.modal('show');
-                        c.editMode.exit();
-                    })
+            errors: [],
+            popUp: {
+                show: function (resetInputs) {
+                    var popup = jQuery('#changePlanner');
+                    if (resetInputs) {
+                        c.changePlanner.errors = [];
+                        popup.find('input').val('');
+                    }
+                    popup.modal('show')
+                },
+                hide: function () {
+                    jQuery('#changePlanner').modal('hide');
+                }
+            },
+            init: function (resetInputs) {
+                if (c.allUsers.length === 0) {
+                    orgResources.orgUser.query({userId: ''})
+                        .$promise.then(function (response) {
+                            var pages;
+                            c.allUsers = response;
+                            pages = Math.ceil(c.allUsers.length / 10);
+                            c.pagination.user.pages = pages;
+                            c.pagination.user.utilArray = new Array(pages);
+                            c.changePlanner.popUp.show(true);
+                            c.editMode.exit();
+                        })
+                }
+                else {
+                    c.changePlanner.popUp.show(true);
+                }
+
             },
             change: function () {
-                if(!this.planner_id){
+                if (!this.planner_id) {
                     this.errors.push('Select a user to be planner');
                 }
                 else if (this.plannerId !== c.data.group.planner_id) {
                     c.confirmPopup.message = "Saving changes";
+                    c.changePlanner.popUp.hide();
                     c.confirmPopup.show();
-                    jQuery('#changePlanner').modal('hide');
+
                     orgResources.orgGroup.update({groupId: id}, jQuery.param(
                             {
                                 name: c.data.group.name,
@@ -199,6 +217,7 @@
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.errors.planner, true);
                                 c.confirmPopup.hide();
+                                c.changePlanner.popUp.show();
                             }
                         });
                 }
@@ -206,47 +225,63 @@
 
         };
         c.addToGroup = {
-            errors : [],
+            errors: [],
             members: [],
             validMembers: [],
+            popUp: {
+                show: function (resetInputs) {
+                    var popup = jQuery('#addToGroup');
+                    if (resetInputs) {
+                        c.changePlanner.errors = [];
+                        popup.find('input').val('');
+                    }
+                    popup.modal('show')
+                },
+                hide: function () {
+                    jQuery('#addToGroup').modal('hide');
+                }
+            },
             init: function () {
                 var utilArray = [];
                 var secondUtilArray = [];
-                for (var i = 0; i < c.data.members.length; i++) {
-                    secondUtilArray.push(c.data.members[i].id);
-                }
-                orgResources.orgUser.query({userId: ''})
-                    .$promise.then(function (response) {
-                        var modal = jQuery('#addToGroup');
-                        modal.find('input').val('');
-                        var pages;
-                        for (var j = 0; j < response.length; j++) {
-                            if (secondUtilArray.indexOf(response[j].id) === -1) {
-                                utilArray.push(response[j]);
+                if (c.allUsers.length === 0) {
+                    for (var i = 0; i < c.data.members.length; i++) {
+                        secondUtilArray.push(c.data.members[i].id);
+                    }
+                    orgResources.orgUser.query({userId: ''})
+                        .$promise.then(function (response) {
+                            var pages;
+                            for (var j = 0; j < response.length; j++) {
+                                if (secondUtilArray.indexOf(response[j].id) === -1) {
+                                    utilArray.push(response[j]);
+                                }
                             }
-                        }
-                        c.allUsers = utilArray;
-                        pages = Math.ceil(c.allUsers.length / 10);
-                        c.pagination.user.pages = pages;
-                        c.pagination.user.utilArray = new Array(pages);
-                        modal.modal('show');
-                        c.editMode.exit();
-                    })
+                            c.allUsers = utilArray;
+                            pages = Math.ceil(c.allUsers.length / 10);
+                            c.pagination.user.pages = pages;
+                            c.pagination.user.utilArray = new Array(pages);
+                            c.addToGroup.popUp.show(true);
+                            c.editMode.exit();
+                        })
+                }
+                else {
+                    c.addToGroup.popUp.show(true);
+                }
+
             },
             change: function () {
-
                 var validMembers = [];
                 angular.forEach(this.members, function (value, key) {
                     if (value === true) {
                         validMembers.push(key.toString());
                     }
                 });
-                if(validMembers.length === 0){
+                if (validMembers.length === 0) {
                     this.errors.push("Select at least one user");
                 }
-                else{
+                else {
                     c.confirmPopup.message = "Adding user to group";
-                    jQuery('#addToGroup').modal('hide');
+                    c.addToGroup.popUp.hide();
                     c.confirmPopup.show();
                     orgResources.orgUserInGroup.save({
                         groupId: c.data.group.id,
@@ -262,6 +297,7 @@
                             if (response.status === 422) {
                                 mixedContentToArray.process(response.data, c.errors.planner, true);
                                 c.confirmPopup.hide();
+                                c.addToGroup.popUp.show();
                             }
                         })
                 }
@@ -274,7 +310,7 @@
             orgResources.orgUserInGroup.remove({groupId: id, userId: userId}).$promise
                 .then(
                 function () {
-                    c.getUsers();
+                    getUsers();
                     c.editMode.exit();
                     c.confirmPopup.hide();
                 }
@@ -286,5 +322,5 @@
 
     };
     var app = angular.module('Plunner');
-    app.controller('groupController', controller);
+    app.controller('groupController', ['$routeParams', '$location', 'mixedContentToArray', 'orgResources', 'arrayToUrlParams', controller]);
 }());

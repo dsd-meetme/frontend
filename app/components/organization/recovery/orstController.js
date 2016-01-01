@@ -1,10 +1,9 @@
 (function () {
-    /**
-     A controller for managing the set of a new password for an organization and the
-     reset of the previous one
-     @param dataPublisher A service used to perform an http post request
-     **/
-    var controller = function ($scope, $routeParams, $location, $timeout, mixedContentToArray) {
+
+
+    var controller = function ($scope, $routeParams, $location, mixedContentToArray, configService, dataPublisher) {
+
+        var apiDomain = configService.apiDomain;
         var c = this;
         c.errors = [];
         c.invalidFields = {
@@ -12,6 +11,14 @@
             passwordLength: false,
             emailVal: false,
             passwordReq: false
+        };
+        c.confirmPopup = {
+            show: function () {
+                jQuery('authorizationPopup').modal('show');
+            },
+            hide: function () {
+                jQuery('authorizationPopup').modal('hide');
+            }
         };
         c.reset = function () {
             var form = $scope.resetForm;
@@ -22,21 +29,21 @@
             c.invalidFields.passwordReq = form.password.$error.required;
             //Submits
             if (!form.$invalid) {
-                jQuery("#authorizationPopup").modal('show');
-                dataPublisher.publish('http://api.plunner.com/companies/password/reset', {
+                c.confirmPopup.show();
+                dataPublisher.publish(apiDomain + '/companies/password/reset', {
                     email: c.email,
                     password: c.password,
                     password_confirmation: c.password,
                     token: $routeParams.token
                 }).then(
                     function () {
-                        jQuery("#authorizationPopup").modal('hide');
+                        c.confirmPopup.hide();
                         $location.path('/presentation');
                     },
                     function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors, true);
-                            jQuery("#authorizationPopup").modal('hide');
+                            c.confirmPopup.hide();
                         }
                     }
                 )
@@ -45,5 +52,5 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('orstController', controller);
+    app.controller('orstController', ['$scope', '$routeParams', '$location', 'mixedContentToArray', 'configService', 'dataPublisher', controller]);
 }());

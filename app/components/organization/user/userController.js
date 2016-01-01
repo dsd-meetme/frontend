@@ -1,55 +1,49 @@
-(function(){
-    /**
-     A controller that manage existing users inside an organization
-     @param orgResources A service that provides objects that incapsulate restful communication
-     logic
-     **/
-    var controller = function($scope,$routeParams,$location,$timeout,mixedContentToArray,orgResources){
+(function () {
+
+    var controller = function ($scope, $routeParams, $location, mixedContentToArray, orgResources) {
         var c = this;
         //user id
         var id = $routeParams.id;
-        var emptyInvalidFields = function(invalidFields){
-            for(key in invalidFields){
+        var emptyInvalidFields = function (invalidFields) {
+            for (var key in invalidFields) {
                 invalidFields[key] = false;
             }
         };
         c.data = {};
         c.dataCopy = {};
         c.confirmPopup = {
-            message : '',
-            show : function(){
+            message: '',
+            show: function () {
                 jQuery('#authorizationPopup').modal('show');
             },
-            hide : function(){
+            hide: function () {
                 jQuery('#authorizationPopup').modal('hide');
             }
         };
         //Get user info in the context of an org
-        c.getInfo = function(){
+        var getInfo = function () {
             //restful show
-            orgResources.orgUser.get({userId:id}).$promise
-                .then(function(response){
-                    console.log('responso');
-                    console.log(response)
+            orgResources.orgUser.get({userId: id}).$promise
+                .then(function (response) {
                     c.data = response;
                     c.dataCopy.name = c.data.name;
                     c.dataCopy.email = c.data.email;
                 });
         };
         //Delete an user in the context of an org
-        c.delete = function(){
+        c.delete = function () {
             //restful delete
             c.confirmPopup.message = 'Deleting user';
             c.confirmPopup.show();
-            orgResources.orgUser.remove({userId:id}).$promise
-                .then(function(response){
-                        c.confirmPopup.hide();
-                        $location.path('/organization');
+            orgResources.orgUser.remove({userId: id}).$promise
+                .then(function () {
+                    c.confirmPopup.hide();
+                    $location.path('/organization');
 
                 });
         };
         c.update = {
-            thereErrors : false,
+            thereErrors: false,
             invalidFields: {
                 passwordLength: false,
                 passwordMatch: false,
@@ -74,14 +68,13 @@
                     c.confirmPopup.show();
                     toSend.name = c.dataCopy.name;
                     toSend.email = c.dataCopy.email;
-                    console.log(c.dataCopy);
-                    if(c.dataCopy.password){
+                    if (c.dataCopy.password) {
                         toSend.password = c.dataCopy.password;
                         toSend.password_confirmation = c.dataCopy.password_confirmation;
                     }
                     orgResources.orgUser.update({userId: id}, jQuery.param(toSend)).$promise
                         .then(function () {
-                            c.getInfo();
+                            getInfo();
                             c.editMode.exit();
                             c.confirmPopup.hide();
                         }, function (response) {
@@ -94,24 +87,21 @@
 
             }
         };
-        c.deleteFromGroup = function(id){
-            orgResources.orgUserInGroup.remove({ groupId : id, userId : c.data.id})
-                .$promise.then(function(){
-                    c.confirmPopup.message = 'Changes successfully made';
-                    c.confirmPopup.show();
-                    $timeout(function () {
-                        c.confirmPopup.hide();
-                    }, 2000);
-                    c.getInfo();
+        c.deleteFromGroup = function (id) {
+            c.confirmPopup.message = 'Removing user from group';
+            c.confirmPopup.show();
+            orgResources.orgUserInGroup.remove({groupId: id, userId: c.data.id})
+                .$promise.then(function () {
                     c.editMode.exit();
+                    c.confirmPopup.hide();
                 })
         };
         c.editMode = {
-            flag : false,
-            enter : function(){
+            flag: false,
+            enter: function () {
                 this.flag = true;
             },
-            exit : function(){
+            exit: function () {
                 this.flag = false;
                 c.dataCopy.name = c.data.name;
                 c.dataCopy.email = c.data.email;
@@ -121,10 +111,10 @@
                 emptyInvalidFields(c.update.invalidFields);
             }
         };
-        c.getInfo();
+        getInfo();
     };
 
 
     var app = angular.module('Plunner');
-    app.controller('userController',controller);
+    app.controller('userController', ['$scope', '$routeParams', '$location', 'mixedContentToArray', 'orgResources', controller]);
 }());

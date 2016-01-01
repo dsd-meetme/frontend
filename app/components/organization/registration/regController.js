@@ -1,9 +1,6 @@
 (function () {
-    /**
-     A controller that manages a plunner's organization registration
-     @param regService A service used to perform the actual plunner's organization registration
-     **/
-    var controller = function ($scope, $location, dataPublisher, mixedContentToArray) {
+    var controller = function ($scope, $location, dataPublisher, mixedContentToArray, configService) {
+        var apiDomain = configService.apiDomain;
         var c = this;
         //In case of account already registered, sets a property to true so that
         //an error can be displayed on the view
@@ -17,6 +14,14 @@
             passwordMatch: false,
             passwordLength: false
         };
+        c.confirmPopup = {
+            show: function () {
+                jQuery("#authorizationPopup").modal('show');
+            },
+            hide: function () {
+                jQuery("#authorizationPopup").modal('hide');
+            }
+        }
         //Processes the submit of dsiForm (domain sign in)
         c.process = function () {
             var form = $scope.regForm;
@@ -29,8 +34,8 @@
             c.invalidFields.passwordMatch = (form.password.$modelValue !== form.passwordC.$modelValue);
 
             if (!form.$invalid && !c.invalidFields.passwordMatch) {
-                jQuery("#authorizationPopup").modal('show');
-                dataPublisher.publish('http://api.plunner.com/companies/auth/register', {
+                c.confirmPopup.show();
+                dataPublisher.publish(apiDomain + '/companies/auth/register', {
                     name: c.name,
                     email: c.email,
                     password: c.password,
@@ -38,13 +43,13 @@
                 })
                     .then(
                     function () {
-                        jQuery("#authorizationPopup").modal('hide');
+                        c.confirmPopup.hide();
                         $location.path('/organization');
                     },
                     function (response) {
                         if (response.status === 422) {
                             mixedContentToArray.process(response.data, c.errors, true);
-                            jQuery("#authorizationPopup").modal('hide');
+                            c.confirmPopup.hide();
                         }
                     }
                 );
@@ -52,5 +57,5 @@
         }
     };
     var app = angular.module('Plunner');
-    app.controller('regController', controller);
+    app.controller('regController', ['$scope', '$location', 'dataPublisher', 'mixedContentToArray', 'configService', controller]);
 }());

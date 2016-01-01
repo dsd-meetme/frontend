@@ -23,6 +23,9 @@
   .signUp button:hover {
     background-color: #0c80df; }
 
+.signUp .error_tile {
+  margin-bottom: 5px; }
+
 .odash #addGroup .modal-body > div, .odash #addUser .modal-body > div {
   margin-bottom: 25px; }
   .odash #addGroup .modal-body > div p, .odash #addUser .modal-body > div p {

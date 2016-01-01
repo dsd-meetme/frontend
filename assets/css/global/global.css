@@ -9,13 +9,17 @@
   font-weight: 500 !important; }
 
 body {
-  font-family: "Roboto", "Helvetica", Arial, sans-serif; }
+  font-family: "Roboto", "Helvetica", Arial, sans-serif;
+  background-color: #ccc; }
 
 body, html {
   height: 100%; }
 
 .wrapper {
-  min-height: 100%; }
+  min-height: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  background-color: white; }
 
 a {
   text-decoration: none; }

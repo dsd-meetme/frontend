@@ -1,17 +1,13 @@
 (function () {
-    /**
-     A controller for managing the login of a plunner organization
-     @author Giorgio Pea
-     @param dataPublisher A service used to perform an http post request
-     **/
-    var controller = function ($scope, $location, dataPublisher, mixedContentToArray) {
+    var controller = function ($scope, $location, dataPublisher, mixedContentToArray, configService) {
         /*This controller instance */
+        var apiDomain = configService.apiDomain;
         var c = this;
         var authorizationPopup = {
-            show : function(){
+            show: function () {
                 jQuery('#authorizationPopup').modal('show')
             },
-            hide : function(){
+            hide: function () {
                 jQuery('#authorizationPopup').modal('hide')
             }
         };
@@ -31,14 +27,14 @@
             c.invalidFields.emailReq = form.email.$error.required;
             c.invalidFields.emailVal = form.email.$error.email;
             if (!form.$invalid) {
-                if(c.rmbMe === 'true'){
+                if (c.rmbMe === 'true') {
                     remember = '1'
                 }
-                else{
+                else {
                     remember = '0'
                 }
                 authorizationPopup.show();
-                dataPublisher.publish('http://api.plunner.com/companies/auth/login', {
+                dataPublisher.publish(apiDomain + '/companies/auth/login', {
                     email: c.email,
                     password: c.password,
                     remember: remember
@@ -49,6 +45,7 @@
                     authorizationPopup.hide();
                     if (response.status === 422) {
                         mixedContentToArray.process(response.data, c.errors, true);
+                        authorizationPopup.hide();
                     }
                 });
             }
@@ -56,5 +53,5 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('osiController', controller);
+    app.controller('osiController', ['$scope','$location','dataPublisher','mixedContentToArray','configService',controller]);
 }());
