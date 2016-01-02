@@ -77,6 +77,10 @@
                                         <li><span class="tileSynched">GROUP:</span>
                                             &nbsp;&nbsp;{{meeting.group_name}}
                                         </li>
+                                        <li ng-if="meeting.start_time">
+                                            <span>STARTS ON:</span>
+                                            &nbsp;&nbsp;{{meeting.start_time}}
+                                        </li>
                                         <li>
                                             <button ng-click="udashC.deletePlannedMeeting(meeting.group_id, meeting.id)">
                                                 <i class="fa fa-trash-o"></i><span>&nbsp;&nbsp;DELETE</span>
@@ -86,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 col-sm-1 col-xs-1 text-right tileIconRight">
-                                <a href="/#/user/newmeeting/{{meeting.group_id}}&{{meeting.id}}&w">
+                                <a href="/#/user/newmeeting/{{meeting.group_id}}&{{meeting.id}}&w&{{meeting.planned}}">
                                     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                                     <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
                                          xmlns="http://www.w3.org/2000/svg" ng-click="">

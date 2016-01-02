@@ -11,7 +11,7 @@ This application uses angularJS
 # How to install
 1. Clone the repository on your local machine
 2. Install all dependencies via [npm](http://npmjs.org/) `npm install` ([nodejs.org](http://nodejs.org) required)
-3. Bootstrap the application via `gulp production`
+3. Bootstrap the application via `node_modules/.bin/gulp production`
 
 or symply via npm 
 

@@ -51,6 +51,8 @@
             return adaptedEvents;
 
         };
+        var startTime;
+
         var getUserInfo = function () {
             userResources.userInfo.get()
                 .$promise.then(function (response) {
@@ -58,6 +60,30 @@
                 });
         };
         var c = this;
+        var getMeetings = function () {
+            var meeting;
+            plannerResources.plannerManagedMeetings.query({current: 1})
+                .$promise.then(function (response) {
+                    for (var key in response) {
+                        if (response[key].id === c.groupId) {
+                            for (var i = 0; i < response[key].meetings.length; i++) {
+                                meeting = response[key].meetings[i];
+                                if (meeting.id === c.meetingId) {
+                                    c.startTime = meeting.start_time;
+                                    startTime = meeting.start_time;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    startTime = 123;
+
+                    if(startTime){
+                        c.showEmptyState = true;
+                    }
+                    c.getTimeslots();
+                });
+        };
         c.buttonText = 'Plan meeting';
         c.events = [];
         c.userInfo = {
@@ -65,6 +91,8 @@
         };
         c.inputEnabled = false;
         c.dataCopy = {};
+        c.showEmptyState = false;
+        c.startTime;
         c.processUrl = function () {
             var urlParams;
             if ($routeParams.type.length === 1 && $routeParams.type === '_') {
@@ -74,6 +102,7 @@
                 urlParams = $routeParams.type.split('&');
                 this.groupId = urlParams[0];
                 this.meetingId = urlParams[1];
+
                 mode = urlParams[2];
                 if (mode === 'w') {
                     this.inputEnabled = true;
@@ -107,28 +136,30 @@
         c.getTimeslots = function () {
             var splittedTimeStart, splittedTimeEnd;
             if (mode === 'w') {
-                plannerResources.plannerManagedMeetingsTimeslots.query({
-                    groupId: this.groupId,
-                    meetingId: this.meetingId,
-                    timeslotId: ''
-                })
-                    .$promise.then(function (response) {
-                        for (var i = 0; i < response.length; i++) {
-                            splittedTimeStart = response[i].time_start.split(' ');
-                            splittedTimeEnd = response[i].time_end.split(' ');
-                            c.events.push({
-                                title: '',
-                                start: splittedTimeStart[0] + 'T' + splittedTimeStart[1],
-                                end: splittedTimeEnd[0] + 'T' + splittedTimeEnd[1],
-                                specificId: response[i].id
-                            });
-
-                        }
-                        if (window.innerWidth <= 768) {
-                            c.calendarConfig.defaultView = 'agendaDay';
-                        }
-                        calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
+                if (!startTime) {
+                    plannerResources.plannerManagedMeetingsTimeslots.query({
+                        groupId: this.groupId,
+                        meetingId: this.meetingId,
+                        timeslotId: ''
                     })
+                        .$promise.then(function (response) {
+                            for (var i = 0; i < response.length; i++) {
+                                splittedTimeStart = response[i].time_start.split(' ');
+                                splittedTimeEnd = response[i].time_end.split(' ');
+                                c.events.push({
+                                    title: '',
+                                    start: splittedTimeStart[0] + 'T' + splittedTimeStart[1],
+                                    end: splittedTimeEnd[0] + 'T' + splittedTimeEnd[1],
+                                    specificId: response[i].id
+                                });
+
+                            }
+                            if (window.innerWidth <= 768) {
+                                c.calendarConfig.defaultView = 'agendaDay';
+                            }
+                            calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
+                        })
+                }
             }
             else {
                 if (window.innerWidth <= 768) {
@@ -231,7 +262,14 @@
             var form = $scope.meetingInfoForm;
             var newEvents, modifiedEvents = [];
             var alsoEditEvents = false;
-            var events = calendar.fullCalendar('clientEvents');
+            var events;
+            if (is_planned === 'false') {
+                events = calendar.fullCalendar('clientEvents');
+            }
+            else {
+                events = [];
+            }
+
             var minEventDuration;
             var processedEvents;
             var index, index_one;
@@ -245,15 +283,17 @@
             if (!this.invalidFields.durationReq) {
                 this.invalidFields.durationLimit = !(this.duration >= 15 && this.duration <= 300);
             }
-            this.invalidFields.oneEventLeast = events.length === 0;
-
-            for (var i = 0; i < events.length; i++) {
-                minEventDuration = (events[i].end.format('x') - events[i].start.format('x')) / 1000;
-                if (minEventDuration < this.duration) {
-                    this.invalidFields.durationConflict = true;
-                    break;
+            if (!startTime) {
+                this.invalidFields.oneEventLeast = events.length === 0;
+                for (var i = 0; i < events.length; i++) {
+                    minEventDuration = (events[i].end.format('x') - events[i].start.format('x')) / 1000;
+                    if (minEventDuration < this.duration) {
+                        this.invalidFields.durationConflict = true;
+                        break;
+                    }
                 }
             }
+
             for (var key in this.invalidFields) {
                 if (this.invalidFields[key] === true) {
                     this.thereErrors = true;
@@ -262,6 +302,7 @@
             }
             this.thereErrors = form.$invalid || this.invalidFields.durationConflict || this.invalidFields.oneEventLeast
                 || this.invalidFields.oneGroup;
+            console.log(c.invalidFields);
             if (!this.thereErrors) {
                 processedEvents = backendEventAdapter(events, true);
                 if (mode === 'c') {
@@ -272,7 +313,6 @@
                         description: this.description,
                         duration: (this.duration * 60)
                     })).$promise.then(function (response) {
-                            console.log(response);
                             for (var i = 0; i < processedEvents.length; i++) {
                                 plannerResources.plannerManagedMeetingsTimeslots.save({
                                         groupId: c.selectedGroup,
@@ -316,44 +356,46 @@
                         description: this.description,
                         duration: (this.duration * 60)
                     })).$promise.then(function () {
-                            for (var i = 0; i < newEvents.length; i++) {
-                                plannerResources.plannerManagedMeetingsTimeslots.save({
-                                        groupId: c.groupId,
-                                        meetingId: c.meetingId,
-                                        timeslotId: ''
-                                    },
-                                    jQuery.param(newEvents[i])).$promise.then(function () {
-                                        if (index === newEvents.length - 1 && !alsoEditEvents) {
-                                            c.confirmPopup.hide();
-                                            $location.path('/user');
-                                        }
-                                        index++;
+                            if (!startTime) {
+                                for (var i = 0; i < newEvents.length; i++) {
+                                    plannerResources.plannerManagedMeetingsTimeslots.save({
+                                            groupId: c.groupId,
+                                            meetingId: c.meetingId,
+                                            timeslotId: ''
+                                        },
+                                        jQuery.param(newEvents[i])).$promise.then(function () {
+                                            if (index === newEvents.length - 1 && !alsoEditEvents) {
+                                                c.confirmPopup.hide();
+                                                $location.path('/user');
+                                            }
+                                            index++;
 
-                                    }, function (response) {
-                                        if (response.status === 422) {
-                                            mixedContentToArray.process(response.data, c.errors, true);
-                                            c.confirmPopup.hide();
-                                        }
-                                    });
-                            }
-                            for (i = 0; i < modifiedEvents[1].length; i++) {
-                                plannerResources.plannerManagedMeetingsTimeslots.update({
-                                        groupId: c.groupId,
-                                        meetingId: c.meetingId,
-                                        timeslotId: modifiedEvents[0][i]
-                                    },
-                                    jQuery.param(modifiedEvents[1][i])).$promise.then(function () {
-                                        if (index_one === modifiedEvents[1].length - 1) {
-                                            c.confirmPopup.hide();
-                                            $location.path('/user');
-                                        }
+                                        }, function (response) {
+                                            if (response.status === 422) {
+                                                mixedContentToArray.process(response.data, c.errors, true);
+                                                c.confirmPopup.hide();
+                                            }
+                                        });
+                                }
+                                for (i = 0; i < modifiedEvents[1].length; i++) {
+                                    plannerResources.plannerManagedMeetingsTimeslots.update({
+                                            groupId: c.groupId,
+                                            meetingId: c.meetingId,
+                                            timeslotId: modifiedEvents[0][i]
+                                        },
+                                        jQuery.param(modifiedEvents[1][i])).$promise.then(function () {
+                                            if (index_one === modifiedEvents[1].length - 1) {
+                                                c.confirmPopup.hide();
+                                                $location.path('/user');
+                                            }
 
-                                    }, function (response) {
-                                        if (response.status === 422) {
-                                            mixedContentToArray.process(response.data, c.errors, true);
-                                            c.confirmPopup.hide();
-                                        }
-                                    });
+                                        }, function (response) {
+                                            if (response.status === 422) {
+                                                mixedContentToArray.process(response.data, c.errors, true);
+                                                c.confirmPopup.hide();
+                                            }
+                                        });
+                                }
                             }
                             if (newEvents.length === 0 && modifiedEvents[1].length === 0) {
                                 c.confirmPopup.hide();
@@ -382,9 +424,11 @@
         };
         getUserInfo();
         c.processUrl();
+        getMeetings();
+        console.log(startTime);
         c.getGroups();
         c.getInfo();
-        c.getTimeslots();
+
 
     };
 

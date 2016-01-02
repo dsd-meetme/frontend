@@ -90,6 +90,11 @@
                         <span>{{nmC.groupName}}</span>
 
                         <p class="error_msg" ng-show="nmC.invalidFields.oneGroup">Select a group for the meeting</p>
+                        <div ng-if="nmC.startTime">
+                            <p>Starts at</p>
+                            <span>{{nmC.startTime}}</span>
+                        </div>
+
                     </div>
                 </form>
             </div>
@@ -104,11 +109,10 @@
             <p class="error_tile" ng-show="nmC.invalidFields.oneEventLeast"><i class="fa fa-warning"></i>&nbsp;&nbsp;Insert
                 at least one time window for the meeting</p>
 
-            <p class="error_tile" ng-show="nmC.invalidFields.durationConflict">One time window is too short for the
+            <p class="error_tile" ng-show="nmC.invalidFields.durationConflict"><i class="fa fa-warning"></i>&nbsp;&nbsp;One time window is too short for the
                 meeting</p>
-
             <p class="error_tile" ng-repeat="error in nmeC.errors">{{error}}</p>
-
+            <h4 ng-show="nmC.showEmptyState" class="text-center empty_state_msg font_normal">It's not possible to change the timeslots for this meeting</h4>
             <div id="meetingTimeslots">
             </div>
         </div>

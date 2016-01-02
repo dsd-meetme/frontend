@@ -20,6 +20,7 @@
                     meetingsContainer.push(tmp);
                 }
             }
+            console.log(meetingsContainer);
             return meetingsContainer;
 
         };
@@ -87,7 +88,7 @@
         };
         var getMeetings = function () {
             var pages;
-            userResources.userGroups.query()
+            userResources.userGroups.query({current : 1})
                 .$promise.then(function (response) {
                     c.meetings.toBePlanned = processMeetings(response);
                     pages = Math.ceil(c.meetings.toBePlanned.length / 10);
@@ -102,9 +103,10 @@
         };
         var getManagedMeetings = function () {
             var pages;
-            plannerResources.plannerManagedMeetings.query()
+            plannerResources.plannerManagedMeetings.query({current: 1})
                 .$promise.then(function (response) {
                     c.meetings.managed = processMeetings(response);
+
                     pages = Math.ceil(c.meetings.managed.length / 10);
                     c.pagination.meetingsManaged.pages = pages;
                     c.pagination.meetingsManaged.utilArray = new Array(pages)
@@ -112,8 +114,6 @@
 
         };
         var getUserInfo = function () {
-            console.log(userResources);
-            console.log(plannerResources);
             userResources.userInfo.get()
                 .$promise.then(function (response) {
                     c.userInfo.is_planner = response.is_planner;

@@ -33,7 +33,7 @@ gulp.task('broswer-sync', function () {
     });
 });
 gulp.task('watch', function () {
-    gulp.watch('assets/sass/*/*.sass', ['sass_compile']);
+    gulp.watch('assets/sass/**/*.sass', ['sass_compile']);
     gulp.watch('app/*/*/*/*.js', ['concat']);
 });
 
