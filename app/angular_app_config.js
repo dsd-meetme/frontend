@@ -182,6 +182,9 @@
                 when('error', {
                     templateUrl: 'app/components/errors/generic.html'
                 }).
+                when('/signInHub', {
+                    templateUrl: 'app/components/presentation/signInHub.html'
+                }).
                 otherwise({
                     redirectTo: '/404'
                 });

@@ -94,8 +94,8 @@
                 when('error', {
                     templateUrl: 'app/components/errors/generic.html'
                 }).
-                when('/signin', {
-                    templateUrl: 'app/components/presentation/signin.html'
+                when('/signInHub', {
+                    templateUrl: 'app/components/presentation/signInHub.html'
                 }).
                 otherwise({
                     redirectTo: '/404'

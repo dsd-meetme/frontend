@@ -1,59 +1,4 @@
 (function () {
-    /**
-     * A service that performs an http POST request given a url and some data
-     * @param $http Angular's http service
-     * @returns {{publish: Function}} A method that executes an http POST request given a url and some data
-     */
-    var service = function ($http) {
-        /**
-         * Executes a http POST request given an url and some data
-         * @param url The url that is the target of the http POST request to be executed
-         * @param data The data to be sent to the specified url using the POST request to be executed
-         * @returns {*}
-         */
-        var publish = function (url, data) {
-            return $http({
-                method: 'POST',
-                url: url,
-                data: jQuery.param(data)
-            })
-        };
-        return {
-            publish: publish
-        }
-
-    };
-
-    var app = angular.module('Plunner');
-    app.factory('dataPublisher', service);
-}());
-
-(function(){
-  //A service that manages the logout of an organization or an employee
-  var service = function($location,$cookies){
-    return {
-      logout : function(url){
-        function InvalidArgumentException(msg,argumentIndex){
-          this.message = msg;
-          this.argumentIndex = argumentIndex;
-        }
-        if(!angular.isString(url)){
-          throw new InvalidArgumentException("This method's unique argument must be a string",0);
-
-        }
-        else{
-          $cookies.remove('auth_token');
-          $location.path(url);
-        }
-      }
-    }
-  };
-
-  var app = angular.module('Plunner');
-  app.factory('logoutService',service);
-}());
-
-(function () {
     //A service that returns resource objects that encapsulate the restful communication logic relative
     //to an organization
     var service = function ($resource, configService) {
@@ -182,6 +127,61 @@
     app.factory('userResources', ['$resource', 'configService', service]);
 
 }());
+(function () {
+    /**
+     * A service that performs an http POST request given a url and some data
+     * @param $http Angular's http service
+     * @returns {{publish: Function}} A method that executes an http POST request given a url and some data
+     */
+    var service = function ($http) {
+        /**
+         * Executes a http POST request given an url and some data
+         * @param url The url that is the target of the http POST request to be executed
+         * @param data The data to be sent to the specified url using the POST request to be executed
+         * @returns {*}
+         */
+        var publish = function (url, data) {
+            return $http({
+                method: 'POST',
+                url: url,
+                data: jQuery.param(data)
+            })
+        };
+        return {
+            publish: publish
+        }
+
+    };
+
+    var app = angular.module('Plunner');
+    app.factory('dataPublisher', service);
+}());
+
+(function(){
+  //A service that manages the logout of an organization or an employee
+  var service = function($location,$cookies){
+    return {
+      logout : function(url){
+        function InvalidArgumentException(msg,argumentIndex){
+          this.message = msg;
+          this.argumentIndex = argumentIndex;
+        }
+        if(!angular.isString(url)){
+          throw new InvalidArgumentException("This method's unique argument must be a string",0);
+
+        }
+        else{
+          $cookies.remove('auth_token');
+          $location.path(url);
+        }
+      }
+    }
+  };
+
+  var app = angular.module('Plunner');
+  app.factory('logoutService',service);
+}());
+
 (function () {
     var service = function () {
 

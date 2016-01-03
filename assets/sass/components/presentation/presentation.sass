@@ -1,12 +1,5 @@
 @import "../../global/colors"
 
-.wrapper
-  background: #457fca
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #457fca, #5691c8)
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #457fca, #5691c8)
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 .navigation--presentation
   background-color: transparent
@@ -36,6 +29,9 @@
   h1
     font-family: 'Montserrat'
     margin-top: 50px
+
+  h3
+    line-height: 1.5em
 
 .presentation__content__signup
   padding: 20px 40px 20px 40px
@@ -71,6 +67,7 @@
     font-weight: 300
     font-size: 16px
     margin-top: 30px
+    line-height: 1.3em
 
   >div
     height: 138px
@@ -88,6 +85,9 @@
   margin-top: 11em
 
 @media (max-width: 570px)
+  .presentation__content
+    h3
+      font-size: 18px
   .presentation__content__signup
     >div
       &:first-child
@@ -116,6 +116,7 @@
         border-bottom: 0
         img
           margin-top: 0
+
 
 
   .presentation__content__features-wrapper

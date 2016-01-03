@@ -21,7 +21,7 @@ gulp.task('sass_compile_global', function () {
         .pipe(gulp.dest('assets/css/'))
 });
 gulp.task('sass_compile_presentation', function(){
-    return gulp.src('assets/sass/components/presentation/presentation.sass', {style: 'expanded'})
+    return gulp.src('assets/sass/components/presentation/*.sass', {style: 'expanded'})
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('assets/css/'))
 });
@@ -41,7 +41,11 @@ gulp.task('watch', function () {
     gulp.watch('assets/sass/**/*.sass', ['sass_compile']);
     gulp.watch('app/*/*/*/*.js', ['concat']);
 });
-
+gulp.task('concat_presentation', function(){
+    return gulp.src('app/components/presentation/*.js')
+        .pipe(concat('controllers_presentation.js'))
+        .pipe(gulp.dest('app/'));
+});
 gulp.task('concat_controllers_user', function () {
     return gulp.src('app/components/user/*/*.js')
         .pipe(concat('controllers_user.js'))
@@ -62,7 +66,7 @@ gulp.task('concat_configuration', function () {
         .pipe(concat('angular_app_config.js'))
         .pipe(gulp.dest('app/'));
 });
-gulp.task('concat', ['concat_configuration', 'concat_services_directives', 'concat_controllers_organization', 'concat_controllers_user']);
+gulp.task('concat', ['concat_configuration', 'concat_services_directives', 'concat_controllers_organization', 'concat_controllers_user', 'concat_presentation']);
 
 
 gulp.task('production', ['sass_compile','concat']);
