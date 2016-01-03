@@ -212,6 +212,9 @@
             }
             //Mode checking(organizations)
             if(path){
+                if(path !== '/'){
+                    jQuery('.wrapper').removeClass('backgroundLightBlue')
+                }
                 if(path.search('organization') !== -1){
                     if(angular.isUndefined(mode) || mode !== 'cn'){
                         $location.path('/orgsignin');
