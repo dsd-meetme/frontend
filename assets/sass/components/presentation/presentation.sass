@@ -1,0 +1,143 @@
+@import "../../global/colors"
+
+.wrapper
+  background: #457fca
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #457fca, #5691c8)
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #457fca, #5691c8)
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+.navigation--presentation
+  background-color: transparent
+  padding-top: 16px
+  padding-bottom: 10px
+
+  .navigation-left
+    margin: 0
+
+  .navigation-right
+    a
+      color: white
+      text-decoration: none
+      margin: 0
+      padding: 8px 16px
+      font-weight: 300
+
+    ul
+      li:last-child
+        a
+          border: 2px solid white
+          border-radius: 4px
+
+.presentation__content
+  color: white
+
+  h1
+    font-family: 'Montserrat'
+    margin-top: 50px
+
+.presentation__content__signup
+  padding: 20px 40px 20px 40px
+  background-color: transparentize(#d8d8d8, .70)
+
+  > div
+
+    &:first-child
+      float: left
+
+      h4
+        font-weight: 400
+        letter-spacing: 1px
+
+    &:last-child
+      float: right
+
+      a
+        display: block
+        color: white
+        padding: 8px 16px
+        border: 2px solid white
+        border-radius: 4px
+        font-size: 16px
+        text-decoration: none
+
+.presentation__content__features
+  margin-top:
+  img
+    width: 70px
+
+  h5
+    font-weight: 300
+    font-size: 16px
+    margin-top: 30px
+
+  >div
+    height: 138px
+    border-right: 1px solid transparentize(white, .8)
+    &:first-child
+      h5
+        margin-top: 29px
+    &:last-child
+      border-right: 0
+      img
+        margin-top: 23px
+
+
+.presentation__content__features-wrapper
+  margin-top: 11em
+
+@media (max-width: 570px)
+  .presentation__content__signup
+    >div
+      &:first-child
+        float: none
+
+      &:last-child
+        text-align: center
+        float: none
+        margin-top: 20px
+
+        a
+          display: inline-block
+
+
+  .presentation__content__features
+    >div
+      width: 100%
+      border-right: 0
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+      margin-bottom: 30px
+      padding-bottom: 30px
+      padding-top: 15px
+      height: 180px
+
+      &:last-child
+        border-bottom: 0
+        img
+          margin-top: 0
+
+
+  .presentation__content__features-wrapper
+    margin-top: 5em
+
+
+@media (max-width: 500px)
+  .navigation--presentation
+    .navigation-left
+      float: left
+      border-bottom: 0
+      width: auto
+      padding: 0
+
+
+    .navigation-right
+      li
+        &:first-child
+          float: right
+          border: 2px solid white
+          padding: 5px
+          margin-top: -5px
+        &:last-child
+          display: none
+
