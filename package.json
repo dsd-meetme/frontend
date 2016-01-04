@@ -1,7 +1,7 @@
 {
   "name": "plunner",
   "version": "1.0.0",
-  "description": "A meeting planner for business with automation and optimization in mind",
+  "description": "A meeting planner for businesses with automation and optimization in mind",
   "main": "gulp-file.js",
   "directories": {
     "test": "test"
@@ -13,16 +13,15 @@
     "angular-route": "^1.4.8",
     "bootstrap": "^3.3.5",
     "jquery": "^2.1.4",
-    "jquery-ui": "^1.10.5",
     "jwt-decode": "^1.4.0",
-    "moment": "^2.10.6"
+    "moment": "^2.10.6",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.1.0",
   },
   "devDependencies": {
     "angular-mocks": "^1.4.8",
     "browser-sync": "^2.10.0",
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-sass": "^2.1.0",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.15",
     "karma-chrome-launcher": "^0.2.1",
