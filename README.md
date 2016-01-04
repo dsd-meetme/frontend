@@ -14,9 +14,9 @@ This application uses angularJS
 2. Install all dependencies via [npm](http://npmjs.org/) `npm install` ([nodejs.org](http://nodejs.org) required)
 3. Bootstrap the application via `node_modules/.bin/gulp production`
 
-or symply via npm 
+or symply via  [create-project](https://www.npmjs.com/package/create-project)
 
-**TODO**
+`create-project frontend dsd-meetme/frontend`
 
 and bootstrap the application via `gulp production`
 
