@@ -1,0 +1,31 @@
+.navigation--signinhub {
+  background: #457fca;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #457fca, #5691c8);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #457fca, #5691c8); }
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.presentation__content--signinhub {
+  margin-top: 10em; }
+  .presentation__content--signinhub .row img {
+    display: block;
+    margin: 0 auto;
+    width: 175px;
+    height: 175px; }
+  .presentation__content--signinhub .row a {
+    margin-top: 30px;
+    display: block;
+    text-align: center;
+    font-size: 18px; }
+  @media (max-width: 500px) {
+    .presentation__content--signinhub {
+      margin-top: 5em; }
+      .presentation__content--signinhub .row > div {
+        width: 100%;
+        margin-bottom: 50px; }
+      .presentation__content--signinhub .row img {
+        width: 150px;
+        height: 150px; }
+      .presentation__content--signinhub .row a {
+        font-size: 16px; } }
