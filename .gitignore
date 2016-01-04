@@ -118,10 +118,6 @@ npm-debug.log
 public/css
 app/dist
 assets/css/generated
-app/angular_app_config.js
-app/controllers_org.js
-app/controllers_user.js
-app/services_directives.js
 
 ### laravel ide helper ###
 .phpstorm.meta.php
