@@ -44,27 +44,27 @@ gulp.task('watch', function () {
 gulp.task('concat_presentation', function(){
     return gulp.src('app/components/presentation/*.js')
         .pipe(concat('controllers_presentation.js'))
-        .pipe(gulp.dest('app/dist/'));
+        .pipe(gulp.dest('app/dist'));
 });
 gulp.task('concat_controllers_user', function () {
     return gulp.src('app/components/user/*/*.js')
         .pipe(concat('controllers_user.js'))
-        .pipe(gulp.dest('app/dist/'));
+        .pipe(gulp.dest('app/dist'));
 });
 gulp.task('concat_controllers_organization', function () {
     return gulp.src('app/components/organization/*/*.js')
         .pipe(concat('controllers_org.js'))
-        .pipe(gulp.dest('app/dist/'));
+        .pipe(gulp.dest('app/dist'));
 });
 gulp.task('concat_services_directives', function () {
     return gulp.src('app/shared/*/*.js')
         .pipe(concat('services_directives.js'))
-        .pipe(gulp.dest('app/dist/'));
+        .pipe(gulp.dest('app/dist'));
 });
 gulp.task('concat_configuration', function () {
     return gulp.src('app/configuration/*.js')
         .pipe(concat('angular_app_config.js'))
-        .pipe(gulp.dest('app/dist/'));
+        .pipe(gulp.dest('app/dist'));
 });
 gulp.task('concat', ['concat_configuration', 'concat_services_directives', 'concat_controllers_organization', 'concat_controllers_user', 'concat_presentation']);
 
