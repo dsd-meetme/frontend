@@ -7,15 +7,16 @@ This application uses angularJS
 
 [Application example web server](http://admin.plunner.com). It is just an example, so we don't guarantee that everything works
 
+**N.B.** You need also the [backend application](https://github.com/dsd-meetme/backend)
 
 # How to install
 1. Clone the repository on your local machine
 2. Install all dependencies via [npm](http://npmjs.org/) `npm install` ([nodejs.org](http://nodejs.org) required)
 3. Bootstrap the application via `node_modules/.bin/gulp production`
 
-or symply via npm 
+or symply via  [create-project](https://www.npmjs.com/package/create-project)
 
-**TODO**
+`create-project frontend dsd-meetme/frontend`
 
 and bootstrap the application via `gulp production`
 
