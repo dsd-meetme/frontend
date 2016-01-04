@@ -22,6 +22,9 @@
                 if(path !== '/'){
                     jQuery('.wrapper').removeClass('backgroundLightBlue')
                 }
+                else{
+                    jQuery('.wrapper').addClass('backgroundLightBlue')
+                }
                 if(path.search('organization') !== -1){
                     if(angular.isUndefined(mode) || mode !== 'cn'){
                         $location.path('/orgsignin');
