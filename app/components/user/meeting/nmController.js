@@ -62,12 +62,13 @@
         var c = this;
         var getMeetings = function () {
             var meeting;
-            plannerResources.plannerManagedMeetings.query({current: 1})
-                .$promise.then(function (response) {
-                    for (var key in response) {
-                        if (response[key].id === c.groupId) {
-                            for (var i = 0; i < response[key].meetings.length; i++) {
-                                meeting = response[key].meetings[i];
+            if(mode === 'w'){
+                plannerResources.plannerManagedMeetings.query({current: 1})
+                    .$promise.then(function (response) {
+                        console.log(response);
+                        for(var i= 0; i<response.length; i++){
+                            for (var j = 0; j < response[i].meetings.length; j++) {
+                                meeting = response[i].meetings[j];
                                 if (meeting.id === c.meetingId) {
                                     c.startTime = meeting.start_time;
                                     startTime = meeting.start_time;
@@ -75,14 +76,14 @@
                                 }
                             }
                         }
-                    }
-                    startTime = 123;
 
-                    if(startTime){
-                        c.showEmptyState = true;
-                    }
-                    c.getTimeslots();
-                });
+                        if(startTime){
+                            c.showEmptyState = true;
+                        }
+                        c.getTimeslots();
+                    });
+            }
+
         };
         c.buttonText = 'Plan meeting';
         c.events = [];
@@ -425,7 +426,6 @@
         getUserInfo();
         c.processUrl();
         getMeetings();
-        console.log(startTime);
         c.getGroups();
         c.getInfo();
 
