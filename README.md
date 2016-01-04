@@ -7,7 +7,7 @@ This application uses angularJS
 
 [Application example web server](http://admin.plunner.com). It is just an example, so we don't guarantee that everything works
 
-You also need the [backend application](https://github.com/dsd-meetme/backend)
+**N.B.** You need also the [backend application](https://github.com/dsd-meetme/backend)
 
 # How to install
 1. Clone the repository on your local machine
