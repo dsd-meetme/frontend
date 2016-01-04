@@ -116,6 +116,7 @@ coverage.xml
 node_modules/
 npm-debug.log
 public/css
+app/dist
 assets/css/generated
 app/angular_app_config.js
 app/controllers_org.js

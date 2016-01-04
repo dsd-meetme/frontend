@@ -23,7 +23,7 @@ gulp.task('sass_compile_global', function () {
 gulp.task('sass_compile_presentation', function(){
     return gulp.src('assets/sass/components/presentation/*.sass', {style: 'expanded'})
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('assets/css/generated))
+        .pipe(gulp.dest('assets/css/generated'))
 });
 gulp.task('sass_compile', ['sass_compile_global','sass_compile_user', 'sass_compile_org','sass_compile_presentation']);
 gulp.task('broswer-sync', function () {
@@ -43,27 +43,27 @@ gulp.task('watch', function () {
 });
 gulp.task('concat_presentation', function(){
     return gulp.src('app/components/presentation/*.js')
-        .pipe(concat('controllers_presentation.js'))
+        .pipe(concat('app/dist/controllers_presentation.js'))
         .pipe(gulp.dest('app/'));
 });
 gulp.task('concat_controllers_user', function () {
     return gulp.src('app/components/user/*/*.js')
-        .pipe(concat('controllers_user.js'))
+        .pipe(concat('app/dist/controllers_user.js'))
         .pipe(gulp.dest('app/'));
 });
 gulp.task('concat_controllers_organization', function () {
     return gulp.src('app/components/organization/*/*.js')
-        .pipe(concat('controllers_org.js'))
+        .pipe(concat('app/dist/controllers_org.js'))
         .pipe(gulp.dest('app/'));
 });
 gulp.task('concat_services_directives', function () {
     return gulp.src('app/shared/*/*.js')
-        .pipe(concat('services_directives.js'))
+        .pipe(concat('app/dist/services_directives.js'))
         .pipe(gulp.dest('app/'));
 });
 gulp.task('concat_configuration', function () {
     return gulp.src('app/configuration/*.js')
-        .pipe(concat('angular_app_config.js'))
+        .pipe(concat('app/dist/angular_app_config.js'))
         .pipe(gulp.dest('app/'));
 });
 gulp.task('concat', ['concat_configuration', 'concat_services_directives', 'concat_controllers_organization', 'concat_controllers_user', 'concat_presentation']);
