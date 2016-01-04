@@ -118,6 +118,10 @@
                     var popup = jQuery('#addGroup');
                     if (resetInputs) {
                         c.addGroup.errors = [];
+                        c.addGroup.planner = null;
+                        c.addGroup.members = [];
+                        c.addGroup.name = '';
+                        c.addGroup.desc = '';
                         popup.find('input').val('').removeAttr('checked');
                     }
                     popup.modal('show');
@@ -202,7 +206,10 @@
                     var popup = jQuery('#addUser');
                     if (resetInputs) {
                         c.addUser.errors = [];
-                        popup.find('input').val('').removeAttr('checked');
+                        c.addUser.name = '';
+                        c.addUser.email = '';
+                        c.addUser.password = '';
+                        c.addUser.password_confirmation = '';
                     }
                     popup.modal('show');
                 },

@@ -166,6 +166,7 @@
                     var popup = jQuery('#changePlanner');
                     if (resetInputs) {
                         c.changePlanner.errors = [];
+                        c.changePlanner.plannerId = '';
                         popup.find('input').val('');
                     }
                     popup.modal('show')
@@ -174,7 +175,7 @@
                     jQuery('#changePlanner').modal('hide');
                 }
             },
-            init: function (resetInputs) {
+            init: function () {
                 if (c.allUsers.length === 0) {
                     orgResources.orgUser.query({userId: ''})
                         .$promise.then(function (response) {
@@ -205,7 +206,7 @@
                             {
                                 name: c.data.group.name,
                                 description: c.data.group.description,
-                                planner_id: this.plannerId
+                                planner_id: c.changePlanner.plannerId
                             })
                     ).$promise
                         .then(function () {
@@ -233,6 +234,8 @@
                     var popup = jQuery('#addToGroup');
                     if (resetInputs) {
                         c.changePlanner.errors = [];
+                        c.changePlanner.members = [];
+                        c.changePlanner.validMembers = [];
                         popup.find('input').val('');
                     }
                     popup.modal('show')

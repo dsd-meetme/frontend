@@ -523,6 +523,10 @@
                     //this.thereErrors = false;
                     if (resetInputs) {
                         c.importSchedule.errors = [];
+                        c.importSchedule.calendars = [];
+                        c.credentials.url = '';
+                        c.credentials.username = '';
+                        c.credentials.password = '';
                         popup.find('input').val('');
                     }
                     popup.modal('show');

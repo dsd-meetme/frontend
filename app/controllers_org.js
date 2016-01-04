@@ -118,6 +118,10 @@
                     var popup = jQuery('#addGroup');
                     if (resetInputs) {
                         c.addGroup.errors = [];
+                        c.addGroup.planner = null;
+                        c.addGroup.members = [];
+                        c.addGroup.name = '';
+                        c.addGroup.desc = '';
                         popup.find('input').val('').removeAttr('checked');
                     }
                     popup.modal('show');
@@ -202,7 +206,10 @@
                     var popup = jQuery('#addUser');
                     if (resetInputs) {
                         c.addUser.errors = [];
-                        popup.find('input').val('').removeAttr('checked');
+                        c.addUser.name = '';
+                        c.addUser.email = '';
+                        c.addUser.password = '';
+                        c.addUser.password_confirmation = '';
                     }
                     popup.modal('show');
                 },
@@ -424,6 +431,7 @@
                     var popup = jQuery('#changePlanner');
                     if (resetInputs) {
                         c.changePlanner.errors = [];
+                        c.changePlanner.plannerId = '';
                         popup.find('input').val('');
                     }
                     popup.modal('show')
@@ -432,7 +440,7 @@
                     jQuery('#changePlanner').modal('hide');
                 }
             },
-            init: function (resetInputs) {
+            init: function () {
                 if (c.allUsers.length === 0) {
                     orgResources.orgUser.query({userId: ''})
                         .$promise.then(function (response) {
@@ -463,7 +471,7 @@
                             {
                                 name: c.data.group.name,
                                 description: c.data.group.description,
-                                planner_id: this.plannerId
+                                planner_id: c.changePlanner.plannerId
                             })
                     ).$promise
                         .then(function () {
@@ -491,6 +499,8 @@
                     var popup = jQuery('#addToGroup');
                     if (resetInputs) {
                         c.changePlanner.errors = [];
+                        c.changePlanner.members = [];
+                        c.changePlanner.validMembers = [];
                         popup.find('input').val('');
                     }
                     popup.modal('show')
