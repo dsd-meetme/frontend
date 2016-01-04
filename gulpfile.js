@@ -8,22 +8,22 @@ var connect = require('gulp-connect');
 gulp.task('sass_compile_org', function () {
     return gulp.src('assets/sass/components/organization/organization.sass', {style: 'expanded'})
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('assets/css/'))
+        .pipe(gulp.dest('assets/css/generated'))
 });
 gulp.task('sass_compile_user', function () {
     return gulp.src('assets/sass/components/user/user.sass', {style: 'expanded'})
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('assets/css/'))
+        .pipe(gulp.dest('assets/css/generated'))
 });
 gulp.task('sass_compile_global', function () {
     return gulp.src('assets/sass/global/global.sass', {style: 'expanded'})
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('assets/css/'))
+        .pipe(gulp.dest('assets/css/generated'))
 });
 gulp.task('sass_compile_presentation', function(){
     return gulp.src('assets/sass/components/presentation/*.sass', {style: 'expanded'})
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('assets/css/'))
+        .pipe(gulp.dest('assets/css/generated))
 });
 gulp.task('sass_compile', ['sass_compile_global','sass_compile_user', 'sass_compile_org','sass_compile_presentation']);
 gulp.task('broswer-sync', function () {
