@@ -209,7 +209,7 @@
                         c.addUser.name = '';
                         c.addUser.email = '';
                         c.addUser.password = '';
-                        c.addUser.password_confirmation = '';
+                        c.addUser.confirmation_password = '';
                     }
                     popup.modal('show');
                 },
