@@ -225,6 +225,7 @@
             }
 
         };
+        c.allUsers = [];
         c.addToGroup = {
             errors: [],
             members: [],

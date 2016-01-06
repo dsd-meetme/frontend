@@ -1,6 +1,6 @@
 (function () {
 
-    var controller = function ($scope, dataPublisher, mixedContentToArray, userResources, plannerResources, configService) {
+    var controller = function ($scope, dataPublisher, mixedContentToArray, userResources, plannerResources, configService, objectResetFields) {
 
         /*
          Gets the meetings relative to a given group.
@@ -238,9 +238,10 @@
                     if (resetInputs) {
                         c.importSchedule.errors = [];
                         c.importSchedule.calendars = [];
-                        c.credentials.url = '';
-                        c.credentials.username = '';
-                        c.credentials.password = '';
+                        c.importSchedule.credentials.url = '';
+                        c.importSchedule.credentials.username = '';
+                        c.importSchedule.credentials.password = '';
+                        objectResetFields.resetFields(c.importSchedule.invalidFields);
                         popup.find('input').val('');
                     }
                     popup.modal('show');
@@ -436,5 +437,5 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('udashController', ['$scope', 'dataPublisher', 'mixedContentToArray', 'userResources', 'plannerResources', 'configService', controller]);
+    app.controller('udashController', ['$scope', 'dataPublisher', 'mixedContentToArray', 'userResources', 'plannerResources', 'configService','objectResetFields', controller]);
 }());
