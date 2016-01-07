@@ -80,7 +80,6 @@
                         if(startTime){
                             c.showEmptyState = true;
                         }
-                        c.getTimeslots();
                     });
             }
 
@@ -166,6 +165,7 @@
                 if (window.innerWidth <= 768) {
                     c.calendarConfig.defaultView = 'agendaDay';
                 }
+                console.log('entro qui');
                 calendar = jQuery('#meetingTimeslots').fullCalendar(c.calendarConfig);
             }
         };
@@ -264,7 +264,7 @@
             var newEvents, modifiedEvents = [];
             var alsoEditEvents = false;
             var events;
-            if (is_planned === 'false') {
+            if (!c.showEmptyState) {
                 events = calendar.fullCalendar('clientEvents');
             }
             else {
@@ -426,6 +426,7 @@
         getUserInfo();
         c.processUrl();
         getMeetings();
+        c.getTimeslots();
         c.getGroups();
         c.getInfo();
 
