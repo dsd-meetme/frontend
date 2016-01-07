@@ -165,6 +165,7 @@
                             }, arrayToUrlParams.process('id', validMembers)).$promise
                                 .then(function () {
                                     getGroups();
+                                    getUsers();
                                     c.confirmPopup.hide();
                                 }, function (response) {
                                     //Puts relevant errors in array
