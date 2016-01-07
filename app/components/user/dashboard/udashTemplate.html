@@ -265,6 +265,9 @@
                                                 INACTIVE
                                             </span>
                                         </li>
+                                        <li ng-show="schedule.caldav.sync_errors">
+                                            <i class="fa fa-warning" class="lapl" data-toggle="tooltip" data-placement="top" title="{{schedule.caldav.sync_errors}}"></i>
+                                        </li>
                                         <li>
                                             <span>SYNCED ON:</span>
                                             &nbsp;&nbsp;{{schedule.updated_at}}

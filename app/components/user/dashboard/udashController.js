@@ -76,7 +76,9 @@
             userResources.userSchedule.query({calendarId: ''})
                 .$promise.then(function (response) {
                     processedSchedules = processSchedules(response);
+                    console.log(processedSchedules);
                     c.schedules.imported = processedSchedules.importedSchedules;
+
                     pages = Math.ceil(c.schedules.imported.length / 10);
                     c.pagination.schedulesImported.pages = pages;
                     c.pagination.schedulesImported.utilArray = new Array(pages);
@@ -84,6 +86,10 @@
                     pages = Math.ceil(c.schedules.composed.length / 10);
                     c.pagination.schedulesComposed.pages = pages;
                     c.pagination.schedulesComposed.utilArray = new Array(pages);
+                    setTimeout(function(){
+                        jQuery("[data-toggle='tooltip']").tooltip();
+                    },1000);
+
                 });
         };
         var getMeetings = function () {
@@ -356,6 +362,7 @@
                     c.editSchedule.data.enabled = c.schedules.imported[index].enabled;
                     c.editSchedule.data.cal_name = c.schedules.imported[index].caldav.calendar_name;
                     c.editSchedule.currentIndex = index;
+
                     popup.modal('show');
                 },
                 hide: function () {
