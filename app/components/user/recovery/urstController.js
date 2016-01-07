@@ -20,6 +20,7 @@
         };
         c.reset = function () {
             var form = $scope.resetForm;
+            c.errors = [];
             c.invalidFields.emailReq = form.email.$error.required;
             c.invalidFields.emailVal = form.email.$error.email;
             c.invalidFields.pwdLength = form.password.$error.minlength;

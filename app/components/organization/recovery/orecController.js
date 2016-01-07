@@ -19,6 +19,7 @@
             }
         };
         c.recover = function () {
+            c.errors = [];
             var form = $scope.recoveryForm;
             //Checks the validity status of input fields
             c.invalidFields.emailReq = form.email.$error.required;

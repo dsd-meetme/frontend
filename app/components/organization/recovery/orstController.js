@@ -22,6 +22,7 @@
         };
         c.reset = function () {
             var form = $scope.resetForm;
+            c.errors = [];
             //Checks the validity status of input fields
             c.invalidFields.emailReq = form.email.$error.required;
             c.invalidFields.emailVal = form.email.$error.email;

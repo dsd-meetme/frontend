@@ -25,6 +25,7 @@
         //Processes the submit of dsiForm (domain sign in)
         c.process = function () {
             var form = $scope.regForm;
+            c.errors = [];
             //Validity status of input fields checking
             c.invalidFields.passwordReq = form.password.$error.required;
             c.invalidFields.nameReq = form.name.$error.required;

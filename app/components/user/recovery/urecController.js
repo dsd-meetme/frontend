@@ -19,11 +19,12 @@
         };
         c.recover = function () {
             var form = $scope.recoveryForm;
+            c.errors = [];
             c.invalidFields.nameReq = form.name.$error.required;
             c.invalidFields.emailReq = form.email.$error.required;
             c.invalidFields.emailVal = form.email.$error.email;
             if (!form.$invalid) {
-                c.confirmPopup.show()
+                c.confirmPopup.show();
                 dataPublisher.publish(apiDomain + '/employees/password/email', {
                     company: c.name,
                     email: c.email
