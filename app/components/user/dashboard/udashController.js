@@ -72,10 +72,10 @@
         };
         var c = this;
         var getSchedules = function () {
-            var pages, processsedSchedules;
+            var pages;
             userResources.userSchedule.query({calendarId: ''})
                 .$promise.then(function (response) {
-                    processedSchedules = processSchedules(response);
+                    var processedSchedules = processSchedules(response);
                     console.log(processedSchedules);
                     c.schedules.imported = processedSchedules.importedSchedules;
 
@@ -328,6 +328,8 @@
                 .$promise.then(function () {
                     getSchedules();
                     c.confirmPopup.hide();
+                }, function(){
+                    c.confirmPopup.hide();
                 })
         };
         c.editSchedule = {
@@ -435,6 +437,8 @@
                 .then(function () {
                     getMeetings();
                     getManagedMeetings();
+                    c.confirmPopup.hide();
+                }, function(){
                     c.confirmPopup.hide();
                 })
         };

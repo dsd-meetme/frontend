@@ -107,6 +107,8 @@
                 .then(function () {
                     c.confirmPopup.hide();
                     $location.path('/organization')
+                }, function(){
+                    c.confirmPopup.hide();
                 });
         };
         c.updatePlanner = function (plannerId) {
@@ -316,6 +318,8 @@
                 function () {
                     getUsers();
                     c.editMode.exit();
+                    c.confirmPopup.hide();
+                }, function(){
                     c.confirmPopup.hide();
                 }
             )

@@ -40,6 +40,8 @@
                     c.confirmPopup.hide();
                     $location.path('/organization');
 
+                }, function(){
+                    c.confirmPopup.hide();
                 });
         };
         c.update = {

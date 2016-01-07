@@ -132,6 +132,8 @@
                 .then(function () {
                     c.confirmPopup.hide();
                     $location.path('/user');
+                }, function(){
+                    c.confirmPopup.hide();
                 })
         };
         c.getTimeslots = function () {
@@ -180,7 +182,8 @@
             }).$promise
                 .then(function () {
                     c.confirmPopup.hide();
-
+                }, function(){
+                    c.confirmPopup.hide();
                 })
         };
         c.calendarConfig = {
