@@ -196,7 +196,7 @@
 
             },
             change: function () {
-                if (!this.planner_id) {
+                if (!this.plannerId) {
                     this.errors.push('Select a user to be planner');
                 }
                 else if (this.plannerId !== c.data.group.planner_id) {
@@ -294,8 +294,7 @@
                         userId: ''
                     }, arrayToUrlParams.process('id', validMembers)).$promise
                         .then(function () {
-                            //Update view
-                            getGroupInfo();
+                            getUsers();
                             c.editMode.exit();
                             c.confirmPopup.hide();
                         }, function (response) {

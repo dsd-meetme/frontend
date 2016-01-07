@@ -64,7 +64,7 @@
                     },
                     responseError: function (response) {
                         if (response.status === 401) {
-                            $cookies.remove('auth_token');
+
                             $location.path('/401');
                         }
                         else if (response.status === 403) {
