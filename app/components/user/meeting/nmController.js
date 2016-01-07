@@ -6,8 +6,9 @@
         var calendar;
         var selectDay = function () {
             var date = moment();
+            date.utc();
             var day = date.day();
-            if (day < 6) {
+            if (day <= 6 ) {
                 date.add(7 - date.day(), 'days').minute(0).hour(0);
             }
             else {
@@ -307,6 +308,7 @@
             if (!this.thereErrors) {
                 processedEvents = backendEventAdapter(events, true);
                 if (mode === 'c') {
+                    console.log(processedEvents);
                     c.confirmPopup.message = "Creating meeting";
                     c.confirmPopup.show();
                     plannerResources.plannerMeetings.save({groupId: c.selectedGroup, meetingId: ''}, jQuery.param({
@@ -324,7 +326,7 @@
                                 ).$promise.then(function () {
                                         if (index === processedEvents.length - 1) {
                                             c.confirmPopup.hide();
-                                            $location.path('/user');
+                                            //$location.path('/user');
                                         }
                                         index++;
                                     }, function (response) {
