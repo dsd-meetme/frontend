@@ -45,7 +45,7 @@
 
 
     .tileBottomGroup
-      margin-bottom: 10px
+      margin-top: 7px
 
       ul
         li
@@ -54,6 +54,9 @@
       i
         color: $washed_black
         font-size: 16px
+
+      .tileSynched
+        color: $main_blue
 
       .fa-warning
         color: $danger_red
@@ -89,6 +92,18 @@
 .tile-small
   height: 120px
 
+  .tileActiveInfo
+    color: #2ECC71
+    font-size: 14px
+
+  .tileNonActiveInfo
+    color: $gray_light
+    font-size: 14px
+
+  .tileSyncError
+    color: $danger_red
+    font-size: 14px
+
   .tileIconLeft, .tileIconRight, .tileBody
     height: 120px
     margin-top: -11px
@@ -104,13 +119,7 @@
     .tileBottomGroup
       margin-top: 10px
 
-      .tileActiveInfo
-        font-weight: 500
-        color: #2ECC71
 
-      .tileNonActiveInfo
-        font-weight: 500
-        color: $gray_light
 
 @media (max-width: 600px)
   .tile
@@ -118,9 +127,12 @@
     font-size: 13px
 
     .tileIconLeft
+      height: 100px
+      margin-top: -10px
+
       img
         width: 50px
-        margin-top: 17px
+        margin-top: 22px
 
     .tileBody
       height: 100px
@@ -131,6 +143,9 @@
         font-size: 18px
 
     .tileIconRight
+      height: 100px
+      margin-top: -10px
+
       svg
         width: 10px
         height: 20px
@@ -138,13 +153,11 @@
 
 @media (max-width: 400px)
   .tile
-    height: 100px
     font-size: 13px
 
     .tileIconLeft
 
     .tileBody
-      height: 100px
       margin-top: -10px
 
       .tileTitle
@@ -158,12 +171,9 @@
       svg
         width: 10px
         height: 20px
-        margin-top: 24px
+        margin-top: 33px
 
   .tile-small
-    .tileIconLeft
-      img
-        margin-top: 24px
 
     .tileIconRight
       svg

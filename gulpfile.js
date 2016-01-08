@@ -27,11 +27,11 @@ gulp.task('sass_compile_presentation', function(){
 });
 gulp.task('sass_compile', ['sass_compile_global','sass_compile_user', 'sass_compile_org','sass_compile_presentation']);
 gulp.task('broswer-sync', function () {
-    sync.init(["assets/css/*.css",
+    sync.init(["assets/css/generated/*.css",
         "app/*/*/*/*.html",
         "*.html",
         "app/*/*/*.html",
-        "app/*.js"], {
+        "app/dist/*.js"], {
         server: {
             baseDir: "./"
         }

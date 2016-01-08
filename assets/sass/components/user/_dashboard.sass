@@ -98,6 +98,11 @@
             &:hover
               color: $glob_gray
 
+  .scheduleSection
+    .sub_section_actionbar
+      button
+        margin-right: 15px
+
   @media(max-width: 1200px)
     .scheduleSection
       .search_input
@@ -106,16 +111,12 @@
         margin-top: 30px
 
   @media(max-width: 670px)
-    .tile
-      .tileBottomGroup
-        display: none
-
-    .tile-small
-      .tileBottomGroup
-        display: block
-
-        li:last-child
+    .meetingSection
+      .tile
+        .tileBottomGroup
           display: none
+
+
 
   @media(max-width: 500px)
     .udash_empty_state_msg
@@ -123,21 +124,15 @@
     .udash_content_type_title
       h4
         font-size: 18px
-    .tile-small
-      .tileBottomGroup
 
-        li:nth-last-child(2)
-          display: none
+    .sub_section_actionbar
+      a
+        width: 100%
+        text-align: center
+        padding: 8px 16px
 
-  @media(max-width: 420px)
-      .sub_section_actionbar
-        a, button
-          width: 100%
-          text-align: center
-          padding: 8px 16px
-
-        button
-          margin-bottom: 20px
+      button
+        margin-bottom: 20px
 
 #importSchedule, #editSchedule
 

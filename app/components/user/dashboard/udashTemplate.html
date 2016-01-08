@@ -1,4 +1,4 @@
- <div class="container-fluid navigation">
+<div class="container-fluid navigation">
     <div class="navigation-left">
         <a href="/#/user">
             <img src="assets/img/logoWhite.png" alt="Plunner"/>
@@ -37,7 +37,7 @@
     <br/>
     <br/>
 
-    <div class="row" ng-show="udashC.viewSections.meetings">
+    <div class="row meetingSection" ng-show="udashC.viewSections.meetings">
         <div class="col-md-8 col-md-push-2 col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 media_adapt">
             <div class="row sub_section_actionbar">
                 <div class="col-md-12">
@@ -45,6 +45,7 @@
                         <i class="fa fa-plus"></i>
                         &nbsp;&nbsp;Plan meeting
                     </a>
+
                     <div class="search_input">
                         <i class="fa fa-search fa-lg"></i>
                         <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
@@ -72,17 +73,17 @@
                                 <div class="tileBottomGroup">
                                     <ul class="list-inline list-unstyled">
                                         <li>
-                                            <span class="tileSynched">DURATION:</span>
-                                            &nbsp;&nbsp;{{meeting.duration/60}}mins
+                                            <span class="tileSynched fa fa-clock-o font_light"></span>
+                                            &nbsp;{{meeting.duration/60}} mins
                                         </li>
-                                        <li><span class="tileSynched">GROUP:</span>
+                                        <li><span class="tileSynched fa fa-users font_light"></span>
                                             &nbsp;&nbsp;{{meeting.group_name}}
                                         </li>
                                         <li ng-if="meeting.start_time">
                                             <span>STARTS ON:</span>
                                             &nbsp;&nbsp;{{meeting.start_time}}
                                         </li>
-                                        <li>
+                                        <li style="display:none">
                                             <button ng-click="udashC.deletePlannedMeeting(meeting.group_id, meeting.id)">
                                                 <i class="fa fa-trash-o"></i><span>&nbsp;&nbsp;DELETE</span>
                                             </button>
@@ -141,11 +142,11 @@
                                 <div class="tileBottomGroup">
                                     <ul class="list-inline list-unstyled">
                                         <li>
-                                            <span class="tileSynched">DURATION:</span>
-                                            &nbsp;&nbsp;{{meeting.duration/60}}mins
+                                            <span class="tileSynched fa fa-clock-o"></span>
+                                            &nbsp;{{meeting.duration/60}} mins
                                         </li>
-                                        <li><span class="tileSynched">GROUP:</span>
-                                            &nbsp;&nbsp;{{meeting.group_name}}
+                                        <li><span class="tileSynched fa fa-users"></span>
+                                            &nbsp;{{meeting.group_name}}
                                         </li>
                                     </ul>
                                 </div>
@@ -191,15 +192,15 @@
                                     <ul class="list-inline list-unstyled">
                                         <li>
                                             <span>STARTS ON:</span>
-                                            &nbsp;&nbsp;{{meeting.start_time}}
+                                            &nbsp;{{meeting.start_time}}
                                         </li>
                                         <li>
                                             <span class="tileSynched">DURATION:</span>
-                                            &nbsp;&nbsp;{{meeting.duration/60}}mins
+                                            &nbsp;{{meeting.duration/60}} mins
                                         </li>
                                         <li>
                                             <span class="tileSynched">GROUP:</span>
-                                            &nbsp;&nbsp;{{meeting.group_name}}
+                                            &nbsp;{{meeting.group_name}}
                                         </li>
                                     </ul>
                                 </div>
@@ -233,6 +234,7 @@
                         <i class="fa fa-pencil fa-lg"></i>&nbsp;&nbsp;
                         Compose schedule
                     </a>
+
                     <div class="search_input">
                         <i class="fa fa-search fa-lg"></i>
                         <input type="search" ng-model="filterISchedules" placeholder="Search for..."/>
@@ -252,27 +254,31 @@
                                 <img src="assets/img/schedule_one.png" alt=""/>
                             </div>
                             <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
-                                <h4 class="tileTitle">{{schedule.name}}</h4>
+                                <h4 class="tileTitle">
+                                    <span class="tileActiveInfo fa fa-circle"
+                                       ng-show="schedule.enabled === '1' && !schedule.caldav.sync_errors "
+                                       data-toggle="tooltip" data-placement="top" title="Schedule enabled">
+                                            </span>
+                                    <span class="tileNonActiveInfo fa fa-circle"
+                                          ng-show="schedule.enabled !=='1' && !schedule.caldav.sync_errors "
+                                          data-toggle="tooltip" data-placement="top"
+                                          title="Schedule not enabled">
+                                    </span>
+                                    <span class="fa fa-circle tileSyncError"
+                                          ng-show="schedule.caldav.sync_errors" data-toggle="tooltip"
+                                          data-placement="top" title="{{schedule.caldav.sync_errors}}">
+
+                                    </span>
+                                    &nbsp;{{schedule.name}}
+                                </h4>
 
                                 <div class="tileBottomGroup">
                                     <ul class="list-inline list-unstyled">
                                         <li>
-                                            <span class="tileActiveInfo" ng-show="schedule.enabled === '1'">
-                                                ACTIVE
-                                            </span>
-                                            <span class="tileNonActiveInfo" ng-show="schedule.enabled !=='1'"
-                                                  class="fa fa-circle-o">
-                                                INACTIVE
-                                            </span>
+                                            <span class="fa fa-refresh tileSynched"></span>
+                                            &nbsp;{{schedule.updated_at}}
                                         </li>
-                                        <li ng-show="schedule.caldav.sync_errors">
-                                            <i class="fa fa-warning" class="lapl" data-toggle="tooltip" data-placement="top" title="{{schedule.caldav.sync_errors}}"></i>
-                                        </li>
-                                        <li>
-                                            <span>SYNCED ON:</span>
-                                            &nbsp;&nbsp;{{schedule.updated_at}}
-                                        </li>
-                                        <li>
+                                        <li style="display: none">
                                             <button ng-click="udashC.deleteSchedule(schedule.id)">
                                                 <i class="fa fa-trash-o"></i>
                                                 &nbsp;&nbsp;DELETE
@@ -323,20 +329,31 @@
                                 <img src="assets/img/schedule_one.png" alt=""/>
                             </div>
                             <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
-                                <h4 class="tileTitle">{{schedule.name}}</h4>
+                                <h4 class="tileTitle">
+                                    <span class="tileActiveInfo fa fa-circle"
+                                          ng-show="schedule.enabled === '1'"
+                                          data-toggle="tooltip" data-placement="top" title="Schedule enabled">
+                                            </span>
+                                    <span class="tileNonActiveInfo fa fa-circle"
+                                          ng-show="schedule.enabled !=='1'"
+                                          data-toggle="tooltip" data-placement="top"
+                                          title="Schedule not enabled">
+                                    </span>
+                                    &nbsp;{{schedule.name}}
+                                </h4>
 
                                 <div class="tileBottomGroup">
                                     <ul class="list-inline list-unstyled">
-                                        <li><span class="tileActiveInfo"
+                                        <!--<li><span class="tileActiveInfo"
                                                   ng-show="schedule.enabled === '1'">ACTIVE</span>
                                             <span class="tileNonActiveInfo" ng-show="schedule.enabled !=='1'"
-                                                  class="fa fa-circle-o">INACTIVE</span></li>
-                                        <li><span>LAST UPDATE:</span>&nbsp;&nbsp;{{schedule.updated_at}}</li>
-                                        <li>
+                                                  class="fa fa-circle-o">INACTIVE</span></li>-->
+                                        <li><span class="fa fa-refresh tileSynched"></span>&nbsp;&nbsp;{{schedule.updated_at}}</li>
+                                        <!--<li>
                                             <button ng-click="udashC.deleteSchedule(schedule.id)">
                                                 <i class="fa fa-trash-o"></i><span>&nbsp;&nbsp;DELETE</span>
                                             </button>
-                                        </li>
+                                        </li>-->
                                     </ul>
                                 </div>
                             </div>
@@ -494,7 +511,8 @@
                     </div>
                     <div>
                         <p>CalDav username</p>
-                        <input ng-class="{error_underline : udashC.editSchedule.invalidFields.usernameReq }" class="main_input"
+                        <input ng-class="{error_underline : udashC.editSchedule.invalidFields.usernameReq }"
+                               class="main_input"
                                required name="username" type="text"
                                ng-model="udashC.editSchedule.data.username"/>
 
@@ -516,6 +534,7 @@
                         <input ng-class="{error_underline : udashC.editSchedule.invalidFields.passwordMatch}"
                                class="main_input" name="password_confirmation" type="password"
                                ng-model="udashC.editSchedule.password_confirmation" placeholder="Confirm password"/>
+
                         <p ng-show="udashC.editSchedule.invalidFields.passwordMatch" class="error_msg">The two
                             passwords do not match</p>
                     </div>
@@ -547,6 +566,7 @@
             </div>
             <div class="modal-body text-center">
                 <img src="assets/img/484.GIF" alt=""/>
+
                 <h2>&nbsp;&nbsp;{{udashC.confirmPopup.message}}</h2>
             </div>
             <br/>
