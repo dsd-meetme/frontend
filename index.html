@@ -2,6 +2,12 @@
 <html ng-app="Plunner">
 <head>
     <title>Plunner</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/generated/global.css">
@@ -10,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/generated/organization.css"/>
     <link rel="stylesheet" href="assets/css/generated/user.css"/>
     <link rel="stylesheet" href="assets/css/fullcalendar.min.css">
+    <link rel='stylesheet' href='assets/css/loading-bar.css'/>
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicons/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicons/apple-icon-72x72.png">
@@ -24,11 +31,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
     <link rel="manifest" href="assets/favicons/manifest.json">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="assets/favicons/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+
 
 </head>
 <body>
@@ -42,53 +45,22 @@
 
 <!-- FOOTER -->
 
-
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
 <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
 <script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
 <script type="text/javascript" src="node_modules/jwt-decode/build/jwt-decode.min.js"></script>
-<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+
 <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="node_modules/moment/min/moment.min.js"></script>
 <script type="text/javascript" src="assets/js/fullcalendar.min.js"></script>
+<script type="text/javascript" src="assets/js/loading-bar.js"></script>
 <script type="text/javascript" src="app/app.module.js"></script>
 <script type="text/javascript" src="config.js"></script>
 <script type="text/javascript" src="app/dist/angular_app_config.js"></script>
 <script type="text/javascript" src="app/dist/services_directives.js"></script>
 <script type="text/javascript" src="app/dist/controllers_org.js"></script>
 <script type="text/javascript" src="app/dist/controllers_user.js"></script>
-<!--
-<script type="text/javascript" src="app/configuration/app.routes.js"></script>
-<script type="text/javascript" src="app/configuration/app.run.js"></script>
-<script type="text/javascript" src="config.js"></script>
-<script type="text/javascript" src="app/configuration/app.interceptors.js"></script>
-<script type="text/javascript" src="app/shared/resources/orgResources.js"></script>
-<script type="text/javascript" src="app/shared/resources/userResources.js"></script>
-<script type="text/javascript" src="app/shared/resources/plannerResources.js"></script>
-<script type="text/javascript" src="app/shared/utils/paginationFilter.js"></script>
-<script type="text/javascript" src="app/shared/utils/findObjectByProperty.js"></script>
-<script type="text/javascript" src="app/shared/utils/mixedContentToArray.js"></script>
-<script type="text/javascript" src="app/components/organization/signIn/osiController.js"></script>
-<script type="text/javascript" src="app/components/organization/registration/regController.js"></script>
-<script type="text/javascript" src="app/components/organization/dashboard/odashController.js"></script>
-<script type="text/javascript" src="app/shared/communication/logoutService.js"></script>
-<script type="text/javascript" src="app/components/organization/profile/opController.js"></script>
-<script type="text/javascript" src="app/components/organization/recovery/orecController.js"></script>
-<script type="text/javascript" src="app/components/user/signIn/usiController.js"></script>
-<script type="text/javascript" src="app/components/presentation/presController.js"></script>
-<script type="text/javascript" src="app/components/organization/user/userController.js"></script>
-<script type="text/javascript" src="app/components/organization/group/groupController.js"></script>
-<script type="text/javascript" src="app/components/user/dashboard/udashController.js"></script>
-<script type="text/javascript" src="app/components/user/meeting/nmController.js"></script>
-<script type="text/javascript" src="app/shared/utils/arrayToUrlParams.js"></script>
-<script type="text/javascript" src="app/components/organization/recovery/orstController.js"></script>
-<script type="text/javascript" src="app/components/user/recovery/urecController.js"></script>
-<script type="text/javascript" src="app/shared/communication/dataPublisher.js"></script>
-<script type="text/javascript" src="app/components/user/recovery/urstController.js"></script>
-<script type="text/javascript" src="app/components/user/composeSchedule/cschedController.js"></script>
-<script type="text/javascript" src="app/shared/utils/logoutDirective.js"></script>
-<script type="text/javascript" src="app/components/user/profile/upController.js"></script>
-<script type="text/javascript" src="app/shared/utils/profileDirective.js"></script>-->
 </body>
 </html>
