@@ -14,7 +14,7 @@
             </li>
             <li>
                 <img src="assets/img/sign_out.png" alt="Sign out" logout redirect="/"/>
-                <button type="button" class="navbar_button" logout redirect="/">SIGN OUT</button>
+                <button type="button" class="navbar_button" logout redirect="/">Sign Out</button>
             </li>
         </ul>
     </div>
@@ -61,7 +61,7 @@
                          ng-repeat="meeting in udashC.meetings.managed | filter: {title : filterTBPMeetings} | paginationFilter: udashC.pagination.meetingsManaged.filterString">
                         <div class="row">
                             <div class="col-md-2 col-sm-2 col-xs-2  tileIconLeft">
-                                <img src="assets/img/meeting_one.png" alt=""/>
+                                <img src="assets/img/meeting.png" alt=""/>
                             </div>
                             <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{meeting.title}}</h4>
@@ -130,7 +130,7 @@
                          ng-repeat="meeting in udashC.meetings.toBePlanned | filter: {title : filterTBPMeetings} | paginationFilter: udashC.pagination.meetingsPlanned.filterString">
                         <div class="row">
                             <div class="col-md-2 col-sm-2 col-xs-2  tileIconLeft">
-                                <img src="assets/img/meeting_one.png" alt=""/>
+                                <img src="assets/img/meeting.png" alt=""/>
                             </div>
                             <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{meeting.title}}</h4>
@@ -179,7 +179,7 @@
                          ng-repeat="meeting in udashC.meetings.planned | filter: {title : filterTBPMeetings} | paginationFilter: udashC.pagination.meetingsToBePlanned.filterString">
                         <div class="row">
                             <div class="col-md-2 col-sm-2 col-xs-2  tileIconLeft">
-                                <img src="assets/img/meeting_two.png" alt=""/>
+                                <img src="assets/img/meeting.png" alt=""/>
                             </div>
                             <div class="col-md-9 col-sm-9 col-xs-9 tileBody">
                                 <h4 class="tileTitle">{{meeting.title}}</h4>
