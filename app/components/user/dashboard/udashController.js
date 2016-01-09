@@ -350,6 +350,7 @@
                 calendar_name: '',
                 password: ''
             },
+            calId : '',
             currentIndex: -1,
             popUp: {
                 show: function (index, showErrors) {
@@ -364,12 +365,23 @@
                     c.editSchedule.data.enabled = c.schedules.imported[index].enabled;
                     c.editSchedule.data.cal_name = c.schedules.imported[index].caldav.calendar_name;
                     c.editSchedule.currentIndex = index;
-
                     popup.modal('show');
                 },
                 hide: function () {
                     jQuery('#editSchedule').modal('hide');
                 }
+            },
+            delete : function(){
+                c.confirmPopup.message = 'Deleting schedule';
+                c.editSchedule.popUp.hide();
+                c.confirmPopup.show();
+                userResources.userSchedule.remove({calendarId: c.editSchedule.data.id})
+                    .$promise.then(function () {
+                        getSchedules();
+                        c.confirmPopup.hide();
+                    }, function(){
+                        c.confirmPopup.hide();
+                    })
             },
             submit: function () {
                 var form = $scope.editScheduleForm;

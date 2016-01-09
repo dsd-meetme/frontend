@@ -546,10 +546,11 @@
                             <span>Enabled</span>
                         </label>
                     </div>
+                    <button class="secondary_button" ng-click="udashC.editSchedule.delete()"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;DELETE </button>
                     <p class="error_tile" ng-repeat="error in udashC.editSchedule.errors">&nbsp;&nbsp;{{error}}</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="secondary_button" data-dismiss="modal" aria-label="Close">Abort
+                    <button class="secondary_button" data-dismiss="modal" aria-label="Close">Close
                     </button>
                     <button class="main_button" ng-click="udashC.editSchedule.submit()">Save
                         changes
