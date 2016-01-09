@@ -50,6 +50,7 @@
                         mixedContentToArray.process(response.data, c.errors, true);
                         authorizationPopup.hide();
                     }
+                    authorizationPopup.hide();
                 });
             }
         }

@@ -86,6 +86,7 @@
                                     mixedContentToArray.process(response.data, c.update.errors, true);
                                     c.confirmPopup.hide();
                                 }
+                                c.confirmPopup.hide();
                             })
                     }
 

@@ -315,6 +315,7 @@
                                 c.confirmPopup.hide();
                                 c.importSchedule.popUp.show();
                             }
+                            c.confirmPopup.hide();
                         })
                     }
 
@@ -331,6 +332,27 @@
                 }, function(){
                     c.confirmPopup.hide();
                 })
+        };
+        c.meetingInfo = {
+            popUp : {
+                show : function(type, index){
+                    var data = c.meetings[type][index];
+                    c.meetingInfo.data.title = data.title;
+                    c.meetingInfo.data.desc = data.description;
+                    c.meetingInfo.data.group = data.group_name;
+                    c.meetingInfo.data.duration = data.duration;
+                    c.meetingInfo.data.starts = data.start_time;
+                    jQuery('#meetingDetail').modal('show');
+                }
+            },
+            data : {
+                title : '',
+                desc : '',
+                group : '',
+                duration : '',
+                starts : ''
+
+            }
         };
         c.editSchedule = {
             errors: [],
@@ -372,6 +394,7 @@
                 }
             },
             delete : function(){
+
                 c.confirmPopup.message = 'Deleting schedule';
                 c.editSchedule.popUp.hide();
                 c.confirmPopup.show();
@@ -438,6 +461,7 @@
                                 c.confirmPopup.hide();
                                 c.editSchedule.popUp.show(c.editSchedule.currentIndex, true);
                             }
+                            c.confirmPopup.hide();
                         })
                 }
             }

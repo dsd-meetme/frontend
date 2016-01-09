@@ -151,7 +151,18 @@
                                     </ul>
                                 </div>
                             </div>
+
                             <div class="col-md-1 col-sm-1 col-xs-1 text-right tileIconRight">
+                                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     ng-click="udashC.meetingInfo.popUp.show('toBePlanned',$index)">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g transform="translate(-1202.000000, -14.000000)" fill="#dddddd">
+                                            <path d="M1228.02325,50.9383888 L1202.0559,84 L1208.31538,89.5463755 L1236.38284,53.4511569 L1238.33675,50.9383905 L1236.32694,48.4701061 L1208.25948,14 L1202.0559,19.0512964 L1228.02325,50.9383888 Z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -204,6 +215,18 @@
                                         </li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div class="col-md-1 col-sm-1 col-xs-1 text-right tileIconRight">
+                                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                <svg width="15px" height="32px" viewBox="0 0 37 76" version="1.1"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     ng-click="udashC.meetingInfo.popUp.show('planned',$index)">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g transform="translate(-1202.000000, -14.000000)" fill="#dddddd">
+                                            <path d="M1228.02325,50.9383888 L1202.0559,84 L1208.31538,89.5463755 L1236.38284,53.4511569 L1238.33675,50.9383905 L1236.32694,48.4701061 L1208.25948,14 L1202.0559,19.0512964 L1228.02325,50.9383888 Z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -571,6 +594,40 @@
                 <h2>&nbsp;&nbsp;{{udashC.confirmPopup.message}}</h2>
             </div>
             <br/>
+        </div>
+    </div>
+</div>
+<div id="meetingDetail" class="modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Meeting detail</h3>
+            </div>
+            <div class="modal-body">
+                <p class="font_bold">Title</p>
+                <p>{{udashC.meetingInfo.data.title}}</p>
+                <p class="font_bold">Description</p>
+                <p>{{udashC.meetingInfo.data.desc}}</p>
+                <br/>
+                <ul class="list-inline list-unstyled">
+                    <li>
+                        <p><i class="blue-colored fa fa-users"></i>&nbsp; {{udashC.meetingInfo.data.group}}</p>
+                    </li>
+                    <li>
+                        <p><i class="blue-colored fa fa-clock-o"></i>&nbsp; {{udashC.meetingInfo.data.duration/60}} Mins</p>
+                    </li>
+                </ul>
+                <div ng-show="udashC.meetingInfo.date.starts">
+                    <p ng class="font_bold">Starts at</p>
+                    <p>{{udashC.meetingInfo.data.starts}}</p>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button class="secondary_button" data-dismiss="modal" aria-label="Close">Close
+                </button>
+            </div>
         </div>
     </div>
 </div>

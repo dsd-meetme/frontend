@@ -174,6 +174,7 @@
                                         c.confirmPopup.hide();
                                         c.addGroup.popUp.show();
                                     }
+                                    c.confirmPopup.hide();
                                 })
                         },
                         function (response) {
@@ -183,6 +184,7 @@
                                 c.confirmPopup.hide();
                                 c.addGroup.popUp.show();
                             }
+                            c.confirmPopup.hide();
                         });
                 }
             }
@@ -252,6 +254,7 @@
                                 c.confirmPopup.hide();
                                 c.addUser.popUp.show();
                             }
+                            c.confirmPopup.hide();
                         });
                 }
             }

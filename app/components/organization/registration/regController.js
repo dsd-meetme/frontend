@@ -52,6 +52,7 @@
                             mixedContentToArray.process(response.data, c.errors, true);
                             c.confirmPopup.hide();
                         }
+                        c.confirmPopup.hide();
                     }
                 );
             }

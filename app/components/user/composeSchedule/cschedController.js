@@ -165,6 +165,7 @@
                                             mixedContentToArray.process(response.data, c.errors, true);
                                             c.confirmPopup.hide();
                                         }
+                                        c.confirmPopup.hide();
                                     });
                             }
                         }, function (response) {
@@ -172,6 +173,7 @@
                                 mixedContentToArray.process(response.data, c.errors, true);
                                 c.confirmPopup.hide();
                             }
+                            c.confirmPopup.hide();
                         })
                 }
                 else {
@@ -200,6 +202,7 @@
                                             mixedContentToArray.process(response.data, c.errors, true);
                                             c.confirmPopup.hide();
                                         }
+                                        c.confirmPopup.hide();
                                     });
                             }
                             for (i = 0; i < modifiedEvents[1].length; i++) {
@@ -220,6 +223,7 @@
                                             mixedContentToArray.process(response.data, c.errors, true);
                                             c.confirmPopup.hide();
                                         }
+                                        c.confirmPopup.hide();
                                     });
                             }
                             if (newEvents.length === 0 && modifiedEvents[1].length === 0) {
@@ -231,6 +235,7 @@
                                 mixedContentToArray.process(response.data, c.errors, true);
                                 c.confirmPopup.hide();
                             }
+                            c.confirmPopup.hide();
                         });
                 }
             }

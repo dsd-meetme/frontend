@@ -84,6 +84,7 @@
                                 mixedContentToArray.process(response.data, c.update.errors, true);
                                 c.confirmPopup.hide();
                             }
+                            c.confirmPopup.hide();
                         })
                 }
 
@@ -95,6 +96,8 @@
             orgResources.orgUserInGroup.remove({groupId: id, userId: c.data.id})
                 .$promise.then(function () {
                     c.editMode.exit();
+                    c.confirmPopup.hide();
+                },function(){
                     c.confirmPopup.hide();
                 })
         };

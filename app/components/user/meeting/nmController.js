@@ -337,6 +337,7 @@
                                             mixedContentToArray.process(response.data, c.errors, true);
                                             c.confirmPopup.hide();
                                         }
+                                        c.confirmPopup.hide();
 
                                     })
                             }
@@ -345,6 +346,7 @@
                                 mixedContentToArray.process(response.data, c.errors, true);
                                 c.confirmPopup.hide();
                             }
+                            c.confirmPopup.hide();
 
                         })
                 }
@@ -381,6 +383,7 @@
                                                 mixedContentToArray.process(response.data, c.errors, true);
                                                 c.confirmPopup.hide();
                                             }
+                                            c.confirmPopup.hide();
                                         });
                                 }
                                 for (i = 0; i < modifiedEvents[1].length; i++) {
@@ -400,6 +403,7 @@
                                                 mixedContentToArray.process(response.data, c.errors, true);
                                                 c.confirmPopup.hide();
                                             }
+                                            c.confirmPopup.hide();
                                         });
                                 }
                             }
@@ -413,6 +417,7 @@
                                 mixedContentToArray.process(response.data, c.errors, true);
                                 c.confirmPopup.hide();
                             }
+                            c.confirmPopup.hide();
 
                         })
                 }

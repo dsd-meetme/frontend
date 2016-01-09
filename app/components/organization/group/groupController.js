@@ -132,6 +132,7 @@
                             mixedContentToArray.process(response.data, c.errors.planner, true);
                             c.confirmPopup.hide();
                         }
+                        c.confirmPopup.hide();
                     });
             }
         };
@@ -158,6 +159,7 @@
                             mixedContentToArray.process(response.data, c.errors.info, true);
                             c.confirmPopup.hide();
                         }
+                        c.confirmPopup.hide();
                     });
             }
         };
@@ -222,6 +224,7 @@
                                 c.confirmPopup.hide();
                                 c.changePlanner.popUp.show();
                             }
+                            c.confirmPopup.hide();
                         });
                 }
             }
@@ -304,6 +307,7 @@
                                 c.confirmPopup.hide();
                                 c.addToGroup.popUp.show();
                             }
+                            c.confirmPopup.hide();
                         })
                 }
 
