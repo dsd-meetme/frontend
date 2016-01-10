@@ -101,7 +101,7 @@
                     c.pagination.meetingsToBePlanned.pages = pages;
                     c.pagination.meetingsToBePlanned.utilArray = new Array(pages);
                 });
-            userResources.userPlannedMeetings.query({meetingId: ''})
+            userResources.userPlannedMeetings.query({meetingId: '', current: 1})
                 .$promise.then(function (response) {
                     c.meetings.planned = response;
 
