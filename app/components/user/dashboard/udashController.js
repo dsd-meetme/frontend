@@ -337,6 +337,7 @@
             popUp : {
                 show : function(type, index){
                     var data = c.meetings[type][index];
+                    console.log(data);
                     c.meetingInfo.data.title = data.title;
                     c.meetingInfo.data.desc = data.description;
                     c.meetingInfo.data.group = data.group_name;

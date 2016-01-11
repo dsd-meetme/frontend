@@ -63,10 +63,10 @@
                     </div>
                     <div class="col-md-6">
                         <p>Duration(in mins)</p>
-                        <input ng-readonly="!nmC.inputEnabled"
+                        <input ng-readonly="nmC.startTime"
                                ng-class="{error_underline:nmC.invalidFields.durationReq || nmC.invalidFields.durationVal || mC.invalidFields.durationLimit  }"
                                class="main_input" type="number" ng-model="nmC.duration" name="duration" required
-                               placeholder="Insert a duration"/>
+                               placeholder="Insert a duration" min="15"/>
 
                         <p class="error_msg" ng-show="nmC.invalidFields.durationReq">Insert a duration</p>
 
@@ -76,6 +76,8 @@
                         <p class="error_msg" ng-show="nmC.invalidFields.durationLimit">Insert a valid duration
                             duration(max 300mins, min
                             15mins)</p>
+                        <br/>
+                        <br/>
                         <div>
                             <p>Groups</p>
 
@@ -89,6 +91,7 @@
                             <span>{{nmC.groupName}}</span>
                             <p class="error_msg" ng-show="nmC.invalidFields.oneGroup">Select a group for the meeting</p>
                         </div>
+                        <br/>
                         <div ng-if="nmC.startTime">
                             <p>Starts at</p>
                             <span>{{nmC.startTime}}</span>

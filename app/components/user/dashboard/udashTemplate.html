@@ -77,11 +77,11 @@
                                             &nbsp;{{meeting.duration/60}} mins
                                         </li>
                                         <li><span class="tileSynched fa fa-users font_light"></span>
-                                            &nbsp;&nbsp;{{meeting.group_name}}
+                                            &nbsp;{{meeting.group_name}}
                                         </li>
                                         <li ng-if="meeting.start_time">
-                                            <span>STARTS ON:</span>
-                                            &nbsp;&nbsp;{{meeting.start_time}}
+                                            <span class="tileSynched fa fa-flag-checkered"></span>
+                                            &nbsp;{{meeting.start_time}}
                                         </li>
                                         <li style="display:none">
                                             <button ng-click="udashC.deletePlannedMeeting(meeting.group_id, meeting.id)">
@@ -201,13 +201,14 @@
                                 </div>
                                 <div class="tileBottomGroup">
                                     <ul class="list-inline list-unstyled">
+
                                         <li>
-                                            <span>STARTS ON:</span>
-                                            &nbsp;{{meeting.start_time}}
+                                            <span class="tileSynched fa fa-clock-o"></span>
+                                            &nbsp;{{meeting.duration/60}} mins
                                         </li>
                                         <li>
-                                            <span class="tileSynched">DURATION:</span>
-                                            &nbsp;{{meeting.duration/60}} mins
+                                            <span class="tileSynched fa fa-flag-checkered"></span>
+                                            &nbsp;{{meeting.start_time}}
                                         </li>
                                     </ul>
                                 </div>
@@ -604,16 +605,9 @@
                 <p>{{udashC.meetingInfo.data.title}}</p>
                 <p class="font_bold">Description</p>
                 <p>{{udashC.meetingInfo.data.desc}}</p>
-                <br/>
-                <ul class="list-inline list-unstyled">
-                    <li>
-                        <p><i class="blue-colored fa fa-users"></i>&nbsp; {{udashC.meetingInfo.data.group}}</p>
-                    </li>
-                    <li>
-                        <p><i class="blue-colored fa fa-clock-o"></i>&nbsp; {{udashC.meetingInfo.data.duration/60}} Mins</p>
-                    </li>
-                </ul>
-                <div ng-show="udashC.meetingInfo.date.starts">
+                <p class="font_bold">Duration</p>
+                <p>{{udashC.meetingInfo.data.duration/60}} Mins</p>
+                <div ng-show="udashC.meetingInfo.data.starts">
                     <p ng class="font_bold">Starts at</p>
                     <p>{{udashC.meetingInfo.data.starts}}</p>
                 </div>
