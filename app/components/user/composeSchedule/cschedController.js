@@ -180,13 +180,15 @@
                     c.confirmPopup.message = 'Saving schedule';
                     c.confirmPopup.show();
                     index = 0;
+                    console.log("events");
+                    console.log(events);
                     processedEvents = backendEventAdapter(events, true);
                     newEvents = backendEventAdapter(checkNewEvents(events), true);
                     modifiedEvents = backendEventAdapter(changedEvents, false);
                     alsoEditEvents = modifiedEvents[1].length > 0;
 
                     userResources.userSchedule.update({calendarId: c.id}, jQuery.param({
-                        name: this.name,
+                        name: c.name,
                         enabled: enabled
                     })).$promise.then(function () {
                             for (var i = 0; i < newEvents.length; i++) {
