@@ -64,19 +64,20 @@
                     },
                     responseError: function (response) {
                         if (response.status === 401) {
-
+                            $cookies.remove('auth_token');
                             $location.path('/401');
                         }
                         else if (response.status === 403) {
-                            $cookies.remove('auth_token');
                             $location.path('/403');
                         }
                         else if (response.status === 404) {
                             //General com error broadcast
                             $location.path('/404')
                         }
+                        else if (response.status === 500){
+                            $location.path('/500')
+                        }
                         else if (response.status !== 422) {
-                            $cookies.remove('auth_token');
                             $location.path('/error')
                         }
                         return $q.reject(response);

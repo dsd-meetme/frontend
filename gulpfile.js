@@ -41,6 +41,7 @@ gulp.task('watch', function () {
     gulp.watch('assets/sass/**/*.sass', ['sass_compile']);
     gulp.watch('app/*/*/*/*.js', ['concat']);
     gulp.watch('app/configuration/*.js', ['concat']);
+    gulp.watch('app/*/*/*.js',['concat']);
 });
 gulp.task('concat_presentation', function(){
     return gulp.src('app/components/presentation/*.js')

@@ -15,12 +15,6 @@
             }
             //Mode checking(organizations)
             if (path) {
-                if (path !== '/') {
-                    jQuery('.wrapper').removeClass('backgroundLightBlue')
-                }
-                else {
-                    jQuery('.wrapper').addClass('backgroundLightBlue');
-                }
                 if (path.search('org') !== -1 && path.search('recovery') === -1 && path.search('reset') === -1) {
                     if (mode === undefined || mode !== 'cn') {
                         $location.path('/orgsignin');

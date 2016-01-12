@@ -212,7 +212,6 @@ angular.module('cfp.loadingBar', [])
         started = true;
 
         if (includeBar) {
-          console.log($parent);
           $animate.enter(loadingBarContainer, $parent);
         }
 

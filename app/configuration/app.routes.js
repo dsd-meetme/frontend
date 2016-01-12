@@ -45,7 +45,7 @@
                     controllerAs: 'orecC'
                 }).
                 when('/',{
-                    templateUrl: 'app/components/presentation/presTemplate.html'
+                    templateUrl: 'app/components/presentation/signInHub.html'
                 }).
                 when('/organization/users/:id',{
                     templateUrl: 'app/components/organization/user/userTemplate.html',
@@ -91,11 +91,11 @@
                 when('/401', {
                     templateUrl: 'app/components/errors/401.html'
                 }).
+                when('/500', {
+                    templateUrl: 'app/components/errors/500.html'
+                }).
                 when('error', {
                     templateUrl: 'app/components/errors/generic.html'
-                }).
-                when('/signInHub', {
-                    templateUrl: 'app/components/presentation/signInHub.html'
                 }).
                 otherwise({
                     redirectTo: '/404'
