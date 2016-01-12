@@ -54,5 +54,5 @@
     };
 
     var app = angular.module('Plunner');
-    app.controller('urstController', ['$scope', '$routeParams', 'dataPublisher', 'mixedContentToArray', 'configService ', controller]);
+    app.controller('urstController', ['$scope', '$routeParams', 'dataPublisher', 'mixedContentToArray', 'configService', controller]);
 }());
