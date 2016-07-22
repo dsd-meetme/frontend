@@ -7,6 +7,8 @@ This application uses angularJS
 
 Here the entire site: [plunner.com](http://plunner.com)
 
+Here a phonegap porting: [phonegap](https://github.com/dima2015/phonegap)
+
 [Application example web server](http://admin.plunner.com). It is just an example, so we don't guarantee that everything works
 
 **N.B.** You need also the [backend application](https://github.com/dsd-meetme/backend)
